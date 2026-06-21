@@ -362,7 +362,15 @@ function drawSwitchyard(ctx, switchyard, time) {
   });
   ctx.stroke();
 
+  const boxImage = sprites.world.switchyardBox;
   switchyard.boxes.forEach((box) => {
+    if (imageReady(boxImage)) {
+      const groundY = box.y + 30;
+      const height = 172;
+      drawWorldSprite(ctx, boxImage, box.x, groundY, height);
+      warmGlow(ctx, box.x, groundY - height * 0.52, 52, box.lit ? 0.6 + Math.sin(time * 4) * 0.08 : 0.16);
+      return;
+    }
     ctx.fillStyle = "#5f4832";
     roundedRect(ctx, box.x - 34, box.y - 30, 68, 58, 8);
     ctx.fill();
@@ -388,6 +396,14 @@ function drawStormRidge(ctx, ridge, time) {
     ctx.restore();
   });
   const gauge = ridge.gauge;
+  const gaugeImage = sprites.world.stormGauge;
+  if (imageReady(gaugeImage)) {
+    const groundY = gauge.y + 60;
+    const height = 224;
+    drawWorldSprite(ctx, gaugeImage, gauge.x, groundY, height);
+    warmGlow(ctx, gauge.x, groundY - height * 0.62, 46, gauge.lit ? 0.55 + Math.sin(time * 3.4) * 0.06 : 0.18);
+    return;
+  }
   ctx.fillStyle = "#5f4832";
   roundedRect(ctx, gauge.x - 46, gauge.y - 48, 92, 96, 18);
   ctx.fill();
@@ -405,21 +421,29 @@ function drawStormRidge(ctx, ridge, time) {
 
 function drawBeaconHill(ctx, beaconHill, time) {
   const tower = beaconHill.tower;
-  ctx.strokeStyle = "#4f382b";
-  ctx.lineWidth = 8;
-  ctx.beginPath();
-  ctx.moveTo(tower.x - 52, tower.y + 80);
-  ctx.lineTo(tower.x, tower.y - 220);
-  ctx.lineTo(tower.x + 52, tower.y + 80);
-  ctx.moveTo(tower.x - 36, tower.y - 50);
-  ctx.lineTo(tower.x + 36, tower.y - 110);
-  ctx.moveTo(tower.x + 36, tower.y - 50);
-  ctx.lineTo(tower.x - 36, tower.y - 110);
-  ctx.stroke();
-  ctx.fillStyle = `rgba(255, 229, 141, ${tower.lit ? 0.76 + Math.sin(time * 4) * 0.08 : 0.28})`;
-  ctx.beginPath();
-  ctx.arc(tower.x, tower.y - 230, 20, 0, Math.PI * 2);
-  ctx.fill();
+  const towerImage = sprites.world.beaconTower;
+  if (imageReady(towerImage)) {
+    const groundY = tower.y + 84;
+    const height = 320;
+    drawWorldSprite(ctx, towerImage, tower.x, groundY, height);
+    warmGlow(ctx, tower.x, groundY - height * 0.86, 70, tower.lit ? 0.7 + Math.sin(time * 4) * 0.08 : 0.26);
+  } else {
+    ctx.strokeStyle = "#4f382b";
+    ctx.lineWidth = 8;
+    ctx.beginPath();
+    ctx.moveTo(tower.x - 52, tower.y + 80);
+    ctx.lineTo(tower.x, tower.y - 220);
+    ctx.lineTo(tower.x + 52, tower.y + 80);
+    ctx.moveTo(tower.x - 36, tower.y - 50);
+    ctx.lineTo(tower.x + 36, tower.y - 110);
+    ctx.moveTo(tower.x + 36, tower.y - 50);
+    ctx.lineTo(tower.x - 36, tower.y - 110);
+    ctx.stroke();
+    ctx.fillStyle = `rgba(255, 229, 141, ${tower.lit ? 0.76 + Math.sin(time * 4) * 0.08 : 0.28})`;
+    ctx.beginPath();
+    ctx.arc(tower.x, tower.y - 230, 20, 0, Math.PI * 2);
+    ctx.fill();
+  }
   beaconHill.cables.forEach((cable) => {
     ctx.strokeStyle = "rgba(201, 121, 69, 0.42)";
     ctx.lineWidth = 3;
@@ -449,7 +473,15 @@ function drawRainbarrelRow(ctx, row, time) {
     ctx.bezierCurveTo(channel.x - 80, channel.y + 22, channel.x + 80, channel.y - 18, channel.x + channel.width / 2, channel.y);
     ctx.stroke();
   });
+  const barrelImage = sprites.world.rainBarrel;
   row.barrels.forEach((barrel) => {
+    if (imageReady(barrelImage)) {
+      const groundY = barrel.y + 34;
+      const height = 132;
+      drawWorldSprite(ctx, barrelImage, barrel.x, groundY, height);
+      warmGlow(ctx, barrel.x, groundY - height * 0.4, 40, barrel.overflow ? 0.16 : 0.4);
+      return;
+    }
     ctx.fillStyle = "#6c543b";
     roundedRect(ctx, barrel.x - 28, barrel.y - 44, 56, 76, 12);
     ctx.fill();
@@ -613,6 +645,15 @@ function drawWheelWater(ctx, time) {
 function drawRootPump(ctx, target, time, powerLevel) {
   const pulse = 0.7 + Math.sin(time * 3.2) * 0.12;
 
+  const pumpImage = sprites.world.rootPump;
+  if (imageReady(pumpImage)) {
+    const groundY = target.y + 40;
+    const height = 236;
+    const { width } = drawWorldSprite(ctx, pumpImage, target.x, groundY, height);
+    warmGlow(ctx, target.x, groundY - height * 0.5, width * 0.55, (0.3 + powerLevel * 0.55) * pulse);
+    return;
+  }
+
   ctx.save();
   ctx.translate(target.x, target.y);
   ctx.fillStyle = "#47634a";
@@ -662,16 +703,20 @@ function drawRepairMarker(ctx, target, time, powerLevel) {
   ctx.arc(0, 0, 120, 0, Math.PI * 2);
   ctx.fill();
 
-  ctx.fillStyle = "#5f4832";
-  roundedRect(ctx, -34, -32, 68, 64, 12);
-  ctx.fill();
-  ctx.strokeStyle = colors.copper;
-  ctx.lineWidth = 5;
-  ctx.stroke();
-  ctx.fillStyle = `rgba(255, 229, 141, ${0.32 + powerLevel * 0.58})`;
-  ctx.beginPath();
-  ctx.arc(0, -2, 15 + powerLevel * 5, 0, Math.PI * 2);
-  ctx.fill();
+  // The real landmark art now stands here, so the marker is just a soft
+  // "look here" highlight — only fall back to a drawn node if no art loaded.
+  if (!imageReady(sprites.world.switchyardBox) && !imageReady(sprites.world.stormGauge) && !imageReady(sprites.world.beaconTower)) {
+    ctx.fillStyle = "#5f4832";
+    roundedRect(ctx, -34, -32, 68, 64, 12);
+    ctx.fill();
+    ctx.strokeStyle = colors.copper;
+    ctx.lineWidth = 5;
+    ctx.stroke();
+    ctx.fillStyle = `rgba(255, 229, 141, ${0.32 + powerLevel * 0.58})`;
+    ctx.beginPath();
+    ctx.arc(0, -2, 15 + powerLevel * 5, 0, Math.PI * 2);
+    ctx.fill();
+  }
   ctx.restore();
 }
 

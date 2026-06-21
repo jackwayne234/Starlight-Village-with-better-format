@@ -31,7 +31,12 @@ export const sprites = {
     puddle: loadImage(`${WORLD}/puddle-trimmed.png`),
     brokenBranch: loadImage(`${WORLD}/broken-branch-trimmed.png`),
     gear: loadImage(`${WORLD}/repair-part-gear-trimmed.png`),
-    signpost: loadImage(`${WORLD}/signpost-trimmed.png`)
+    signpost: loadImage(`${WORLD}/signpost-trimmed.png`),
+    rootPump: loadImage(`${WORLD}/root-pump-trimmed.png`),
+    switchyardBox: loadImage(`${WORLD}/switchyard-box-trimmed.png`),
+    stormGauge: loadImage(`${WORLD}/storm-gauge-trimmed.png`),
+    beaconTower: loadImage(`${WORLD}/beacon-tower-trimmed.png`),
+    rainBarrel: loadImage(`${WORLD}/rain-barrel-trimmed.png`)
   }
 };
 
