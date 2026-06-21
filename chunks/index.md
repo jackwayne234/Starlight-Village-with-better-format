@@ -12,6 +12,6 @@ High-level list only. All details live inside each chunk file.
 | 20 | Puzzle Engine Robustness | complete |
 | 21 | Scene Data Audit | complete |
 | 22 | Rendering Polish and Safety | complete |
-| 23 | Code Hygiene | pending |
+| 23 | Code Hygiene | complete |
 | 24 | Re-Review Iteration Pass | pending |
 | 25 | Final Handoff | pending |

@@ -25,4 +25,18 @@ Confirm scope against Chunk 16 so hygiene work does not collide with earlier fix
 
 ## Completion Notes
 
-_(to be filled in when the chunk runs)_
+- Removed dead `lamp-relay` code from `src/rendering/worldRenderer.js`: the
+  `activeRepair?.id === "lamp-relay"` branch, the `"lamp-relay"` entry in the marker
+  exclusion list, and the entire unused `drawLampRelay` function. No scene/repair uses the id
+  `lamp-relay` (confirmed by grep). Marker fallback behavior is unchanged for all real
+  repairs.
+- Verified no residual references; full `node --check` sweep passes on all JS files.
+
+Deliberately NOT done (judgment call, kept simple):
+- `roundedRect` is duplicated across hud/renderPipeline/actorRenderer/worldRenderer and
+  `clamp` exists in camera.js + hud.js. Consolidating into a shared module would touch 5
+  files and introduce new import coupling for a tiny self-contained helper. Per the
+  "refactor only when it clearly helps" rule, the churn outweighs the benefit, so these are
+  left as-is.
+
+Status: complete.

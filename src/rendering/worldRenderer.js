@@ -21,13 +21,10 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
   if (waterWheel) {
     drawWaterWheel(ctx, waterWheel, time, powerLevel);
   }
-  if (activeRepair?.id === "lamp-relay") {
-    drawLampRelay(ctx, activeRepair, time);
-  }
   if (activeRepair?.id === "root-pump") {
     drawRootPump(ctx, activeRepair, time, powerLevel);
   }
-  if (activeRepair && !["water-wheel", "lamp-relay", "root-pump"].includes(activeRepair.id)) {
+  if (activeRepair && !["water-wheel", "root-pump"].includes(activeRepair.id)) {
     drawRepairMarker(ctx, activeRepair, time, powerLevel);
   }
   if (activeRepair) {
@@ -505,32 +502,6 @@ function drawWheelWater(ctx, time) {
     ctx.bezierCurveTo(-62 + i * 28, 108, -38 + i * 28, 84, -22 + i * 28, 98);
     ctx.stroke();
   }
-}
-
-function drawLampRelay(ctx, target, time) {
-  const tuned = target.complete;
-  const pulse = 0.5 + Math.sin(time * 5) * 0.12;
-
-  ctx.save();
-  ctx.translate(target.x + 30, target.y - 17);
-  ctx.strokeStyle = tuned ? "rgba(255, 232, 166, 0.82)" : `rgba(143, 217, 240, ${0.35 + pulse * 0.25})`;
-  ctx.lineWidth = 3;
-  ctx.setLineDash(tuned ? [] : [8, 8]);
-  ctx.lineDashOffset = -time * 36;
-  ctx.beginPath();
-  ctx.arc(0, 0, 34, 0, Math.PI * 2);
-  ctx.stroke();
-  ctx.setLineDash([]);
-
-  if (!tuned) {
-    const sparkAngle = time * 4;
-    ctx.fillStyle = "rgba(143, 217, 240, 0.95)";
-    ctx.beginPath();
-    ctx.arc(Math.cos(sparkAngle) * 34, Math.sin(sparkAngle) * 34, 6, 0, Math.PI * 2);
-    ctx.fill();
-  }
-
-  ctx.restore();
 }
 
 function drawRootPump(ctx, target, time, powerLevel) {
