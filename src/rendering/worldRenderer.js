@@ -862,13 +862,16 @@ function drawGlowPlant(ctx, plant, time, powerLevel) {
 }
 
 function drawRepairPart(ctx, part, time) {
-  const gearImage = sprites.world.gear;
-  if (part.type === "gear" && imageReady(gearImage)) {
+  const partImage = sprites.world[part.type] || sprites.world.gear;
+  if (imageReady(partImage)) {
     const size = 52;
+    const height = size * (partImage.naturalHeight / partImage.naturalWidth);
     ctx.save();
     ctx.translate(part.x, part.y + Math.sin(time * 2 + part.x) * 3);
-    ctx.rotate(time * 0.4);
-    ctx.drawImage(gearImage, -size / 2, -size / 2, size, size);
+    if (part.type === "gear") {
+      ctx.rotate(time * 0.4); // only the gear reads well spinning
+    }
+    ctx.drawImage(partImage, -size / 2, -height / 2, size, height);
     ctx.restore();
     return;
   }

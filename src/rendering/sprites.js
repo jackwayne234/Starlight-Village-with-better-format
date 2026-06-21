@@ -11,6 +11,7 @@ function loadImage(src) {
 const APPRENTICE = "assets/sprites/characters/apprentice";
 const ROBOT = "assets/sprites/characters/robot";
 const WORLD = "assets/sprites/world";
+const TITLE = "assets/title";
 
 export const sprites = {
   apprentice: {
@@ -31,12 +32,17 @@ export const sprites = {
     puddle: loadImage(`${WORLD}/puddle-trimmed.png`),
     brokenBranch: loadImage(`${WORLD}/broken-branch-trimmed.png`),
     gear: loadImage(`${WORLD}/repair-part-gear-trimmed.png`),
+    coil: loadImage(`${WORLD}/repair-part-coil-trimmed.png`),
+    seed: loadImage(`${WORLD}/repair-part-seed-trimmed.png`),
     signpost: loadImage(`${WORLD}/signpost-trimmed.png`),
     rootPump: loadImage(`${WORLD}/root-pump-trimmed.png`),
     switchyardBox: loadImage(`${WORLD}/switchyard-box-trimmed.png`),
     stormGauge: loadImage(`${WORLD}/storm-gauge-trimmed.png`),
     beaconTower: loadImage(`${WORLD}/beacon-tower-trimmed.png`),
     rainBarrel: loadImage(`${WORLD}/rain-barrel-trimmed.png`)
+  },
+  title: {
+    hero: loadImage(`${TITLE}/title-hero.png`)
   }
 };
 

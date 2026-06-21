@@ -1,6 +1,8 @@
 // Cozy title / start screen drawn over a live rainy backdrop of the first
 // scene. `alpha` (0..1) lets the game fade it in at boot and out on start.
 
+import { sprites, imageReady } from "../rendering/sprites.js";
+
 export function drawTitleScreen(ctx, time, width, height, alpha = 1) {
   if (alpha <= 0) {
     return;
@@ -9,6 +11,7 @@ export function drawTitleScreen(ctx, time, width, height, alpha = 1) {
   ctx.save();
   ctx.globalAlpha = alpha;
 
+  drawHeroBackdrop(ctx, width, height);
   drawVeil(ctx, width, height);
   drawStarlight(ctx, time, width, height);
 
@@ -21,6 +24,18 @@ export function drawTitleScreen(ctx, time, width, height, alpha = 1) {
   drawControlsHint(ctx, centerX, height - 46);
 
   ctx.restore();
+}
+
+function drawHeroBackdrop(ctx, width, height) {
+  // Painted cover art, scaled to fill the screen (cover-fit), behind the veil.
+  const hero = sprites.title.hero;
+  if (!imageReady(hero)) {
+    return;
+  }
+  const scale = Math.max(width / hero.naturalWidth, height / hero.naturalHeight);
+  const w = hero.naturalWidth * scale;
+  const h = hero.naturalHeight * scale;
+  ctx.drawImage(hero, (width - w) / 2, (height - h) / 2, w, h);
 }
 
 function drawVeil(ctx, width, height) {
