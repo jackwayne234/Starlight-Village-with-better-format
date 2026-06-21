@@ -542,3 +542,6 @@ _Not granted yet. The AI should ask: “Do I have your permission to start worki
 - Cloned the repo into `./starlight-village/` (read-only discovery; no edits, no pushes).
 - Did a read-only discovery read of docs + all core/interaction/entities/ui/render-pipeline source and one scene file; drafted the Chunk Plan (C1–C11 + a needs-your-decision item on the dormant save/load system).
 - No code changes made. Permission to start the fix work is NOT yet granted.
+- Pushed planning docs (chunks 15–25) and this ground-truth.md to GitHub on `main`.
+- Consolidated ground-truth.md to a single source of truth: real file lives in the repo; the outer project-folder path is now a symlink to it.
+- Added a PostToolUse hook (`.claude/settings.json`) that auto-commits and pushes ground-truth.md to GitHub whenever it is edited.
