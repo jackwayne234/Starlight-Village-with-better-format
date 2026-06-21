@@ -33,7 +33,7 @@ export function createGame({ canvas, ctx, input, firstScene, persistProgress, cr
       }
     } else {
       updatePlayer(scene, input, dt);
-      updateRobot(scene, dt, time);
+      updateRobot(scene, dt);
       updateRepairFlow(scene, input, dt);
       if (scene.nextSceneId && createScene) {
         const nextScene = createScene(scene.nextSceneId);

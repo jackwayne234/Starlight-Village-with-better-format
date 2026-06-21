@@ -27,4 +27,14 @@ against Chunk 16. Keep changes behavior-preserving; refactor only if it clearly 
 
 ## Completion Notes
 
-_(to be filled in when the chunk runs)_
+- Removed the dead `time` argument from the `updateRobot(scene, dt, time)` call in
+  `src/core/game.js` (now `updateRobot(scene, dt)`). `entities/robot.js` never used it; the
+  robot's hover/bob is driven by `time` in the renderer, so behavior is unchanged. `time` is
+  still used elsewhere in the loop (dt calc + `renderScene`).
+- Verified `scene.robot.pose` values set by `repairFlow.js` ("scan"/"route"/"celebrate"/
+  "idle") are consumed by `rendering/actorRenderer.js` (`drawRobot`) — no dead pose state.
+- Audited `advanceRepairTarget` and flow-mode transitions: within-scene advance resets mode
+  to "walking" with cleared timers; scene change builds a fresh scene via the registry
+  (clean defaults); chapter-complete sets its own mode. No stale-state issues found.
+- Syntax check passes.
+- Status: complete.
