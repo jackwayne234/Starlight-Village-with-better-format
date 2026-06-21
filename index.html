@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Starlight Village</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="game-shell" aria-label="Starlight Village playable prototype">
+      <p id="game-instructions" class="sr-only">
+        Move with the left and right arrow keys or A and D. Repair with Space, Enter, or E. Press R to reset saved progress.
+      </p>
+      <canvas
+        id="game"
+        width="1280"
+        height="720"
+        tabindex="0"
+        aria-describedby="game-instructions"
+        aria-label="Starlight Village game canvas"
+      ></canvas>
+    </main>
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
