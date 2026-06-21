@@ -9,19 +9,19 @@ export function createStarlightVillageScene() {
 
   scene.layers = {
     trees: [
-      { x: 80, y: 292, scale: 1.14 },
-      { x: 230, y: 270, scale: 0.96 },
-      { x: 1000, y: 266, scale: 1.05 },
-      { x: 1135, y: 315, scale: 0.82 },
+      { x: 120, y: 292, scale: 1.14 },
+      { x: 360, y: 270, scale: 0.96 },
+      { x: 860, y: 266, scale: 1.05 },
+      { x: 1010, y: 315, scale: 0.82 },
       { x: 1430, y: 286, scale: 1.08 },
-      { x: 1685, y: 326, scale: 0.82 },
-      { x: 1960, y: 276, scale: 1.02 }
+      { x: 1810, y: 326, scale: 0.82 },
+      { x: 2160, y: 276, scale: 1.02 }
     ],
     cottages: [
       { x: 560, y: 404, scale: 0.86, lit: false },
-      { x: 1015, y: 428, scale: 0.7, lit: true },
-      { x: 1565, y: 418, scale: 0.76, lit: false },
-      { x: 1905, y: 430, scale: 0.68, lit: false }
+      { x: 1230, y: 428, scale: 0.7, lit: true },
+      { x: 1640, y: 418, scale: 0.76, lit: false },
+      { x: 1980, y: 430, scale: 0.68, lit: false }
     ],
     lamps: [
       { x: 394, y: 504, lit: false },

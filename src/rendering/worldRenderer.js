@@ -887,13 +887,8 @@ function drawRepairPart(ctx, part, time) {
   if (imageReady(partImage)) {
     const size = 52;
     const height = size * (partImage.naturalHeight / partImage.naturalWidth);
-    ctx.save();
-    ctx.translate(part.x, part.y + Math.sin(time * 2 + part.x) * 3);
-    if (part.type === "gear") {
-      ctx.rotate(time * 0.4); // only the gear reads well spinning
-    }
-    ctx.drawImage(partImage, -size / 2, -height / 2, size, height);
-    ctx.restore();
+    // Parts rest on the ground (no float, no spin) now that they are real props.
+    ctx.drawImage(partImage, part.x - size / 2, part.y - height / 2, size, height);
     return;
   }
 

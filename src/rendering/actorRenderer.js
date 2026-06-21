@@ -25,7 +25,7 @@ function drawPlayer(ctx, player, time) {
 
   const celebrating = player.reaction === "cheer";
   const cheerLift = celebrating ? Math.sin(player.reactionTimer * Math.PI * 5) * 5 - 7 : 0;
-  const bob = Math.sin(time * 2.2) * 2 + cheerLift;
+  const bob = cheerLift; // no idle float; only the celebration hop lifts the boy
   const footY = player.y + 88;
 
   // Soft contact shadow, unaffected by the sprite flip.
@@ -125,7 +125,7 @@ function drawPlayerVector(ctx, player, time) {
   const step = player.walking ? Math.sin(time * 10) * 8 : 0;
   const celebrating = player.reaction === "cheer";
   const cheerLift = celebrating ? Math.sin(player.reactionTimer * Math.PI * 5) * 5 - 7 : 0;
-  const bob = Math.sin(time * 2.2) * 2 + cheerLift;
+  const bob = cheerLift; // no idle float; only the celebration hop lifts the boy
 
   ctx.save();
   ctx.translate(player.x, player.y + bob);
