@@ -10,6 +10,7 @@ function loadImage(src) {
 
 const APPRENTICE = "assets/sprites/characters/apprentice";
 const ROBOT = "assets/sprites/characters/robot";
+const WORLD = "assets/sprites/world";
 
 export const sprites = {
   apprentice: {
@@ -20,6 +21,13 @@ export const sprites = {
   robot: {
     idle: loadImage(`${ROBOT}/robot-cover-idle-trimmed.png`),
     scan: loadImage(`${ROBOT}/robot-scan-trimmed.png`)
+  },
+  world: {
+    waterWheel: loadImage(`${WORLD}/water-wheel-trimmed.png`),
+    cottage: loadImage(`${WORLD}/cottage-trimmed.png`),
+    tree: loadImage(`${WORLD}/tree-trimmed.png`),
+    lamp: loadImage(`${WORLD}/lamp-trimmed.png`),
+    glowPlant: loadImage(`${WORLD}/glow-plant-trimmed.png`)
   }
 };
 

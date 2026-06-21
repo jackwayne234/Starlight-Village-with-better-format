@@ -1,6 +1,33 @@
 import { config } from "../core/config.js";
+import { sprites, imageReady } from "./sprites.js";
 
 const { colors } = config;
+
+// Draws a world image centered on x, with its base resting on groundY.
+function drawWorldSprite(ctx, image, x, groundY, height) {
+  const scale = height / image.naturalHeight;
+  const width = image.naturalWidth * scale;
+  ctx.drawImage(image, x - width / 2, groundY - height, width, height);
+  return { width, scale };
+}
+
+// Additive warm halo used to bloom lights back on as power is restored.
+function warmGlow(ctx, cx, cy, radius, intensity) {
+  if (intensity <= 0.02) {
+    return;
+  }
+  ctx.save();
+  ctx.globalCompositeOperation = "lighter";
+  const gradient = ctx.createRadialGradient(cx, cy, radius * 0.12, cx, cy, radius);
+  gradient.addColorStop(0, `rgba(255, 216, 135, ${0.5 * intensity})`);
+  gradient.addColorStop(0.5, `rgba(255, 188, 96, ${0.2 * intensity})`);
+  gradient.addColorStop(1, "rgba(255, 188, 96, 0)");
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
 
 export function drawWorld(ctx, scene, time, width, height, cameraX) {
   const powerLevel = scene.world.powerLevel;
@@ -38,6 +65,12 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
 }
 
 function drawTree(ctx, tree, time) {
+  const treeImage = sprites.world.tree;
+  if (imageReady(treeImage)) {
+    drawWorldSprite(ctx, treeImage, tree.x, tree.y + 230 * tree.scale, 360 * tree.scale);
+    return;
+  }
+
   ctx.save();
   ctx.translate(tree.x, tree.y);
   ctx.scale(tree.scale, tree.scale);
@@ -81,6 +114,16 @@ function drawCottage(ctx, cottage, time, powerLevel) {
   const lit = cottage.lit || powerLevel > 0.95;
   const glow = 0.5 + Math.sin(time * 4 + cottage.x) * 0.07;
   const restoringGlow = Math.max(0, powerLevel - 0.2) * 0.5;
+
+  const cottageImage = sprites.world.cottage;
+  if (imageReady(cottageImage)) {
+    const groundY = cottage.y + 54 * cottage.scale;
+    const height = 188 * cottage.scale;
+    const { width } = drawWorldSprite(ctx, cottageImage, cottage.x, groundY, height);
+    const windowGlow = (lit ? 0.55 : 0.14) + restoringGlow;
+    warmGlow(ctx, cottage.x, groundY - height * 0.52, width * 0.46, Math.min(0.85, windowGlow * (0.92 + Math.sin(time * 3 + cottage.x) * 0.08)));
+    return;
+  }
 
   ctx.save();
   ctx.translate(cottage.x, cottage.y);
@@ -419,7 +462,42 @@ function drawOnwardGlow(ctx, scene, time) {
   ctx.stroke();
 }
 
+function drawWaterWheelImage(ctx, image, target, time, powerLevel) {
+  const displayHeight = 264;
+  const scale = displayHeight / image.naturalHeight;
+  const displayWidth = image.naturalWidth * scale;
+  const baseY = 96; // bottom of the wheel rests near the old base line
+
+  ctx.save();
+  ctx.translate(target.x, target.y);
+  drawRepairHalo(ctx, target, time, powerLevel);
+
+  // Warm glow behind the hub runes, swelling as power comes back.
+  const glow = 0.25 + powerLevel * 0.55 + Math.sin(time * 2) * 0.05 * powerLevel;
+  ctx.save();
+  ctx.globalCompositeOperation = "lighter";
+  const halo = ctx.createRadialGradient(0, baseY - displayHeight * 0.5, 8, 0, baseY - displayHeight * 0.5, displayHeight * 0.42);
+  halo.addColorStop(0, `rgba(255, 221, 120, ${0.34 * glow})`);
+  halo.addColorStop(1, "rgba(255, 221, 120, 0)");
+  ctx.fillStyle = halo;
+  ctx.beginPath();
+  ctx.arc(0, baseY - displayHeight * 0.5, displayHeight * 0.42, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
+  // Slightly dim the whole wheel until power is restored.
+  ctx.globalAlpha = 0.78 + powerLevel * 0.22;
+  ctx.drawImage(image, -displayWidth / 2, baseY - displayHeight, displayWidth, displayHeight);
+  ctx.restore();
+}
+
 function drawWaterWheel(ctx, target, time, powerLevel) {
+  const wheelImage = sprites.world.waterWheel;
+  if (imageReady(wheelImage)) {
+    drawWaterWheelImage(ctx, wheelImage, target, time, powerLevel);
+    return;
+  }
+
   const spin = powerLevel >= 1 ? time * 1.8 : Math.sin(time * 1.6) * (0.08 + powerLevel * 0.16);
 
   ctx.save();
@@ -604,6 +682,16 @@ function drawCompletionPulse(ctx, target, celebrationTimer) {
 function drawLamp(ctx, lamp, time, powerLevel) {
   const lit = lamp.lit || powerLevel > 0.95;
   const glow = lit ? 0.72 + Math.sin(time * 4 + lamp.x) * 0.08 : 0.22 + powerLevel * 0.34;
+
+  const lampImage = sprites.world.lamp;
+  if (imageReady(lampImage)) {
+    const groundY = lamp.y + 92;
+    const height = 172;
+    drawWorldSprite(ctx, lampImage, lamp.x, groundY, height);
+    warmGlow(ctx, lamp.x, groundY - height * 0.8, 76, glow * (0.92 + Math.sin(time * 4.4 + lamp.x * 0.01) * 0.08));
+    return;
+  }
+
   ctx.save();
   ctx.translate(lamp.x, lamp.y);
   ctx.strokeStyle = "#3f342b";
@@ -656,6 +744,16 @@ function drawBrokenBranch(ctx, branch) {
 
 function drawGlowPlant(ctx, plant, time, powerLevel) {
   const glow = plant.active ? 0.65 + Math.sin(time * 3 + plant.x) * 0.1 : 0.24 + powerLevel * 0.3;
+
+  const plantImage = sprites.world.glowPlant;
+  if (imageReady(plantImage)) {
+    const groundY = plant.y + 28;
+    const height = 96;
+    drawWorldSprite(ctx, plantImage, plant.x, groundY, height);
+    warmGlow(ctx, plant.x, groundY - height * 0.5, 50, glow);
+    return;
+  }
+
   ctx.save();
   ctx.translate(plant.x, plant.y);
   ctx.strokeStyle = "#345b42";
