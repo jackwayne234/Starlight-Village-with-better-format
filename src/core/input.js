@@ -1,7 +1,7 @@
 export function createInput() {
   const keys = new Set();
   const pressed = new Set();
-  const gameCodes = new Set(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Space", "Enter", "KeyA", "KeyD", "KeyE", "KeyR"]);
+  const gameCodes = new Set(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Space", "Enter", "KeyA", "KeyD", "KeyW", "KeyS", "KeyE", "KeyR"]);
 
   window.addEventListener("keydown", (event) => {
     if (gameCodes.has(event.code)) {

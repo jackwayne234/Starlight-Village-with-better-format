@@ -27,4 +27,9 @@ Chunk doc per Q14.
 
 ## Completion Notes
 
-_(to be filled in when the chunk runs)_
+- Added `KeyW` and `KeyS` to the `gameCodes` set in `src/core/input.js`. These are consumed
+  by `repairFlow.js` for puzzle navigation but were previously not `preventDefault`'d,
+  unlike their `KeyA`/`KeyD` counterparts. Now W/S behave consistently and won't scroll the
+  page.
+- Syntax check passes.
+- Status: complete.
