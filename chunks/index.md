@@ -13,5 +13,5 @@ High-level list only. All details live inside each chunk file.
 | 21 | Scene Data Audit | complete |
 | 22 | Rendering Polish and Safety | complete |
 | 23 | Code Hygiene | complete |
-| 24 | Re-Review Iteration Pass | pending |
+| 24 | Re-Review Iteration Pass | complete |
 | 25 | Final Handoff | pending |

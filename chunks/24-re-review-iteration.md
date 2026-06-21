@@ -24,4 +24,20 @@ attempts, stop and ask the user before deferring it (Q24).
 
 ## Completion Notes
 
-_(to be filled in when the chunk runs)_
+Re-reviewed all changed files (input.js, hud.js, game.js, repairPuzzle.js, worldRenderer.js)
+and their neighbors. Re-ran the full verification suite after every fix:
+
+- Syntax: all JS files pass `node --check`.
+- Boot/serve: local server returns 200 for page + changed modules.
+- Imports: every relative import resolves.
+- Puzzles: all 7 layouts solvable; engine `updateConnections` completes all 6 scene puzzles.
+- Scene data: audit clean; repair chain matches HANDOFF route.
+
+Additional re-scan checks (no issues): puzzle-mode disables player walking; the rotate key
+press that completes a puzzle does not bleed into the reward advance (input cleared per
+frame, reward gated on its own timer); reaction-bubble stagger intact.
+
+No new actionable issues found. Only outstanding item is the intentional, user-decision
+save/load behavior (not auto-fixed).
+
+Status: complete (review pass clean).
