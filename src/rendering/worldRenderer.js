@@ -61,7 +61,24 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
   scene.layers.brokenBranches.forEach((branch) => drawBrokenBranch(ctx, branch));
   scene.layers.glowPlants.forEach((plant) => drawGlowPlant(ctx, plant, time, powerLevel));
   scene.layers.repairParts.forEach((part) => drawRepairPart(ctx, part, time));
+  drawSignpost(ctx, scene, time, powerLevel);
   ctx.restore();
+}
+
+// A wooden "this way out" signpost standing near the right edge of each scene.
+function drawSignpost(ctx, scene, time, powerLevel) {
+  const signImage = sprites.world.signpost;
+  if (!imageReady(signImage)) {
+    return;
+  }
+
+  const x = scene.world.width - 168;
+  const groundY = 632;
+  const height = 188;
+  const { width } = drawWorldSprite(ctx, signImage, x, groundY, height);
+  // The hanging lantern sits on the right side, a little above center.
+  const intensity = 0.45 + powerLevel * 0.4 + Math.sin(time * 3.2) * 0.05;
+  warmGlow(ctx, x + width * 0.22, groundY - height * 0.46, 58, intensity);
 }
 
 function drawTree(ctx, tree, time) {
@@ -250,6 +267,17 @@ function drawMist(ctx, bands, time, width) {
 }
 
 function drawPuddle(ctx, puddle, time) {
+  const puddleImage = sprites.world.puddle;
+  if (imageReady(puddleImage)) {
+    const width = puddle.width * 2.2;
+    const height = width * (puddleImage.naturalHeight / puddleImage.naturalWidth);
+    ctx.save();
+    ctx.globalAlpha = 0.92;
+    ctx.drawImage(puddleImage, puddle.x - width / 2, puddle.y - height / 2, width, height);
+    ctx.restore();
+    return;
+  }
+
   ctx.fillStyle = "rgba(127, 173, 173, 0.38)";
   ctx.beginPath();
   ctx.ellipse(puddle.x, puddle.y, puddle.width / 2, puddle.height / 2, 0, 0, Math.PI * 2);
@@ -725,6 +753,18 @@ function drawLamp(ctx, lamp, time, powerLevel) {
 }
 
 function drawBrokenBranch(ctx, branch) {
+  const branchImage = sprites.world.brokenBranch;
+  if (imageReady(branchImage)) {
+    const width = 178;
+    const height = width * (branchImage.naturalHeight / branchImage.naturalWidth);
+    ctx.save();
+    ctx.translate(branch.x, branch.y);
+    ctx.rotate(branch.rotation);
+    ctx.drawImage(branchImage, -width / 2, -height * 0.62, width, height);
+    ctx.restore();
+    return;
+  }
+
   ctx.save();
   ctx.translate(branch.x, branch.y);
   ctx.rotate(branch.rotation);
@@ -777,6 +817,17 @@ function drawGlowPlant(ctx, plant, time, powerLevel) {
 }
 
 function drawRepairPart(ctx, part, time) {
+  const gearImage = sprites.world.gear;
+  if (part.type === "gear" && imageReady(gearImage)) {
+    const size = 52;
+    ctx.save();
+    ctx.translate(part.x, part.y + Math.sin(time * 2 + part.x) * 3);
+    ctx.rotate(time * 0.4);
+    ctx.drawImage(gearImage, -size / 2, -size / 2, size, size);
+    ctx.restore();
+    return;
+  }
+
   ctx.save();
   ctx.translate(part.x, part.y + Math.sin(time * 2 + part.x) * 3);
   if (part.type === "gear") {

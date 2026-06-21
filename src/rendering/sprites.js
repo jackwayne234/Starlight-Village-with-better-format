@@ -27,7 +27,11 @@ export const sprites = {
     cottage: loadImage(`${WORLD}/cottage-trimmed.png`),
     tree: loadImage(`${WORLD}/tree-trimmed.png`),
     lamp: loadImage(`${WORLD}/lamp-trimmed.png`),
-    glowPlant: loadImage(`${WORLD}/glow-plant-trimmed.png`)
+    glowPlant: loadImage(`${WORLD}/glow-plant-trimmed.png`),
+    puddle: loadImage(`${WORLD}/puddle-trimmed.png`),
+    brokenBranch: loadImage(`${WORLD}/broken-branch-trimmed.png`),
+    gear: loadImage(`${WORLD}/repair-part-gear-trimmed.png`),
+    signpost: loadImage(`${WORLD}/signpost-trimmed.png`)
   }
 };
 
