@@ -556,3 +556,24 @@ _Not granted yet. The AI should ask: “Do I have your permission to start worki
   resolution, puzzle solvability brute force, engine completion, scene-data audit — all pass.
 - Outstanding (user decision, not auto-fixed): save data is written but never loaded
   (intentional playtest reset-on-refresh per HANDOFF).
+
+### 2026-06-21 (afternoon — Update 1 painted art pass)
+- Shifted focus to Update 1's "make it prettier" goal (art/visuals), per
+  `update1/north-star.md`. Code polish pass was already complete.
+- Built a reusable sprite pipeline: Chris generates objects in ChatGPT (white
+  background), agent cuts them out with new `tools/sprite-cutout.mjs` (white→
+  transparent, feather, trim; `global` mode also clears enclosed gaps), then
+  wires them into the renderer with code-drawn fallbacks (`imageReady` guard).
+- Replaced the code-drawn world with painted images: water wheel (now in a mill
+  pond), cottage, tree, lamp, glow-plant, puddle, broken-branch, signpost, the
+  three repair parts, all six scene hero props (pump/switchyard/gauge/tower/
+  barrel/footbridge), the beacon-hill shed, a painted parallax background, and a
+  title-screen cover. 9 commits on `main` (fedf147 … e57dacf).
+- Playtest fixes: removed trapped white in tree + wheel gaps; stopped floating
+  repair parts and the idle-floating boy; spaced Starlight Village trees/cottages
+  so a house no longer sits in a tree.
+- Verified each step (node --check, local http.server 200s). Chris play-tested
+  and signed off. Pushed everything to GitHub. Turnover written to
+  `update1/turnover-2026-06-21-art-pass.md`; checklist in `update1/progress.md`.
+- Next session: re-check scenes 2–6 for cottage/tree overlaps, then pacing,
+  puzzle ramp, weather, ending screen, dialogue.
