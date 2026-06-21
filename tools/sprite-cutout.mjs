@@ -30,18 +30,27 @@ function encode(w,h,rgba){
   return Buffer.concat([Buffer.from([137,80,78,71,13,10,26,10]),chunk('IHDR',ihdr),chunk('IDAT',comp),chunk('IEND',Buffer.alloc(0))]);
 }
 
-const [,,inF,outF,thr='236']=process.argv;
+const [,,inF,outF,thr='236',mode='edge']=process.argv;
 const T=+thr;
 const {w,h,ch,data}=decode(inF);
 const rgba=Buffer.alloc(w*h*4);
 for(let i=0;i<w*h;i++){const s=i*ch;rgba[i*4]=data[s];rgba[i*4+1]=data[s+1];rgba[i*4+2]=data[s+2];rgba[i*4+3]=255;}
 // flood fill background (whitish + reachable from border) -> alpha 0
 const isWhite=i=>{const r=rgba[i*4],g=rgba[i*4+1],b=rgba[i*4+2];return Math.min(r,g,b)>=T;};
-const bg=new Uint8Array(w*h), stack=[];
-for(let x=0;x<w;x++){stack.push(x,(h-1)*w+x);} for(let y=0;y<h;y++){stack.push(y*w,y*w+w-1);}
-while(stack.length){const i=stack.pop();if(bg[i]||!isWhite(i))continue;bg[i]=1;rgba[i*4+3]=0;
-  const x=i%w,y=(i/w)|0;
-  if(x>0)stack.push(i-1);if(x<w-1)stack.push(i+1);if(y>0)stack.push(i-w);if(y<h-1)stack.push(i+w);}
+const bg=new Uint8Array(w*h);
+if(mode==='global'){
+  // Remove ALL near-white pixels, including sky trapped in enclosed gaps
+  // (e.g. between tree branches). Use a high threshold so painted detail stays.
+  for(let i=0;i<w*h;i++){if(isWhite(i)){bg[i]=1;rgba[i*4+3]=0;}}
+}else{
+  // Default: flood fill only background reachable from the border, so white
+  // highlights inside the art are preserved.
+  const stack=[];
+  for(let x=0;x<w;x++){stack.push(x,(h-1)*w+x);} for(let y=0;y<h;y++){stack.push(y*w,y*w+w-1);}
+  while(stack.length){const i=stack.pop();if(bg[i]||!isWhite(i))continue;bg[i]=1;rgba[i*4+3]=0;
+    const x=i%w,y=(i/w)|0;
+    if(x>0)stack.push(i-1);if(x<w-1)stack.push(i+1);if(y>0)stack.push(i-w);if(y<h-1)stack.push(i+w);}
+}
 // feather: kept pixels touching bg get partial alpha if light (softens white halo)
 const soft=Buffer.from(rgba);
 for(let y=0;y<h;y++)for(let x=0;x<w;x++){const i=y*w+x;if(bg[i]||rgba[i*4+3]===0)continue;
