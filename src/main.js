@@ -1,18 +1,20 @@
 import { createGame } from "./core/game.js";
 import { createInput } from "./core/input.js";
 import { applyProgress, clearProgress, loadProgress, saveProgress } from "./core/progress.js";
-import { createInitialScene } from "./scenes/sceneRegistry.js";
+import { createInitialScene, createScene } from "./scenes/sceneRegistry.js";
 
 const canvas = document.querySelector("#game");
 const ctx = canvas.getContext("2d");
 const input = createInput();
-const firstScene = applyProgress(createInitialScene(), loadProgress());
+const progress = loadProgress();
+const firstScene = applyProgress(progress?.sceneId ? createScene(progress.sceneId) : createInitialScene(), progress);
 const game = createGame({
   canvas,
   ctx,
   input,
   firstScene,
-  persistProgress: saveProgress
+  persistProgress: saveProgress,
+  createScene
 });
 
 window.addEventListener("keydown", (event) => {

@@ -48,12 +48,14 @@ export function createBaseScene({ id, title, worldWidth = 2200, startMessage }) 
     repairs: [],
     repairIndex: 0,
     repairTarget: null,
+    nextSceneId: null,
     progressDirty: false,
     dialogue: {
       speaker: null,
       text: "",
       timer: 0
     },
+    reactionBubbles: [],
     flow: {
       mode: "walking",
       timer: 0,

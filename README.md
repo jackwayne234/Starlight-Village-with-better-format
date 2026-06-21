@@ -19,10 +19,12 @@ http://127.0.0.1:5200/
 ## Current V2 Slice
 
 - One rainy Chapter 1 lane.
+- Six Chapter 1 locations: Starlight Village, Glowfen Grove, Mossline Switchyard, Stormedge Rise, Beacon Hill, and Rainbarrel Row.
 - Apprentice and floating robot companion.
 - Left/right walking with a scrolling camera.
 - Water wheel repair: hold Space, Enter, or E to route power.
-- Lamp relay repair: tap Space, Enter, or E when the spark reaches the gold zone.
+- Root pump repair in Glowfen Grove: hold Space, Enter, or E to wake the grove.
+- One repair target in each later location, using the current V2 hold-repair flow.
 - Short character dialogue bubbles.
 - Progress saved in browser storage.
 

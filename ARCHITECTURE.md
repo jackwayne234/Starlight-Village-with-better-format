@@ -17,6 +17,8 @@ V2 starts small on purpose. The goal is not to build a generic engine; it is to 
 
 Scenes should export a `create...Scene()` function that starts from `createBaseScene()` and then fills in location-specific layers, actors, repair targets, and messages. New scenes should be registered in `sceneRegistry.js` instead of being imported directly by `main.js`.
 
+Scene transitions are requested by scene/repair data with `nextSceneId`; the game loop owns creating the next scene through the registry. Rendering should not change scenes.
+
 ## Render Order
 
 1. Backdrop

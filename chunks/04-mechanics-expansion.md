@@ -25,9 +25,8 @@ One new mechanic is enough for this chunk.
 
 ## Completion Notes
 
-- Added a repair queue with the existing water wheel and a new lamp relay target.
+- Added repair queue support around the existing water wheel.
 - Kept water wheel as the hold-to-charge mechanic.
-- Added a distinct timed-tap lamp relay mechanic with three successful taps required.
-- Added fail-soft miss feedback for mistimed relay taps.
-- Added a relay marker in the world and a timing meter in the HUD.
-- Verified the full sequence from water wheel repair to relay repair completion.
+- Added a distinct timed-tap mechanic in the interaction layer for later repair targets.
+- Kept Scene 1 focused on the water wheel only.
+- Verified the water wheel repair can complete and hand off to the next step.

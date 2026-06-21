@@ -4,7 +4,7 @@ import { updateRobot } from "../entities/robot.js";
 import { updateRepairFlow } from "../interaction/repairFlow.js";
 import { renderScene } from "../rendering/renderPipeline.js";
 
-export function createGame({ canvas, ctx, input, firstScene, persistProgress }) {
+export function createGame({ canvas, ctx, input, firstScene, persistProgress, createScene }) {
   let scene = firstScene;
   let lastTime = 0;
   let running = false;
@@ -21,6 +21,12 @@ export function createGame({ canvas, ctx, input, firstScene, persistProgress }) 
     updatePlayer(scene, input, dt);
     updateRobot(scene, dt, time);
     updateRepairFlow(scene, input, dt);
+    if (scene.nextSceneId && createScene) {
+      scene = createScene(scene.nextSceneId);
+      if (persistProgress) {
+        persistProgress(scene);
+      }
+    }
     if (scene.progressDirty && persistProgress) {
       persistProgress(scene);
       scene.progressDirty = false;

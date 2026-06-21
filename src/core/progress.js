@@ -61,16 +61,60 @@ export function applyProgress(scene, progress) {
 
 function restoreWorldFlags(scene) {
   const waterWheel = scene.repairs.find((repair) => repair.id === "water-wheel");
-  const lampRelay = scene.repairs.find((repair) => repair.id === "lamp-relay");
+  const activeHoldRepair = scene.repairs.find((repair) => repair.kind === "hold-charge" && !repair.complete) ?? scene.repairs.find((repair) => repair.kind === "hold-charge");
 
   scene.world.repaired = Boolean(waterWheel?.complete);
-  scene.world.powerLevel = waterWheel?.complete ? 1 : waterWheel?.progress ?? 0;
-  scene.world.relayAligned = Boolean(lampRelay?.complete);
+  scene.world.powerLevel = waterWheel?.complete ? 1 : activeHoldRepair?.progress ?? 0;
+  scene.world.groveBloom = scene.repairs.find((repair) => repair.id === "root-pump")?.complete ? 1 : 0;
+  scene.repairs.filter((repair) => repair.complete).forEach((repair) => restoreRepairEffect(scene, repair));
+}
+
+function restoreRepairEffect(scene, repair) {
+  if (repair.id === "root-pump") {
+    if (scene.bridge) scene.bridge.repaired = true;
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+  }
+
+  if (repair.id === "switchyard-junction") {
+    scene.switchyard?.poles.forEach((pole) => {
+      pole.lit = true;
+    });
+    scene.switchyard?.boxes.forEach((box) => {
+      box.lit = true;
+    });
+  }
+
+  if (repair.id === "storm-gauge" && scene.ridge?.gauge) {
+    scene.ridge.gauge.lit = true;
+  }
+
+  if (repair.id === "beacon-tower" && scene.beaconHill?.tower) {
+    scene.beaconHill.tower.lit = true;
+  }
+
+  if (repair.id === "rainbarrel-drain") {
+    if (scene.rainbarrelRow?.drain) scene.rainbarrelRow.drain.cleared = true;
+    scene.rainbarrelRow?.channels.forEach((channel) => {
+      channel.flow = true;
+    });
+    scene.rainbarrelRow?.barrels.forEach((barrel) => {
+      barrel.overflow = false;
+    });
+  }
 }
 
 function restoreFlowMessage(scene) {
   const allComplete = scene.repairs.length > 0 && scene.repairs.every((repair) => repair.complete);
   if (allComplete) {
+    if (scene.repairTarget?.nextSceneId) {
+      scene.nextSceneId = scene.repairTarget.nextSceneId;
+    }
+
     scene.flow.message = "All repairs in this slice are stable.";
     return;
   }

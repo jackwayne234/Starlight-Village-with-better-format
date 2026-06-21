@@ -1,15 +1,47 @@
 export function drawHud(ctx, scene, width, height) {
   drawTitle(ctx, scene);
   drawDialogueBubble(ctx, scene, width);
+  drawReactionBubbles(ctx, scene, width);
   drawMessage(ctx, scene.flow.message, width, height);
 
   if (scene.repairTarget && scene.flow.mode === "puzzle") {
     drawPuzzlePrompt(ctx, scene.repairTarget, width, height);
+    if (scene.repairTarget.kind === "path-puzzle" && scene.repairTarget.puzzle) {
+      drawPathPuzzle(ctx, scene.repairTarget.puzzle, width, height);
+    }
   }
 
   if (scene.flow.mode === "reward" && scene.flow.celebrationTimer > 0) {
     drawCompletionBadge(ctx, scene.flow.celebrationTimer, width);
   }
+}
+
+function drawReactionBubbles(ctx, scene, width) {
+  scene.reactionBubbles.forEach((bubble) => {
+    const anchor = resolveBubbleAnchor(scene, bubble);
+    const screenX = clamp(anchor.x - scene.camera.x, 130, width - 130);
+    const screenY = Math.max(96, anchor.y - 56);
+    const alpha = Math.min(1, bubble.timer / 0.4);
+
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = "rgba(22, 31, 30, 0.66)";
+    roundedRect(ctx, screenX - 120, screenY - 34, 240, 42, 8);
+    ctx.fill();
+    ctx.fillStyle = "rgba(250, 240, 210, 0.94)";
+    ctx.font = "600 14px system-ui, sans-serif";
+    ctx.textAlign = "center";
+    wrapText(ctx, bubble.text, screenX, screenY - 12, 210, 17);
+    ctx.restore();
+  });
+}
+
+function resolveBubbleAnchor(scene, bubble) {
+  if (bubble.x === "robot") {
+    return { x: scene.robot.x, y: scene.robot.y - 48 };
+  }
+
+  return { x: bubble.x, y: bubble.y };
 }
 
 function drawDialogueBubble(ctx, scene, width) {
@@ -71,15 +103,32 @@ function drawPuzzlePrompt(ctx, target, width, height) {
   ctx.fillStyle = "rgba(255, 239, 196, 0.96)";
   ctx.font = "700 22px system-ui, sans-serif";
   ctx.textAlign = "center";
-  ctx.fillText(target.kind === "timed-tap" ? "Tap Space" : "Hold Space", width / 2, height / 2 - 28);
+  ctx.fillText(getPuzzleTitle(target), width / 2, height / 2 - 28);
   ctx.font = "500 16px system-ui, sans-serif";
-  ctx.fillText(target.kind === "timed-tap" ? "when the spark hits gold" : "to route power", width / 2, height / 2 - 2);
-  if (target.kind === "timed-tap") {
+  ctx.fillText(getPuzzleHint(target), width / 2, height / 2 - 2);
+  if (target.kind === "path-puzzle") {
+    ctx.font = "500 14px system-ui, sans-serif";
+    ctx.fillText("Arrows choose tile, Space rotates", width / 2, height / 2 + 28);
+  } else if (target.kind === "timed-tap") {
     drawTimingMeter(ctx, target, width, height);
   } else {
     drawChargeMeter(ctx, target.progress, width, height);
   }
   ctx.textAlign = "left";
+}
+
+function getPuzzleHint(target) {
+  if (target.kind === "path-puzzle") {
+    return "route light through the board";
+  }
+  return target.kind === "timed-tap" ? "when the spark hits gold" : "to route power";
+}
+
+function getPuzzleTitle(target) {
+  if (target.kind === "path-puzzle") {
+    return "Rotate Paths";
+  }
+  return target.kind === "timed-tap" ? "Tap Space" : "Hold Space";
 }
 
 function drawChargeMeter(ctx, progress, width, height) {
@@ -113,6 +162,78 @@ function drawTimingMeter(ctx, target, width, height) {
   ctx.fillStyle = "rgba(245, 235, 205, 0.9)";
   ctx.font = "600 14px system-ui, sans-serif";
   ctx.fillText(`${target.hits}/${target.requiredHits} tuned`, width / 2, height / 2 + 60);
+}
+
+function drawPathPuzzle(ctx, puzzle, width, height) {
+  const tileSize = 48;
+  const gap = 7;
+  const boardWidth = puzzle.cols * tileSize + (puzzle.cols - 1) * gap;
+  const startX = width / 2 - boardWidth / 2;
+  const startY = height / 2 + 86;
+
+  ctx.save();
+  ctx.textAlign = "center";
+  ctx.fillStyle = "rgba(20, 30, 28, 0.62)";
+  roundedRect(ctx, width / 2 - 150, startY - 42, 300, 214, 8);
+  ctx.fill();
+  ctx.fillStyle = "rgba(255, 239, 196, 0.94)";
+  ctx.font = "700 15px system-ui, sans-serif";
+  ctx.fillText(puzzle.title, width / 2, startY - 16);
+
+  puzzle.tiles.forEach((row, rowIndex) => {
+    row.forEach((tile, colIndex) => {
+      const x = startX + colIndex * (tileSize + gap);
+      const y = startY + rowIndex * (tileSize + gap);
+      const key = `${rowIndex},${colIndex}`;
+      const selected = puzzle.selected.row === rowIndex && puzzle.selected.col === colIndex;
+      const lit = puzzle.connected.has(key);
+      drawPuzzleTile(ctx, tile, x, y, tileSize, selected, lit);
+    });
+  });
+  ctx.restore();
+}
+
+function drawPuzzleTile(ctx, tile, x, y, size, selected, lit) {
+  ctx.fillStyle = lit ? "rgba(73, 103, 91, 0.95)" : "rgba(79, 56, 43, 0.95)";
+  roundedRect(ctx, x, y, size, size, 7);
+  ctx.fill();
+  ctx.strokeStyle = selected ? "rgba(255, 232, 166, 0.95)" : "rgba(255, 232, 166, 0.18)";
+  ctx.lineWidth = selected ? 3 : 1.5;
+  ctx.stroke();
+
+  if (tile.type === "blank") {
+    return;
+  }
+
+  ctx.save();
+  ctx.translate(x + size / 2, y + size / 2);
+  ctx.rotate(tile.rotation * Math.PI * 0.5);
+  ctx.strokeStyle = lit ? "rgba(255, 224, 138, 0.98)" : "rgba(201, 121, 69, 0.9)";
+  ctx.lineWidth = 7;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  if (tile.type === "line" || tile.type === "start" || tile.type === "output") {
+    ctx.moveTo(-size * 0.32, 0);
+    ctx.lineTo(size * 0.32, 0);
+  }
+  if (tile.type === "turn") {
+    ctx.moveTo(0, size * 0.28);
+    ctx.quadraticCurveTo(0, 0, size * 0.28, 0);
+  }
+  if (tile.type === "tee") {
+    ctx.moveTo(-size * 0.3, 0);
+    ctx.lineTo(size * 0.3, 0);
+    ctx.moveTo(0, 0);
+    ctx.lineTo(0, size * 0.3);
+  }
+  ctx.stroke();
+  if (tile.type === "start" || tile.type === "output") {
+    ctx.fillStyle = lit ? "rgba(255, 232, 166, 0.95)" : "rgba(143, 217, 240, 0.72)";
+    ctx.beginPath();
+    ctx.arc(tile.type === "start" ? -size * 0.28 : size * 0.28, 0, 6, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
 }
 
 function drawCompletionBadge(ctx, celebrationTimer, width) {

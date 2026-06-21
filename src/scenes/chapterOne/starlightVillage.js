@@ -78,39 +78,17 @@ export function createStarlightVillageScene() {
       puzzleText: "Hold Space to route power through the water wheel.",
       rewardText: "Water wheel restored. The village lights breathe back on.",
       onwardText: "The lane glows ahead. Walk right when you are ready.",
-      nextText: "The robot hums beside you. A lamp relay flickers down the lane.",
+      nextText: "The lane opens toward Glowfen Grove.",
+      nextSceneId: "chapter-one/glowfen-grove",
+      reactions: [
+        { text: "The lights are back!", x: 735, y: 292 },
+        { text: "Power restored.", x: "robot", y: "robotTop" }
+      ],
       dialogue: {
         scan: { speaker: "robot", text: "Main wheel is asleep. I found the sleepy part." },
         puzzle: { speaker: "player", text: "Okay. Lantern steady, hands steady." },
         reward: { speaker: "robot", text: "Village current is back. Nicely routed." },
-        next: { speaker: "robot", text: "That lamp relay is still wobbling." }
-      }
-    },
-    {
-      id: "lamp-relay",
-      kind: "timed-tap",
-      x: 1488,
-      y: 526,
-      radius: 170,
-      complete: false,
-      hits: 0,
-      requiredHits: 3,
-      sparkPhase: 0,
-      sparkSpeed: 0.72,
-      successMin: 0.42,
-      successMax: 0.58,
-      feedbackTimer: 0,
-      feedback: "",
-      scanText: "Robot scan: lamp relay out of tune.",
-      puzzleText: "Tap Space as the spark crosses the gold notch.",
-      rewardText: "Lamp relay tuned. The right side of the village steadies.",
-      onwardText: "Both repairs are holding. The village path feels safer now.",
-      nextText: "All repairs in this slice are complete.",
-      dialogue: {
-        scan: { speaker: "robot", text: "Tiny timing problem. My favorite kind." },
-        puzzle: { speaker: "player", text: "Catch the spark on the bright mark." },
-        reward: { speaker: "player", text: "There. The light sounds calmer now." },
-        next: { speaker: "robot", text: "Two repairs stable. Rain still dramatic." }
+        next: { speaker: "robot", text: "Power is stable. Glowfen Grove is waiting." }
       }
     }
   ];

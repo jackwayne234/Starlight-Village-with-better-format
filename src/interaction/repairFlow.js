@@ -1,9 +1,12 @@
+import { createRepairPuzzle, movePuzzleSelection, rotateSelectedTile } from "./repairPuzzle.js";
+
 export function updateRepairFlow(scene, input, dt) {
   const flow = scene.flow;
   const target = scene.repairTarget;
 
   updateReactionTimers(scene, dt);
   updateDialogue(scene, dt);
+  updateReactionBubbles(scene, dt);
 
   if (!target) {
     return;
@@ -31,7 +34,9 @@ export function updateRepairFlow(scene, input, dt) {
   if (flow.mode === "puzzle") {
     scene.robot.pose = "route";
 
-    if (target.kind === "timed-tap") {
+    if (target.kind === "path-puzzle") {
+      updatePathPuzzleRepair(scene, input, target);
+    } else if (target.kind === "timed-tap") {
       updateTimedTapRepair(scene, input, dt, target);
     } else {
       updateHoldChargeRepair(scene, input, dt, target);
@@ -53,6 +58,36 @@ export function updateRepairFlow(scene, input, dt) {
   }
 }
 
+function updatePathPuzzleRepair(scene, input, target) {
+  if (!target.puzzle) {
+    target.puzzle = createRepairPuzzle(target.puzzleTheme);
+  }
+
+  if (input.consume("ArrowUp") || input.consume("KeyW")) {
+    movePuzzleSelection(target.puzzle, -1, 0);
+  }
+  if (input.consume("ArrowDown") || input.consume("KeyS")) {
+    movePuzzleSelection(target.puzzle, 1, 0);
+  }
+  if (input.consume("ArrowLeft") || input.consume("KeyA")) {
+    movePuzzleSelection(target.puzzle, 0, -1);
+  }
+  if (input.consume("ArrowRight") || input.consume("KeyD")) {
+    movePuzzleSelection(target.puzzle, 0, 1);
+  }
+  if (consumeRepairInput(input)) {
+    rotateSelectedTile(target.puzzle);
+  }
+
+  target.progress = target.puzzle.completed ? 1 : target.puzzle.connected.size / (target.puzzle.rows * target.puzzle.cols);
+  scene.world.powerLevel = Math.max(scene.world.powerLevel, target.progress);
+
+  if (target.puzzle.completed) {
+    applyRepairEffect(scene, target);
+    completeRepair(scene, target);
+  }
+}
+
 function updateHoldChargeRepair(scene, input, dt, target) {
   const routingPower = input.isDown("Space") || input.isDown("Enter") || input.isDown("KeyE");
   const delta = routingPower ? target.chargeRate : -target.decayRate;
@@ -60,8 +95,7 @@ function updateHoldChargeRepair(scene, input, dt, target) {
   scene.world.powerLevel = target.progress;
 
   if (target.progress >= 1) {
-    scene.world.repaired = true;
-    scene.world.powerLevel = 1;
+    applyRepairEffect(scene, target);
     completeRepair(scene, target);
   }
 }
@@ -110,12 +144,77 @@ function completeRepair(scene, target) {
   scene.flow.message = target.rewardText;
   scene.progressDirty = true;
   showDialogue(scene, target.dialogue?.reward);
+  showReactionBubbles(scene, target.reactions);
+}
+
+function applyRepairEffect(scene, target) {
+  scene.world.repaired = true;
+  scene.world.powerLevel = 1;
+
+  if (target.id === "root-pump") {
+    scene.world.groveBloom = 1;
+    if (scene.bridge) scene.bridge.repaired = true;
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+  }
+
+  if (target.id === "switchyard-junction") {
+    scene.switchyard?.poles.forEach((pole) => {
+      pole.lit = true;
+    });
+    scene.switchyard?.boxes.forEach((box) => {
+      box.lit = true;
+    });
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+  }
+
+  if (target.id === "storm-gauge") {
+    if (scene.ridge?.gauge) scene.ridge.gauge.lit = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+  }
+
+  if (target.id === "beacon-tower") {
+    if (scene.beaconHill?.tower) scene.beaconHill.tower.lit = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+  }
+
+  if (target.id === "rainbarrel-drain") {
+    if (scene.rainbarrelRow?.drain) scene.rainbarrelRow.drain.cleared = true;
+    scene.rainbarrelRow?.channels.forEach((channel) => {
+      channel.flow = true;
+    });
+    scene.rainbarrelRow?.barrels.forEach((barrel) => {
+      barrel.overflow = false;
+    });
+    scene.layers.cottages.forEach((cottage) => {
+      cottage.lit = true;
+    });
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+  }
 }
 
 function advanceRepairTarget(scene) {
   const nextIndex = scene.repairIndex + 1;
 
   if (nextIndex >= scene.repairs.length) {
+    if (scene.repairTarget.nextSceneId) {
+      scene.nextSceneId = scene.repairTarget.nextSceneId;
+      scene.progressDirty = true;
+      return;
+    }
+
     scene.flow.message = scene.repairTarget.nextText;
     showDialogue(scene, scene.repairTarget.dialogue?.next);
     return;
@@ -176,4 +275,21 @@ function updateDialogue(scene, dt) {
     scene.dialogue.speaker = null;
     scene.dialogue.text = "";
   }
+}
+
+function showReactionBubbles(scene, reactions = []) {
+  scene.reactionBubbles = reactions.map((reaction, index) => ({
+    ...reaction,
+    timer: 3.2 + index * 0.35
+  }));
+}
+
+function updateReactionBubbles(scene, dt) {
+  if (!scene.reactionBubbles.length) {
+    return;
+  }
+
+  scene.reactionBubbles = scene.reactionBubbles
+    .map((bubble) => ({ ...bubble, timer: bubble.timer - dt }))
+    .filter((bubble) => bubble.timer > 0);
 }
