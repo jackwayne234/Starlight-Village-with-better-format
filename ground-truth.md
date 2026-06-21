@@ -545,3 +545,4 @@ _Not granted yet. The AI should ask: “Do I have your permission to start worki
 - Pushed planning docs (chunks 15–25) and this ground-truth.md to GitHub on `main`.
 - Consolidated ground-truth.md to a single source of truth: real file lives in the repo; the outer project-folder path is now a symlink to it.
 - Added a PostToolUse hook (`.claude/settings.json`) that auto-commits and pushes ground-truth.md to GitHub whenever it is edited.
+- Reloaded config via /hooks to activate the auto-sync hook; verified it commits and pushes on edit.
