@@ -1,5 +1,5 @@
 const SAVE_KEY = "starlight-village-v2-progress";
-const SAVE_VERSION = 1;
+const SAVE_VERSION = 2;
 
 export function loadProgress() {
   try {
@@ -15,7 +15,8 @@ export function saveProgress(scene) {
     version: SAVE_VERSION,
     sceneId: scene.id,
     repairIndex: scene.repairIndex,
-    completedRepairIds: scene.repairs.filter((repair) => repair.complete).map((repair) => repair.id)
+    completedRepairIds: scene.repairs.filter((repair) => repair.complete).map((repair) => repair.id),
+    chapterComplete: Boolean(scene.chapterComplete)
   };
 
   try {
@@ -34,7 +35,7 @@ export function clearProgress() {
 }
 
 export function applyProgress(scene, progress) {
-  if (!progress || progress.version !== SAVE_VERSION || progress.sceneId !== scene.id) {
+  if (!progress || ![1, SAVE_VERSION].includes(progress.version) || progress.sceneId !== scene.id) {
     return scene;
   }
 
@@ -46,25 +47,21 @@ export function applyProgress(scene, progress) {
 
     repair.complete = true;
     repair.progress = 1;
-    if (repair.kind === "timed-tap") {
-      repair.hits = repair.requiredHits;
-    }
   });
 
   const firstIncomplete = scene.repairs.findIndex((repair) => !repair.complete);
   scene.repairIndex = firstIncomplete === -1 ? scene.repairs.length - 1 : firstIncomplete;
   scene.repairTarget = scene.repairs[scene.repairIndex] ?? null;
   restoreWorldFlags(scene);
-  restoreFlowMessage(scene);
+  restoreFlowMessage(scene, progress);
   return scene;
 }
 
 function restoreWorldFlags(scene) {
   const waterWheel = scene.repairs.find((repair) => repair.id === "water-wheel");
-  const activeHoldRepair = scene.repairs.find((repair) => repair.kind === "hold-charge" && !repair.complete) ?? scene.repairs.find((repair) => repair.kind === "hold-charge");
 
   scene.world.repaired = Boolean(waterWheel?.complete);
-  scene.world.powerLevel = waterWheel?.complete ? 1 : activeHoldRepair?.progress ?? 0;
+  scene.world.powerLevel = waterWheel?.complete ? 1 : 0;
   scene.world.groveBloom = scene.repairs.find((repair) => repair.id === "root-pump")?.complete ? 1 : 0;
   scene.repairs.filter((repair) => repair.complete).forEach((repair) => restoreRepairEffect(scene, repair));
 }
@@ -108,11 +105,18 @@ function restoreRepairEffect(scene, repair) {
   }
 }
 
-function restoreFlowMessage(scene) {
+function restoreFlowMessage(scene, progress) {
   const allComplete = scene.repairs.length > 0 && scene.repairs.every((repair) => repair.complete);
   if (allComplete) {
     if (scene.repairTarget?.nextSceneId) {
       scene.nextSceneId = scene.repairTarget.nextSceneId;
+    }
+
+    if (progress.chapterComplete || scene.repairTarget?.chapterComplete) {
+      scene.chapterComplete = scene.repairTarget.chapterComplete;
+      scene.flow.mode = "chapter-complete";
+      scene.flow.message = scene.repairTarget.nextText;
+      return;
     }
 
     scene.flow.message = "All repairs in this slice are stable.";

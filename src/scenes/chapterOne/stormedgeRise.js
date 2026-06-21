@@ -73,12 +73,10 @@ export function createStormedgeRiseScene() {
       radius: 230,
       complete: false,
       progress: 0,
-      chargeRate: 0.4,
-      decayRate: 0.12,
       scanText: "Robot scan: storm gauge unstable.",
       puzzleText: "Rotate the signal paths to steady the storm gauge.",
       rewardText: "Storm gauge stabilized. The wind readings settle.",
-      onwardText: "The beacon hill path is open. Walk right when ready.",
+      onwardText: "The beacon hill path is open.",
       nextText: "Climbing to Beacon Hill.",
       nextSceneId: "chapter-one/beacon-hill",
       reactions: [

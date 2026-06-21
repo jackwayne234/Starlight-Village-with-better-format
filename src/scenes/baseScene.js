@@ -49,6 +49,7 @@ export function createBaseScene({ id, title, worldWidth = 2200, startMessage }) 
     repairIndex: 0,
     repairTarget: null,
     nextSceneId: null,
+    chapterComplete: null,
     progressDirty: false,
     dialogue: {
       speaker: null,

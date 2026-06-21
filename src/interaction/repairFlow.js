@@ -12,6 +12,10 @@ export function updateRepairFlow(scene, input, dt) {
     return;
   }
 
+  if (flow.mode === "chapter-complete") {
+    return;
+  }
+
   const distance = Math.abs(scene.player.x - target.x);
 
   if (flow.mode === "walking" && distance < target.radius && !target.complete) {
@@ -33,13 +37,14 @@ export function updateRepairFlow(scene, input, dt) {
 
   if (flow.mode === "puzzle") {
     scene.robot.pose = "route";
+    updatePathPuzzleRepair(scene, input, target);
+  }
 
-    if (target.kind === "path-puzzle") {
-      updatePathPuzzleRepair(scene, input, target);
-    } else if (target.kind === "timed-tap") {
-      updateTimedTapRepair(scene, input, dt, target);
-    } else {
-      updateHoldChargeRepair(scene, input, dt, target);
+  if (flow.mode === "puzzle-complete") {
+    flow.timer -= dt;
+    scene.robot.pose = "celebrate";
+    if (flow.timer <= 0) {
+      completeRepair(scene, target);
     }
   }
 
@@ -52,7 +57,7 @@ export function updateRepairFlow(scene, input, dt) {
       flow.message = target.onwardText;
     }
 
-    if (flow.timer <= 0 && (input.isDown("ArrowRight") || input.isDown("KeyD"))) {
+    if (flow.timer <= 0 && consumeRepairInput(input)) {
       advanceRepairTarget(scene);
     }
   }
@@ -84,49 +89,10 @@ function updatePathPuzzleRepair(scene, input, target) {
 
   if (target.puzzle.completed) {
     applyRepairEffect(scene, target);
-    completeRepair(scene, target);
-  }
-}
-
-function updateHoldChargeRepair(scene, input, dt, target) {
-  const routingPower = input.isDown("Space") || input.isDown("Enter") || input.isDown("KeyE");
-  const delta = routingPower ? target.chargeRate : -target.decayRate;
-  target.progress = clamp01(target.progress + delta * dt);
-  scene.world.powerLevel = target.progress;
-
-  if (target.progress >= 1) {
-    applyRepairEffect(scene, target);
-    completeRepair(scene, target);
-  }
-}
-
-function updateTimedTapRepair(scene, input, dt, target) {
-  target.sparkPhase = (target.sparkPhase + target.sparkSpeed * dt) % 1;
-  target.feedbackTimer = Math.max(0, target.feedbackTimer - dt);
-
-  if (target.feedbackTimer <= 0) {
-    target.feedback = "";
-  }
-
-  if (!consumeRepairInput(input)) {
-    return;
-  }
-
-  if (target.sparkPhase >= target.successMin && target.sparkPhase <= target.successMax) {
-    target.hits += 1;
-    target.progress = target.hits / target.requiredHits;
-    target.feedback = target.hits >= target.requiredHits ? "Relay tuned." : `Good. ${target.requiredHits - target.hits} more.`;
-    target.feedbackTimer = 0.9;
-  } else {
-    target.feedback = "Almost. Wait for the spark to cross the gold notch.";
-    target.feedbackTimer = 1.1;
-  }
-
-  if (target.hits >= target.requiredHits) {
-    scene.world.relayAligned = true;
-    completeRepair(scene, target);
-  } else {
-    scene.flow.message = target.feedback;
+    scene.flow.mode = "puzzle-complete";
+    scene.flow.timer = 1.15;
+    scene.flow.message = target.puzzle.successMessage ?? target.rewardText;
+    target.progress = 1;
   }
 }
 
@@ -211,7 +177,18 @@ function advanceRepairTarget(scene) {
   if (nextIndex >= scene.repairs.length) {
     if (scene.repairTarget.nextSceneId) {
       scene.nextSceneId = scene.repairTarget.nextSceneId;
+      scene.flow.message = scene.repairTarget.nextText;
       scene.progressDirty = true;
+      showDialogue(scene, scene.repairTarget.dialogue?.next);
+      return;
+    }
+
+    if (scene.repairTarget.chapterComplete) {
+      scene.chapterComplete = scene.repairTarget.chapterComplete;
+      scene.flow.mode = "chapter-complete";
+      scene.flow.message = scene.repairTarget.nextText;
+      scene.progressDirty = true;
+      showDialogue(scene, scene.repairTarget.dialogue?.next, 3.2);
       return;
     }
 
@@ -233,10 +210,6 @@ function advanceRepairTarget(scene) {
 
 function consumeRepairInput(input) {
   return input.consume("Space") || input.consume("Enter") || input.consume("KeyE");
-}
-
-function clamp01(value) {
-  return Math.max(0, Math.min(1, value));
 }
 
 function updateReactionTimers(scene, dt) {
@@ -280,7 +253,8 @@ function updateDialogue(scene, dt) {
 function showReactionBubbles(scene, reactions = []) {
   scene.reactionBubbles = reactions.map((reaction, index) => ({
     ...reaction,
-    timer: 3.2 + index * 0.35
+    delay: 2.05 + index * 1.55,
+    timer: 2.55
   }));
 }
 
@@ -290,6 +264,12 @@ function updateReactionBubbles(scene, dt) {
   }
 
   scene.reactionBubbles = scene.reactionBubbles
-    .map((bubble) => ({ ...bubble, timer: bubble.timer - dt }))
-    .filter((bubble) => bubble.timer > 0);
+    .map((bubble) => {
+      if (bubble.delay > 0) {
+        return { ...bubble, delay: Math.max(0, bubble.delay - dt) };
+      }
+
+      return { ...bubble, timer: bubble.timer - dt };
+    })
+    .filter((bubble) => bubble.delay > 0 || bubble.timer > 0);
 }

@@ -69,18 +69,17 @@ export function createGlowfenGroveScene() {
   scene.repairs = [
     {
       id: "root-pump",
-      kind: "hold-charge",
+      kind: "path-puzzle",
+      puzzleTheme: "root-pump",
       x: 1045,
       y: 510,
       radius: 210,
       complete: false,
       progress: 0,
-      chargeRate: 0.42,
-      decayRate: 0.1,
       scanText: "Robot scan: grove root pump stalled.",
-      puzzleText: "Hold Space to wake the root pump gently.",
+      puzzleText: "Rotate the root channels to wake the pump.",
       rewardText: "Root pump restored. Glowfen Grove breathes again.",
-      onwardText: "The grove is stable. Walk right toward the switchyard.",
+      onwardText: "The grove is stable.",
       nextText: "Heading toward Mossline Switchyard.",
       nextSceneId: "chapter-one/mossline-switchyard",
       reactions: [
@@ -89,7 +88,7 @@ export function createGlowfenGroveScene() {
       ],
       dialogue: {
         scan: { speaker: "robot", text: "These roots are holding their breath." },
-        puzzle: { speaker: "player", text: "Easy does it. No startling the grove." },
+        puzzle: { speaker: "player", text: "Easy path, steady light. Wake the roots." },
         reward: { speaker: "robot", text: "Root pressure steady. The plants approve." },
         next: { speaker: "player", text: "The switchyard should be just past the glow plants." }
       }

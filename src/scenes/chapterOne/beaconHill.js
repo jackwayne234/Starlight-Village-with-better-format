@@ -78,12 +78,10 @@ export function createBeaconHillScene() {
       radius: 250,
       complete: false,
       progress: 0,
-      chargeRate: 0.38,
-      decayRate: 0.1,
       scanText: "Robot scan: beacon signal weak.",
       puzzleText: "Rotate the signal paths to tune the beacon.",
       rewardText: "Beacon restored. Warm light crosses the hill.",
-      onwardText: "One stormwater call remains. Walk right when ready.",
+      onwardText: "One stormwater call remains.",
       nextText: "Heading to Rainbarrel Row.",
       nextSceneId: "chapter-one/rainbarrel-row",
       reactions: [

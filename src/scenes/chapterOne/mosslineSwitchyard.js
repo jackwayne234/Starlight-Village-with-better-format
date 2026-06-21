@@ -81,12 +81,10 @@ export function createMosslineSwitchyardScene() {
       radius: 230,
       complete: false,
       progress: 0,
-      chargeRate: 0.44,
-      decayRate: 0.1,
       scanText: "Robot scan: switchyard junction line is down.",
       puzzleText: "Rotate the paths to reconnect the mossline junction.",
       rewardText: "Switchyard line restored. Current steadies through the trees.",
-      onwardText: "The storm road climbs toward the ridge. Walk right when ready.",
+      onwardText: "The storm road climbs toward the ridge.",
       nextText: "Heading toward Stormedge Rise.",
       nextSceneId: "chapter-one/stormedge-rise",
       reactions: [

@@ -18,7 +18,7 @@ export function createStarlightVillageScene() {
       { x: 1960, y: 276, scale: 1.02 }
     ],
     cottages: [
-      { x: 735, y: 404, scale: 0.86, lit: false },
+      { x: 560, y: 404, scale: 0.86, lit: false },
       { x: 1015, y: 428, scale: 0.7, lit: true },
       { x: 1565, y: 418, scale: 0.76, lit: false },
       { x: 1905, y: 430, scale: 0.68, lit: false }
@@ -66,27 +66,25 @@ export function createStarlightVillageScene() {
   scene.repairs = [
     {
       id: "water-wheel",
-      kind: "hold-charge",
+      kind: "path-puzzle",
+      puzzleTheme: "water-wheel",
       x: 840,
       y: 456,
       radius: 220,
       complete: false,
       progress: 0,
-      chargeRate: 0.5,
-      decayRate: 0.14,
       scanText: "Robot scan: water wheel generator offline.",
-      puzzleText: "Hold Space to route power through the water wheel.",
+      puzzleText: "Rotate the channels to wake the water wheel.",
       rewardText: "Water wheel restored. The village lights breathe back on.",
-      onwardText: "The lane glows ahead. Walk right when you are ready.",
+      onwardText: "The lane glows ahead.",
       nextText: "The lane opens toward Glowfen Grove.",
       nextSceneId: "chapter-one/glowfen-grove",
       reactions: [
-        { text: "The lights are back!", x: 735, y: 292 },
-        { text: "Power restored.", x: "robot", y: "robotTop" }
+        { text: "The lights are back!", x: 560, y: 330 }
       ],
       dialogue: {
         scan: { speaker: "robot", text: "Main wheel is asleep. I found the sleepy part." },
-        puzzle: { speaker: "player", text: "Okay. Lantern steady, hands steady." },
+        puzzle: { speaker: "player", text: "Okay. Turn the channels until the wheel catches." },
         reward: { speaker: "robot", text: "Village current is back. Nicely routed." },
         next: { speaker: "robot", text: "Power is stable. Glowfen Grove is waiting." }
       }

@@ -523,7 +523,7 @@ function drawLampRelay(ctx, target, time) {
   ctx.setLineDash([]);
 
   if (!tuned) {
-    const sparkAngle = target.sparkPhase * Math.PI * 2;
+    const sparkAngle = time * 4;
     ctx.fillStyle = "rgba(143, 217, 240, 0.95)";
     ctx.beginPath();
     ctx.arc(Math.cos(sparkAngle) * 34, Math.sin(sparkAngle) * 34, 6, 0, Math.PI * 2);

@@ -22,16 +22,16 @@ http://127.0.0.1:5200/
 - Six Chapter 1 locations: Starlight Village, Glowfen Grove, Mossline Switchyard, Stormedge Rise, Beacon Hill, and Rainbarrel Row.
 - Apprentice and floating robot companion.
 - Left/right walking with a scrolling camera.
-- Water wheel repair: hold Space, Enter, or E to route power.
-- Root pump repair in Glowfen Grove: hold Space, Enter, or E to wake the grove.
-- One repair target in each later location, using the current V2 hold-repair flow.
+- All Chapter 1 repairs use rotate-path puzzles.
+- One repair target in each Chapter 1 location.
+- Chapter 1 complete summary after Rainbarrel Row.
 - Short character dialogue bubbles.
 - Progress saved in browser storage.
 
 ## Controls
 
 - Move: Left/Right arrows or A/D.
-- Repair: Space, Enter, or E.
+- Repair or continue: Space, Enter, or E.
 - Reset saved progress: R.
 
 ## Architecture Shape
