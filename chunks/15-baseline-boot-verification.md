@@ -26,4 +26,11 @@ Tool: existing README run command; no new script needed.
 
 ## Completion Notes
 
-_(to be filled in when the chunk runs)_
+- Syntax check (`node --check`) passes on all 24 JS files.
+- Local server (`python3 -m http.server 5200`) serves `/`, `index.html`, `styles.css`, and
+  source modules with HTTP 200.
+- Verified every relative `import` across the codebase resolves to a real file (no broken
+  module paths).
+- In-browser console capture / visual click-through deferred to user play-test (no browser
+  available in this environment). Boot + static baseline is clean.
+- Status: complete.

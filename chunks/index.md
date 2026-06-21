@@ -4,7 +4,7 @@ High-level list only. All details live inside each chunk file.
 
 | Chunk | Title | Status |
 |-------|-------|--------|
-| 15 | Baseline and Boot Verification | pending |
+| 15 | Baseline and Boot Verification | complete |
 | 16 | Full Issue Inventory | pending |
 | 17 | Input Handling Consistency | pending |
 | 18 | Prompt and Message Accuracy | pending |
