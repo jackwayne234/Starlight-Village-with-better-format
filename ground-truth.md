@@ -546,3 +546,13 @@ _Not granted yet. The AI should ask: “Do I have your permission to start worki
 - Consolidated ground-truth.md to a single source of truth: real file lives in the repo; the outer project-folder path is now a symlink to it.
 - Added a PostToolUse hook (`.claude/settings.json`) that auto-commits and pushes ground-truth.md to GitHub whenever it is edited.
 - Reloaded config via /hooks to activate the auto-sync hook; verified it commits and pushes on edit.
+- Permission to start work granted via /goal (complete all chunks one at a time, in series).
+- Completed all chunks C15–C25, one per commit. Code fixes: input W/S consistency (C17),
+  continue-prompt wording (C18), removed dead updateRobot time arg (C19), puzzle connectivity
+  seeds from real start tile (C20), removed dead lamp-relay rendering code (C23). Review-only
+  chunks confirmed clean: baseline/boot (C15), inventory + puzzle solvability (C16), scene
+  data audit (C21), rendering safety (C22), re-review (C24). Final handoff in chunk 25.
+- Verification each step: node --check on all JS, local http.server boot (200s), import
+  resolution, puzzle solvability brute force, engine completion, scene-data audit — all pass.
+- Outstanding (user decision, not auto-fixed): save data is written but never loaded
+  (intentional playtest reset-on-refresh per HANDOFF).
