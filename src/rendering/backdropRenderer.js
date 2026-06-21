@@ -24,7 +24,10 @@ function drawPaintedScenery(ctx, width, height, cameraX) {
   const w = scenery.naturalWidth * scale;
   const x = -cameraX * 0.3;
   ctx.save();
-  ctx.globalAlpha = 0.96;
+  ctx.globalAlpha = 0.98;
+  // The painted forest is a dark night scene; lift its brightness/contrast a
+  // touch so it reads behind the village instead of blending into the sky.
+  ctx.filter = "brightness(1.5) saturate(1.12) contrast(1.05)";
   ctx.drawImage(scenery, x, 0, w, height);
   // Cover any sliver past the right edge if the camera runs far.
   if (x + w < width) {

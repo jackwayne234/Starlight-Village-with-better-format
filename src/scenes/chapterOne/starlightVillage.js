@@ -8,53 +8,40 @@ export function createStarlightVillageScene() {
   });
 
   scene.layers = {
+    // Tall trees (placeholder leafy art until the pine sprite is added), sized
+    // against the ~232px boy so they read like real trees and tucked behind the
+    // cottages. Bases land near the walking line (~y640).
     trees: [
-      { x: 120, y: 292, scale: 1.14 },
-      { x: 360, y: 270, scale: 0.96 },
-      { x: 860, y: 266, scale: 1.05 },
-      { x: 1010, y: 315, scale: 0.82 },
-      { x: 1430, y: 286, scale: 1.08 },
-      { x: 1810, y: 326, scale: 0.82 },
-      { x: 2160, y: 276, scale: 1.02 }
+      { x: 120, y: 270, scale: 1.6 },
+      { x: 1150, y: 247, scale: 1.7 },
+      { x: 1760, y: 291, scale: 1.5 },
+      { x: 2150, y: 269, scale: 1.62 }
     ],
+    // Cottages scaled up to be clearly taller than the boy (realistic houses),
+    // resting on the ground line and spaced so none overlaps a tree trunk.
     cottages: [
-      { x: 560, y: 404, scale: 0.86, lit: false },
-      { x: 1230, y: 428, scale: 0.7, lit: true },
-      { x: 1640, y: 418, scale: 0.76, lit: false },
-      { x: 1980, y: 430, scale: 0.68, lit: false }
+      { x: 400, y: 529, scale: 2.15, lit: false },
+      { x: 1500, y: 524, scale: 2.3, lit: true },
+      { x: 1990, y: 540, scale: 2.0, lit: false }
     ],
+    // Lamps line the walking path between the landmarks.
     lamps: [
-      { x: 394, y: 504, lit: false },
-      { x: 958, y: 512, lit: true },
-      { x: 1152, y: 535, lit: false },
-      { x: 1488, y: 526, lit: false },
-      { x: 1815, y: 532, lit: false },
-      { x: 2075, y: 518, lit: false }
+      { x: 250, y: 560, lit: false },
+      { x: 680, y: 562, lit: true },
+      { x: 1180, y: 560, lit: false },
+      { x: 1720, y: 562, lit: false }
     ],
+    // A couple of glowing plants tucked at the far edges, off the path.
     glowPlants: [
-      { x: 524, y: 604, active: true },
-      { x: 617, y: 625, active: false },
-      { x: 861, y: 604, active: true },
-      { x: 1390, y: 608, active: true },
-      { x: 1760, y: 620, active: false }
+      { x: 90, y: 638, active: true },
+      { x: 2120, y: 636, active: false }
     ],
-    brokenBranches: [
-      { x: 325, y: 619, rotation: -0.25 },
-      { x: 1084, y: 633, rotation: 0.18 },
-      { x: 1518, y: 638, rotation: -0.1 },
-      { x: 1865, y: 622, rotation: 0.22 }
-    ],
-    repairParts: [
-      { x: 676, y: 590, type: "gear" },
-      { x: 1008, y: 584, type: "coil" },
-      { x: 1118, y: 573, type: "seed" },
-      { x: 1640, y: 590, type: "gear" }
-    ],
+    // Walking path kept clear: no loose parts or fallen branches.
+    brokenBranches: [],
+    repairParts: [],
     puddles: [
-      { x: 250, y: 650, width: 118, height: 24 },
-      { x: 610, y: 646, width: 92, height: 18 },
-      { x: 1375, y: 616, width: 126, height: 24 },
-      { x: 1990, y: 606, width: 96, height: 18 }
+      { x: 300, y: 664, width: 118, height: 24 },
+      { x: 1900, y: 660, width: 110, height: 22 }
     ],
     mistBands: [
       { x: 80, y: 516, width: 180, speed: 9 },
@@ -68,8 +55,9 @@ export function createStarlightVillageScene() {
       id: "water-wheel",
       kind: "path-puzzle",
       puzzleTheme: "water-wheel",
-      x: 840,
-      y: 456,
+      x: 800,
+      y: 568,
+      displayHeight: 440,
       radius: 220,
       complete: false,
       progress: 0,

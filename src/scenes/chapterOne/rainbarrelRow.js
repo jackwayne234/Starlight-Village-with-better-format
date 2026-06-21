@@ -19,10 +19,10 @@ export function createRainbarrelRowScene() {
       { x: 1540, y: 650, width: 360, flow: false }
     ],
     barrels: [
-      { x: 520, y: 542, overflow: true },
-      { x: 825, y: 548, overflow: true },
-      { x: 1395, y: 546, overflow: true },
-      { x: 1710, y: 552, overflow: true }
+      { x: 520, y: 602, overflow: true },
+      { x: 825, y: 602, overflow: true },
+      { x: 1395, y: 602, overflow: true },
+      { x: 1710, y: 602, overflow: true }
     ],
     gutters: [
       { x: 430, y: 363, width: 260, drip: true },
@@ -33,46 +33,35 @@ export function createRainbarrelRowScene() {
   };
   scene.layers = {
     trees: [
-      { x: 80, y: 306, scale: 0.95 },
-      { x: 250, y: 286, scale: 1.08 },
-      { x: 635, y: 324, scale: 0.82 },
-      { x: 1110, y: 296, scale: 0.98 },
-      { x: 1485, y: 318, scale: 0.86 },
-      { x: 1930, y: 292, scale: 1.02 }
+      { x: 80, y: 291, scale: 1.5 },
+      { x: 250, y: 268, scale: 1.6 },
+      { x: 635, y: 309, scale: 1.42 },
+      { x: 1110, y: 296, scale: 1.48 },
+      { x: 1485, y: 300, scale: 1.46 },
+      { x: 1930, y: 280, scale: 1.55 }
     ],
     cottages: [
-      { x: 445, y: 430, scale: 0.78, lit: false },
-      { x: 770, y: 452, scale: 0.68, lit: true },
-      { x: 1370, y: 444, scale: 0.76, lit: false },
-      { x: 1665, y: 462, scale: 0.66, lit: false }
+      { x: 380, y: 534, scale: 2.05, lit: false },
+      { x: 850, y: 526, scale: 2.2, lit: true },
+      { x: 1340, y: 532, scale: 2.1, lit: false },
+      { x: 1760, y: 537, scale: 2.0, lit: false }
     ],
     lamps: [
-      { x: 305, y: 534, lit: true },
-      { x: 1010, y: 536, lit: false },
-      { x: 1265, y: 528, lit: false },
-      { x: 1870, y: 532, lit: true }
+      { x: 305, y: 560, lit: true },
+      { x: 1010, y: 560, lit: false },
+      { x: 1265, y: 560, lit: false },
+      { x: 1870, y: 560, lit: true }
     ],
     glowPlants: [
-      { x: 365, y: 610, active: true },
-      { x: 710, y: 628, active: false },
-      { x: 1175, y: 612, active: true },
-      { x: 1610, y: 628, active: false }
+      { x: 120, y: 640, active: true },
+      { x: 1980, y: 638, active: false }
     ],
-    brokenBranches: [
-      { x: 610, y: 620, rotation: -0.18 },
-      { x: 995, y: 636, rotation: 0.22 },
-      { x: 1510, y: 626, rotation: -0.2 }
-    ],
-    repairParts: [
-      { x: 1110, y: 584, type: "coil" },
-      { x: 1430, y: 586, type: "gear" }
-    ],
+    brokenBranches: [],
+    repairParts: [],
     puddles: [
-      { x: 190, y: 664, width: 220, height: 19 },
-      { x: 690, y: 675, width: 260, height: 19 },
-      { x: 1120, y: 650, width: 280, height: 21 },
-      { x: 1540, y: 672, width: 230, height: 18 },
-      { x: 1890, y: 654, width: 170, height: 17 }
+      { x: 200, y: 664, width: 220, height: 19 },
+      { x: 1120, y: 662, width: 280, height: 21 },
+      { x: 1900, y: 660, width: 170, height: 17 }
     ],
     mistBands: [
       { x: 130, y: 426, width: 360, speed: 12 },

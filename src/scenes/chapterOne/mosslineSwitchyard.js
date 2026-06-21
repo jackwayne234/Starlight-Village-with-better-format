@@ -19,50 +19,36 @@ export function createMosslineSwitchyardScene() {
       { x: 1760, y: 490, height: 225, lit: false }
     ],
     boxes: [
-      { x: 720, y: 575, lit: true },
-      { x: 1165, y: 578, lit: false },
-      { x: 1570, y: 586, lit: false }
+      { x: 720, y: 606, lit: true },
+      { x: 1165, y: 606, lit: false },
+      { x: 1570, y: 606, lit: false }
     ],
     gate: { x: 1870, y: 532 }
   };
   scene.layers = {
     trees: [
-      { x: 75, y: 292, scale: 1.08 },
-      { x: 245, y: 324, scale: 0.82 },
-      { x: 790, y: 282, scale: 1.02 },
-      { x: 1190, y: 318, scale: 0.9 },
-      { x: 1515, y: 276, scale: 1.1 },
-      { x: 1940, y: 310, scale: 0.88 }
+      { x: 75, y: 280, scale: 1.55 },
+      { x: 245, y: 314, scale: 1.4 },
+      { x: 790, y: 291, scale: 1.5 },
+      { x: 1190, y: 303, scale: 1.45 },
+      { x: 1515, y: 273, scale: 1.58 },
+      { x: 1940, y: 309, scale: 1.42 }
     ],
     cottages: [],
     lamps: [
-      { x: 360, y: 530, lit: true },
-      { x: 1080, y: 535, lit: false },
-      { x: 1660, y: 528, lit: false }
+      { x: 360, y: 560, lit: true },
+      { x: 1080, y: 560, lit: false },
+      { x: 1660, y: 560, lit: false }
     ],
     glowPlants: [
-      { x: 430, y: 608, active: true },
-      { x: 610, y: 628, active: false },
-      { x: 995, y: 612, active: true },
-      { x: 1290, y: 624, active: false },
-      { x: 1605, y: 607, active: true }
+      { x: 120, y: 640, active: true },
+      { x: 1980, y: 638, active: false }
     ],
-    brokenBranches: [
-      { x: 620, y: 615, rotation: -0.12 },
-      { x: 1030, y: 628, rotation: 0.24 },
-      { x: 1725, y: 624, rotation: -0.2 }
-    ],
-    repairParts: [
-      { x: 720, y: 548, type: "coil" },
-      { x: 1165, y: 550, type: "gear" },
-      { x: 1570, y: 558, type: "seed" }
-    ],
+    brokenBranches: [],
+    repairParts: [],
     puddles: [
-      { x: 135, y: 658, width: 180, height: 19 },
-      { x: 650, y: 675, width: 250, height: 18 },
-      { x: 1055, y: 650, width: 190, height: 16 },
-      { x: 1460, y: 670, width: 220, height: 18 },
-      { x: 1840, y: 654, width: 150, height: 17 }
+      { x: 200, y: 662, width: 180, height: 19 },
+      { x: 1840, y: 660, width: 150, height: 17 }
     ],
     mistBands: [
       { x: 180, y: 430, width: 320, speed: 8 },

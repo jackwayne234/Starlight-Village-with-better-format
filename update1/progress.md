@@ -96,9 +96,33 @@ the existing character sprites). All on-model and committed.
 - Local `python3 -m http.server 5200` boot check; index + every new asset 200.
 - Chris play-tested live and signed off ("overall it looks pretty good").
 
+## ✅ Done: Proportion + pine-tree pass on all 6 scenes (session 2026-06-21, evening)
+
+Chris flagged that the world looked "crudely pasted in" — props too small, a
+cottage floating on a tree, trees not matching the conifer background, and
+clutter on the walking path. Fixed across the whole chapter:
+
+- **Background was fine all along** — Chris's browser was serving a stale cache.
+  Brightened the painted forest backdrop so it reads (`backdropRenderer.js`,
+  `brightness(1.5)` filter) and added `tools/dev-server.mjs`, a no-cache static
+  server, so future edits show on a normal refresh. (Browsers still need ONE
+  hard refresh / Incognito to clear what they already cached.)
+- **Pine trees** — Chris generated a pine in ChatGPT; cut out with
+  `sprite-cutout.mjs … 240 global` → `pine-tree-trimmed.png`. `drawTree` now
+  prefers the pine (leafy `tree` kept as fallback), so all six scenes match the
+  conifer background.
+- **Realistic proportions** — everything was boy-sized or smaller (boy sprite is
+  232px). Scaled up: cottages ~2.0–2.3×, pines to ~1.4–1.7×, water wheel to 440px
+  and brought forward into the mill pond at the river mouth (now `displayHeight`
+  on the repair). Hero props bumped in `worldRenderer.js`: switchyard box→224,
+  storm gauge→292, shed→292, beacon tower→440, rain barrel→160, root pump→300.
+- **Grounding** — props now sit on the walking line (~y636–648) instead of
+  floating; cottage/landmark `y` values retuned per scene.
+- **Cleared the path** — removed all `repairParts` and `brokenBranches`, thinned
+  `glowPlants`/`puddles` to the edges in every scene.
+- Verified each scene with a headless CDP render harness; all six look cohesive.
+
 ### Not done yet (still on the Update 1 list)
-- Scenes 2–6 NOT re-checked for cottage/tree overlaps (only Starlight Village
-  was fixed) — likely a few more "house in a tree" spots to space out.
 - Weather richness (puddles/lightning), pacing slow-down, puzzle difficulty
   ramp, ending screen polish, dialogue polish.
 - Optional art: distant village silhouettes, Chapter-1 ending picture.

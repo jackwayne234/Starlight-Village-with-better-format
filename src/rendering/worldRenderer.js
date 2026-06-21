@@ -82,6 +82,13 @@ function drawSignpost(ctx, scene, time, powerLevel) {
 }
 
 function drawTree(ctx, tree, time) {
+  // Pine/evergreen to match the conifer background; falls back to the leafy
+  // sprite, then to the code-drawn tree, if an image hasn't loaded yet.
+  const pineImage = sprites.world.pine;
+  if (imageReady(pineImage)) {
+    drawWorldSprite(ctx, pineImage, tree.x, tree.y + 230 * tree.scale, 360 * tree.scale);
+    return;
+  }
   const treeImage = sprites.world.tree;
   if (imageReady(treeImage)) {
     drawWorldSprite(ctx, treeImage, tree.x, tree.y + 230 * tree.scale, 360 * tree.scale);
@@ -378,7 +385,7 @@ function drawSwitchyard(ctx, switchyard, time) {
   switchyard.boxes.forEach((box) => {
     if (imageReady(boxImage)) {
       const groundY = box.y + 30;
-      const height = 172;
+      const height = 224;
       drawWorldSprite(ctx, boxImage, box.x, groundY, height);
       warmGlow(ctx, box.x, groundY - height * 0.52, 52, box.lit ? 0.6 + Math.sin(time * 4) * 0.08 : 0.16);
       return;
@@ -411,7 +418,7 @@ function drawStormRidge(ctx, ridge, time) {
   const gaugeImage = sprites.world.stormGauge;
   if (imageReady(gaugeImage)) {
     const groundY = gauge.y + 60;
-    const height = 224;
+    const height = 292;
     drawWorldSprite(ctx, gaugeImage, gauge.x, groundY, height);
     warmGlow(ctx, gauge.x, groundY - height * 0.62, 46, gauge.lit ? 0.55 + Math.sin(time * 3.4) * 0.06 : 0.18);
     return;
@@ -436,7 +443,7 @@ function drawBeaconHill(ctx, beaconHill, time) {
   if (beaconHill.shed && imageReady(shedImage)) {
     const shed = beaconHill.shed;
     const groundY = shed.y + 96;
-    const height = 214;
+    const height = 292;
     const { width } = drawWorldSprite(ctx, shedImage, shed.x, groundY, height);
     warmGlow(ctx, shed.x - width * 0.12, groundY - height * 0.45, 56, shed.lit ? 0.5 + Math.sin(time * 3.2) * 0.07 : 0.18);
   }
@@ -445,7 +452,7 @@ function drawBeaconHill(ctx, beaconHill, time) {
   const towerImage = sprites.world.beaconTower;
   if (imageReady(towerImage)) {
     const groundY = tower.y + 84;
-    const height = 320;
+    const height = 440;
     drawWorldSprite(ctx, towerImage, tower.x, groundY, height);
     warmGlow(ctx, tower.x, groundY - height * 0.86, 70, tower.lit ? 0.7 + Math.sin(time * 4) * 0.08 : 0.26);
   } else {
@@ -498,7 +505,7 @@ function drawRainbarrelRow(ctx, row, time) {
   row.barrels.forEach((barrel) => {
     if (imageReady(barrelImage)) {
       const groundY = barrel.y + 34;
-      const height = 132;
+      const height = 160;
       drawWorldSprite(ctx, barrelImage, barrel.x, groundY, height);
       warmGlow(ctx, barrel.x, groundY - height * 0.4, 40, barrel.overflow ? 0.16 : 0.4);
       return;
@@ -544,7 +551,8 @@ function drawOnwardGlow(ctx, scene, time) {
 }
 
 function drawWaterWheelImage(ctx, image, target, time, powerLevel) {
-  const displayHeight = 264;
+  const displayHeight = target.displayHeight || 264;
+  const pondScale = displayHeight / 264;
   const scale = displayHeight / image.naturalHeight;
   const displayWidth = image.naturalWidth * scale;
   const baseY = 96; // bottom of the wheel rests near the old base line
@@ -554,7 +562,7 @@ function drawWaterWheelImage(ctx, image, target, time, powerLevel) {
   drawRepairHalo(ctx, target, time, powerLevel);
 
   // Mill pond so the wheel sits in water instead of on dry grass.
-  drawMillPond(ctx, baseY, time);
+  drawMillPond(ctx, baseY, time, pondScale);
 
   // Warm glow behind the hub runes, swelling as power comes back.
   const glow = 0.25 + powerLevel * 0.55 + Math.sin(time * 2) * 0.05 * powerLevel;
@@ -578,24 +586,26 @@ function drawWaterWheelImage(ctx, image, target, time, powerLevel) {
 }
 
 // A little teal mill pond drawn under the wheel, matching the stream colour.
-function drawMillPond(ctx, baseY, time) {
-  const pondY = baseY + 12;
+function drawMillPond(ctx, baseY, time, scale = 1) {
+  const pondY = baseY + 12 * scale;
+  const rx = 196 * scale;
+  const ry0 = 42 * scale;
   ctx.save();
-  const pond = ctx.createRadialGradient(4, pondY, 14, 4, pondY, 196);
+  const pond = ctx.createRadialGradient(4, pondY, 14 * scale, 4, pondY, rx);
   pond.addColorStop(0, "rgba(70, 122, 132, 0.92)");
   pond.addColorStop(0.7, "rgba(52, 102, 114, 0.82)");
   pond.addColorStop(1, "rgba(52, 102, 114, 0)");
   ctx.fillStyle = pond;
   ctx.beginPath();
-  ctx.ellipse(4, pondY, 196, 42, 0, 0, Math.PI * 2);
+  ctx.ellipse(4, pondY, rx, ry0, 0, 0, Math.PI * 2);
   ctx.fill();
   ctx.strokeStyle = "rgba(206, 238, 229, 0.3)";
   ctx.lineWidth = 2.5;
   for (let i = 0; i < 4; i += 1) {
-    const ry = pondY - 12 + i * 12 + Math.sin(time * 1.6 + i) * 2.5;
+    const ry = pondY - 12 * scale + i * 12 * scale + Math.sin(time * 1.6 + i) * 2.5;
     ctx.beginPath();
-    ctx.moveTo(-150, ry);
-    ctx.bezierCurveTo(-50, ry - 7, 72, ry + 6, 172, ry - 5);
+    ctx.moveTo(-150 * scale, ry);
+    ctx.bezierCurveTo(-50 * scale, ry - 7, 72 * scale, ry + 6, 172 * scale, ry - 5);
     ctx.stroke();
   }
   ctx.restore();
@@ -698,7 +708,7 @@ function drawRootPump(ctx, target, time, powerLevel) {
   const pumpImage = sprites.world.rootPump;
   if (imageReady(pumpImage)) {
     const groundY = target.y + 40;
-    const height = 236;
+    const height = 300;
     const { width } = drawWorldSprite(ctx, pumpImage, target.x, groundY, height);
     warmGlow(ctx, target.x, groundY - height * 0.5, width * 0.55, (0.3 + powerLevel * 0.55) * pulse);
     return;

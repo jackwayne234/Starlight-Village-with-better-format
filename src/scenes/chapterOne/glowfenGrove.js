@@ -22,42 +22,32 @@ export function createGlowfenGroveScene() {
   scene.bridge = { x: 850, y: 604, width: 420, repaired: false };
 
   scene.layers = {
+    // Tall pines, grounded near the walking line and spaced through the grove.
     trees: [
-      { x: 40, y: 250, scale: 1.28 },
-      { x: 190, y: 285, scale: 0.92 },
-      { x: 460, y: 242, scale: 1.22 },
-      { x: 720, y: 310, scale: 0.9 },
-      { x: 1030, y: 252, scale: 1.18 },
-      { x: 1320, y: 294, scale: 1.02 },
-      { x: 1665, y: 250, scale: 1.25 }
+      { x: 40, y: 263, scale: 1.62 },
+      { x: 190, y: 303, scale: 1.45 },
+      { x: 460, y: 273, scale: 1.58 },
+      { x: 720, y: 314, scale: 1.4 },
+      { x: 1030, y: 280, scale: 1.55 },
+      { x: 1320, y: 291, scale: 1.5 },
+      { x: 1665, y: 268, scale: 1.6 }
     ],
     cottages: [],
     lamps: [
-      { x: 340, y: 535, lit: true },
-      { x: 1240, y: 522, lit: false }
+      { x: 340, y: 560, lit: true },
+      { x: 1240, y: 560, lit: false }
     ],
+    // Glow plants kept to the edges of the grove, off the walking path.
     glowPlants: [
-      { x: 280, y: 622, active: true },
-      { x: 408, y: 610, active: false },
-      { x: 650, y: 606, active: true },
-      { x: 890, y: 632, active: true },
-      { x: 1120, y: 604, active: false },
-      { x: 1390, y: 618, active: true },
-      { x: 1620, y: 600, active: false }
+      { x: 120, y: 640, active: true },
+      { x: 1560, y: 642, active: true },
+      { x: 1760, y: 638, active: false }
     ],
-    brokenBranches: [
-      { x: 525, y: 626, rotation: 0.18 },
-      { x: 1510, y: 635, rotation: -0.2 }
-    ],
-    repairParts: [
-      { x: 740, y: 590, type: "seed" },
-      { x: 980, y: 584, type: "coil" },
-      { x: 1184, y: 592, type: "seed" }
-    ],
+    brokenBranches: [],
+    repairParts: [],
     puddles: [
-      { x: 310, y: 650, width: 120, height: 22 },
-      { x: 860, y: 636, width: 154, height: 28 },
-      { x: 1480, y: 622, width: 126, height: 24 }
+      { x: 300, y: 662, width: 120, height: 22 },
+      { x: 1480, y: 660, width: 126, height: 24 }
     ],
     mistBands: [
       { x: 180, y: 505, width: 250, speed: 7 },
@@ -72,7 +62,7 @@ export function createGlowfenGroveScene() {
       kind: "path-puzzle",
       puzzleTheme: "root-pump",
       x: 1045,
-      y: 510,
+      y: 596,
       radius: 210,
       complete: false,
       progress: 0,

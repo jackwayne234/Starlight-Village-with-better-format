@@ -12,7 +12,7 @@ export function createStormedgeRiseScene() {
   scene.robot.x = 427;
   scene.backdrop = { moonX: 1080, moonY: 140, cloudDrift: 1.55, hillOffset: 86, ridgeOffset: 120 };
   scene.ridge = {
-    gauge: { x: 1115, y: 508, lit: false },
+    gauge: { x: 1115, y: 576, lit: false },
     posts: [
       { x: 560, y: 522, lean: -0.16 },
       { x: 1440, y: 530, lean: 0.14 }
@@ -20,41 +20,28 @@ export function createStormedgeRiseScene() {
   };
   scene.layers = {
     trees: [
-      { x: 95, y: 315, scale: 0.9 },
-      { x: 345, y: 286, scale: 1.04 },
-      { x: 720, y: 330, scale: 0.78 },
-      { x: 1035, y: 292, scale: 1 },
-      { x: 1360, y: 318, scale: 0.86 },
-      { x: 1740, y: 280, scale: 1.08 }
+      { x: 95, y: 291, scale: 1.5 },
+      { x: 345, y: 268, scale: 1.6 },
+      { x: 720, y: 309, scale: 1.42 },
+      { x: 1035, y: 286, scale: 1.52 },
+      { x: 1360, y: 300, scale: 1.46 },
+      { x: 1740, y: 280, scale: 1.55 }
     ],
-    cottages: [{ x: 1680, y: 438, scale: 0.62, lit: true }],
+    cottages: [{ x: 1680, y: 537, scale: 2.0, lit: true }],
     lamps: [
-      { x: 410, y: 538, lit: true },
-      { x: 925, y: 536, lit: false },
-      { x: 1535, y: 532, lit: true }
+      { x: 410, y: 560, lit: true },
+      { x: 925, y: 560, lit: false },
+      { x: 1535, y: 560, lit: true }
     ],
     glowPlants: [
-      { x: 420, y: 610, active: true },
-      { x: 760, y: 626, active: false },
-      { x: 1185, y: 610, active: true },
-      { x: 1510, y: 628, active: true }
+      { x: 130, y: 640, active: true },
+      { x: 1960, y: 638, active: true }
     ],
-    brokenBranches: [
-      { x: 505, y: 622, rotation: -0.38 },
-      { x: 810, y: 638, rotation: 0.2 },
-      { x: 1320, y: 626, rotation: -0.28 },
-      { x: 1700, y: 618, rotation: 0.18 }
-    ],
-    repairParts: [
-      { x: 1115, y: 572, type: "coil" },
-      { x: 1565, y: 585, type: "gear" }
-    ],
+    brokenBranches: [],
+    repairParts: [],
     puddles: [
-      { x: 180, y: 660, width: 220, height: 21 },
-      { x: 590, y: 674, width: 190, height: 18 },
-      { x: 970, y: 650, width: 260, height: 20 },
-      { x: 1420, y: 668, width: 240, height: 19 },
-      { x: 1805, y: 654, width: 180, height: 18 }
+      { x: 230, y: 662, width: 220, height: 21 },
+      { x: 1870, y: 660, width: 180, height: 18 }
     ],
     mistBands: [
       { x: 140, y: 416, width: 420, speed: 16 },

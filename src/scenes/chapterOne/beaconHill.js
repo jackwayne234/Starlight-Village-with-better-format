@@ -12,8 +12,8 @@ export function createBeaconHillScene() {
   scene.robot.x = 422;
   scene.backdrop = { moonX: 1025, moonY: 132, cloudDrift: 1.25, hillOffset: 140, ridgeOffset: 176 };
   scene.beaconHill = {
-    tower: { x: 1240, y: 522, lit: false },
-    shed: { x: 1640, y: 444, lit: true },
+    tower: { x: 1240, y: 552, lit: false },
+    shed: { x: 1640, y: 540, lit: true },
     flags: [
       { x: 870, y: 382, color: "#d8aa57" },
       { x: 1330, y: 268, color: "#c97945" },
@@ -26,40 +26,28 @@ export function createBeaconHillScene() {
   };
   scene.layers = {
     trees: [
-      { x: 90, y: 304, scale: 0.94 },
-      { x: 295, y: 284, scale: 1.1 },
-      { x: 650, y: 324, scale: 0.78 },
-      { x: 1010, y: 306, scale: 0.9 },
-      { x: 1510, y: 318, scale: 0.82 },
-      { x: 1940, y: 292, scale: 1 }
+      { x: 90, y: 291, scale: 1.5 },
+      { x: 295, y: 268, scale: 1.6 },
+      { x: 650, y: 309, scale: 1.42 },
+      { x: 1010, y: 286, scale: 1.52 },
+      { x: 1510, y: 300, scale: 1.46 },
+      { x: 1940, y: 280, scale: 1.55 }
     ],
     cottages: [],
     lamps: [
-      { x: 430, y: 534, lit: true },
-      { x: 965, y: 526, lit: true },
-      { x: 1810, y: 532, lit: false }
+      { x: 430, y: 560, lit: true },
+      { x: 965, y: 560, lit: true },
+      { x: 1810, y: 560, lit: false }
     ],
     glowPlants: [
-      { x: 420, y: 610, active: true },
-      { x: 750, y: 626, active: true },
-      { x: 1085, y: 610, active: false },
-      { x: 1540, y: 628, active: true }
+      { x: 140, y: 640, active: true },
+      { x: 2010, y: 638, active: true }
     ],
-    brokenBranches: [
-      { x: 530, y: 622, rotation: -0.26 },
-      { x: 920, y: 638, rotation: 0.18 },
-      { x: 1710, y: 624, rotation: -0.18 }
-    ],
-    repairParts: [
-      { x: 1030, y: 578, type: "gear" },
-      { x: 1710, y: 584, type: "coil" }
-    ],
+    brokenBranches: [],
+    repairParts: [],
     puddles: [
-      { x: 140, y: 660, width: 180, height: 18 },
-      { x: 620, y: 672, width: 210, height: 18 },
-      { x: 990, y: 652, width: 240, height: 19 },
-      { x: 1480, y: 675, width: 210, height: 18 },
-      { x: 1885, y: 650, width: 190, height: 18 }
+      { x: 220, y: 662, width: 180, height: 18 },
+      { x: 1900, y: 660, width: 190, height: 18 }
     ],
     mistBands: [
       { x: 160, y: 410, width: 360, speed: 14 },
