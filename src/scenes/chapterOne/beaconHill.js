@@ -5,7 +5,7 @@ export function createBeaconHillScene() {
     id: "chapter-one/beacon-hill",
     title: "Beacon Hill Signal Tower",
     worldWidth: 2100,
-    startMessage: "Beacon Hill rises through the rain. Find the signal tower."
+    startMessage: ""
   });
 
   scene.player.x = 310;

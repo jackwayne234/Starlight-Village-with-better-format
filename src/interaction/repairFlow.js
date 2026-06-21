@@ -1,4 +1,5 @@
 import { createRepairPuzzle, movePuzzleSelection, rotateSelectedTile } from "./repairPuzzle.js";
+import { sfx } from "../audio/gameAudio.js";
 
 export function updateRepairFlow(scene, input, dt) {
   const flow = scene.flow;
@@ -23,6 +24,7 @@ export function updateRepairFlow(scene, input, dt) {
     flow.timer = 1.2;
     flow.message = target.scanText;
     showDialogue(scene, target.dialogue?.scan);
+    sfx.robotChirp();
   }
 
   if (flow.mode === "scanning") {
@@ -81,7 +83,9 @@ function updatePathPuzzleRepair(scene, input, target) {
     movePuzzleSelection(target.puzzle, 0, 1);
   }
   if (consumeRepairInput(input)) {
-    rotateSelectedTile(target.puzzle);
+    if (rotateSelectedTile(target.puzzle)) {
+      sfx.tileRotate();
+    }
   }
 
   target.progress = target.puzzle.completed ? 1 : target.puzzle.connected.size / (target.puzzle.rows * target.puzzle.cols);
@@ -93,6 +97,7 @@ function updatePathPuzzleRepair(scene, input, target) {
     scene.flow.timer = 1.15;
     scene.flow.message = target.puzzle.successMessage ?? target.rewardText;
     target.progress = 1;
+    sfx.repairSuccess();
   }
 }
 

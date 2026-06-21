@@ -249,6 +249,10 @@ function drawTitle(ctx, scene) {
 }
 
 function drawMessage(ctx, message, width, height) {
+  if (!message) {
+    return;
+  }
+
   ctx.fillStyle = "rgba(20, 30, 28, 0.58)";
   roundedRect(ctx, 222, height - 104, width - 444, 68, 8);
   ctx.fill();

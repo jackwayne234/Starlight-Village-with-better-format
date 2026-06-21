@@ -1,6 +1,11 @@
 import { config } from "../core/config.js";
+import { sprites, imageReady } from "./sprites.js";
 
 const { colors } = config;
+
+// On-screen sizes for the painted art.
+const PLAYER_HEIGHT = 232;
+const ROBOT_WIDTH = 56;
 
 export function drawActors(ctx, scene, time, cameraX) {
   ctx.save();
@@ -8,6 +13,92 @@ export function drawActors(ctx, scene, time, cameraX) {
   drawRepairBeam(ctx, scene, time);
   drawPlayer(ctx, scene.player, time);
   drawRobot(ctx, scene.robot, time);
+  ctx.restore();
+}
+
+function drawPlayer(ctx, player, time) {
+  const frame = pickPlayerFrame(player, time);
+  if (!imageReady(frame.image)) {
+    drawPlayerVector(ctx, player, time);
+    return;
+  }
+
+  const celebrating = player.reaction === "cheer";
+  const cheerLift = celebrating ? Math.sin(player.reactionTimer * Math.PI * 5) * 5 - 7 : 0;
+  const bob = Math.sin(time * 2.2) * 2 + cheerLift;
+  const footY = player.y + 88;
+
+  // Soft contact shadow, unaffected by the sprite flip.
+  ctx.save();
+  ctx.fillStyle = "rgba(22, 27, 24, 0.28)";
+  ctx.beginPath();
+  ctx.ellipse(player.x, player.y + 86, 50, 12, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
+  const scale = PLAYER_HEIGHT / frame.image.naturalHeight;
+  const drawW = frame.image.naturalWidth * scale;
+  const drawH = PLAYER_HEIGHT;
+  const flip = player.facing * frame.facing;
+
+  ctx.save();
+  ctx.translate(player.x, footY + bob);
+  ctx.scale(flip, 1);
+  ctx.drawImage(frame.image, -drawW / 2, -drawH, drawW, drawH);
+  ctx.restore();
+}
+
+// Walk cycle is just two frames: a walking pose and the standing pose,
+// alternating (step, stand, step, stand). Both the idle and walk-2 art face
+// right (+1), so they never flip direction mid-walk.
+function pickPlayerFrame(player, time) {
+  if (!player.walking) {
+    return { image: sprites.apprentice.idle, facing: 1 };
+  }
+
+  const stepFrame = Math.floor(time * 6) % 2 === 0;
+  return stepFrame
+    ? { image: sprites.apprentice.walk2, facing: 1 }
+    : { image: sprites.apprentice.idle, facing: 1 };
+}
+
+function drawRobot(ctx, robot, time) {
+  const celebrating = robot.pose === "celebrate";
+  const active = robot.pose === "scan" || robot.pose === "route" || celebrating;
+  const hover = Math.sin(time * (celebrating ? 5.4 : 2.6)) * (celebrating ? 12 : 8);
+  const image = active ? sprites.robot.scan : sprites.robot.idle;
+
+  if (!imageReady(image)) {
+    drawRobotVector(ctx, robot, time);
+    return;
+  }
+
+  ctx.save();
+  ctx.translate(robot.x, robot.y + hover);
+
+  // Glow halo behind the robot, brighter when it is working. Sized off the
+  // robot so the halo stays tight as the sprite scales.
+  const pulse = celebrating ? 0.42 : active ? 0.34 : 0.22;
+  const reach = ROBOT_WIDTH * (active ? 1.05 : 0.72);
+  const glow = ctx.createRadialGradient(0, 0, 12, 0, 0, reach);
+  glow.addColorStop(0, `rgba(143, 217, 240, ${pulse})`);
+  glow.addColorStop(1, "rgba(143, 217, 240, 0)");
+  ctx.fillStyle = glow;
+  ctx.beginPath();
+  ctx.arc(0, 0, reach, 0, Math.PI * 2);
+  ctx.fill();
+
+  const scale = ROBOT_WIDTH / image.naturalWidth;
+  const drawW = ROBOT_WIDTH;
+  const drawH = image.naturalHeight * scale;
+  // Anchor each pose by where the robot's BODY sits in the image, so the body
+  // stays centered on robot.y while the scan beam hangs below it.
+  const bodyAnchor = active ? 0.34 : 0.46;
+  ctx.drawImage(image, -drawW / 2, -drawH * bodyAnchor, drawW, drawH);
+
+  if (celebrating) {
+    drawRobotSparkles(ctx, time);
+  }
   ctx.restore();
 }
 
@@ -30,7 +121,7 @@ function drawRepairBeam(ctx, scene, time) {
   ctx.setLineDash([]);
 }
 
-function drawPlayer(ctx, player, time) {
+function drawPlayerVector(ctx, player, time) {
   const step = player.walking ? Math.sin(time * 10) * 8 : 0;
   const celebrating = player.reaction === "cheer";
   const cheerLift = celebrating ? Math.sin(player.reactionTimer * Math.PI * 5) * 5 - 7 : 0;
@@ -134,7 +225,7 @@ function drawLantern(ctx, time) {
   ctx.fill();
 }
 
-function drawRobot(ctx, robot, time) {
+function drawRobotVector(ctx, robot, time) {
   const celebrating = robot.pose === "celebrate";
   const hover = Math.sin(time * (celebrating ? 5.4 : 2.6)) * (celebrating ? 12 : 8);
   const active = robot.pose === "scan" || robot.pose === "route" || celebrating;

@@ -2,6 +2,7 @@ import { createGame } from "./core/game.js";
 import { createInput } from "./core/input.js";
 import { clearProgress, saveProgress } from "./core/progress.js";
 import { createInitialScene, createScene } from "./scenes/sceneRegistry.js";
+import { primeAudio, unlockAudio } from "./audio/gameAudio.js";
 
 const canvas = document.querySelector("#game");
 const ctx = canvas.getContext("2d");
@@ -15,6 +16,15 @@ const game = createGame({
   firstScene,
   persistProgress: saveProgress,
   createScene
+});
+
+// Try to start the rainy ambience right away on the welcome screen. Browsers
+// usually keep it silent until the player interacts, so we also start it on the
+// very first interaction of any kind — clicking or touching the welcome screen
+// turns the sound on while the title is still up, and it stays on after that.
+primeAudio();
+["keydown", "pointerdown", "touchstart", "click"].forEach((eventName) => {
+  window.addEventListener(eventName, unlockAudio);
 });
 
 window.addEventListener("keydown", (event) => {

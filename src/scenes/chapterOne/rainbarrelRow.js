@@ -5,7 +5,7 @@ export function createRainbarrelRowScene() {
     id: "chapter-one/rainbarrel-row",
     title: "Rainbarrel Row",
     worldWidth: 2050,
-    startMessage: "Rainbarrel Row is overflowing. Follow the runoff to the clogged drain."
+    startMessage: ""
   });
 
   scene.player.x = 300;

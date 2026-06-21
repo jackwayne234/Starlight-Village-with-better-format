@@ -5,7 +5,7 @@ export function createStormedgeRiseScene() {
     id: "chapter-one/stormedge-rise",
     title: "Stormedge Rise",
     worldWidth: 2050,
-    startMessage: "Wind pushes over Stormedge Rise. Reach the storm gauge."
+    startMessage: ""
   });
 
   scene.player.x = 315;

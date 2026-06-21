@@ -5,7 +5,7 @@ export function createMosslineSwitchyardScene() {
     id: "chapter-one/mossline-switchyard",
     title: "Mossline Switchyard",
     worldWidth: 2050,
-    startMessage: "Mossline Switchyard crackles ahead. Find the broken junction box."
+    startMessage: ""
   });
 
   scene.player.x = 300;

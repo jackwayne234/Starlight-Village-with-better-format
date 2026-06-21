@@ -5,7 +5,8 @@ import { drawWeather } from "./weatherRenderer.js";
 import { drawWorld } from "./worldRenderer.js";
 import { drawHud } from "../ui/hud.js";
 
-export function renderScene(ctx, scene, time, transition = null) {
+export function renderScene(ctx, scene, time, transition = null, options = {}) {
+  const { hud = true } = options;
   const { width, height } = config.canvas;
   const cameraX = scene.camera.x;
 
@@ -14,7 +15,9 @@ export function renderScene(ctx, scene, time, transition = null) {
   drawWorld(ctx, scene, time, width, height, cameraX);
   drawActors(ctx, scene, time, cameraX);
   drawWeather(ctx, scene, time, width, height);
-  drawHud(ctx, scene, width, height);
+  if (hud) {
+    drawHud(ctx, scene, width, height);
+  }
   drawTransition(ctx, transition, width, height);
 }
 

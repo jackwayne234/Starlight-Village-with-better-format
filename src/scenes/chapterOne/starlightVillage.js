@@ -4,7 +4,7 @@ export function createStarlightVillageScene() {
   const scene = createBaseScene({
     id: "chapter-one/starlight-village",
     title: "Starlight Village",
-    startMessage: "Walk right through the rain. The robot will call out the broken wheel."
+    startMessage: ""
   });
 
   scene.layers = {
@@ -76,7 +76,7 @@ export function createStarlightVillageScene() {
       scanText: "Robot scan: water wheel generator offline.",
       puzzleText: "Rotate the channels to wake the water wheel.",
       rewardText: "Water wheel restored. The village lights breathe back on.",
-      onwardText: "The lane glows ahead.",
+      onwardText: "",
       nextText: "The lane opens toward Glowfen Grove.",
       nextSceneId: "chapter-one/glowfen-grove",
       reactions: [

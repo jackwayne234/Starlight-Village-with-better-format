@@ -5,7 +5,7 @@ export function createGlowfenGroveScene() {
     id: "chapter-one/glowfen-grove",
     title: "Glowfen Grove",
     worldWidth: 1900,
-    startMessage: "Glowfen Grove hums softly. Follow the blue fireflies to the root pump."
+    startMessage: ""
   });
 
   scene.player.x = 210;
