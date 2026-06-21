@@ -27,4 +27,13 @@ against Chunk 16 first. Behavior-preserving refactor allowed under Q17.
 
 ## Completion Notes
 
-_(to be filled in when the chunk runs)_
+- `updateConnections` in `src/interaction/repairPuzzle.js` now seeds its BFS from the actual
+  `start` tile (new `findStartTile` helper) instead of the hardcoded `[0][0]` cell. Removes
+  the silent coupling between connectivity and grid position. If no start tile exists, the
+  queue is empty and the puzzle simply isn't completable (safe).
+- Behavior-preserving: all layouts already place `start` at `[0][0]`.
+- Verified two ways: (1) standalone solvability brute force still passes for all 7 layouts;
+  (2) drove each of the 6 scene puzzles to a solving rotation set through the engine's own
+  API (`rotateSelectedTile`) and confirmed `puzzle.completed` becomes true.
+- Syntax check passes.
+- Status: complete.

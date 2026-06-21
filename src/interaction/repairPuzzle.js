@@ -189,7 +189,8 @@ export function getTileConnections(tile) {
 
 function updateConnections(puzzle) {
   const connected = new Set();
-  const queue = [{ row: 0, col: 0 }];
+  const start = findStartTile(puzzle);
+  const queue = start ? [start] : [];
 
   while (queue.length) {
     const current = queue.shift();
@@ -216,6 +217,17 @@ function updateConnections(puzzle) {
   puzzle.connected = connected;
   puzzle.completed = getOutputKeys(puzzle).every((key) => connected.has(key));
   return puzzle.completed;
+}
+
+function findStartTile(puzzle) {
+  for (let row = 0; row < puzzle.rows; row += 1) {
+    for (let col = 0; col < puzzle.cols; col += 1) {
+      if (puzzle.tiles[row][col].type === "start") {
+        return { row, col };
+      }
+    }
+  }
+  return null;
 }
 
 function getOutputKeys(puzzle) {
