@@ -49,5 +49,58 @@
 - Robot resized to a small companion (`ROBOT_WIDTH = 56`), glow tied to its size. Confirmed good by Chris.
 - Removed the bottom "walk to find the broken item" instructions on all six scenes and the "The lane glows ahead." line.
 
+## ✅ Done: Painted world art pass (session 2026-06-21, afternoon)
+
+Big "make it prettier" push — replaced the code-drawn world shapes with real
+painted images that Chris generated in ChatGPT (cozy storybook style, matching
+the existing character sprites). All on-model and committed.
+
+### Pipeline (reusable)
+- Chris generates each object in ChatGPT on a plain white background and saves
+  to `~/Downloads`. Agent copies into `assets/sprites/world/` and runs
+  `node tools/sprite-cutout.mjs <in> <out>-trimmed.png [threshold] [mode]`.
+- `tools/sprite-cutout.mjs` (new) cuts the white background to transparent,
+  feathers the rim, and trims to content. Two modes:
+  - default (edge flood-fill) — keeps pale detail inside the art.
+  - `global` — removes ALL near-white, including sky trapped in enclosed gaps
+    (used for the tree and the water wheel spokes). Use threshold ~238–244.
+- Built because the box has no PIL/pip/ImageMagick; Node 22 is available.
+
+### Art added & wired (all with code-drawn fallbacks via `imageReady`)
+- `src/rendering/sprites.js` — new `world.*` and `title.*` image groups.
+- World props in `src/rendering/worldRenderer.js`: water wheel (sits in a new
+  teal mill pond), cottage, tree, lamp, glow-plant, puddle, broken-branch,
+  signpost (new exit marker), and the three repair parts (gear/coil/seed).
+- Hero props per scene: root pump (Glowfen), switchyard box (Mossline), storm
+  gauge (Stormedge), beacon tower + previously-undrawn shed (Beacon Hill),
+  rain barrel (Rainbarrel), footbridge (Glowfen).
+- `warmGlow` helper blooms lights as `powerLevel`/lit flags rise, preserving the
+  "lights come back on" beat. Generic repair marker reduced to a soft highlight
+  so it doesn't overlap the landmark art.
+- Title screen (`src/ui/titleScreen.js`) now shows a painted cover (boy + robot,
+  on-model) behind the veil.
+- Painted misty-forest parallax background (`src/rendering/backdropRenderer.js`),
+  drifting behind every scene, replacing the code-drawn hills when loaded.
+
+### Playtest fixes this session
+- Water wheel: white in the spoke gaps removed (global cutout).
+- Tree: white in branch gaps removed (global cutout).
+- Repair parts (gear/coil/seed): no longer bob/spin — they rest on the ground.
+- Boy: removed the constant idle float; kept the celebration hop.
+- Starlight Village: spaced trees/cottages so a house no longer sits inside a
+  tree canopy near the wheel.
+- Water wheel: added a mill pond so it sits in water, not on dry grass.
+
+### Verification
+- `node --check` clean on every touched JS file each step.
+- Local `python3 -m http.server 5200` boot check; index + every new asset 200.
+- Chris play-tested live and signed off ("overall it looks pretty good").
+
 ### Not done yet (still on the Update 1 list)
-- Background/scene art polish, weather richness, title/start screen, pacing slow-down, puzzle difficulty ramp, ending screen polish, dialogue polish.
+- Scenes 2–6 NOT re-checked for cottage/tree overlaps (only Starlight Village
+  was fixed) — likely a few more "house in a tree" spots to space out.
+- Weather richness (puddles/lightning), pacing slow-down, puzzle difficulty
+  ramp, ending screen polish, dialogue polish.
+- Optional art: distant village silhouettes, Chapter-1 ending picture.
+- Save/load is still write-only (refresh restarts at Starlight Village) — left
+  intentionally; Chris said "we can do it later."
