@@ -25,4 +25,18 @@ Match nearby style (Q15); shared helpers handled in Chunk 23.
 
 ## Completion Notes
 
-_(to be filled in when the chunk runs)_
+Confirm-only — no code changes needed. Checked:
+
+- `ctx.save()`/`ctx.restore()` are balanced in every render file (actorRenderer 3/3,
+  renderPipeline 1/1, worldRenderer 17/17, hud 8/8; backdrop and weather use none).
+- Every `globalAlpha` assignment sits inside a save/restore (and `drawTravelDots` resets it
+  to 1 explicitly).
+- `setLineDash` and `globalCompositeOperation = "screen"` are each scoped inside a
+  save/restore and/or explicitly reset.
+- Text wrapping (`wrapText`) is only ever called with real string inputs (flow.message,
+  guarded dialogue text, chapterComplete copy, reaction text) — no null/undefined paths.
+
+No leaks or artifacts found. Off-screen culling intentionally not added (scene sizes are
+small; adding it would be unnecessary complexity for no benefit).
+
+Status: complete (no changes required).
