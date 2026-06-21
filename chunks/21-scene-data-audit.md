@@ -29,4 +29,20 @@ save schema (Q9) — additive only if anything must change.
 
 ## Completion Notes
 
-_(to be filled in when the chunk runs)_
+Confirm-only — no code changes needed. Verified programmatically (throwaway
+`/tmp/scene-audit.mjs`):
+
+- Every repair's effect/restore target structure exists in its scene:
+  - root-pump → `bridge`, `layers.glowPlants`, `layers.lamps`
+  - switchyard-junction → `switchyard.poles/boxes`, `layers.lamps`
+  - storm-gauge → `ridge.gauge`, `layers.lamps`
+  - beacon-tower → `beaconHill.tower`, `layers.lamps`
+  - rainbarrel-drain → `rainbarrelRow.drain/channels/barrels`, `layers.cottages/lamps`
+  - water-wheel → `world`, `layers`
+- All six scene factories build without throwing; every `nextSceneId` resolves in the
+  registry.
+- Repair chain matches the documented Chapter-1 route:
+  water-wheel → root-pump → switchyard-junction → storm-gauge → beacon-tower →
+  rainbarrel-drain → [chapter complete]. Initial scene = starlight-village.
+
+Status: complete (no changes required).
