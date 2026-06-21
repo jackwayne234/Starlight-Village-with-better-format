@@ -1,11 +1,37 @@
 import { config } from "../core/config.js";
+import { sprites, imageReady } from "./sprites.js";
 
 const { colors } = config;
 
 export function drawBackdrop(ctx, scene, time, width, height, cameraX) {
   drawSky(ctx, scene.backdrop, width, height);
+  if (drawPaintedScenery(ctx, width, height, cameraX)) {
+    drawClouds(ctx, scene.backdrop, time, width, cameraX);
+    return;
+  }
   drawClouds(ctx, scene.backdrop, time, width, cameraX);
   drawHills(ctx, scene.backdrop, scene.world.width, width, height, cameraX);
+}
+
+// Painted misty hills/forest, drifting slowly behind the world (parallax).
+// Returns true when it drew, so the code-drawn hills are skipped.
+function drawPaintedScenery(ctx, width, height, cameraX) {
+  const scenery = sprites.title.background;
+  if (!imageReady(scenery)) {
+    return false;
+  }
+  const scale = height / scenery.naturalHeight;
+  const w = scenery.naturalWidth * scale;
+  const x = -cameraX * 0.3;
+  ctx.save();
+  ctx.globalAlpha = 0.96;
+  ctx.drawImage(scenery, x, 0, w, height);
+  // Cover any sliver past the right edge if the camera runs far.
+  if (x + w < width) {
+    ctx.drawImage(scenery, x + w - 1, 0, w, height);
+  }
+  ctx.restore();
+  return true;
 }
 
 function drawSky(ctx, backdrop, width, height) {

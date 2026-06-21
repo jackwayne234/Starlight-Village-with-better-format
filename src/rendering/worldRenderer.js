@@ -310,6 +310,18 @@ function drawSceneLandmarks(ctx, scene, time) {
 
 function drawFootbridge(ctx, bridge, time) {
   const glow = bridge.repaired ? 0.34 + Math.sin(time * 3) * 0.08 : 0.1;
+
+  const bridgeImage = sprites.world.footbridge;
+  if (imageReady(bridgeImage)) {
+    const width = bridge.width * 1.08;
+    const height = width * (bridgeImage.naturalHeight / bridgeImage.naturalWidth);
+    ctx.drawImage(bridgeImage, bridge.x - width / 2, bridge.y + 64 - height, width, height);
+    if (bridge.repaired) {
+      warmGlow(ctx, bridge.x, bridge.y - height * 0.32, width * 0.42, 0.4 + Math.sin(time * 3) * 0.08);
+    }
+    return;
+  }
+
   ctx.save();
   ctx.translate(bridge.x, bridge.y);
   ctx.strokeStyle = "#4f382b";
@@ -420,6 +432,15 @@ function drawStormRidge(ctx, ridge, time) {
 }
 
 function drawBeaconHill(ctx, beaconHill, time) {
+  const shedImage = sprites.world.shed;
+  if (beaconHill.shed && imageReady(shedImage)) {
+    const shed = beaconHill.shed;
+    const groundY = shed.y + 96;
+    const height = 214;
+    const { width } = drawWorldSprite(ctx, shedImage, shed.x, groundY, height);
+    warmGlow(ctx, shed.x - width * 0.12, groundY - height * 0.45, 56, shed.lit ? 0.5 + Math.sin(time * 3.2) * 0.07 : 0.18);
+  }
+
   const tower = beaconHill.tower;
   const towerImage = sprites.world.beaconTower;
   if (imageReady(towerImage)) {

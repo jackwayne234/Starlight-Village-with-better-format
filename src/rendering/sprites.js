@@ -39,10 +39,13 @@ export const sprites = {
     switchyardBox: loadImage(`${WORLD}/switchyard-box-trimmed.png`),
     stormGauge: loadImage(`${WORLD}/storm-gauge-trimmed.png`),
     beaconTower: loadImage(`${WORLD}/beacon-tower-trimmed.png`),
-    rainBarrel: loadImage(`${WORLD}/rain-barrel-trimmed.png`)
+    rainBarrel: loadImage(`${WORLD}/rain-barrel-trimmed.png`),
+    footbridge: loadImage(`${WORLD}/footbridge-trimmed.png`),
+    shed: loadImage(`${WORLD}/shed-trimmed.png`)
   },
   title: {
-    hero: loadImage(`${TITLE}/title-hero.png`)
+    hero: loadImage(`${TITLE}/title-hero.png`),
+    background: loadImage(`${TITLE}/background-hills.png`)
   }
 };
 
