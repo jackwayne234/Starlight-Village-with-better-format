@@ -270,7 +270,7 @@ function drawContinuePrompt(ctx, scene, width, height) {
   ctx.fillStyle = "rgba(255, 232, 166, 0.96)";
   ctx.font = "700 13px system-ui, sans-serif";
   ctx.textAlign = "center";
-  ctx.fillText("Press Space Bar to continue to the next scene", width / 2, height - 13);
+  ctx.fillText("Press Space, Enter, or E to continue", width / 2, height - 13);
   ctx.textAlign = "left";
 }
 

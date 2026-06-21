@@ -27,4 +27,11 @@ Chunk 16 inventory. Update README/HANDOFF only if controls wording changes (Q22)
 
 ## Completion Notes
 
-_(to be filled in when the chunk runs)_
+- Updated the reward "continue" prompt in `src/ui/hud.js` from "Press Space Bar to continue
+  to the next scene" to "Press Space, Enter, or E to continue", matching the keys
+  `consumeRepairInput` actually accepts. Shortened to fit the prompt pill comfortably.
+- Cross-checked other copy: `index.html` screen-reader instructions and `README.md` controls
+  already list Space/Enter/E correctly; the in-puzzle "Space rotates" hint is accurate. No
+  other prompt changes needed.
+- Syntax check passes.
+- Status: complete.

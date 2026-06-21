@@ -7,7 +7,7 @@ High-level list only. All details live inside each chunk file.
 | 15 | Baseline and Boot Verification | complete |
 | 16 | Full Issue Inventory | complete |
 | 17 | Input Handling Consistency | complete |
-| 18 | Prompt and Message Accuracy | pending |
+| 18 | Prompt and Message Accuracy | complete |
 | 19 | Repair Flow and Entity Correctness | pending |
 | 20 | Puzzle Engine Robustness | pending |
 | 21 | Scene Data Audit | pending |
