@@ -553,6 +553,9 @@ function drawWaterWheelImage(ctx, image, target, time, powerLevel) {
   ctx.translate(target.x, target.y);
   drawRepairHalo(ctx, target, time, powerLevel);
 
+  // Mill pond so the wheel sits in water instead of on dry grass.
+  drawMillPond(ctx, baseY, time);
+
   // Warm glow behind the hub runes, swelling as power comes back.
   const glow = 0.25 + powerLevel * 0.55 + Math.sin(time * 2) * 0.05 * powerLevel;
   ctx.save();
@@ -569,6 +572,32 @@ function drawWaterWheelImage(ctx, image, target, time, powerLevel) {
   // Slightly dim the whole wheel until power is restored.
   ctx.globalAlpha = 0.78 + powerLevel * 0.22;
   ctx.drawImage(image, -displayWidth / 2, baseY - displayHeight, displayWidth, displayHeight);
+  ctx.globalAlpha = 1;
+  drawWheelWater(ctx, time); // splashes where the wheel meets the pond
+  ctx.restore();
+}
+
+// A little teal mill pond drawn under the wheel, matching the stream colour.
+function drawMillPond(ctx, baseY, time) {
+  const pondY = baseY + 12;
+  ctx.save();
+  const pond = ctx.createRadialGradient(4, pondY, 14, 4, pondY, 196);
+  pond.addColorStop(0, "rgba(70, 122, 132, 0.92)");
+  pond.addColorStop(0.7, "rgba(52, 102, 114, 0.82)");
+  pond.addColorStop(1, "rgba(52, 102, 114, 0)");
+  ctx.fillStyle = pond;
+  ctx.beginPath();
+  ctx.ellipse(4, pondY, 196, 42, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = "rgba(206, 238, 229, 0.3)";
+  ctx.lineWidth = 2.5;
+  for (let i = 0; i < 4; i += 1) {
+    const ry = pondY - 12 + i * 12 + Math.sin(time * 1.6 + i) * 2.5;
+    ctx.beginPath();
+    ctx.moveTo(-150, ry);
+    ctx.bezierCurveTo(-50, ry - 7, 72, ry + 6, 172, ry - 5);
+    ctx.stroke();
+  }
   ctx.restore();
 }
 
