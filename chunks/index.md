@@ -16,3 +16,4 @@ High-level list only. All details live inside each chunk file.
 | 24 | Re-Review Iteration Pass | complete |
 | 25 | Final Handoff | complete |
 | 26 | Chapter 2 Route Expansion | complete |
+| 27 | Sprite Matte Cleanup | complete |
