@@ -176,6 +176,14 @@ function applyRepairEffect(scene, target) {
       lamp.lit = true;
     });
   }
+
+  if (target.id === "archive-lens-array") {
+    if (scene.observatory?.lens) scene.observatory.lens.lit = true;
+    if (scene.observatory?.tower) scene.observatory.tower.lit = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+  }
 }
 
 function advanceRepairTarget(scene) {

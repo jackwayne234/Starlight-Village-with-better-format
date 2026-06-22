@@ -90,7 +90,7 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
   if (activeRepair?.id === "root-pump") {
     drawRootPump(ctx, activeRepair, time, powerLevel);
   }
-  if (activeRepair && !["water-wheel", "root-pump"].includes(activeRepair.id)) {
+  if (activeRepair && !["water-wheel", "root-pump", "archive-lens-array"].includes(activeRepair.id)) {
     drawRepairMarker(ctx, activeRepair, time, powerLevel);
   }
   if (activeRepair) {
@@ -412,6 +412,9 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.rainbarrelRow) {
     drawRainbarrelRow(ctx, scene.rainbarrelRow, time);
   }
+  if (scene.observatory) {
+    drawObservatory(ctx, scene.observatory, time, scene.world.powerLevel);
+  }
 }
 
 function drawFootbridge(ctx, bridge, time) {
@@ -588,6 +591,47 @@ function drawBeaconHill(ctx, beaconHill, time) {
     ctx.closePath();
     ctx.fill();
   });
+}
+
+function drawObservatory(ctx, observatory, time, powerLevel) {
+  const repairedGlow = observatory.lens?.lit || powerLevel > 0.95;
+
+  observatory.pathEdges?.forEach((pathEdge) => {
+    drawPlacedSprite(ctx, sprites.world.wetPathEdge, pathEdge, time, 0.88);
+  });
+  observatory.foundations?.forEach((foundation) => {
+    drawPlacedSprite(ctx, sprites.world.mossyStoneFoundation, foundation, time, 0.96);
+  });
+  observatory.rocks?.forEach((rocks) => {
+    drawPlacedSprite(ctx, sprites.world.rainyRocksReeds, rocks, time, 0.94);
+  });
+
+  if (observatory.hut) {
+    drawPlacedSprite(ctx, sprites.world.observatoryHut, observatory.hut, time, 0.95);
+    warmGlow(ctx, observatory.hut.x + 35, observatory.hut.groundY - observatory.hut.height * 0.43, 62, 0.38 + powerLevel * 0.22);
+  }
+
+  if (observatory.tower) {
+    drawPlacedSprite(ctx, sprites.world.oldObservatory, observatory.tower, time, 0.98);
+    warmGlow(ctx, observatory.tower.x - 52, observatory.tower.groundY - observatory.tower.height * 0.43, 76, 0.32 + powerLevel * 0.3);
+  }
+
+  if (observatory.lens) {
+    drawPlacedSprite(ctx, sprites.world.archiveLensArray, observatory.lens, time, 0.98);
+    warmGlow(ctx, observatory.lens.x, observatory.lens.groundY - observatory.lens.height * 0.54, 112, repairedGlow ? 0.68 + Math.sin(time * 3.5) * 0.08 : 0.24 + powerLevel * 0.34);
+  }
+}
+
+function drawPlacedSprite(ctx, image, item, time, alpha = 1) {
+  if (!imageReady(image) || !item) {
+    return;
+  }
+
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  const bob = item.float ? Math.sin(time * 1.6 + item.x * 0.01) * item.float : 0;
+  drawWorldSprite(ctx, image, item.x, item.groundY + bob, item.height);
+  ctx.restore();
 }
 
 function drawRainbarrelRow(ctx, row, time) {

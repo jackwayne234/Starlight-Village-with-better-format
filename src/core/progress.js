@@ -103,6 +103,11 @@ function restoreRepairEffect(scene, repair) {
       barrel.overflow = false;
     });
   }
+
+  if (repair.id === "archive-lens-array") {
+    if (scene.observatory?.lens) scene.observatory.lens.lit = true;
+    if (scene.observatory?.tower) scene.observatory.tower.lit = true;
+  }
 }
 
 function restoreFlowMessage(scene, progress) {

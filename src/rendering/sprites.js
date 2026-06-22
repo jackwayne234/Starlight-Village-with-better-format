@@ -43,6 +43,12 @@ export const sprites = {
     rainBarrel: loadImage(`${WORLD}/rain-barrel-trimmed.png`),
     footbridge: loadImage(`${WORLD}/footbridge-trimmed.png`),
     shed: loadImage(`${WORLD}/shed-trimmed.png`),
+    oldObservatory: loadImage(`${WORLD}/old-observatory-trimmed.png`),
+    archiveLensArray: loadImage(`${WORLD}/archive-lens-array-trimmed.png`),
+    observatoryHut: loadImage(`${WORLD}/observatory-hut-trimmed.png`),
+    mossyStoneFoundation: loadImage(`${WORLD}/mossy-stone-foundation-trimmed.png`),
+    wetPathEdge: loadImage(`${WORLD}/wet-path-edge-trimmed.png`),
+    rainyRocksReeds: loadImage(`${WORLD}/rainy-rocks-reeds-trimmed.png`),
     // Seamless, horizontally-tiling textures for the path band, the stream, and
     // the grass behind the path. Fill existing shapes; no cutout (full-bleed).
     pathTile: loadImage(`${WORLD}/path-tile.png`),

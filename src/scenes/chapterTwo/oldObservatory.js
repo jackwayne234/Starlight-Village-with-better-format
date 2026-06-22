@@ -11,16 +11,21 @@ export function createOldObservatoryScene() {
   scene.player.x = 310;
   scene.robot.x = 430;
   scene.backdrop = { moonX: 620, moonY: 126, cloudDrift: 0.62, hillOffset: -10, ridgeOffset: -58 };
-  scene.beaconHill = {
-    tower: { x: 1420, y: 434, lit: false },
-    shed: { x: 920, y: 508, lit: true },
-    cables: [
-      { fromX: 950, fromY: 390, toX: 1360, toY: 304 },
-      { fromX: 1420, fromY: 292, toX: 1760, toY: 382 }
+  scene.observatory = {
+    tower: { x: 1460, groundY: 638, height: 540, lit: false },
+    lens: { x: 1110, groundY: 640, height: 350, lit: false },
+    hut: { x: 650, groundY: 642, height: 310, lit: true },
+    foundations: [
+      { x: 1430, groundY: 656, height: 165 },
+      { x: 1100, groundY: 662, height: 140 }
     ],
-    flags: [
-      { x: 1320, y: 222, color: "#8fd9f0" },
-      { x: 1510, y: 262, color: "#d8aa57" }
+    pathEdges: [
+      { x: 775, groundY: 696, height: 150 },
+      { x: 1265, groundY: 692, height: 146 }
+    ],
+    rocks: [
+      { x: 380, groundY: 656, height: 165 },
+      { x: 1840, groundY: 658, height: 175 }
     ]
   };
   scene.layers = {
@@ -30,10 +35,7 @@ export function createOldObservatoryScene() {
       { x: 1840, y: 292, scale: 1.5 },
       { x: 2080, y: 278, scale: 1.45 }
     ],
-    cottages: [
-      { x: 500, y: 536, scale: 1.78, lit: true },
-      { x: 1740, y: 534, scale: 1.86, lit: false }
-    ],
+    cottages: [],
     lamps: [
       { x: 280, y: 560, lit: true },
       { x: 760, y: 560, lit: true },
@@ -45,10 +47,7 @@ export function createOldObservatoryScene() {
       { x: 1540, y: 640, active: false }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 1280, y: 624, kind: "coil" },
-      { x: 1485, y: 626, kind: "seed" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 250, y: 664, width: 135, height: 20 },
       { x: 1080, y: 662, width: 220, height: 22 },
@@ -66,7 +65,7 @@ export function createOldObservatoryScene() {
       id: "archive-lens-array",
       kind: "path-puzzle",
       puzzleTheme: "archive-lens",
-      x: 1420,
+      x: 1110,
       y: 560,
       radius: 265,
       complete: false,
