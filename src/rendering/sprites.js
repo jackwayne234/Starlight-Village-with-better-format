@@ -42,10 +42,15 @@ export const sprites = {
     beaconTower: loadImage(`${WORLD}/beacon-tower-trimmed.png`),
     rainBarrel: loadImage(`${WORLD}/rain-barrel-trimmed.png`),
     footbridge: loadImage(`${WORLD}/footbridge-trimmed.png`),
-    shed: loadImage(`${WORLD}/shed-trimmed.png`)
+    shed: loadImage(`${WORLD}/shed-trimmed.png`),
+    // Seamless, horizontally-tiling textures for the path band, the stream, and
+    // the grass behind the path. Fill existing shapes; no cutout (full-bleed).
+    pathTile: loadImage(`${WORLD}/path-tile.png`),
+    waterTile: loadImage(`${WORLD}/water-tile.png`),
+    grassTile: loadImage(`${WORLD}/grass-tile.png`)
   },
   title: {
-    hero: loadImage(`${TITLE}/title-hero.png`),
+    hero: loadImage(`${TITLE}/itch-cover.png`),
     background: loadImage(`${TITLE}/background-hills.png`)
   }
 };

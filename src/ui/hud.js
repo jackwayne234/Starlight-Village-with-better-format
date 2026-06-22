@@ -8,7 +8,6 @@ export function drawHud(ctx, scene, width, height) {
   const occupiedBubbles = [{ x: 28, y: 28, width: 310, height: 50 }];
   drawDialogueBubble(ctx, scene, width, height, occupiedBubbles);
   drawReactionBubbles(ctx, scene, width, height, occupiedBubbles);
-  drawMessage(ctx, scene.flow.message, width, height);
   drawContinuePrompt(ctx, scene, width, height);
 
   if (scene.chapterComplete) {
@@ -246,21 +245,6 @@ function drawTitle(ctx, scene) {
   ctx.fillStyle = "rgba(242, 229, 186, 0.92)";
   ctx.font = "600 22px system-ui, sans-serif";
   ctx.fillText(scene.title, 48, 60);
-}
-
-function drawMessage(ctx, message, width, height) {
-  if (!message) {
-    return;
-  }
-
-  ctx.fillStyle = "rgba(20, 30, 28, 0.58)";
-  roundedRect(ctx, 222, height - 104, width - 444, 68, 8);
-  ctx.fill();
-  ctx.fillStyle = "rgba(245, 235, 205, 0.94)";
-  ctx.font = "500 19px system-ui, sans-serif";
-  ctx.textAlign = "center";
-  wrapText(ctx, message, width / 2, height - 76, width - 500, 24);
-  ctx.textAlign = "left";
 }
 
 function drawContinuePrompt(ctx, scene, width, height) {

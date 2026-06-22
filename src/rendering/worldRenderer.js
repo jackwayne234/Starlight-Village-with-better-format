@@ -11,6 +11,44 @@ function drawWorldSprite(ctx, image, x, groundY, height) {
   return { width, scale };
 }
 
+// Builds a repeating pattern from a tile image, scaled so the tile reads at
+// `targetTileWidth` pixels on screen. Returns null if the image isn't ready.
+function texturePattern(ctx, image, targetTileWidth) {
+  if (!imageReady(image)) {
+    return null;
+  }
+  const pattern = ctx.createPattern(image, "repeat");
+  if (pattern && pattern.setTransform && typeof DOMMatrix !== "undefined") {
+    const s = targetTileWidth / image.naturalWidth;
+    pattern.setTransform(new DOMMatrix([s, 0, 0, s, 0, 0]));
+  }
+  return pattern;
+}
+
+// A warm vertical smear of light reflecting off the wet path below a lamp.
+function drawWetReflection(ctx, x, topY, length, intensity) {
+  if (intensity <= 0.04) {
+    return;
+  }
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  const halo = ctx.createLinearGradient(x, topY, x, topY + length);
+  halo.addColorStop(0, `rgba(255, 214, 140, ${0.46 * intensity})`);
+  halo.addColorStop(0.5, `rgba(255, 198, 120, ${0.2 * intensity})`);
+  halo.addColorStop(1, "rgba(255, 198, 120, 0)");
+  ctx.fillStyle = halo;
+  ctx.beginPath();
+  ctx.ellipse(x, topY + length * 0.5, 14, length * 0.5, 0, 0, Math.PI * 2);
+  ctx.fill();
+  // A thin bright core, like the streak of light on a puddle.
+  const core = ctx.createLinearGradient(x, topY, x, topY + length * 0.82);
+  core.addColorStop(0, `rgba(255, 238, 196, ${0.5 * intensity})`);
+  core.addColorStop(1, "rgba(255, 238, 196, 0)");
+  ctx.fillStyle = core;
+  ctx.fillRect(x - 3, topY, 6, length * 0.82);
+  ctx.restore();
+}
+
 // Additive warm halo used to bloom lights back on as power is restored.
 function warmGlow(ctx, cx, cy, radius, intensity) {
   if (intensity <= 0.02) {
@@ -40,9 +78,10 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
   scene.layers.cottages.forEach((cottage) => drawCottage(ctx, cottage, time, powerLevel));
   drawGround(ctx, scene.world.width, height);
   drawPath(ctx, scene.world.width, time);
-  drawStream(ctx, time);
+  if (waterWheel) {
+    drawStream(ctx, time);
+  }
   drawMist(ctx, scene.layers.mistBands, time, scene.world.width);
-  scene.layers.puddles.forEach((puddle) => drawPuddle(ctx, puddle, time));
   drawSceneLandmarks(ctx, scene, time);
   drawOnwardGlow(ctx, scene, time);
   if (waterWheel) {
@@ -86,7 +125,12 @@ function drawTree(ctx, tree, time) {
   // sprite, then to the code-drawn tree, if an image hasn't loaded yet.
   const pineImage = sprites.world.pine;
   if (imageReady(pineImage)) {
+    // Darken the pines so they settle into the rainy night instead of looking
+    // lamp-lit / too bright against the dark scene.
+    ctx.save();
+    ctx.filter = "brightness(0.66) saturate(1.05)";
     drawWorldSprite(ctx, pineImage, tree.x, tree.y + 230 * tree.scale, 360 * tree.scale);
+    ctx.restore();
     return;
   }
   const treeImage = sprites.world.tree;
@@ -181,9 +225,11 @@ function drawCottage(ctx, cottage, time, powerLevel) {
 }
 
 function drawGround(ctx, width, height) {
+  // Dark base fill behind everything (also shows through if no grass texture).
   ctx.fillStyle = colors.groundDark;
   ctx.fillRect(0, 586, width, height - 586);
-  ctx.fillStyle = colors.ground;
+
+  // The grass band shape (kept whether filled with texture or flat colour).
   ctx.beginPath();
   ctx.moveTo(0, 580);
   ctx.bezierCurveTo(180, 552, 255, 602, 415, 578);
@@ -194,15 +240,25 @@ function drawGround(ctx, width, height) {
   ctx.lineTo(width, height);
   ctx.lineTo(0, height);
   ctx.closePath();
-  ctx.fill();
+
+  const pattern = texturePattern(ctx, sprites.world.grassTile, 320);
+  if (pattern) {
+    ctx.fillStyle = pattern;
+    ctx.fill();
+    // The grass art is already dark/wet, so only a light foreground deepening.
+    const shade = ctx.createLinearGradient(0, 560, 0, height);
+    shade.addColorStop(0, "rgba(12, 20, 18, 0)");
+    shade.addColorStop(1, "rgba(8, 14, 14, 0.26)");
+    ctx.fillStyle = shade;
+    ctx.fill();
+  } else {
+    ctx.fillStyle = colors.ground;
+    ctx.fill();
+  }
 }
 
 function drawPath(ctx, width, time) {
-  const gradient = ctx.createLinearGradient(0, 560, 0, 720);
-  gradient.addColorStop(0, colors.path);
-  gradient.addColorStop(0.58, "#6c6654");
-  gradient.addColorStop(1, "#3f4539");
-  ctx.fillStyle = gradient;
+  // The path band shape (kept whether we fill it with texture or a gradient).
   ctx.beginPath();
   ctx.moveTo(0, 676);
   ctx.bezierCurveTo(220, 626, 380, 650, 565, 632);
@@ -213,7 +269,26 @@ function drawPath(ctx, width, time) {
   ctx.lineTo(width, 720);
   ctx.lineTo(0, 720);
   ctx.closePath();
-  ctx.fill();
+
+  const pattern = texturePattern(ctx, sprites.world.pathTile, 256);
+  if (pattern) {
+    ctx.fillStyle = pattern;
+    ctx.fill();
+    // The path art is already dark wet cobble, so only a light foreground
+    // deepening for depth.
+    const wet = ctx.createLinearGradient(0, 560, 0, 720);
+    wet.addColorStop(0, "rgba(10, 16, 20, 0)");
+    wet.addColorStop(1, "rgba(6, 10, 14, 0.3)");
+    ctx.fillStyle = wet;
+    ctx.fill();
+  } else {
+    const gradient = ctx.createLinearGradient(0, 560, 0, 720);
+    gradient.addColorStop(0, colors.path);
+    gradient.addColorStop(0.58, "#6c6654");
+    gradient.addColorStop(1, "#3f4539");
+    ctx.fillStyle = gradient;
+    ctx.fill();
+  }
 
   ctx.strokeStyle = `rgba(236, 229, 190, ${0.14 + Math.sin(time * 2) * 0.03})`;
   ctx.lineWidth = 3;
@@ -232,8 +307,8 @@ function drawWetStoneSegments(ctx, width, time) {
   ctx.globalCompositeOperation = "screen";
   for (let x = 120; x < width; x += 165) {
     const y = 654 - Math.sin(x * 0.012) * 18;
-    const shimmer = 0.1 + Math.sin(time * 2.2 + x) * 0.025;
-    ctx.strokeStyle = `rgba(236, 229, 190, ${shimmer})`;
+    const shimmer = 0.07 + Math.sin(time * 2.2 + x) * 0.02;
+    ctx.strokeStyle = `rgba(214, 232, 240, ${shimmer})`;
     ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.ellipse(x, y, 58, 12, -0.1 + Math.sin(x) * 0.04, 0.1, Math.PI - 0.1);
@@ -242,25 +317,49 @@ function drawWetStoneSegments(ctx, width, time) {
   ctx.restore();
 }
 
+// A soft millrace pool at the base of the water wheel, feathered into the wet
+// stone so it reads as water collecting there — not a sliced sprite pasted on.
 function drawStream(ctx, time) {
-  ctx.fillStyle = "rgba(63, 116, 128, 0.72)";
-  ctx.beginPath();
-  ctx.moveTo(760, 622);
-  ctx.bezierCurveTo(810, 600, 900, 608, 970, 584);
-  ctx.lineTo(1028, 720);
-  ctx.lineTo(812, 720);
-  ctx.closePath();
-  ctx.fill();
+  const cx = 820; // just under the wheel hub (wheel sits at x800)
+  const cy = 702;
+  const R = 196;
+  const squash = 0.34; // foreshorten so the pool lies flat on the ground
 
-  ctx.strokeStyle = "rgba(206, 238, 229, 0.34)";
-  ctx.lineWidth = 3;
-  for (let i = 0; i < 4; i += 1) {
-    const y = 632 + i * 22 + Math.sin(time * 1.6 + i) * 3;
-    ctx.beginPath();
-    ctx.moveTo(805, y);
-    ctx.bezierCurveTo(865, y - 12, 925, y + 8, 992, y - 8);
-    ctx.stroke();
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.scale(1, squash); // work in a circle of radius R, drawn as a flat ellipse
+
+  ctx.beginPath();
+  ctx.arc(0, 0, R, 0, Math.PI * 2);
+  ctx.clip();
+
+  // Dark night-water base (semi-transparent so the wet stone reads through it).
+  const water = ctx.createRadialGradient(0, 0, R * 0.1, 0, 0, R);
+  water.addColorStop(0, "rgba(20, 42, 50, 0.82)");
+  water.addColorStop(0.65, "rgba(12, 28, 34, 0.7)");
+  water.addColorStop(1, "rgba(8, 20, 26, 0.42)");
+  ctx.fillStyle = water;
+  ctx.fillRect(-R, -R, R * 2, R * 2);
+
+  // Faint texture on top for ripple/reflection detail, kept low so the gold
+  // glints read as soft reflections rather than a glowing puddle.
+  const pattern = texturePattern(ctx, sprites.world.waterTile, 200);
+  if (pattern) {
+    ctx.globalAlpha = 0.2;
+    ctx.fillStyle = pattern;
+    ctx.fillRect(-R, -R, R * 2, R * 2);
+    ctx.globalAlpha = 1;
   }
+
+  // Feather the whole rim so the pool melts into the wet stone.
+  ctx.globalCompositeOperation = "destination-out";
+  const fade = ctx.createRadialGradient(0, 0, R * 0.2, 0, 0, R);
+  fade.addColorStop(0, "rgba(0, 0, 0, 0)");
+  fade.addColorStop(1, "rgba(0, 0, 0, 1)");
+  ctx.fillStyle = fade;
+  ctx.fillRect(-R, -R, R * 2, R * 2);
+
+  ctx.restore();
 }
 
 function drawMist(ctx, bands, time, width) {
@@ -443,7 +542,7 @@ function drawBeaconHill(ctx, beaconHill, time) {
   if (beaconHill.shed && imageReady(shedImage)) {
     const shed = beaconHill.shed;
     const groundY = shed.y + 96;
-    const height = 292;
+    const height = 420;
     const { width } = drawWorldSprite(ctx, shedImage, shed.x, groundY, height);
     warmGlow(ctx, shed.x - width * 0.12, groundY - height * 0.45, 56, shed.lit ? 0.5 + Math.sin(time * 3.2) * 0.07 : 0.18);
   }
@@ -452,7 +551,7 @@ function drawBeaconHill(ctx, beaconHill, time) {
   const towerImage = sprites.world.beaconTower;
   if (imageReady(towerImage)) {
     const groundY = tower.y + 84;
-    const height = 440;
+    const height = 620;
     drawWorldSprite(ctx, towerImage, tower.x, groundY, height);
     warmGlow(ctx, tower.x, groundY - height * 0.86, 70, tower.lit ? 0.7 + Math.sin(time * 4) * 0.08 : 0.26);
   } else {
@@ -561,9 +660,6 @@ function drawWaterWheelImage(ctx, image, target, time, powerLevel) {
   ctx.translate(target.x, target.y);
   drawRepairHalo(ctx, target, time, powerLevel);
 
-  // Mill pond so the wheel sits in water instead of on dry grass.
-  drawMillPond(ctx, baseY, time, pondScale);
-
   // Warm glow behind the hub runes, swelling as power comes back.
   const glow = 0.25 + powerLevel * 0.55 + Math.sin(time * 2) * 0.05 * powerLevel;
   ctx.save();
@@ -581,24 +677,46 @@ function drawWaterWheelImage(ctx, image, target, time, powerLevel) {
   ctx.globalAlpha = 0.78 + powerLevel * 0.22;
   ctx.drawImage(image, -displayWidth / 2, baseY - displayHeight, displayWidth, displayHeight);
   ctx.globalAlpha = 1;
-  drawWheelWater(ctx, time); // splashes where the wheel meets the pond
   ctx.restore();
 }
 
-// A little teal mill pond drawn under the wheel, matching the stream colour.
+// The mill pond under the wheel — same water texture as the stream, with a
+// soft radial fade so its rim melts into the bank.
 function drawMillPond(ctx, baseY, time, scale = 1) {
   const pondY = baseY + 12 * scale;
   const rx = 196 * scale;
   const ry0 = 42 * scale;
   ctx.save();
-  const pond = ctx.createRadialGradient(4, pondY, 14 * scale, 4, pondY, rx);
-  pond.addColorStop(0, "rgba(70, 122, 132, 0.92)");
-  pond.addColorStop(0.7, "rgba(52, 102, 114, 0.82)");
-  pond.addColorStop(1, "rgba(52, 102, 114, 0)");
-  ctx.fillStyle = pond;
-  ctx.beginPath();
-  ctx.ellipse(4, pondY, rx, ry0, 0, 0, Math.PI * 2);
-  ctx.fill();
+
+  const pattern = texturePattern(ctx, sprites.world.waterTile, 200);
+  if (pattern) {
+    ctx.save();
+    ctx.beginPath();
+    ctx.ellipse(4, pondY, rx, ry0, 0, 0, Math.PI * 2);
+    ctx.clip();
+    ctx.globalAlpha = 0.9;
+    ctx.fillStyle = pattern;
+    ctx.fillRect(4 - rx, pondY - ry0, rx * 2, ry0 * 2);
+    // Feather the long edges so the pond blends into the ground.
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = "destination-out";
+    const fade = ctx.createRadialGradient(4, pondY, rx * 0.5, 4, pondY, rx);
+    fade.addColorStop(0, "rgba(0, 0, 0, 0)");
+    fade.addColorStop(1, "rgba(0, 0, 0, 1)");
+    ctx.fillStyle = fade;
+    ctx.fillRect(4 - rx, pondY - ry0, rx * 2, ry0 * 2);
+    ctx.restore();
+  } else {
+    const pond = ctx.createRadialGradient(4, pondY, 14 * scale, 4, pondY, rx);
+    pond.addColorStop(0, "rgba(70, 122, 132, 0.92)");
+    pond.addColorStop(0.7, "rgba(52, 102, 114, 0.82)");
+    pond.addColorStop(1, "rgba(52, 102, 114, 0)");
+    ctx.fillStyle = pond;
+    ctx.beginPath();
+    ctx.ellipse(4, pondY, rx, ry0, 0, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
   ctx.strokeStyle = "rgba(206, 238, 229, 0.3)";
   ctx.lineWidth = 2.5;
   for (let i = 0; i < 4; i += 1) {
@@ -820,6 +938,8 @@ function drawLamp(ctx, lamp, time, powerLevel) {
   if (imageReady(lampImage)) {
     const groundY = lamp.y + 92;
     const height = 172;
+    // Wet-path reflection beneath the lamp (drawn first, under the post).
+    drawWetReflection(ctx, lamp.x, groundY - 6, 150, glow * (lit ? 1 : 0.25));
     drawWorldSprite(ctx, lampImage, lamp.x, groundY, height);
     warmGlow(ctx, lamp.x, groundY - height * 0.8, 76, glow * (0.92 + Math.sin(time * 4.4 + lamp.x * 0.01) * 0.08));
     return;

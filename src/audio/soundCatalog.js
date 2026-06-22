@@ -2,19 +2,20 @@ export const soundCatalog = {
   "weather.rain.loop": {
     generated: "steadyRainLoop",
     bus: "ambience",
-    volume: 0.46
+    volume: 0.26
   },
   "weather.thunder.roll": {
     files: ["./assets/audio/weather/rolling-thunder-pixabay.mp3"],
     bus: "weather",
     volume: 1,
+    gain: 1.9,
     cooldown: 3,
     restart: false
   },
   "weather.thunder.fallback": {
     generated: "lowThunder",
     bus: "weather",
-    volume: 0.5,
+    volume: 0.85,
     cooldown: 8
   },
   "ui.scan.chirp": {

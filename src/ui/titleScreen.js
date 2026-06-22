@@ -40,10 +40,12 @@ function drawHeroBackdrop(ctx, width, height) {
 
 function drawVeil(ctx, width, height) {
   // Soft darkening so text reads, but the rainy village stays visible behind.
+  // Lighter veil now that the itch cover art is the star — just enough to keep
+  // the title and prompt legible, darkening a little more at top and bottom.
   const veil = ctx.createLinearGradient(0, 0, 0, height);
-  veil.addColorStop(0, "rgba(9, 16, 20, 0.62)");
-  veil.addColorStop(0.5, "rgba(10, 18, 22, 0.48)");
-  veil.addColorStop(1, "rgba(7, 12, 15, 0.7)");
+  veil.addColorStop(0, "rgba(9, 16, 20, 0.42)");
+  veil.addColorStop(0.5, "rgba(10, 18, 22, 0.16)");
+  veil.addColorStop(1, "rgba(7, 12, 15, 0.58)");
   ctx.fillStyle = veil;
   ctx.fillRect(0, 0, width, height);
 

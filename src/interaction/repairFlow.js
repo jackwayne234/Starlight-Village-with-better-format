@@ -56,7 +56,9 @@ export function updateRepairFlow(scene, input, dt) {
 
     if (!flow.onwardPrompted && flow.timer <= 2.6) {
       flow.onwardPrompted = true;
-      flow.message = target.onwardText;
+      if (target.onwardText) {
+        showDialogue(scene, { speaker: "robot", text: target.onwardText });
+      }
     }
 
     if (flow.timer <= 0 && consumeRepairInput(input)) {
