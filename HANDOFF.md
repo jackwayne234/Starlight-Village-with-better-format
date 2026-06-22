@@ -25,6 +25,7 @@ Starlight Village -> Glowfen Grove -> Mossline Switchyard -> Stormedge Rise -> B
 - Rainbarrel Row now continues into Chapter 2.
 - Chapter 2 currently adds Lantern Market, Glassrail Crossing, and Old Observatory.
 - Chapter 2 ending exists after Old Observatory.
+- Glow/mushroom plants are temporarily hidden in the renderer because the current sprite has internal white cutout fills and feels too bright for the rainy night palette. Make a replacement sprite later before turning them back on.
 
 ## Known Caveats
 
@@ -35,6 +36,7 @@ Starlight Village -> Glowfen Grove -> Mossline Switchyard -> Stormedge Rise -> B
 - Audio has not been migrated yet.
 - Weather/audio polish remains a later chunk.
 - Comment bubbles are improved but may still need a deeper V1-style pass.
+- Several location art passes have landed: Old Observatory has dedicated assets, Glowfen has foliage grounding, and Mossline has painted pole/line sprites. Continue in small scene-by-scene visual passes.
 
 ## Suggested Next Step
 

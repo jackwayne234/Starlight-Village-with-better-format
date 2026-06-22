@@ -98,7 +98,8 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
   }
   scene.layers.lamps.forEach((lamp) => drawLamp(ctx, lamp, time, powerLevel));
   scene.layers.brokenBranches.forEach((branch) => drawBrokenBranch(ctx, branch));
-  scene.layers.glowPlants.forEach((plant) => drawGlowPlant(ctx, plant, time, powerLevel));
+  // Temporarily hidden until the mushroom/glow-plant art is replaced.
+  // The current sprite has internal white cutout fills that fight the night scene.
   scene.layers.repairParts.forEach((part) => drawRepairPart(ctx, part, time));
   scene.layers.foliage?.forEach((foliage) => drawFoliageSprite(ctx, foliage, time));
   drawSignpost(ctx, scene, time, powerLevel);
