@@ -872,6 +872,7 @@ function drawRootPump(ctx, target, time, powerLevel) {
     const groundY = target.y + 40;
     const height = 300;
     const { width } = drawWorldSprite(ctx, pumpImage, target.x, groundY, height);
+    drawRootPumpGroundBlend(ctx, target.x, groundY, width, time);
     warmGlow(ctx, target.x, groundY - height * 0.5, width * 0.55, (0.3 + powerLevel * 0.55) * pulse);
     return;
   }
@@ -909,6 +910,33 @@ function drawRootPump(ctx, target, time, powerLevel) {
   ctx.beginPath();
   ctx.arc(0, 0, 13 + powerLevel * 6, 0, Math.PI * 2);
   ctx.fill();
+  ctx.restore();
+}
+
+function drawRootPumpGroundBlend(ctx, x, groundY, width, time) {
+  ctx.save();
+  ctx.globalCompositeOperation = "source-over";
+
+  const shadow = ctx.createRadialGradient(x, groundY - 8, 8, x, groundY - 8, width * 0.48);
+  shadow.addColorStop(0, "rgba(12, 20, 17, 0.58)");
+  shadow.addColorStop(0.68, "rgba(12, 20, 17, 0.42)");
+  shadow.addColorStop(1, "rgba(12, 20, 17, 0)");
+  ctx.fillStyle = shadow;
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 4, width * 0.48, 18, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.strokeStyle = `rgba(58, 82, 35, ${0.42 + Math.sin(time * 2.1) * 0.04})`;
+  ctx.lineWidth = 6;
+  ctx.lineCap = "round";
+  for (let i = 0; i < 5; i += 1) {
+    const offset = -width * 0.34 + i * width * 0.17;
+    ctx.beginPath();
+    ctx.moveTo(x + offset, groundY - 12 + Math.sin(time + i) * 2);
+    ctx.quadraticCurveTo(x + offset + width * 0.08, groundY - 20, x + offset + width * 0.18, groundY - 11);
+    ctx.stroke();
+  }
+
   ctx.restore();
 }
 
