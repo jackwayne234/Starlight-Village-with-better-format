@@ -15,3 +15,4 @@ High-level list only. All details live inside each chunk file.
 | 23 | Code Hygiene | complete |
 | 24 | Re-Review Iteration Pass | complete |
 | 25 | Final Handoff | complete |
+| 26 | Chapter 2 Route Expansion | complete |

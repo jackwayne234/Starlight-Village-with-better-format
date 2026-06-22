@@ -18,13 +18,13 @@ http://127.0.0.1:5200/
 
 ## Current V2 Slice
 
-- One rainy Chapter 1 lane.
-- Six Chapter 1 locations: Starlight Village, Glowfen Grove, Mossline Switchyard, Stormedge Rise, Beacon Hill, and Rainbarrel Row.
+- One rainy story route across Chapters 1 and 2.
+- Nine locations: Starlight Village, Glowfen Grove, Mossline Switchyard, Stormedge Rise, Beacon Hill, Rainbarrel Row, Lantern Market, Glassrail Crossing, and Old Observatory.
 - Apprentice and floating robot companion.
 - Left/right walking with a scrolling camera.
 - All Chapter 1 repairs use rotate-path puzzles.
 - One repair target in each Chapter 1 location.
-- Chapter 1 complete summary after Rainbarrel Row.
+- Chapter 2 complete summary after Old Observatory.
 - Short character dialogue bubbles.
 - Progress saved in browser storage.
 

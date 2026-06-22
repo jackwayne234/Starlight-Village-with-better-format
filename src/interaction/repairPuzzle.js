@@ -49,6 +49,21 @@ const layouts = {
     [tile("start", 0, true), tile("turn", 2), tile("blank", 0, true)],
     [tile("output", 2, true), tile("tee", 3), tile("output", 0, true)],
     [tile("blank", 0, true), tile("blank", 0, true), tile("blank", 0, true)]
+  ],
+  "market-lanterns": [
+    [tile("start", 0, true), tile("turn", 2), tile("blank", 0, true)],
+    [tile("blank", 0, true), tile("tee", 3), tile("output", 0, true)],
+    [tile("output", 2, true), tile("tee", 0), tile("output", 0, true)]
+  ],
+  "rail-signal": [
+    [tile("start", 0, true), tile("turn", 2), tile("blank", 0, true)],
+    [tile("blank", 0, true), tile("tee", 0), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("output", 1, true), tile("blank", 0, true)]
+  ],
+  "archive-lens": [
+    [tile("start", 0, true), tile("tee", 2), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("line", 0), tile("blank", 0, true)],
+    [tile("output", 2, true), tile("tee", 0), tile("output", 0, true)]
   ]
 };
 
@@ -132,6 +147,57 @@ const themes = {
       conduit: "#7ebebf",
       conduitLit: "#bdeee6",
       glow: "#bdeee6"
+    }
+  },
+  "market-lanterns": {
+    title: "Market Lantern Grid",
+    instructions: "Rotate the brass paths to carry glow from the village battery into every market lantern.",
+    objective: "Relight the market.",
+    successMessage: "Lantern grid linked. The market is warm again.",
+    colors: {
+      panel: "#705542",
+      panelDark: "#352f2a",
+      boardInset: "#4d3d32",
+      tileLit: "#665b42",
+      conduit: "#c89554",
+      conduitLit: "#ffe3a3",
+      node: "#d5b46c",
+      glow: "#ffe3a3",
+      accent: "#9fd6dc"
+    }
+  },
+  "rail-signal": {
+    title: "Glassrail Signal",
+    instructions: "Rotate the signal paths to reconnect the crossing lights before the supply cart arrives.",
+    objective: "Align signals.",
+    successMessage: "Crossing signals linked. The rail is safe.",
+    colors: {
+      panel: "#5b605c",
+      panelDark: "#263032",
+      boardInset: "#394244",
+      tileLit: "#4f6969",
+      conduit: "#8ab8bd",
+      conduitLit: "#c9f0f0",
+      node: "#a9cac9",
+      glow: "#c9f0f0",
+      accent: "#f0c56b"
+    }
+  },
+  "archive-lens": {
+    title: "Archive Lens Array",
+    instructions: "Rotate the lens paths to send starlight through every archive prism.",
+    objective: "Focus the lens.",
+    successMessage: "Lens array focused. The old maps shine clear.",
+    colors: {
+      panel: "#5d596d",
+      panelDark: "#292836",
+      boardInset: "#3a3748",
+      tileLit: "#54506c",
+      conduit: "#a994d6",
+      conduitLit: "#e4d6ff",
+      node: "#c1a9f0",
+      glow: "#e4d6ff",
+      accent: "#99d7be"
     }
   }
 };

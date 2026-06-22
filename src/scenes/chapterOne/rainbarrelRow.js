@@ -82,22 +82,10 @@ export function createRainbarrelRowScene() {
       progress: 0,
       scanText: "Robot scan: storm drain clogged.",
       puzzleText: "Rotate the channels to redirect the runoff.",
-      rewardText: "Stormwater redirected. Chapter repairs complete.",
+      rewardText: "Stormwater redirected. The village repairs are holding.",
       onwardText: "The village repairs are holding through the rain.",
-      nextText: "Chapter 1 complete.",
-      chapterComplete: {
-        title: "Chapter 1 Complete",
-        subtitle: "Starlight Village is steady through the storm.",
-        checklist: [
-          "Water wheel generator restored",
-          "Glowfen Grove roots awakened",
-          "Mossline junction reconnected",
-          "Stormedge gauge stabilized",
-          "Beacon Hill signal relit",
-          "Rainbarrel runoff cleared"
-        ],
-        prompt: "Press R to replay Chapter 1."
-      },
+      nextText: "The repaired lane opens toward Lantern Market.",
+      nextSceneId: "chapter-two/lantern-market",
       reactions: [
         { text: "No more water at the door!", x: 740, y: 318 },
         { text: "The barrels are behaving again!", x: 1540, y: 326 },
