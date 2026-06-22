@@ -55,6 +55,12 @@ export const sprites = {
     glowfenGlowRocks: loadImage(`${WORLD}/glowfen-glow-rocks-trimmed.png`),
     glowfenRootChannel: loadImage(`${WORLD}/glowfen-root-channel-trimmed.png`),
     glowfenLeafLitter: loadImage(`${WORLD}/glowfen-leaf-litter-trimmed.png`),
+    mosslineUtilityPole: loadImage(`${WORLD}/mossline-utility-pole-trimmed.png`),
+    mosslinePowerLineSpan: loadImage(`${WORLD}/mossline-power-line-span-trimmed.png`),
+    mosslineSwitchFoliage: loadImage(`${WORLD}/mossline-switch-foliage-trimmed.png`),
+    mosslineOvergrownSwitchBox: loadImage(`${WORLD}/mossline-overgrown-switch-box-trimmed.png`),
+    mosslineConduitCoils: loadImage(`${WORLD}/mossline-conduit-coils-trimmed.png`),
+    mosslinePuddleGround: loadImage(`${WORLD}/mossline-puddle-ground-trimmed.png`),
     // Seamless, horizontally-tiling textures for the path band, the stream, and
     // the grass behind the path. Fill existing shapes; no cutout (full-bleed).
     pathTile: loadImage(`${WORLD}/path-tile.png`),

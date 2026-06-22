@@ -13,10 +13,10 @@ export function createMosslineSwitchyardScene() {
   scene.backdrop = { moonX: 965, moonY: 150, cloudDrift: 1.05, hillOffset: 42, ridgeOffset: 66 };
   scene.switchyard = {
     poles: [
-      { x: 520, y: 496, height: 210, lit: false },
-      { x: 930, y: 488, height: 235, lit: true },
-      { x: 1370, y: 508, height: 205, lit: false },
-      { x: 1760, y: 490, height: 225, lit: false }
+      { x: 520, y: 496, height: 210, spriteHeight: 335, lit: false },
+      { x: 930, y: 488, height: 235, spriteHeight: 355, lit: true },
+      { x: 1370, y: 508, height: 205, spriteHeight: 330, lit: false },
+      { x: 1760, y: 490, height: 225, spriteHeight: 350, lit: false }
     ],
     boxes: [
       { x: 720, y: 606, lit: true },
@@ -43,6 +43,13 @@ export function createMosslineSwitchyardScene() {
     glowPlants: [
       { x: 120, y: 640, active: true },
       { x: 1980, y: 638, active: false }
+    ],
+    foliage: [
+      { kind: "mosslineSwitchFoliage", x: 720, groundY: 670, height: 130, alpha: 0.94 },
+      { kind: "mosslineSwitchFoliage", x: 1165, groundY: 670, height: 122, alpha: 0.92 },
+      { kind: "mosslineSwitchFoliage", x: 1570, groundY: 670, height: 126, alpha: 0.92 },
+      { kind: "mosslineConduitCoils", x: 945, groundY: 682, height: 120, alpha: 0.9 },
+      { kind: "mosslinePuddleGround", x: 1340, groundY: 696, height: 118, alpha: 0.8 }
     ],
     brokenBranches: [],
     repairParts: [],

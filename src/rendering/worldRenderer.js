@@ -453,7 +453,24 @@ function drawFootbridge(ctx, bridge, time) {
 }
 
 function drawSwitchyard(ctx, switchyard, time) {
+  const poleImage = sprites.world.mosslineUtilityPole;
+  const lineImage = sprites.world.mosslinePowerLineSpan;
+
+  if (imageReady(lineImage)) {
+    switchyard.poles.slice(0, -1).forEach((pole, index) => {
+      drawPowerLineSpan(ctx, lineImage, pole, switchyard.poles[index + 1]);
+    });
+  }
+
   switchyard.poles.forEach((pole) => {
+    if (imageReady(poleImage)) {
+      const groundY = pole.y + 100;
+      const height = pole.spriteHeight ?? 330;
+      drawWorldSprite(ctx, poleImage, pole.x, groundY, height);
+      warmGlow(ctx, pole.x + 18, groundY - height * 0.62, 44, pole.lit ? 0.42 + Math.sin(time * 4) * 0.06 : 0.16);
+      return;
+    }
+
     ctx.save();
     ctx.translate(pole.x, pole.y);
     ctx.strokeStyle = "#46352b";
@@ -472,17 +489,19 @@ function drawSwitchyard(ctx, switchyard, time) {
     ctx.restore();
   });
 
-  ctx.strokeStyle = "rgba(201, 121, 69, 0.42)";
-  ctx.lineWidth = 4;
-  ctx.beginPath();
-  switchyard.poles.forEach((pole, index) => {
-    if (index === 0) {
-      ctx.moveTo(pole.x, pole.y - pole.height + 120);
-    } else {
-      ctx.lineTo(pole.x, pole.y - pole.height + 120);
-    }
-  });
-  ctx.stroke();
+  if (!imageReady(lineImage)) {
+    ctx.strokeStyle = "rgba(201, 121, 69, 0.42)";
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    switchyard.poles.forEach((pole, index) => {
+      if (index === 0) {
+        ctx.moveTo(pole.x, pole.y - pole.height + 120);
+      } else {
+        ctx.lineTo(pole.x, pole.y - pole.height + 120);
+      }
+    });
+    ctx.stroke();
+  }
 
   const boxImage = sprites.world.switchyardBox;
   switchyard.boxes.forEach((box) => {
@@ -501,6 +520,14 @@ function drawSwitchyard(ctx, switchyard, time) {
     ctx.arc(box.x, box.y - 2, 10, 0, Math.PI * 2);
     ctx.fill();
   });
+}
+
+function drawPowerLineSpan(ctx, image, fromPole, toPole) {
+  const width = Math.abs(toPole.x - fromPole.x) + 112;
+  const height = width * (image.naturalHeight / image.naturalWidth);
+  const x = (fromPole.x + toPole.x) / 2;
+  const y = ((fromPole.y - fromPole.height + 122) + (toPole.y - toPole.height + 122)) / 2;
+  ctx.drawImage(image, x - width / 2, y - height / 2, width, height);
 }
 
 function drawStormRidge(ctx, ridge, time) {
