@@ -37,7 +37,7 @@ export function createMosslineSwitchyardScene() {
     cottages: [],
     lamps: [
       { x: 360, y: 560, lit: true },
-      { x: 1080, y: 560, lit: false },
+      { x: 980, y: 560, lit: false },
       { x: 1660, y: 560, lit: false }
     ],
     glowPlants: [

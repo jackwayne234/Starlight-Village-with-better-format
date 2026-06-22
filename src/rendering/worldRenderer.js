@@ -1052,8 +1052,6 @@ function drawLamp(ctx, lamp, time, powerLevel) {
   if (imageReady(lampImage)) {
     const groundY = lamp.y + 92;
     const height = 172;
-    // Wet-path reflection beneath the lamp (drawn first, under the post).
-    drawWetReflection(ctx, lamp.x, groundY - 6, 150, glow * (lit ? 1 : 0.25));
     drawWorldSprite(ctx, lampImage, lamp.x, groundY, height);
     warmGlow(ctx, lamp.x, groundY - height * 0.8, 76, glow * (0.92 + Math.sin(time * 4.4 + lamp.x * 0.01) * 0.08));
     return;
