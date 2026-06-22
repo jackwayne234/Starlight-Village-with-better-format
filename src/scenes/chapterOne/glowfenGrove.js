@@ -43,6 +43,15 @@ export function createGlowfenGroveScene() {
       { x: 1560, y: 642, active: true },
       { x: 1760, y: 638, active: false }
     ],
+    foliage: [
+      { kind: "glowfenPumpOvergrowth", x: 1030, groundY: 668, height: 255 },
+      { kind: "glowfenRootChannel", x: 800, groundY: 676, height: 190, alpha: 0.9 },
+      { kind: "glowfenBridgeReeds", x: 640, groundY: 654, height: 150 },
+      { kind: "glowfenBridgeReeds", x: 1040, groundY: 654, height: 140, alpha: 0.9 },
+      { kind: "glowfenCobbleVines", x: 520, groundY: 692, height: 120, alpha: 0.82 },
+      { kind: "glowfenLeafLitter", x: 1330, groundY: 694, height: 115, alpha: 0.86 },
+      { kind: "glowfenGlowRocks", x: 1540, groundY: 654, height: 128 }
+    ],
     brokenBranches: [],
     repairParts: [],
     puddles: [

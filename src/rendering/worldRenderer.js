@@ -100,6 +100,7 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
   scene.layers.brokenBranches.forEach((branch) => drawBrokenBranch(ctx, branch));
   scene.layers.glowPlants.forEach((plant) => drawGlowPlant(ctx, plant, time, powerLevel));
   scene.layers.repairParts.forEach((part) => drawRepairPart(ctx, part, time));
+  scene.layers.foliage?.forEach((foliage) => drawFoliageSprite(ctx, foliage, time));
   drawSignpost(ctx, scene, time, powerLevel);
   ctx.restore();
 }
@@ -938,6 +939,20 @@ function drawRootPumpGroundBlend(ctx, x, groundY, width, time) {
   }
 
   ctx.restore();
+}
+
+function drawFoliageSprite(ctx, foliage, time) {
+  const image = sprites.world[foliage.kind];
+  if (!imageReady(image)) {
+    return;
+  }
+
+  drawPlacedSprite(ctx, image, {
+    x: foliage.x,
+    groundY: foliage.groundY,
+    height: foliage.height,
+    float: foliage.float ?? 0
+  }, time, foliage.alpha ?? 0.96);
 }
 
 function drawRepairMarker(ctx, target, time, powerLevel) {

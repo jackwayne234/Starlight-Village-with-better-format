@@ -26,6 +26,7 @@ export function createBaseScene({ id, title, worldWidth = 2200, startMessage }) 
       cottages: [],
       lamps: [],
       glowPlants: [],
+      foliage: [],
       brokenBranches: [],
       repairParts: [],
       puddles: [],

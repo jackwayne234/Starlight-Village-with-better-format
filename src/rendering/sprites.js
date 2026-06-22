@@ -49,6 +49,12 @@ export const sprites = {
     mossyStoneFoundation: loadImage(`${WORLD}/mossy-stone-foundation-trimmed.png`),
     wetPathEdge: loadImage(`${WORLD}/wet-path-edge-trimmed.png`),
     rainyRocksReeds: loadImage(`${WORLD}/rainy-rocks-reeds-trimmed.png`),
+    glowfenPumpOvergrowth: loadImage(`${WORLD}/glowfen-pump-overgrowth-trimmed.png`),
+    glowfenCobbleVines: loadImage(`${WORLD}/glowfen-cobble-vines-trimmed.png`),
+    glowfenBridgeReeds: loadImage(`${WORLD}/glowfen-bridge-reeds-trimmed.png`),
+    glowfenGlowRocks: loadImage(`${WORLD}/glowfen-glow-rocks-trimmed.png`),
+    glowfenRootChannel: loadImage(`${WORLD}/glowfen-root-channel-trimmed.png`),
+    glowfenLeafLitter: loadImage(`${WORLD}/glowfen-leaf-litter-trimmed.png`),
     // Seamless, horizontally-tiling textures for the path band, the stream, and
     // the grass behind the path. Fill existing shapes; no cutout (full-bleed).
     pathTile: loadImage(`${WORLD}/path-tile.png`),

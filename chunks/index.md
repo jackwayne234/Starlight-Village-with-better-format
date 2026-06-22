@@ -18,3 +18,4 @@ High-level list only. All details live inside each chunk file.
 | 26 | Chapter 2 Route Expansion | complete |
 | 27 | Sprite Matte Cleanup | complete |
 | 28 | Old Observatory Asset Pack | complete |
+| 29 | Glowfen Foliage Grounding | complete |
