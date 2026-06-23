@@ -26,7 +26,7 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 11 | chapter-two/glowfen-grove | Glowfen Grove: Restore the root pump so glowing water moves again. | reviewed/keep hand-built | `assets/sprites/world/glowfen-grove-painted.png` |
 | 12 | chapter-two/lantern-lily-pool | Lantern Lily Pool: Rotate lily pads to carry light across the water. | wired | `assets/sprites/world/lantern-lily-pool-painted.png` |
 | 13 | chapter-two/bog-bridge | Bog Bridge: Raise stepping stones in a safe sequence. | wired | `assets/sprites/world/bog-bridge-painted.png` |
-| 14 | chapter-two/frogsong-lock | Frogsong Lock: Match short call patterns to open a reed gate. | generated | `assets/sprites/world/frogsong-lock-painted.png` |
+| 14 | chapter-two/frogsong-lock | Frogsong Lock: Match short call patterns to open a reed gate. | wired | `assets/sprites/world/frogsong-lock-painted.png` |
 | 15 | chapter-two/sunken-signpost | Sunken Signpost: Rebuild a half-submerged direction marker without using arrows. | generated | `assets/sprites/world/sunken-signpost-painted.png` |
 | 16 | chapter-two/mist-pool | Mist Pool: Tune warm vents to thin the mist. | generated | `assets/sprites/world/mist-pool-painted.png` |
 | 17 | chapter-two/moss-gate | Moss Gate: Feed water through root lines to open a mossy gate. | generated | `assets/sprites/world/moss-gate-painted.png` |

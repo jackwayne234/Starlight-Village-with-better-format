@@ -39,6 +39,7 @@ export const sprites = {
     festivalSquare: loadImage(`${WORLD}/festival-square-painted.png?v=painted-route-ch1`),
     lanternLilyPool: loadImage(`${WORLD}/lantern-lily-pool-painted.png?v=painted-route-ch2`),
     bogBridge: loadImage(`${WORLD}/bog-bridge-painted.png?v=painted-route-ch2`),
+    frogsongLock: loadImage(`${WORLD}/frogsong-lock-painted.png?v=painted-route-ch2`),
     tree: loadImage(`${WORLD}/tree-trimmed.png`),
     pine: loadImage(`${WORLD}/pine-tree-trimmed.png`),
     lamp: loadImage(`${WORLD}/lamp-trimmed.png`),
