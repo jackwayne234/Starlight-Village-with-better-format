@@ -62,3 +62,5 @@ High-level list only. All details live inside each chunk file.
 | 70 | Full Route Sprite Backlog | complete |
 | 71 | Route Sprite Production Pass | complete |
 | 72 | Chapter One Route Sprite Wiring | complete |
+| 73 | Chapter Two Route Sprite Wiring | complete |
+| 74 | Chapter Three Route Sprite Wiring | in progress |

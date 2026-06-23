@@ -10,6 +10,7 @@ export function createMosslineSwitchyardScene() {
 
   scene.player.x = 300;
   scene.robot.x = 412;
+  scene.showSignpost = false;
   scene.backdrop = { moonX: 965, moonY: 150, cloudDrift: 1.05, hillOffset: 42, ridgeOffset: 66 };
   scene.switchyard = {
     poles: [
@@ -24,6 +25,14 @@ export function createMosslineSwitchyardScene() {
       { x: 1570, y: 606, lit: false }
     ],
     gate: { x: 1870, y: 532 }
+  };
+  scene.paintedLandmark = {
+    sprite: "mosslineSwitchyard",
+    state: scene.switchyard,
+    x: 1165,
+    groundY: 666,
+    height: 468,
+    glow: { heightRatio: 0.47, radius: 160, fixedIntensity: 0.4, dimIntensity: 0.12, pulse: 0.05 }
   };
   scene.layers = {
     trees: [
@@ -72,6 +81,7 @@ export function createMosslineSwitchyardScene() {
       x: 1165,
       y: 520,
       radius: 230,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: switchyard junction line is down.",
