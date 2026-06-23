@@ -55,6 +55,12 @@ Continue the full-route sprite integration pass into Chapter 4, preserving the r
 - Hid the generic repair marker for Cloud Harvester.
 - Removed loose repair props and broken-branch clutter from Cloud Harvester.
 - Preserved the Stormedge rainy ridge mood, clean-water condenser repair theme, route text, and route to Summit Path.
+- Reviewed `chapter-four/summit-path` against `assets/sprites/world/summit-path-painted.png`.
+- Chose to keep Summit Path on a bespoke side-view treatment because the generated marker-path asset has a bright green-screen background, cropped neighboring fragments at both side edges, and an angled/isometric path view rather than the game's side-view ridge camera.
+- Added a hand-built Summit Path scene and renderer with a side-view wet ridge path, four marker lamps, rope line, high mist, repaired marker glow, and no random side cottages.
+- Hid the generic repair marker for Summit Path.
+- Removed loose repair props and broken-branch clutter from Summit Path.
+- Preserved the Stormedge rainy ridge/forest mood, high-mist marker-light repair theme, route text, and route to Beacon Approach.
 
 ## Verification
 
@@ -116,7 +122,15 @@ Continue the full-route sprite integration pass into Chapter 4, preserving the r
   - `http://127.0.0.1:5266/?scene=chapter-four/cloud-harvester&x=1120&preview=1`
 - Local probes confirmed the Cloud Harvester scene module and `assets/sprites/world/cloud-harvester-painted.png` respond from the preview server.
 - Browser screenshot verification was not available in this thread because no callable browser-control tool was exposed.
+- Static scene-data check confirms `chapter-four/summit-path` remains custom with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, `showMarker: false`, and route flow to `chapter-four/beacon-approach`.
+- Asset review confirmed `assets/sprites/world/summit-path-painted.png` is `396x285`, but it was not wired because its green-screen background, cropped neighboring fragments, and angled/isometric path view do not match the side-view camera rule.
+- Syntax/import checks passed for `src/scenes/chapterFour/summitPath.js`, `src/scenes/sceneRegistry.js`, and `src/rendering/worldRenderer.js` using the bundled Node runtime.
+- Full route walk still reaches all 100 scenes from `chapter-one/starlight-village` to `chapter-ten/celebration-square`, and includes `chapter-four/summit-path` between `chapter-four/cloud-harvester` and `chapter-four/beacon-approach`.
+- Local preview server responded at:
+  - `http://127.0.0.1:5267/?scene=chapter-four/summit-path&x=1120&preview=1`
+- Local probes confirmed the Summit Path scene module and `assets/sprites/world/summit-path-painted.png` respond from the preview server.
+- Browser screenshot verification was not available in this thread because no callable browser-control tool was exposed.
 
 ## Next
 
-Continue route-order sprite wiring at `chapter-four/summit-path`.
+Continue route-order sprite wiring at `chapter-four/beacon-approach`.

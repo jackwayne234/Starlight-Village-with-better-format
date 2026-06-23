@@ -18,6 +18,7 @@ import { createCliffRopeLiftScene } from "./chapterFour/cliffRopeLift.js";
 import { createCrackedStairScene } from "./chapterFour/crackedStair.js";
 import { createLightningRodFieldScene } from "./chapterFour/lightningRodField.js";
 import { createLookoutPostScene } from "./chapterFour/lookoutPost.js";
+import { createSummitPathScene } from "./chapterFour/summitPath.js";
 import { createWeatherVaneRoofScene } from "./chapterFour/weatherVaneRoof.js";
 import { createWindChimePassScene } from "./chapterFour/windChimePass.js";
 import { createCargoCartTurntableScene } from "./chapterThree/cargoCartTurntable.js";
@@ -85,6 +86,7 @@ export const sceneIds = {
   schoolhouseLanterns: "chapter-one/schoolhouse-lanterns",
   signalArmRow: "chapter-three/signal-arm-row",
   stormedgeRise: "chapter-four/stormedge-rise",
+  summitPath: "chapter-four/summit-path",
   sunkenSignpost: "chapter-two/sunken-signpost",
   starlightVillage: "chapter-one/starlight-village",
   weatherVaneRoof: "chapter-four/weather-vane-roof",
@@ -129,6 +131,7 @@ const handBuiltSceneFactories = {
   [sceneIds.rainDrainCorner]: createRainDrainCornerScene,
   [sceneIds.signalArmRow]: createSignalArmRowScene,
   [sceneIds.stormedgeRise]: createStormedgeRiseScene,
+  [sceneIds.summitPath]: createSummitPathScene,
   [sceneIds.starlightVillage]: createStarlightVillageScene,
   [sceneIds.weatherVaneRoof]: createWeatherVaneRoofScene,
   [sceneIds.windChimePass]: createWindChimePassScene,

@@ -502,6 +502,9 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.cloudHarvester) {
     drawCloudHarvester(ctx, scene.cloudHarvester, time, scene.world.powerLevel);
   }
+  if (scene.summitPath) {
+    drawSummitPath(ctx, scene.summitPath, time, scene.world.powerLevel);
+  }
   if (scene.bridge) {
     drawFootbridge(ctx, scene.bridge, time);
   }
@@ -4154,6 +4157,186 @@ function drawCloudHarvester(ctx, harvester, time, powerLevel = 0) {
     warmGlow(ctx, x + 230, groundY - 64, 112, 0.2 + pulse * 0.05);
   }
 
+  ctx.restore();
+}
+
+function drawSummitPath(ctx, path, time, powerLevel = 0) {
+  const { x, groundY } = path;
+  const fixed = path.fixed || path.markersLit || powerLevel > 0.95;
+  const pulse = 0.5 + Math.sin(time * 3.1) * 0.5;
+  const markerGlow = (fixed ? 0.5 : 0.18) + pulse * (fixed ? 0.08 : 0.03) + powerLevel * 0.1;
+
+  ctx.save();
+
+  const skyGlow = ctx.createLinearGradient(x, groundY - 430, x, groundY - 110);
+  skyGlow.addColorStop(0, fixed ? "rgba(128, 191, 198, 0.18)" : "rgba(68, 103, 124, 0.14)");
+  skyGlow.addColorStop(1, "rgba(18, 30, 39, 0)");
+  ctx.fillStyle = skyGlow;
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 244, 520, 176, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "rgba(12, 23, 27, 0.74)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 6, 540, 70, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+
+  drawSummitRidge(ctx, x, groundY, fixed, time);
+  drawSummitMistGate(ctx, x, groundY - 260, fixed, time);
+
+  const markerY = groundY - 132;
+  const markers = [
+    { x: x - 280, y: markerY + 42, scale: 0.9 },
+    { x: x - 118, y: markerY - 12, scale: 1.02 },
+    { x: x + 72, y: markerY - 42, scale: 1.12 },
+    { x: x + 268, y: markerY - 84, scale: 1.18 }
+  ];
+
+  markers.forEach((marker, index) => {
+    const lit = fixed || index < 1;
+    drawSummitMarker(ctx, marker.x, marker.y, marker.scale, lit, time + index * 0.45);
+    if (lit) {
+      warmGlow(ctx, marker.x, marker.y - 96 * marker.scale, 80 * marker.scale, markerGlow);
+      drawWetReflection(ctx, marker.x, marker.y - 18 * marker.scale, 74 * marker.scale, markerGlow * 0.72);
+    }
+  });
+
+  drawMarkerRope(ctx, markers, fixed, time);
+
+  if (!fixed) {
+    ctx.strokeStyle = "rgba(158, 207, 214, 0.34)";
+    ctx.lineWidth = 4;
+    ctx.lineCap = "round";
+    [-138, -10, 124].forEach((offset, index) => {
+      ctx.beginPath();
+      ctx.moveTo(x + offset, groundY - 250 + index * 18);
+      ctx.quadraticCurveTo(x + offset + 34, groundY - 214 + index * 24, x + offset - 12, groundY - 158 + index * 25);
+      ctx.stroke();
+    });
+  }
+
+  warmGlow(ctx, x + 70, groundY - 224, fixed ? 250 : 150, (fixed ? 0.2 : 0.08) + pulse * (fixed ? 0.06 : 0.02));
+  ctx.restore();
+}
+
+function drawSummitRidge(ctx, x, groundY, fixed, time) {
+  const ridgeGradient = ctx.createLinearGradient(x, groundY - 180, x, groundY + 12);
+  ridgeGradient.addColorStop(0, fixed ? "#3b5652" : "#2a4244");
+  ridgeGradient.addColorStop(0.64, fixed ? "#263e3c" : "#1c3034");
+  ridgeGradient.addColorStop(1, "#102128");
+
+  ctx.fillStyle = ridgeGradient;
+  ctx.beginPath();
+  ctx.moveTo(x - 410, groundY - 18);
+  ctx.quadraticCurveTo(x - 270, groundY - 108, x - 86, groundY - 104);
+  ctx.quadraticCurveTo(x + 54, groundY - 162, x + 206, groundY - 122);
+  ctx.quadraticCurveTo(x + 338, groundY - 116, x + 410, groundY - 34);
+  ctx.lineTo(x + 356, groundY + 10);
+  ctx.quadraticCurveTo(x + 14, groundY + 42, x - 356, groundY + 10);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(10, 18, 22, 0.6)";
+  ctx.lineWidth = 7;
+  ctx.stroke();
+
+  const stones = [
+    { x: x - 250, y: groundY - 54, w: 112, h: 28 },
+    { x: x - 108, y: groundY - 84, w: 132, h: 30 },
+    { x: x + 48, y: groundY - 112, w: 138, h: 32 },
+    { x: x + 218, y: groundY - 146, w: 126, h: 30 }
+  ];
+
+  stones.forEach((stone, index) => {
+    ctx.fillStyle = fixed ? "rgba(95, 129, 121, 0.64)" : "rgba(66, 95, 100, 0.58)";
+    ctx.beginPath();
+    ctx.ellipse(stone.x, stone.y + Math.sin(time + index) * 1.2, stone.w / 2, stone.h / 2, -0.08, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "rgba(12, 20, 24, 0.42)";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+  });
+}
+
+function drawSummitMistGate(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  ctx.strokeStyle = fixed ? "rgba(214, 234, 222, 0.2)" : "rgba(185, 214, 220, 0.16)";
+  ctx.lineWidth = 18;
+  ctx.lineCap = "round";
+  [-210, -70, 80, 220].forEach((offset, index) => {
+    ctx.beginPath();
+    ctx.moveTo(x + offset - 80, y + 34 + index * 6);
+    ctx.quadraticCurveTo(x + offset, y - 10 + Math.sin(time + index) * 4, x + offset + 90, y + 24);
+    ctx.stroke();
+  });
+  ctx.restore();
+}
+
+function drawSummitMarker(ctx, x, groundY, scale, lit, time) {
+  const postHeight = 116 * scale;
+  const postWidth = 22 * scale;
+  const lanternY = groundY - postHeight;
+
+  ctx.fillStyle = "#1b1513";
+  roundedRect(ctx, x - postWidth / 2, groundY - postHeight, postWidth, postHeight, 6 * scale);
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(8, 13, 15, 0.62)";
+  ctx.lineWidth = 3 * scale;
+  ctx.stroke();
+
+  ctx.fillStyle = "#4a3324";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY + 1 * scale, 38 * scale, 12 * scale, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  const frameWidth = 54 * scale;
+  const frameHeight = 64 * scale;
+  ctx.fillStyle = "#241913";
+  roundedRect(ctx, x - frameWidth / 2, lanternY - frameHeight, frameWidth, frameHeight, 8 * scale);
+  ctx.fill();
+
+  ctx.fillStyle = lit ? "rgba(252, 211, 122, 0.86)" : "rgba(72, 97, 102, 0.58)";
+  roundedRect(ctx, x - frameWidth * 0.32, lanternY - frameHeight * 0.82, frameWidth * 0.64, frameHeight * 0.58, 7 * scale);
+  ctx.fill();
+
+  ctx.strokeStyle = "#130f0d";
+  ctx.lineWidth = 4 * scale;
+  ctx.strokeRect(x - frameWidth * 0.28, lanternY - frameHeight * 0.76, frameWidth * 0.56, frameHeight * 0.48);
+
+  ctx.fillStyle = "#6f4c2c";
+  ctx.beginPath();
+  ctx.moveTo(x - frameWidth * 0.36, lanternY - frameHeight);
+  ctx.lineTo(x, lanternY - frameHeight - 20 * scale);
+  ctx.lineTo(x + frameWidth * 0.36, lanternY - frameHeight);
+  ctx.closePath();
+  ctx.fill();
+
+  if (lit) {
+    const flicker = 0.36 + Math.sin(time * 5.2) * 0.04;
+    warmGlow(ctx, x, lanternY - frameHeight * 0.48, 62 * scale, flicker);
+  }
+}
+
+function drawMarkerRope(ctx, markers, fixed, time) {
+  ctx.save();
+  ctx.strokeStyle = fixed ? "rgba(144, 88, 54, 0.86)" : "rgba(102, 72, 56, 0.78)";
+  ctx.lineWidth = 5;
+  ctx.lineCap = "round";
+  for (let i = 0; i < markers.length - 1; i += 1) {
+    const a = markers[i];
+    const b = markers[i + 1];
+    ctx.beginPath();
+    ctx.moveTo(a.x + 20 * a.scale, a.y - 116 * a.scale);
+    ctx.quadraticCurveTo(
+      (a.x + b.x) / 2,
+      (a.y + b.y) / 2 - 82 + Math.sin(time + i) * 3,
+      b.x - 22 * b.scale,
+      b.y - 116 * b.scale
+    );
+    ctx.stroke();
+  }
   ctx.restore();
 }
 
