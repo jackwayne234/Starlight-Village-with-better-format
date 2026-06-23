@@ -13,6 +13,14 @@ export function createCargoCartTurntableScene() {
   scene.showSignpost = false;
   scene.backdrop = { moonX: 965, moonY: 142, cloudDrift: 1.0, hillOffset: 48, ridgeOffset: 72 };
   scene.cargoCartTurntable = { x: 1160, groundY: 654, fixed: false, cartMoved: false };
+  scene.paintedLandmark = {
+    sprite: "cargoCartTurntable",
+    state: scene.cargoCartTurntable,
+    x: 1160,
+    groundY: 674,
+    height: 370,
+    glow: { heightRatio: 0.5, radius: 210, fixedIntensity: 0.34, dimIntensity: 0.1, pulse: 0.04 }
+  };
   scene.layers = {
     trees: [
       { x: 75, y: 280, scale: 1.54 },
@@ -36,15 +44,11 @@ export function createCargoCartTurntableScene() {
     ],
     foliage: [
       { kind: "mosslineSwitchFoliage", x: 760, groundY: 670, height: 126, alpha: 0.9 },
-      { kind: "mosslineConduitCoils", x: 1040, groundY: 682, height: 118, alpha: 0.9 },
       { kind: "mosslinePuddleGround", x: 1220, groundY: 696, height: 122, alpha: 0.82 },
       { kind: "mosslineSwitchFoliage", x: 1540, groundY: 670, height: 128, alpha: 0.9 }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 920, y: 624, kind: "gear" },
-      { x: 1405, y: 626, kind: "coil" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 250, y: 662, width: 160, height: 18 },
       { x: 1160, y: 668, width: 470, height: 30 },
@@ -65,6 +69,7 @@ export function createCargoCartTurntableScene() {
       x: 1160,
       y: 548,
       radius: 285,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: cargo cart turntable is misaligned and blocking the mossline.",

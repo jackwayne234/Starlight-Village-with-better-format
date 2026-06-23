@@ -47,6 +47,7 @@ export const sprites = {
     glowfenFerry: loadImage(`${WORLD}/glowfen-ferry-painted.png?v=painted-route-ch2`),
     reedwatchBank: loadImage(`${WORLD}/reedwatch-bank-painted.png?v=painted-route-ch2`),
     mosslineSwitchyard: loadImage(`${WORLD}/mossline-switchyard-painted.png?v=painted-route-ch3`),
+    cargoCartTurntable: loadImage(`${WORLD}/cargo-cart-turntable-painted.png?v=painted-route-ch3`),
     tree: loadImage(`${WORLD}/tree-trimmed.png`),
     pine: loadImage(`${WORLD}/pine-tree-trimmed.png`),
     lamp: loadImage(`${WORLD}/lamp-trimmed.png`),

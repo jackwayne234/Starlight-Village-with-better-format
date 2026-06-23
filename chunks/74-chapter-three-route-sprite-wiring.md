@@ -13,11 +13,24 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 - Wired Mossline Switchyard through the shared `paintedLandmark` renderer path with `paintedLandmark.sprite: "mosslineSwitchyard"`.
 - Hid the generic signpost and repair marker for Mossline Switchyard.
 - Kept the existing rainy forest layers, Mossline foliage, puddles, lamps, route text, and junction-line path puzzle.
+- Reviewed `chapter-three/cargo-cart-turntable` against its existing hand-built turntable/cart art.
+- Chose to wire `assets/sprites/world/cargo-cart-turntable-painted.png` because the generated asset is a stronger single turntable-and-cart landmark, while the older canvas turntable/cart renderer remains available as fallback if the painted sprite does not load.
+- Cleaned the painted Cargo Cart Turntable PNG so the generated green background is transparent.
+- Wired Cargo Cart Turntable through the shared `paintedLandmark` renderer path with `paintedLandmark.sprite: "cargoCartTurntable"`.
+- Removed the loose gear/coil repair props and the foreground conduit-coil clutter from Cargo Cart Turntable.
+- Hid the generic repair marker for Cargo Cart Turntable.
+- Kept the existing rainy forest layers, Mossline lamps, puddles, route text, and rail-signal path puzzle.
 
 ## Verification
 
 - Static scene-data check confirms `chapter-three/mossline-switchyard` has `paintedLandmark.sprite: "mosslineSwitchyard"`, `0` cottages, `0` repair parts, `0` broken branches, and `showMarker: false`.
 - Asset probe confirmed `assets/sprites/world/mossline-switchyard-painted.png` is `386x422` with transparent edge pixels.
+- Static scene-data check confirms `chapter-three/cargo-cart-turntable` has `paintedLandmark.sprite: "cargoCartTurntable"`, `0` cottages, `0` repair parts, `0` broken branches, no foreground conduit-coil clutter, and `showMarker: false`.
+- Asset probe confirmed `assets/sprites/world/cargo-cart-turntable-painted.png` is `408x302` with transparent edge pixels and opaque center pixels.
+- Local preview server responded at:
+  - `http://127.0.0.1:5249/?scene=chapter-three/cargo-cart-turntable&x=1120&preview=1`
+- Painted sprite asset responded at `http://127.0.0.1:5249/assets/sprites/world/cargo-cart-turntable-painted.png?v=painted-route-ch3`.
+- In-app browser preview rendered the painted Cargo Cart Turntable landmark with no console errors in the centered view.
 - Local preview server responded at:
   - `http://127.0.0.1:5248/?scene=chapter-three/mossline-switchyard&preview=1`
   - `http://127.0.0.1:5248/?scene=chapter-three/mossline-switchyard&x=1120&preview=1`
@@ -26,4 +39,4 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 
 ## Next
 
-Continue route-order sprite wiring at `chapter-three/cargo-cart-turntable`.
+Continue route-order sprite wiring at `chapter-three/signal-arm-row`.
