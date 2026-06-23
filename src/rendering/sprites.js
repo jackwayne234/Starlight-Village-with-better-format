@@ -49,6 +49,7 @@ export const sprites = {
     mosslineSwitchyard: loadImage(`${WORLD}/mossline-switchyard-painted.png?v=painted-route-ch3`),
     cargoCartTurntable: loadImage(`${WORLD}/cargo-cart-turntable-painted.png?v=painted-route-ch3`),
     signalArmRow: loadImage(`${WORLD}/signal-arm-row-painted.png?v=painted-route-ch3`),
+    windChimePass: loadImage(`${WORLD}/wind-chime-pass-painted.png?v=painted-route-ch4`),
     tree: loadImage(`${WORLD}/tree-trimmed.png`),
     pine: loadImage(`${WORLD}/pine-tree-trimmed.png`),
     lamp: loadImage(`${WORLD}/lamp-trimmed.png`),

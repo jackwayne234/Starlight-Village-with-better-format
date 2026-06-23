@@ -86,6 +86,7 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Chapter 4 route sprite wiring started on `2026-06-23`: Stormedge Rise was reviewed and kept on its existing bespoke side-view storm-gauge renderer because it better matches the game camera than `stormedge-rise-painted.png`, whose three-quarter stone-base read does not fit the side-view route format. The random side cottage was removed, the generic repair marker was hidden, and the custom gauge glow now brightens after repair completion. See `chunks/75-chapter-four-route-sprite-wiring.md`.
 - Chapter 4 route sprite wiring continued on `2026-06-23`: Weather Vane Roof was reviewed and kept on a new bespoke side-view roof/vane renderer because `weather-vane-roof-painted.png` reads as a three-quarter roof/object, directly shows a green-screen field, and includes a clipped neighboring fragment at the right edge. The new scene has no random cottages, loose repair props, broken-branch clutter, or generic marker, and routes onward to Cliff Rope Lift. Local preview and source checks passed at `http://127.0.0.1:5260/?scene=chapter-four/weather-vane-roof&x=1120&preview=1`. See `chunks/75-chapter-four-route-sprite-wiring.md`.
 - Chapter 4 route sprite wiring continued on `2026-06-23`: Cliff Rope Lift was reviewed and kept on a new bespoke side-view cliff/lift renderer because `cliff-rope-lift-painted.png` reads as an angled/isometric basket and still shows a bright green-screen background. The new scene has no random cottages, loose repair props, broken-branch clutter, or generic marker, and routes onward to Wind Chime Pass. Local preview, browser, and source checks passed at `http://127.0.0.1:5261/?scene=chapter-four/cliff-rope-lift&x=1120&preview=1`. See `chunks/75-chapter-four-route-sprite-wiring.md`.
+- Chapter 4 route sprite wiring continued on `2026-06-23`: Wind Chime Pass now uses `wind-chime-pass-painted.png` through the shared `paintedLandmark` path after the generated side-view chime arch was cleaned of bright green-screen background and a tiny neighboring crop fragment. The new scene has no random cottages, loose repair props, broken-branch clutter, or generic marker, and routes onward to Lightning Rod Field. See `chunks/75-chapter-four-route-sprite-wiring.md`.
 - Workshop Lift became bespoke on `2026-06-22`: it now has a crank, platform, roof shelf, raised/repaired visual state, route checks, and a chunk note in `chunks/42-workshop-lift-scene.md`.
 - Schoolhouse Lanterns became bespoke on `2026-06-22`: it now has a schoolhouse facade, three lantern posts, dark/lit chain state, route checks, and a chunk note in `chunks/43-schoolhouse-lanterns-scene.md`.
 - Market Awnings became bespoke on `2026-06-22`: it now has market stalls, colored awnings, dark/draining runoff state, route checks, and a chunk note in `chunks/44-market-awnings-scene.md`.
@@ -123,7 +124,7 @@ Continue the route-order sprite wiring pass.
 
 Next likely stop:
 
-1. Continue route-order sprite wiring at `chapter-four/wind-chime-pass`.
-2. Review whether Wind Chime Pass should use `wind-chime-pass-painted.png` or keep/improve a bespoke side-view treatment.
+1. Continue route-order sprite wiring at `chapter-four/lightning-rod-field`.
+2. Review whether Lightning Rod Field should use `lightning-rod-field-painted.png` or keep/improve a bespoke side-view treatment.
 3. Keep the format rule: one strong landmark sprite, no random houses, no loose repair props, and no generic marker unless intentionally needed.
 4. Preview each edited scene with `?scene=<scene-id>&preview=1`.

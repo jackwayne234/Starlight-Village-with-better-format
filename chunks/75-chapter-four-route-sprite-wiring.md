@@ -27,6 +27,11 @@ Continue the full-route sprite integration pass into Chapter 4, preserving the r
 - Hid the generic repair marker for Cliff Rope Lift.
 - Removed loose repair props and broken-branch clutter from Cliff Rope Lift.
 - Preserved the Stormedge rainy ridge mood, storm-gauge puzzle theme, route text, and route to Wind Chime Pass.
+- Reviewed `chapter-four/wind-chime-pass` against `assets/sprites/world/wind-chime-pass-painted.png`.
+- Chose to wire Wind Chime Pass through the shared `paintedLandmark` path because the generated chime arch reads as a side-view route landmark after cleanup.
+- Cleaned the bright green-screen background and tiny neighboring crop fragment from `wind-chime-pass-painted.png`.
+- Added a hand-built Wind Chime Pass scene with the painted chime arch as the one strong landmark, no random side cottages, no loose repair props, no broken-branch clutter, and no generic marker.
+- Preserved the Stormedge rainy ridge mood, calm-gust repair theme, route text, and route to Lightning Rod Field.
 
 ## Verification
 
@@ -51,7 +56,14 @@ Continue the full-route sprite integration pass into Chapter 4, preserving the r
   - `http://127.0.0.1:5261/?scene=chapter-four/cliff-rope-lift&x=1120&preview=1`
 - Local probes confirmed the Cliff Rope Lift scene module and `assets/sprites/world/cliff-rope-lift-painted.png` respond from the preview server.
 - In-app browser preview rendered the bespoke Cliff Rope Lift scene at `1280x720` with no console errors.
+- Static scene-data check confirms `chapter-four/wind-chime-pass` uses `paintedLandmark.sprite: "windChimePass"`, `0` cottages, `0` repair parts, `0` broken branches, `showMarker: false`, and route flow to `chapter-four/lightning-rod-field`.
+- Asset review confirmed `assets/sprites/world/wind-chime-pass-painted.png` is `396x353` RGBA with `96104` fully transparent pixels after green-screen cleanup, and the chime arch reads as a side-view/front-facing landmark rather than angled or top-down.
+- Syntax/import checks passed for `src/scenes/chapterFour/windChimePass.js`, `src/scenes/sceneRegistry.js`, and `src/rendering/sprites.js` using the bundled Node runtime.
+- Full route walk still reaches all 100 scenes from `chapter-one/starlight-village` to `chapter-ten/celebration-square`, and includes `chapter-four/wind-chime-pass` before `chapter-four/lightning-rod-field`.
+- Local preview server responded at:
+  - `http://127.0.0.1:5262/?scene=chapter-four/wind-chime-pass&x=1120&preview=1`
+- Local probes confirmed the Wind Chime Pass scene module and `assets/sprites/world/wind-chime-pass-painted.png` respond from the preview server.
 
 ## Next
 
-Continue route-order sprite wiring at `chapter-four/wind-chime-pass`.
+Continue route-order sprite wiring at `chapter-four/lightning-rod-field`.

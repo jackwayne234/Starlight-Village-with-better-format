@@ -47,7 +47,7 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 31 | chapter-four/stormedge-rise | Stormedge Rise: Repair the storm gauge so the village can read the weather. | reviewed/keep existing side-view treatment | `assets/sprites/world/stormedge-rise-painted.png` |
 | 32 | chapter-four/weather-vane-roof | Weather Vane Roof: Turn vanes so wind moves through safe channels. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/weather-vane-roof-painted.png` |
 | 33 | chapter-four/cliff-rope-lift | Cliff Rope Lift: Balance pulleys to raise a small lift basket. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/cliff-rope-lift-painted.png` |
-| 34 | chapter-four/wind-chime-pass | Wind Chime Pass: Arrange chimes to calm a gusty path. | generated | `assets/sprites/world/wind-chime-pass-painted.png` |
+| 34 | chapter-four/wind-chime-pass | Wind Chime Pass: Arrange chimes to calm a gusty path. | wired | `assets/sprites/world/wind-chime-pass-painted.png` |
 | 35 | chapter-four/lightning-rod-field | Lightning Rod Field: Ground rods in a safe pattern before the next strike. | generated | `assets/sprites/world/lightning-rod-field-painted.png` |
 | 36 | chapter-four/lookout-post | Lookout Post: Repair a lookout scope and spot the beacon tower. | generated | `assets/sprites/world/lookout-post-painted.png` |
 | 37 | chapter-four/cracked-stair | Cracked Stair: Lock stone braces under a rain-damaged stairway. | generated | `assets/sprites/world/cracked-stair-painted.png` |
