@@ -41,7 +41,7 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 25 | chapter-three/crane-hook-yard | Crane Hook Yard: Guide a crane hook around obstacles to lift a fallen beam. | reviewed/keep hand-built | `assets/sprites/world/crane-hook-yard-painted.png` |
 | 26 | chapter-three/sparking-relay-shed | Sparking Relay Shed: Route power away from puddles before closing the circuit. | reviewed/keep existing painted treatment | `assets/sprites/world/sparking-relay-shed-painted.png` |
 | 27 | chapter-three/rain-slick-rails | Rain-Slick Rails: Place sand valves to make the rails usable. | reviewed/keep existing side-view treatment | `assets/sprites/world/rain-slick-rails-side-sprite.png` |
-| 28 | chapter-three/tunnel-mouth | Tunnel Mouth: Clear the tunnel warning lamps in the correct order. | generated | `assets/sprites/world/tunnel-mouth-painted.png` |
+| 28 | chapter-three/tunnel-mouth | Tunnel Mouth: Clear the tunnel warning lamps in the correct order. | reviewed/keep existing side-view treatment | `assets/sprites/world/tunnel-mouth-painted.png` |
 | 29 | chapter-three/clock-signal | Clock Signal: Sync a wet station clock with the rail signal pulses. | generated | `assets/sprites/world/clock-signal-painted.png` |
 | 30 | chapter-three/last-platform | Last Platform: Restore the final platform light and open the hill road. | generated | `assets/sprites/world/last-platform-painted.png` |
 | 31 | chapter-four/stormedge-rise | Stormedge Rise: Repair the storm gauge so the village can read the weather. | generated | `assets/sprites/world/stormedge-rise-painted.png` |

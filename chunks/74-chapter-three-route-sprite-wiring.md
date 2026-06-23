@@ -49,6 +49,12 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 - Removed foreground conduit-coil clutter from Rain-Slick Rails.
 - Hid the generic repair marker for Rain-Slick Rails.
 - Kept the existing rainy forest layers, Mossline lamps, puddles, route text, sand-valve repair state, and water-routing path puzzle.
+- Reviewed `chapter-three/tunnel-mouth` against its existing bespoke side-view portal treatment.
+- Chose to keep the existing Tunnel Mouth renderer because it already gives the scene a front-facing wet stone portal, warning-lamp sequence, rail threshold, forest walls, and repaired green-lamp state that match the side-view game camera.
+- Confirmed `assets/sprites/world/tunnel-mouth-painted.png` has transparent edges but reads as an angled/three-quarter rail portal, so it should not be wired for this scene.
+- Removed the remaining foreground conduit-coil clutter from Tunnel Mouth.
+- Hid the generic repair marker for Tunnel Mouth.
+- Kept the existing rainy forest layers, Mossline lamps, puddles, mist, route text, warning-lamp repair state, and archive-lens path puzzle.
 
 ## Verification
 
@@ -66,6 +72,11 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 - Static scene-data check confirms `chapter-three/rain-slick-rails` remains on its custom side-view rail renderer with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, no foreground conduit-coil clutter, and `showMarker: false`.
 - Asset probe confirmed `assets/sprites/world/rain-slick-rails-side-sprite.png` is `1832x367` RGBA with alpha, and the asset stayed wired through the existing `rainSlickRails` renderer path.
 - Asset review confirmed `assets/sprites/world/rain-slick-rails-sprite.png` is the older top-down/angled rail sprite and was not wired.
+- Static scene-data check confirms `chapter-three/tunnel-mouth` remains on its custom side-view tunnel renderer with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, no foreground conduit-coil clutter, and `showMarker: false`.
+- Asset review confirmed `assets/sprites/world/tunnel-mouth-painted.png` is `392x382` RGBA with transparent corner pixels, but it was not wired because its angled rail framing does not match the side-view camera rule.
+- Local preview server responded at:
+  - `http://127.0.0.1:5255/?scene=chapter-three/tunnel-mouth&x=1120&preview=1`
+- Local probes confirmed the Tunnel Mouth scene module and `assets/sprites/world/tunnel-mouth-painted.png` respond from the preview server.
 - Local preview server responded at:
   - `http://127.0.0.1:5253/?scene=chapter-three/rain-slick-rails&x=1120&preview=1`
 - Local probes confirmed the Rain-Slick Rails scene module and side-view rail sprite respond from the preview server.
@@ -92,4 +103,4 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 
 ## Next
 
-Continue route-order sprite wiring at `chapter-three/tunnel-mouth`.
+Continue route-order sprite wiring at `chapter-three/clock-signal`.

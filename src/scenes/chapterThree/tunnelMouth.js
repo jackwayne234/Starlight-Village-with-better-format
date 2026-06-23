@@ -43,7 +43,6 @@ export function createTunnelMouthScene() {
     foliage: [
       { kind: "mosslineSwitchFoliage", x: 655, groundY: 672, height: 128, alpha: 0.9 },
       { kind: "mosslinePuddleGround", x: 985, groundY: 696, height: 126, alpha: 0.78 },
-      { kind: "mosslineConduitCoils", x: 1375, groundY: 682, height: 108, alpha: 0.78 },
       { kind: "mosslineSwitchFoliage", x: 1595, groundY: 672, height: 132, alpha: 0.9 }
     ],
     brokenBranches: [],
