@@ -68,6 +68,18 @@ import {
   createRainbowTowerScene,
   createStainedGlassPathScene
 } from "./chapterEight/routeScenes.js";
+import {
+  createBuriedMuralsScene,
+  createDrainLocksScene,
+  createEchoDoorScene,
+  createForgottenMachineScene,
+  createGearRoomScene,
+  createHeartEngineScene,
+  createOldPipeCrossingScene,
+  createSealedWorkshopScene,
+  createUndergroundStreamScene,
+  createUnderVillageScene
+} from "./chapterNine/routeScenes.js";
 import { createCargoCartTurntableScene } from "./chapterThree/cargoCartTurntable.js";
 import { createConductorBoothScene } from "./chapterThree/conductorBooth.js";
 import { createCraneHookYardScene } from "./chapterThree/craneHookYard.js";
@@ -151,6 +163,7 @@ export const sceneIds = {
   oldFenShrine: "chapter-two/old-fen-shrine",
   oldFlagRoom: "chapter-five/old-flag-room",
   oldOrchard: "chapter-seven/old-orchard",
+  oldPipeCrossing: "chapter-nine/old-pipe-crossing",
   mosslineSwitchyard: "chapter-three/mossline-switchyard",
   oldObservatory: "chapter-two/old-observatory",
   oldFootbridge: "chapter-one/old-footbridge",
@@ -174,9 +187,18 @@ export const sceneIds = {
   summitPath: "chapter-four/summit-path",
   sunkenSignpost: "chapter-two/sunken-signpost",
   starlightVillage: "chapter-one/starlight-village",
+  sealedWorkshop: "chapter-nine/sealed-workshop",
+  underVillage: "chapter-nine/under-village",
+  undergroundStream: "chapter-nine/underground-stream",
   weatherVaneRoof: "chapter-four/weather-vane-roof",
   windChimePass: "chapter-four/wind-chime-pass",
-  windfallenFruit: "chapter-seven/windfallen-fruit"
+  windfallenFruit: "chapter-seven/windfallen-fruit",
+  buriedMurals: "chapter-nine/buried-murals",
+  drainLocks: "chapter-nine/drain-locks",
+  echoDoor: "chapter-nine/echo-door",
+  forgottenMachine: "chapter-nine/forgotten-machine",
+  gearRoom: "chapter-nine/gear-room",
+  heartEngine: "chapter-nine/heart-engine"
 };
 
 const handBuiltSceneFactories = {
@@ -201,6 +223,12 @@ const handBuiltSceneFactories = {
   [sceneIds.conductorBooth]: createConductorBoothScene,
   [sceneIds.craneHookYard]: createCraneHookYardScene,
   [sceneIds.furnaceBellows]: createFurnaceBellowsScene,
+  [sceneIds.buriedMurals]: createBuriedMuralsScene,
+  [sceneIds.drainLocks]: createDrainLocksScene,
+  [sceneIds.echoDoor]: createEchoDoorScene,
+  [sceneIds.forgottenMachine]: createForgottenMachineScene,
+  [sceneIds.gearRoom]: createGearRoomScene,
+  [sceneIds.heartEngine]: createHeartEngineScene,
   [sceneIds.rainSlickRails]: createRainSlickRailsScene,
   [sceneIds.sparkingRelayShed]: createSparkingRelayShedScene,
   [sceneIds.tunnelMouth]: createTunnelMouthScene,
@@ -238,6 +266,7 @@ const handBuiltSceneFactories = {
   [sceneIds.oldFenShrine]: createOldFenShrineScene,
   [sceneIds.oldFlagRoom]: createOldFlagRoomScene,
   [sceneIds.oldOrchard]: createOldOrchardScene,
+  [sceneIds.oldPipeCrossing]: createOldPipeCrossingScene,
   [sceneIds.overflowGarden]: createOverflowGardenScene,
   [sceneIds.pumpAlley]: createPumpAlleyScene,
   [sceneIds.prismLampRow]: createPrismLampRowScene,
@@ -257,6 +286,9 @@ const handBuiltSceneFactories = {
   [sceneIds.stainedGlassPath]: createStainedGlassPathScene,
   [sceneIds.summitPath]: createSummitPathScene,
   [sceneIds.starlightVillage]: createStarlightVillageScene,
+  [sceneIds.sealedWorkshop]: createSealedWorkshopScene,
+  [sceneIds.underVillage]: createUnderVillageScene,
+  [sceneIds.undergroundStream]: createUndergroundStreamScene,
   [sceneIds.weatherVaneRoof]: createWeatherVaneRoofScene,
   [sceneIds.windChimePass]: createWindChimePassScene,
   [sceneIds.windfallenFruit]: createWindfallenFruitScene,

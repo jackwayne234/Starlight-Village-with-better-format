@@ -517,6 +517,9 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.chapterEightLandmark) {
     drawChapterEightLandmark(ctx, scene.chapterEightLandmark, time, scene.world.powerLevel);
   }
+  if (scene.chapterNineLandmark) {
+    drawChapterNineLandmark(ctx, scene.chapterNineLandmark, time, scene.world.powerLevel);
+  }
   if (scene.bridge) {
     drawFootbridge(ctx, scene.bridge, time);
   }
@@ -717,6 +720,350 @@ function drawChapterEightLandmark(ctx, landmark, time, powerLevel) {
   }
 
   ctx.restore();
+}
+
+function drawChapterNineLandmark(ctx, landmark, time, powerLevel) {
+  const fixed = landmark.fixed || powerLevel > 0.95;
+  const x = landmark.x;
+  const groundY = landmark.groundY;
+
+  ctx.save();
+  drawUnderVillageShadow(ctx, x, groundY);
+
+  if (landmark.type === "underVillage") {
+    drawUnderVillageDoorLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "echoDoor") {
+    drawEchoDoorLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "oldPipeCrossing") {
+    drawOldPipeCrossingLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "forgottenMachine") {
+    drawForgottenMachineLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "drainLocks") {
+    drawDrainLocksLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "buriedMurals") {
+    drawBuriedMuralsLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "gearRoom") {
+    drawGearRoomLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "undergroundStream") {
+    drawUndergroundStreamLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "sealedWorkshop") {
+    drawSealedWorkshopLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "heartEngine") {
+    drawHeartEngineLandmark(ctx, x, groundY, fixed, time);
+  }
+
+  if (fixed) {
+    warmGlow(ctx, x, groundY - 178, 310, 0.2 + Math.sin(time * 2.6) * 0.035);
+  }
+
+  ctx.restore();
+}
+
+function drawUnderVillageShadow(ctx, x, groundY) {
+  ctx.fillStyle = "rgba(4, 13, 18, 0.78)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 18, 500, 82, 0.02, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawUnderVillageStoneBase(ctx, x, groundY, width, fixed) {
+  ctx.fillStyle = fixed ? "#283a3e" : "#1d2a30";
+  roundedRect(ctx, x - width / 2, groundY - 70, width, 78, 12);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(130, 174, 167, 0.46)" : "rgba(83, 105, 109, 0.42)";
+  ctx.lineWidth = 3;
+  for (let i = 0; i < 8; i += 1) {
+    const stoneX = x - width / 2 + 24 + i * (width - 48) / 7;
+    ctx.beginPath();
+    ctx.moveTo(stoneX, groundY - 66);
+    ctx.lineTo(stoneX + Math.sin(i) * 8, groundY + 2);
+    ctx.stroke();
+  }
+}
+
+function drawStoneArch(ctx, x, groundY, width, height, fixed) {
+  ctx.fillStyle = fixed ? "#33494c" : "#23343b";
+  roundedRect(ctx, x - width / 2, groundY - height, width, height, 24);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(158, 191, 176, 0.55)" : "rgba(104, 126, 125, 0.48)";
+  ctx.lineWidth = 7;
+  roundedRect(ctx, x - width / 2 + 16, groundY - height + 16, width - 32, height - 18, 20);
+  ctx.stroke();
+}
+
+function drawUnderVillagePipe(ctx, x1, y1, x2, y2, fixed) {
+  ctx.strokeStyle = fixed ? "#a58251" : "#645c4a";
+  ctx.lineWidth = 15;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+  ctx.strokeStyle = fixed ? "rgba(232, 202, 139, 0.42)" : "rgba(151, 137, 101, 0.34)";
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1 - 4);
+  ctx.lineTo(x2, y2 - 4);
+  ctx.stroke();
+}
+
+function drawRoundGauge(ctx, x, y, fixed, time) {
+  ctx.fillStyle = fixed ? "#d2c78f" : "#8b856a";
+  ctx.beginPath();
+  ctx.arc(x, y, 22, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = "#283038";
+  ctx.lineWidth = 5;
+  ctx.stroke();
+  ctx.strokeStyle = fixed ? "#2d514d" : "#3d423f";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + Math.cos(time * 1.2) * 12, y - 10);
+  ctx.stroke();
+}
+
+function drawUnderVillageDoorLandmark(ctx, x, groundY, fixed, time) {
+  drawUnderVillageStoneBase(ctx, x, groundY, 500, fixed);
+  drawStoneArch(ctx, x, groundY - 42, 278, 344, fixed);
+  ctx.fillStyle = fixed ? "#2f302b" : "#20252a";
+  roundedRect(ctx, x - 86, groundY - 286, 172, 238, 16);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(218, 184, 109, 0.78)" : "rgba(124, 105, 76, 0.58)";
+  ctx.lineWidth = 8;
+  roundedRect(ctx, x - 68, groundY - 260, 136, 198, 12);
+  ctx.stroke();
+  drawUnderVillagePipe(ctx, x - 246, groundY - 154, x - 116, groundY - 154, fixed);
+  drawUnderVillagePipe(ctx, x + 116, groundY - 154, x + 246, groundY - 154, fixed);
+  drawValveWheel(ctx, x - 112, groundY - 154, fixed, time);
+  drawValveWheel(ctx, x + 112, groundY - 154, fixed, time + 0.4);
+}
+
+function drawEchoDoorLandmark(ctx, x, groundY, fixed, time) {
+  drawUnderVillageStoneBase(ctx, x, groundY, 540, fixed);
+  drawStoneArch(ctx, x, groundY - 38, 328, 326, fixed);
+  ctx.fillStyle = fixed ? "#252d30" : "#1b252a";
+  ctx.beginPath();
+  ctx.arc(x, groundY - 188, 118, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(208, 183, 112, 0.74)" : "rgba(126, 114, 84, 0.55)";
+  ctx.lineWidth = 10;
+  ctx.beginPath();
+  ctx.arc(x, groundY - 188, 92, 0, Math.PI * 2);
+  ctx.stroke();
+  [-178, -126, 126, 178].forEach((offset, index) => {
+    drawUnderVillagePipe(ctx, x + offset, groundY - 286, x + offset, groundY - 166, fixed);
+    ctx.fillStyle = fixed ? "#9f7445" : "#5b5749";
+    ctx.beginPath();
+    ctx.ellipse(x + offset, groundY - 306, 32, 18, 0, 0, Math.PI * 2);
+    ctx.fill();
+    if (fixed) {
+      ctx.strokeStyle = `rgba(128, 214, 201, ${0.22 + Math.sin(time * 3 + index) * 0.04})`;
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.arc(x + offset, groundY - 306, 42 + index * 4, -0.3, Math.PI + 0.3);
+      ctx.stroke();
+    }
+  });
+}
+
+function drawOldPipeCrossingLandmark(ctx, x, groundY, fixed, time) {
+  drawUnderVillageStoneBase(ctx, x, groundY, 610, fixed);
+  [-174, 0, 174].forEach((offset, index) => {
+    drawUnderVillagePipe(ctx, x - 286, groundY - 236 + index * 54, x + 286, groundY - 236 + index * 54, fixed);
+    drawValveWheel(ctx, x + offset, groundY - 236 + index * 54, fixed, time + index * 0.25);
+  });
+  ctx.fillStyle = fixed ? "#3a4846" : "#253238";
+  roundedRect(ctx, x - 220, groundY - 116, 440, 46, 12);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(159, 192, 179, 0.58)" : "rgba(94, 119, 119, 0.5)";
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.moveTo(x - 218, groundY - 90);
+  ctx.lineTo(x + 218, groundY - 90);
+  ctx.stroke();
+  if (fixed) {
+    warmGlow(ctx, x, groundY - 174, 220, 0.12);
+  }
+}
+
+function drawForgottenMachineLandmark(ctx, x, groundY, fixed, time) {
+  drawUnderVillageStoneBase(ctx, x, groundY, 520, fixed);
+  ctx.fillStyle = fixed ? "#2f3b3d" : "#202d33";
+  roundedRect(ctx, x - 170, groundY - 340, 340, 286, 16);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(175, 197, 176, 0.52)" : "rgba(98, 119, 116, 0.48)";
+  ctx.lineWidth = 6;
+  roundedRect(ctx, x - 134, groundY - 306, 268, 112, 10);
+  ctx.stroke();
+  [x - 82, x, x + 82].forEach((lampX, index) => {
+    ctx.fillStyle = fixed ? colorForIndex(index + 1) : "#5d665f";
+    ctx.beginPath();
+    ctx.arc(lampX, groundY - 250, 18, 0, Math.PI * 2);
+    ctx.fill();
+    if (fixed) {
+      warmGlow(ctx, lampX, groundY - 250, 42, 0.11 + Math.sin(time * 3 + index) * 0.02);
+    }
+  });
+  drawValveWheel(ctx, x - 186, groundY - 172, fixed, time);
+  drawValveWheel(ctx, x + 186, groundY - 172, fixed, time + 0.6);
+  drawUnderVillagePipe(ctx, x - 250, groundY - 126, x + 250, groundY - 126, fixed);
+}
+
+function drawDrainLocksLandmark(ctx, x, groundY, fixed, time) {
+  drawUnderVillageStoneBase(ctx, x, groundY, 560, fixed);
+  [-134, 0, 134].forEach((offset, index) => {
+    drawStoneArch(ctx, x + offset, groundY - 40, 106, 264, fixed);
+    ctx.fillStyle = fixed ? "#243034" : "#18242b";
+    roundedRect(ctx, x + offset - 32, groundY - 238, 64, 172, 8);
+    ctx.fill();
+    drawRoundGauge(ctx, x + offset, groundY - 278, fixed, time + index * 0.45);
+    if (fixed) {
+      ctx.fillStyle = "rgba(69, 168, 177, 0.24)";
+      ctx.fillRect(x + offset - 24, groundY - 130, 48, 62 + Math.sin(time + index) * 5);
+    }
+  });
+  drawUnderVillagePipe(ctx, x - 252, groundY - 116, x + 252, groundY - 116, fixed);
+}
+
+function drawBuriedMuralsLandmark(ctx, x, groundY, fixed, time) {
+  drawUnderVillageStoneBase(ctx, x, groundY, 590, fixed);
+  ctx.fillStyle = fixed ? "#344548" : "#243238";
+  roundedRect(ctx, x - 250, groundY - 300, 500, 224, 14);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(186, 169, 116, 0.62)" : "rgba(100, 105, 89, 0.5)";
+  ctx.lineWidth = 7;
+  roundedRect(ctx, x - 222, groundY - 272, 444, 168, 8);
+  ctx.stroke();
+  const muralAlpha = fixed ? 0.9 : 0.35;
+  ctx.globalAlpha = muralAlpha;
+  ctx.strokeStyle = "#8dcfc0";
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.arc(x - 126, groundY - 190, 42, 0.2, Math.PI * 1.8);
+  ctx.stroke();
+  ctx.strokeStyle = "#d6b45f";
+  ctx.beginPath();
+  ctx.moveTo(x - 28, groundY - 128);
+  ctx.lineTo(x + 28, groundY - 252);
+  ctx.lineTo(x + 86, groundY - 128);
+  ctx.stroke();
+  ctx.strokeStyle = "#9ab3d5";
+  ctx.beginPath();
+  ctx.arc(x + 150, groundY - 184, 48, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+  if (!fixed) {
+    ctx.fillStyle = "rgba(34, 31, 26, 0.46)";
+    ctx.fillRect(x - 210, groundY - 236, 420, 44);
+    ctx.fillRect(x - 190, groundY - 166, 360, 30);
+  }
+  drawUnderVillagePipe(ctx, x - 238, groundY - 86, x + 238, groundY - 86, fixed);
+  if (fixed) {
+    warmGlow(ctx, x, groundY - 190, 260, 0.1 + Math.sin(time * 2) * 0.02);
+  }
+}
+
+function drawGearRoomLandmark(ctx, x, groundY, fixed, time) {
+  drawUnderVillageStoneBase(ctx, x, groundY, 540, fixed);
+  ctx.fillStyle = fixed ? "#303f42" : "#202d33";
+  roundedRect(ctx, x - 215, groundY - 336, 430, 276, 16);
+  ctx.fill();
+  drawSimpleGear(ctx, x - 92, groundY - 188, 76, fixed, time);
+  drawSimpleGear(ctx, x + 92, groundY - 220, 96, fixed, -time * 0.8);
+  drawSimpleGear(ctx, x + 8, groundY - 116, 50, fixed, time * 1.2);
+  drawUnderVillagePipe(ctx, x - 252, groundY - 98, x + 252, groundY - 98, fixed);
+}
+
+function drawSimpleGear(ctx, x, y, radius, fixed, rotation) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(rotation * 0.18);
+  ctx.fillStyle = fixed ? "#a98249" : "#6a614d";
+  ctx.beginPath();
+  for (let i = 0; i < 16; i += 1) {
+    const angle = (Math.PI * 2 * i) / 16;
+    const r = i % 2 === 0 ? radius : radius * 0.82;
+    ctx.lineTo(Math.cos(angle) * r, Math.sin(angle) * r);
+  }
+  ctx.closePath();
+  ctx.fill();
+  ctx.fillStyle = fixed ? "#253437" : "#1a252a";
+  ctx.beginPath();
+  ctx.arc(0, 0, radius * 0.34, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawUndergroundStreamLandmark(ctx, x, groundY, fixed, time) {
+  drawUnderVillageStoneBase(ctx, x, groundY, 600, fixed);
+  ctx.fillStyle = fixed ? "rgba(62, 148, 158, 0.48)" : "rgba(35, 82, 92, 0.46)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 112, 270, 54, 0, 0, Math.PI * 2);
+  ctx.fill();
+  [-190, -95, 0, 95, 190].forEach((offset, index) => {
+    const lift = fixed ? 18 + Math.sin(time * 2 + index) * 3 : 0;
+    ctx.fillStyle = fixed ? "#60736e" : "#3f4f50";
+    ctx.beginPath();
+    ctx.ellipse(x + offset, groundY - 118 - lift, 52, 24, Math.sin(index) * 0.08, 0, Math.PI * 2);
+    ctx.fill();
+    if (fixed) {
+      warmGlow(ctx, x + offset, groundY - 122 - lift, 56, 0.08);
+    }
+  });
+  ctx.strokeStyle = fixed ? "rgba(134, 225, 215, 0.45)" : "rgba(76, 133, 139, 0.32)";
+  ctx.lineWidth = 4;
+  for (let i = 0; i < 4; i += 1) {
+    ctx.beginPath();
+    ctx.moveTo(x - 250, groundY - 112 + i * 9);
+    ctx.quadraticCurveTo(x, groundY - 140 + Math.sin(time + i) * 12, x + 250, groundY - 110 + i * 8);
+    ctx.stroke();
+  }
+}
+
+function drawSealedWorkshopLandmark(ctx, x, groundY, fixed, time) {
+  drawUnderVillageStoneBase(ctx, x, groundY, 520, fixed);
+  drawStoneArch(ctx, x, groundY - 42, 320, 330, fixed);
+  ctx.fillStyle = fixed ? "#2c332f" : "#1f272a";
+  roundedRect(ctx, x - 116, groundY - 276, 232, 218, 12);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(211, 176, 102, 0.72)" : "rgba(121, 105, 76, 0.58)";
+  ctx.lineWidth = 7;
+  ctx.strokeRect(x - 88, groundY - 238, 176, 144);
+  [-66, 0, 66].forEach((offset, index) => {
+    drawRoundGauge(ctx, x + offset, groundY - 306, fixed, time + index);
+  });
+  if (fixed) {
+    ctx.fillStyle = "rgba(242, 193, 100, 0.2)";
+    roundedRect(ctx, x - 92, groundY - 252, 184, 168, 12);
+    ctx.fill();
+  }
+}
+
+function drawHeartEngineLandmark(ctx, x, groundY, fixed, time) {
+  drawUnderVillageStoneBase(ctx, x, groundY, 620, fixed);
+  ctx.fillStyle = fixed ? "#334248" : "#222f36";
+  roundedRect(ctx, x - 170, groundY - 372, 340, 310, 26);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(154, 199, 188, 0.62)" : "rgba(88, 116, 119, 0.5)";
+  ctx.lineWidth = 8;
+  roundedRect(ctx, x - 136, groundY - 336, 272, 238, 20);
+  ctx.stroke();
+  ctx.fillStyle = fixed ? "#4aa79e" : "#31545a";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 224, 74 + Math.sin(time * 2.2) * (fixed ? 5 : 1), 96, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(229, 196, 103, 0.78)" : "rgba(126, 111, 77, 0.58)";
+  ctx.lineWidth = 12;
+  ctx.beginPath();
+  ctx.arc(x, groundY - 224, 112, 0.12, Math.PI * 1.88);
+  ctx.stroke();
+  drawUnderVillagePipe(ctx, x - 300, groundY - 162, x - 126, groundY - 162, fixed);
+  drawUnderVillagePipe(ctx, x + 126, groundY - 162, x + 300, groundY - 162, fixed);
+  drawUnderVillagePipe(ctx, x - 224, groundY - 288, x - 126, groundY - 244, fixed);
+  drawUnderVillagePipe(ctx, x + 126, groundY - 244, x + 224, groundY - 288, fixed);
+  drawValveWheel(ctx, x - 252, groundY - 162, fixed, time);
+  drawValveWheel(ctx, x + 252, groundY - 162, fixed, time + 0.4);
 }
 
 function drawGlassworksShadow(ctx, x, groundY) {

@@ -94,16 +94,16 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 78 | chapter-eight/cooling-pipes | Cooling Pipes: Route cooling water around fragile glass molds. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/cooling-pipes-painted.png` |
 | 79 | chapter-eight/lens-grinder | Lens Grinder: Align gears that polish a beacon lens. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/lens-grinder-painted.png` |
 | 80 | chapter-eight/rainbow-tower | Rainbow Tower: Restore the quarter's tall color signal. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/rainbow-tower-painted.png` |
-| 81 | chapter-nine/under-village | Under-Village Door: Open the hidden service door beneath town. | generated | `assets/sprites/world/under-village-painted.png` |
-| 82 | chapter-nine/echo-door | Echo Door: Match pipe tones to open a round stone door. | generated | `assets/sprites/world/echo-door-painted.png` |
-| 83 | chapter-nine/old-pipe-crossing | Old Pipe Crossing: Rotate pipe bridges into a walkable crossing. | generated | `assets/sprites/world/old-pipe-crossing-painted.png` |
-| 84 | chapter-nine/forgotten-machine | Forgotten Machine: Wake an old village machine one circuit at a time. | generated | `assets/sprites/world/forgotten-machine-painted.png` |
-| 85 | chapter-nine/drain-locks | Drain Locks: Set water locks so pressure equalizes safely. | generated | `assets/sprites/world/drain-locks-painted.png` |
-| 86 | chapter-nine/buried-murals | Buried Murals: Wash mud from murals by routing gentle water streams. | generated | `assets/sprites/world/buried-murals-painted.png` |
-| 87 | chapter-nine/gear-room | Gear Room: Mesh large slow gears without jamming them. | generated | `assets/sprites/world/gear-room-painted.png` |
-| 88 | chapter-nine/underground-stream | Underground Stream: Raise stepping stones in a current-lit cavern. | generated | `assets/sprites/world/underground-stream-painted.png` |
-| 89 | chapter-nine/sealed-workshop | Sealed Workshop: Restore a sealed repair workshop left by earlier keepers. | generated | `assets/sprites/world/sealed-workshop-painted.png` |
-| 90 | chapter-nine/heart-engine | Ancient Heart Engine: Repair the oldest machine that keeps rainwater moving. | generated | `assets/sprites/world/heart-engine-painted.png` |
+| 81 | chapter-nine/under-village | Under-Village Door: Open the hidden service door beneath town. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/under-village-painted.png` |
+| 82 | chapter-nine/echo-door | Echo Door: Match pipe tones to open a round stone door. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/echo-door-painted.png` |
+| 83 | chapter-nine/old-pipe-crossing | Old Pipe Crossing: Rotate pipe bridges into a walkable crossing. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/old-pipe-crossing-painted.png` |
+| 84 | chapter-nine/forgotten-machine | Forgotten Machine: Wake an old village machine one circuit at a time. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/forgotten-machine-painted.png` |
+| 85 | chapter-nine/drain-locks | Drain Locks: Set water locks so pressure equalizes safely. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/drain-locks-painted.png` |
+| 86 | chapter-nine/buried-murals | Buried Murals: Wash mud from murals by routing gentle water streams. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/buried-murals-painted.png` |
+| 87 | chapter-nine/gear-room | Gear Room: Mesh large slow gears without jamming them. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/gear-room-painted.png` |
+| 88 | chapter-nine/underground-stream | Underground Stream: Raise stepping stones in a current-lit cavern. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/underground-stream-painted.png` |
+| 89 | chapter-nine/sealed-workshop | Sealed Workshop: Restore a sealed repair workshop left by earlier keepers. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/sealed-workshop-painted.png` |
+| 90 | chapter-nine/heart-engine | Ancient Heart Engine: Repair the oldest machine that keeps rainwater moving. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/heart-engine-painted.png` |
 | 91 | chapter-ten/festival-return | Festival Return: Come back to town as repaired lights begin to gather. | generated | `assets/sprites/world/festival-return-painted.png` |
 | 92 | chapter-ten/lantern-parade | Lantern Parade: Arrange lantern carts into a safe parade route. | generated | `assets/sprites/world/lantern-parade-painted.png` |
 | 93 | chapter-ten/music-stage | Music Stage: Repair stage lights and music-box timing. | generated | `assets/sprites/world/music-stage-painted.png` |
