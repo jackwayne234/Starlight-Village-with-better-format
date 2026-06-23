@@ -18,6 +18,14 @@ export function createFestivalSquareScene() {
     fixed: false,
     starLit: false
   };
+  scene.paintedLandmark = {
+    sprite: "festivalSquare",
+    state: scene.festivalSquare,
+    x: 1160,
+    groundY: 668,
+    height: 560,
+    glow: { heightRatio: 0.56, radius: 180, fixedIntensity: 0.5, dimIntensity: 0.18, pulse: 0.07 }
+  };
   scene.layers = {
     trees: [
       { x: 120, y: 286, scale: 1.46 },
@@ -25,10 +33,7 @@ export function createFestivalSquareScene() {
       { x: 1690, y: 284, scale: 1.48 },
       { x: 2100, y: 296, scale: 1.42 }
     ],
-    cottages: [
-      { x: 420, y: 536, scale: 1.9, lit: true },
-      { x: 1850, y: 534, scale: 2.0, lit: false }
-    ],
+    cottages: [],
     foliage: [
       { kind: "glowfenLeafLitter", x: 735, groundY: 682, height: 96, alpha: 0.74 },
       { kind: "rainyRocksReeds", x: 1555, groundY: 662, height: 100, alpha: 0.76 }
@@ -43,10 +48,7 @@ export function createFestivalSquareScene() {
       { x: 2050, y: 638, active: false }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 900, y: 624, kind: "seed" },
-      { x: 1390, y: 626, kind: "gear" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 360, y: 664, width: 126, height: 20 },
       { x: 1160, y: 662, width: 220, height: 22 },
@@ -67,6 +69,7 @@ export function createFestivalSquareScene() {
       x: 1160,
       y: 545,
       radius: 275,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: festival square star lantern is dark.",

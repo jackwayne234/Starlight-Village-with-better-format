@@ -22,6 +22,14 @@ export function createSchoolhouseLanternsScene() {
       { x: 1450, lit: false }
     ]
   };
+  scene.paintedLandmark = {
+    sprite: "schoolhouseLanterns",
+    state: scene.schoolhouseLanterns,
+    x: 1160,
+    groundY: 664,
+    height: 510,
+    glow: { heightRatio: 0.48, radius: 160, fixedIntensity: 0.44, dimIntensity: 0.16 }
+  };
   scene.layers = {
     trees: [
       { x: 120, y: 286, scale: 1.46 },
@@ -29,10 +37,7 @@ export function createSchoolhouseLanternsScene() {
       { x: 1660, y: 282, scale: 1.5 },
       { x: 2070, y: 296, scale: 1.42 }
     ],
-    cottages: [
-      { x: 420, y: 536, scale: 1.88, lit: true },
-      { x: 1850, y: 534, scale: 2.0, lit: false }
-    ],
+    cottages: [],
     foliage: [
       { kind: "glowfenLeafLitter", x: 720, groundY: 682, height: 92, alpha: 0.76 },
       { kind: "rainyRocksReeds", x: 1530, groundY: 660, height: 102, alpha: 0.74 }
@@ -47,10 +52,7 @@ export function createSchoolhouseLanternsScene() {
       { x: 2050, y: 638, active: false }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 930, y: 624, kind: "seed" },
-      { x: 1375, y: 626, kind: "coil" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 360, y: 664, width: 126, height: 20 },
       { x: 1160, y: 662, width: 202, height: 22 },
@@ -71,6 +73,7 @@ export function createSchoolhouseLanternsScene() {
       x: 1160,
       y: 545,
       radius: 260,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: schoolhouse lantern chain is dark.",

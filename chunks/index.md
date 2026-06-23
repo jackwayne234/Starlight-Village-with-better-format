@@ -61,3 +61,4 @@ High-level list only. All details live inside each chunk file.
 | 69 | Last Platform Scene | complete |
 | 70 | Full Route Sprite Backlog | complete |
 | 71 | Route Sprite Production Pass | complete |
+| 72 | Chapter One Route Sprite Wiring | complete |

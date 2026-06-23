@@ -18,6 +18,14 @@ export function createOldFootbridgeScene() {
     fixed: false,
     width: 560
   };
+  scene.paintedLandmark = {
+    sprite: "oldFootbridge",
+    state: scene.oldFootbridge,
+    x: 1160,
+    groundY: 672,
+    height: 470,
+    glow: { heightRatio: 0.38, radius: 150, fixedIntensity: 0.38, dimIntensity: 0.14 }
+  };
   scene.layers = {
     trees: [
       { x: 120, y: 282, scale: 1.52 },
@@ -25,10 +33,7 @@ export function createOldFootbridgeScene() {
       { x: 1640, y: 280, scale: 1.54 },
       { x: 2080, y: 294, scale: 1.44 }
     ],
-    cottages: [
-      { x: 410, y: 536, scale: 1.86, lit: true },
-      { x: 1885, y: 536, scale: 1.95, lit: false }
-    ],
+    cottages: [],
     foliage: [
       { kind: "rainyRocksReeds", x: 760, groundY: 662, height: 108, alpha: 0.82 },
       { kind: "glowfenBridgeReeds", x: 1015, groundY: 652, height: 124, alpha: 0.86 },
@@ -44,13 +49,8 @@ export function createOldFootbridgeScene() {
     glowPlants: [
       { x: 2050, y: 638, active: false }
     ],
-    brokenBranches: [
-      { x: 1035, y: 636, scale: 0.78 }
-    ],
-    repairParts: [
-      { x: 920, y: 624, kind: "gear" },
-      { x: 1390, y: 626, kind: "seed" }
-    ],
+    brokenBranches: [],
+    repairParts: [],
     puddles: [
       { x: 360, y: 664, width: 126, height: 20 },
       { x: 1885, y: 660, width: 138, height: 18 }
@@ -70,6 +70,7 @@ export function createOldFootbridgeScene() {
       x: 1160,
       y: 545,
       radius: 275,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: old footbridge planks are loose.",

@@ -16,13 +16,13 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 1 | chapter-one/starlight-village | Water Wheel Yard: Restore the village water wheel so the first lights wake up. | exists/review | `assets/sprites/world/starlight-village-painted.png` |
 | 2 | chapter-one/bakery-gutter | Bakery Gutter: Rotate gutter channels so rain stops pouring through the bakery awning. | exists/review | `assets/sprites/world/bakery-gutter-painted.png` |
 | 3 | chapter-one/bell-rope-corner | Bell Rope Corner: Re-thread a snapped bell rope through pulleys to ring a safe-clear signal. | exists/review | `assets/sprites/world/bell-rope-corner-painted.png` |
-| 4 | chapter-one/workshop-lift | Workshop Lift: Balance a small crank lift so repair parts can reach the roof shelf. | generated | `assets/sprites/world/workshop-lift-painted.png` |
-| 5 | chapter-one/schoolhouse-lanterns | Schoolhouse Lanterns: Connect three damp lantern posts in the right order. | generated | `assets/sprites/world/schoolhouse-lanterns-painted.png` |
-| 6 | chapter-one/market-awnings | Market Awnings: Set cloth awnings to shed rain into barrels instead of stalls. | generated | `assets/sprites/world/market-awnings-painted.png` |
-| 7 | chapter-one/old-footbridge | Old Footbridge: Lock bridge planks into place across a swollen stream. | generated | `assets/sprites/world/old-footbridge-painted.png` |
-| 8 | chapter-one/rain-drain-corner | Rain Drain Corner: Clear a clogged drain maze before the lane floods. | generated | `assets/sprites/world/rain-drain-corner-painted.png` |
-| 9 | chapter-one/mayor-porch | Mayor's Porch: Repair a porch signal chime that tells neighbors the route is safe. | generated | `assets/sprites/world/mayor-porch-painted.png` |
-| 10 | chapter-one/festival-square | Festival Square: Power the square's first star lantern and open the path outward. | generated | `assets/sprites/world/festival-square-painted.png` |
+| 4 | chapter-one/workshop-lift | Workshop Lift: Balance a small crank lift so repair parts can reach the roof shelf. | wired | `assets/sprites/world/workshop-lift-painted.png` |
+| 5 | chapter-one/schoolhouse-lanterns | Schoolhouse Lanterns: Connect three damp lantern posts in the right order. | wired | `assets/sprites/world/schoolhouse-lanterns-painted.png` |
+| 6 | chapter-one/market-awnings | Market Awnings: Set cloth awnings to shed rain into barrels instead of stalls. | wired | `assets/sprites/world/market-awnings-painted.png` |
+| 7 | chapter-one/old-footbridge | Old Footbridge: Lock bridge planks into place across a swollen stream. | wired | `assets/sprites/world/old-footbridge-painted.png` |
+| 8 | chapter-one/rain-drain-corner | Rain Drain Corner: Clear a clogged drain maze before the lane floods. | wired | `assets/sprites/world/rain-drain-corner-painted.png` |
+| 9 | chapter-one/mayor-porch | Mayor's Porch: Repair a porch signal chime that tells neighbors the route is safe. | wired | `assets/sprites/world/mayor-porch-painted.png` |
+| 10 | chapter-one/festival-square | Festival Square: Power the square's first star lantern and open the path outward. | wired | `assets/sprites/world/festival-square-painted.png` |
 | 11 | chapter-two/glowfen-grove | Glowfen Grove: Restore the root pump so glowing water moves again. | exists/review | `assets/sprites/world/glowfen-grove-painted.png` |
 | 12 | chapter-two/lantern-lily-pool | Lantern Lily Pool: Rotate lily pads to carry light across the water. | generated | `assets/sprites/world/lantern-lily-pool-painted.png` |
 | 13 | chapter-two/bog-bridge | Bog Bridge: Raise stepping stones in a safe sequence. | generated | `assets/sprites/world/bog-bridge-painted.png` |

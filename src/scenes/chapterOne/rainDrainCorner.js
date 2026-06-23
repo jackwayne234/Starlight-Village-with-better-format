@@ -18,6 +18,14 @@ export function createRainDrainCornerScene() {
     fixed: false,
     waterHigh: true
   };
+  scene.paintedLandmark = {
+    sprite: "rainDrainCorner",
+    state: scene.rainDrainCorner,
+    x: 1160,
+    groundY: 674,
+    height: 500,
+    glow: { heightRatio: 0.42, radius: 145, fixedIntensity: 0.38, dimIntensity: 0.14 }
+  };
   scene.layers = {
     trees: [
       { x: 120, y: 286, scale: 1.46 },
@@ -25,10 +33,7 @@ export function createRainDrainCornerScene() {
       { x: 1660, y: 284, scale: 1.5 },
       { x: 2070, y: 296, scale: 1.42 }
     ],
-    cottages: [
-      { x: 420, y: 536, scale: 1.9, lit: true },
-      { x: 1845, y: 534, scale: 1.98, lit: false }
-    ],
+    cottages: [],
     foliage: [
       { kind: "rainyRocksReeds", x: 780, groundY: 662, height: 96, alpha: 0.72 },
       { kind: "glowfenLeafLitter", x: 1510, groundY: 682, height: 100, alpha: 0.78 }
@@ -42,13 +47,8 @@ export function createRainDrainCornerScene() {
     glowPlants: [
       { x: 2050, y: 638, active: false }
     ],
-    brokenBranches: [
-      { x: 1045, y: 636, scale: 0.62 }
-    ],
-    repairParts: [
-      { x: 910, y: 624, kind: "gear" },
-      { x: 1365, y: 626, kind: "coil" }
-    ],
+    brokenBranches: [],
+    repairParts: [],
     puddles: [
       { x: 360, y: 664, width: 126, height: 20 },
       { x: 1880, y: 660, width: 138, height: 18 }
@@ -68,6 +68,7 @@ export function createRainDrainCornerScene() {
       x: 1160,
       y: 545,
       radius: 265,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: rain drain is clogged under the corner grate.",

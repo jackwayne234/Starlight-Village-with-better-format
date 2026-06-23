@@ -402,6 +402,10 @@ function drawPuddle(ctx, puddle, time) {
 }
 
 function drawSceneLandmarks(ctx, scene, time) {
+  if (drawPaintedLandmark(ctx, scene.paintedLandmark, time, scene.world.powerLevel)) {
+    return;
+  }
+
   if (scene.bakeryGutter) {
     drawBakeryGutter(ctx, scene.bakeryGutter, time, scene.world.powerLevel);
   }
@@ -501,6 +505,44 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.observatory) {
     drawObservatory(ctx, scene.observatory, time, scene.world.powerLevel);
   }
+}
+
+function drawPaintedLandmark(ctx, landmark, time, powerLevel) {
+  if (!landmark) {
+    return false;
+  }
+
+  const image = sprites.world[landmark.sprite];
+  if (!imageReady(image)) {
+    return false;
+  }
+
+  const state = landmark.state ?? {};
+  const fixed = state.fixed || state.lit || state.starLit || state.chimeLit || state.platformRaised || powerLevel > 0.95;
+  const x = landmark.x + (landmark.xOffset ?? 0);
+  const groundY = landmark.groundY + (landmark.groundYOffset ?? 0);
+  const height = landmark.height ?? 500;
+
+  ctx.save();
+  ctx.filter = fixed
+    ? landmark.fixedFilter ?? "brightness(0.88) saturate(1.02)"
+    : landmark.dimFilter ?? "brightness(0.7) saturate(0.88)";
+  drawWorldSprite(ctx, image, x, groundY, height);
+  ctx.restore();
+
+  if (landmark.glow) {
+    const glow = landmark.glow;
+    const baseIntensity = fixed ? glow.fixedIntensity ?? 0.42 : glow.dimIntensity ?? 0.16;
+    warmGlow(
+      ctx,
+      x + (glow.xOffset ?? 0),
+      groundY - height * (glow.heightRatio ?? 0.56),
+      glow.radius ?? 120,
+      baseIntensity + (fixed ? Math.sin(time * 3.4) * (glow.pulse ?? 0.05) : powerLevel * 0.12)
+    );
+  }
+
+  return true;
 }
 
 function drawMossGate(ctx, gate, time, powerLevel) {

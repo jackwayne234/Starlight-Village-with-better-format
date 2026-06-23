@@ -22,6 +22,14 @@ export function createMarketAwningsScene() {
       { x: 1450, color: "#4f6570", barrelX: 1546 }
     ]
   };
+  scene.paintedLandmark = {
+    sprite: "marketAwnings",
+    state: scene.marketAwnings,
+    x: 1160,
+    groundY: 664,
+    height: 520,
+    glow: { heightRatio: 0.48, radius: 160, fixedIntensity: 0.4, dimIntensity: 0.15 }
+  };
   scene.layers = {
     trees: [
       { x: 120, y: 286, scale: 1.46 },
@@ -29,10 +37,7 @@ export function createMarketAwningsScene() {
       { x: 1690, y: 284, scale: 1.48 },
       { x: 2090, y: 296, scale: 1.4 }
     ],
-    cottages: [
-      { x: 420, y: 536, scale: 1.88, lit: true },
-      { x: 1880, y: 534, scale: 1.98, lit: false }
-    ],
+    cottages: [],
     foliage: [
       { kind: "glowfenLeafLitter", x: 700, groundY: 682, height: 88, alpha: 0.7 },
       { kind: "rainyRocksReeds", x: 1600, groundY: 660, height: 102, alpha: 0.72 }
@@ -47,10 +52,7 @@ export function createMarketAwningsScene() {
       { x: 2070, y: 638, active: false }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 930, y: 624, kind: "coil" },
-      { x: 1380, y: 626, kind: "seed" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 360, y: 664, width: 126, height: 20 },
       { x: 1140, y: 662, width: 226, height: 22 },
@@ -71,6 +73,7 @@ export function createMarketAwningsScene() {
       x: 1160,
       y: 545,
       radius: 270,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: market awnings are dumping rain into the stalls.",

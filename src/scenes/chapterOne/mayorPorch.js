@@ -18,6 +18,14 @@ export function createMayorPorchScene() {
     fixed: false,
     chimeLit: false
   };
+  scene.paintedLandmark = {
+    sprite: "mayorPorch",
+    state: scene.mayorPorch,
+    x: 1160,
+    groundY: 666,
+    height: 540,
+    glow: { heightRatio: 0.52, radius: 150, fixedIntensity: 0.42, dimIntensity: 0.15 }
+  };
   scene.layers = {
     trees: [
       { x: 120, y: 286, scale: 1.46 },
@@ -25,10 +33,7 @@ export function createMayorPorchScene() {
       { x: 1660, y: 284, scale: 1.5 },
       { x: 2070, y: 296, scale: 1.42 }
     ],
-    cottages: [
-      { x: 420, y: 536, scale: 1.9, lit: true },
-      { x: 1850, y: 534, scale: 2.0, lit: false }
-    ],
+    cottages: [],
     foliage: [
       { kind: "glowfenLeafLitter", x: 760, groundY: 682, height: 96, alpha: 0.74 },
       { kind: "rainyRocksReeds", x: 1530, groundY: 662, height: 100, alpha: 0.76 }
@@ -43,10 +48,7 @@ export function createMayorPorchScene() {
       { x: 2050, y: 638, active: false }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 910, y: 624, kind: "coil" },
-      { x: 1370, y: 626, kind: "seed" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 360, y: 664, width: 126, height: 20 },
       { x: 1160, y: 662, width: 190, height: 22 },
@@ -67,6 +69,7 @@ export function createMayorPorchScene() {
       x: 1160,
       y: 545,
       radius: 260,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: mayor's porch signal chime is silent.",

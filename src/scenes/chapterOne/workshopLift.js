@@ -18,6 +18,14 @@ export function createWorkshopLiftScene() {
     fixed: false,
     platformRaised: false
   };
+  scene.paintedLandmark = {
+    sprite: "workshopLift",
+    state: scene.workshopLift,
+    x: 1160,
+    groundY: 664,
+    height: 540,
+    glow: { xOffset: 20, heightRatio: 0.5, radius: 132, fixedIntensity: 0.38, dimIntensity: 0.14 }
+  };
   scene.layers = {
     trees: [
       { x: 115, y: 286, scale: 1.44 },
@@ -25,10 +33,7 @@ export function createWorkshopLiftScene() {
       { x: 1630, y: 282, scale: 1.5 },
       { x: 2070, y: 294, scale: 1.42 }
     ],
-    cottages: [
-      { x: 420, y: 536, scale: 1.88, lit: true },
-      { x: 1825, y: 534, scale: 2.02, lit: false }
-    ],
+    cottages: [],
     foliage: [
       { kind: "rainyRocksReeds", x: 760, groundY: 660, height: 96, alpha: 0.72 },
       { kind: "glowfenLeafLitter", x: 1520, groundY: 682, height: 104, alpha: 0.78 }
@@ -43,10 +48,7 @@ export function createWorkshopLiftScene() {
       { x: 2040, y: 638, active: false }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 900, y: 624, kind: "gear" },
-      { x: 1335, y: 626, kind: "coil" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 360, y: 664, width: 126, height: 20 },
       { x: 1160, y: 662, width: 190, height: 22 },
@@ -67,6 +69,7 @@ export function createWorkshopLiftScene() {
       x: 1160,
       y: 548,
       radius: 250,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: workshop lift crank is slipping.",
