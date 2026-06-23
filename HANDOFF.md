@@ -69,6 +69,7 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Chapter 2 route sprite wiring continued on `2026-06-23`: Sunken Signpost now uses `sunken-signpost-painted.png` through the shared `paintedLandmark` path, with loose branch/seed/gear props and the generic repair marker removed. Centered preview passed at `http://127.0.0.1:5242/?scene=chapter-two/sunken-signpost&x=1120&preview=1`. See `chunks/73-chapter-two-route-sprite-wiring.md`.
 - Chapter 2 route sprite wiring continued on `2026-06-23`: Mist Pool now uses `mist-pool-painted.png` through the shared `paintedLandmark` path, with loose seed/coil props and the generic repair marker removed. Preview and asset probes passed at `http://127.0.0.1:5243/?scene=chapter-two/mist-pool&preview=1` and `http://127.0.0.1:5243/?scene=chapter-two/mist-pool&x=1160&preview=1`. See `chunks/73-chapter-two-route-sprite-wiring.md`.
 - Chapter 2 route sprite wiring continued on `2026-06-23`: Moss Gate now uses `moss-gate-painted.png` through the shared `paintedLandmark` path, with loose seed/coil props and the generic repair marker removed. Preview and asset probes passed at `http://127.0.0.1:5244/?scene=chapter-two/moss-gate&preview=1` and `http://127.0.0.1:5244/?scene=chapter-two/moss-gate&x=1120&preview=1`. See `chunks/73-chapter-two-route-sprite-wiring.md`.
+- Chapter 2 route sprite wiring continued on `2026-06-23`: Old Fen Shrine now uses `old-fen-shrine-painted.png` through the shared `paintedLandmark` path, with loose gear/coil props and the generic repair marker removed. Preview and asset probes passed at `http://127.0.0.1:5245/?scene=chapter-two/old-fen-shrine&preview=1` and `http://127.0.0.1:5245/?scene=chapter-two/old-fen-shrine&x=1120&preview=1`. See `chunks/73-chapter-two-route-sprite-wiring.md`.
 - Workshop Lift became bespoke on `2026-06-22`: it now has a crank, platform, roof shelf, raised/repaired visual state, route checks, and a chunk note in `chunks/42-workshop-lift-scene.md`.
 - Schoolhouse Lanterns became bespoke on `2026-06-22`: it now has a schoolhouse facade, three lantern posts, dark/lit chain state, route checks, and a chunk note in `chunks/43-schoolhouse-lanterns-scene.md`.
 - Market Awnings became bespoke on `2026-06-22`: it now has market stalls, colored awnings, dark/draining runoff state, route checks, and a chunk note in `chunks/44-market-awnings-scene.md`.
@@ -106,7 +107,7 @@ Continue the route-order sprite wiring pass.
 
 Next likely stop:
 
-1. Wire `chapter-two/old-fen-shrine` next using the shared `paintedLandmark` pattern.
+1. Wire `chapter-two/glowfen-ferry` next using the shared `paintedLandmark` pattern.
 2. Continue Chapter 2 route-order wiring scene by scene after Old Fen Shrine.
 3. Keep the format rule: one strong landmark sprite, no random houses, no loose repair props, and no generic marker unless intentionally needed.
 4. Preview each edited scene with `?scene=<scene-id>&preview=1`.

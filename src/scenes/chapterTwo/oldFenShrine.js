@@ -13,6 +13,14 @@ export function createOldFenShrineScene() {
   scene.showSignpost = false;
   scene.backdrop = { moonX: 920, moonY: 132, cloudDrift: 0.95, hillOffset: 70, ridgeOffset: 104 };
   scene.oldFenShrine = { x: 1160, groundY: 650, fixed: false, bowlsAligned: false };
+  scene.paintedLandmark = {
+    sprite: "oldFenShrine",
+    state: scene.oldFenShrine,
+    x: 1160,
+    groundY: 674,
+    height: 480,
+    glow: { heightRatio: 0.52, radius: 170, fixedIntensity: 0.42, dimIntensity: 0.13, pulse: 0.06 }
+  };
   scene.layers = {
     trees: [
       { x: 80, y: 272, scale: 1.58 },
@@ -42,10 +50,7 @@ export function createOldFenShrineScene() {
       { x: 1990, y: 638, active: false }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 990, y: 624, kind: "gear" },
-      { x: 1330, y: 626, kind: "coil" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 415, y: 664, width: 132, height: 20 },
       { x: 1160, y: 668, width: 300, height: 26 },
@@ -66,6 +71,7 @@ export function createOldFenShrineScene() {
       x: 1160,
       y: 548,
       radius: 270,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: fen shrine rain bowls are out of alignment.",
