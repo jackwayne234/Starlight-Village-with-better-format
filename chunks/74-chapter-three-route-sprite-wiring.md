@@ -61,6 +61,12 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 - Removed the remaining foreground conduit-coil clutter from Clock Signal.
 - Kept the generic repair marker hidden for Clock Signal.
 - Kept the existing rainy forest layers, Mossline lamps, puddles, mist, route text, clock/lamp pulse repair state, and rail-signal path puzzle.
+- Reviewed `chapter-three/last-platform` against its existing bespoke side-view platform treatment.
+- Chose to keep the existing Last Platform renderer because it already gives the scene a side-view final platform shelter, end-of-line track stop, hill-road marker, final lamp, and repaired green route glow that match the chapter-exit beat.
+- Confirmed `assets/sprites/world/last-platform-painted.png` reads as a three-quarter/isometric platform, still shows bright generated green background, and includes the neighboring rail fragment called out during production, so it should not be wired for this scene yet.
+- Removed the remaining foreground conduit-coil clutter from Last Platform.
+- Kept the generic repair marker hidden for Last Platform.
+- Kept the existing rainy forest layers, Mossline lamps, puddles, mist, route text, platform-lamp repair state, and market-lantern path puzzle.
 
 ## Verification
 
@@ -82,6 +88,11 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 - Asset review confirmed `assets/sprites/world/tunnel-mouth-painted.png` is `392x382` RGBA with transparent corner pixels, but it was not wired because its angled rail framing does not match the side-view camera rule.
 - Static scene-data check confirms `chapter-three/clock-signal` remains on its custom side-view station-clock renderer with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, no foreground conduit-coil clutter, and `showMarker: false`.
 - Asset review confirmed `assets/sprites/world/clock-signal-painted.png` is `361x420` RGBA with transparent corner pixels, but it was not wired because the existing renderer better preserves the side-view clock/lamp/wire/platform repair state and the generated asset still includes cleanup residue/cropped neighboring art.
+- Static scene-data check confirms `chapter-three/last-platform` remains on its custom side-view platform renderer with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, no foreground conduit-coil clutter, and `showMarker: false`.
+- Asset review confirmed `assets/sprites/world/last-platform-painted.png` is `424x407` RGBA with alpha, but it was not wired because its three-quarter/isometric framing, bright generated green background, and cropped neighboring rail fragment do not match the side-view camera rule.
+- Local preview server responded at:
+  - `http://127.0.0.1:5257/?scene=chapter-three/last-platform&x=1120&preview=1`
+- Local probes confirmed the Last Platform scene module and `assets/sprites/world/last-platform-painted.png` respond from the preview server.
 - Local preview server responded at:
   - `http://127.0.0.1:5256/?scene=chapter-three/clock-signal&x=1120&preview=1`
 - Local probes confirmed the Clock Signal scene module and `assets/sprites/world/clock-signal-painted.png` respond from the preview server.
@@ -114,4 +125,4 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 
 ## Next
 
-Continue route-order sprite wiring at `chapter-three/last-platform`.
+Continue route-order sprite wiring at `chapter-four/stormedge-rise`.
