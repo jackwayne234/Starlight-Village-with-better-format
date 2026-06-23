@@ -65,10 +65,11 @@ export function createBeaconHillScene() {
       radius: 280,
       complete: false,
       progress: 0,
+      showMarker: false,
       scanText: "Robot scan: beacon signal weak.",
       puzzleText: "Rotate the signal paths to tune the beacon.",
       rewardText: "Beacon restored. Warm light crosses the hill.",
-      onwardText: "One stormwater call remains.",
+      onwardText: "The keeper's cottage is waiting below the tower.",
       nextText: "Heading to the keeper's cottage.",
       nextSceneId: "chapter-five/keeper-cottage",
       reactions: [
@@ -78,7 +79,7 @@ export function createBeaconHillScene() {
       dialogue: {
         scan: { speaker: "robot", text: "Beacon signal is whisper-thin." },
         puzzle: { speaker: "player", text: "Let's give the village something bright to follow." },
-        reward: { speaker: "robot", text: "Signal restored. Rainbarrel Row is next." },
+        reward: { speaker: "robot", text: "Signal restored. Keeper's Cottage is next." },
         next: { speaker: "robot", text: "The keeper's cottage is next." }
       }
     }

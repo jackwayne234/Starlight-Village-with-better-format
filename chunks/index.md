@@ -63,4 +63,6 @@ High-level list only. All details live inside each chunk file.
 | 71 | Route Sprite Production Pass | complete |
 | 72 | Chapter One Route Sprite Wiring | complete |
 | 73 | Chapter Two Route Sprite Wiring | complete |
-| 74 | Chapter Three Route Sprite Wiring | in progress |
+| 74 | Chapter Three Route Sprite Wiring | complete |
+| 75 | Chapter Four Route Sprite Wiring | complete |
+| 76 | Chapter Five Route Sprite Wiring | in progress |

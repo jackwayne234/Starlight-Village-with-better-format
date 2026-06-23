@@ -54,7 +54,7 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 38 | chapter-four/cloud-harvester | Cloud Harvester: Tune a strange old machine that condenses rain into clean water. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/cloud-harvester-painted.png` |
 | 39 | chapter-four/summit-path | Summit Path: Light path markers through the high mist. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/summit-path-painted.png` |
 | 40 | chapter-four/beacon-approach | Beacon Approach: Open the final gate before Beacon Hill. | wired | `assets/sprites/world/beacon-approach-painted.png` |
-| 41 | chapter-five/beacon-hill | Beacon Hill Signal Tower: Restore the tower beacon and send light across the storm. | exists/review | `assets/sprites/world/beacon-hill-painted.png` |
+| 41 | chapter-five/beacon-hill | Beacon Hill Signal Tower: Restore the tower beacon and send light across the storm. | reviewed/keep existing side-view treatment | `assets/sprites/world/beacon-tower-large-door.png` |
 | 42 | chapter-five/keeper-cottage | Keeper's Cottage: Route chimney draft and stove sparks to warm the cottage. | generated | `assets/sprites/world/keeper-cottage-painted.png` |
 | 43 | chapter-five/lens-room | Lens Room: Align lenses so the beacon beam focuses. | generated | `assets/sprites/world/lens-room-painted.png` |
 | 44 | chapter-five/fuel-shed | Fuel Shed: Sort fuel valves so the tower burns steadily. | generated | `assets/sprites/world/fuel-shed-painted.png` |
