@@ -74,16 +74,16 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 58 | chapter-six/cistern-house | Cistern House: Balance cistern levels across three tanks. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/cistern-house-painted.png` |
 | 59 | chapter-six/gutter-bell | Gutter Bell: Make a water bell ring when overflow is safe. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/gutter-bell-painted.png` |
 | 60 | chapter-six/stormwater-gate | Stormwater Gate: Open the big drain gate toward the outer village. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/stormwater-gate-painted.png` |
-| 61 | chapter-seven/old-orchard | Old Orchard: Wake the orchard's irrigation line under old roots. | generated | `assets/sprites/world/old-orchard-painted.png` |
-| 62 | chapter-seven/windfallen-fruit | Windfallen Fruit: Sort fallen fruit from blocked channels. | generated | `assets/sprites/world/windfallen-fruit-painted.png` |
-| 63 | chapter-seven/branch-bridge | Branch Bridge: Move branch braces into a safe walking path. | generated | `assets/sprites/world/branch-bridge-painted.png` |
-| 64 | chapter-seven/bee-box-row | Bee Box Row: Warm lanterns near bee boxes without startling them. | generated | `assets/sprites/world/bee-box-row-painted.png` |
-| 65 | chapter-seven/cider-press | Cider Press: Repair gears in a little cider press. | generated | `assets/sprites/world/cider-press-painted.png` |
-| 66 | chapter-seven/scarecrow-wires | Scarecrow Wires: Untangle signal wires around a rain-soaked scarecrow. | generated | `assets/sprites/world/scarecrow-wires-painted.png` |
-| 67 | chapter-seven/root-cellar | Root Cellar: Open cellar vents to keep stored food dry. | generated | `assets/sprites/world/root-cellar-painted.png` |
-| 68 | chapter-seven/moon-apple-tree | Moon Apple Tree: Reflect moonlight onto a rare glowing tree. | generated | `assets/sprites/world/moon-apple-tree-painted.png` |
-| 69 | chapter-seven/birdhouse-lane | Birdhouse Lane: Rehang birdhouses so they guide the route. | generated | `assets/sprites/world/birdhouse-lane-painted.png` |
-| 70 | chapter-seven/hollow-tree-door | Hollow Tree Door: Unlock a hidden door in an old hollow tree. | generated | `assets/sprites/world/hollow-tree-door-painted.png` |
+| 61 | chapter-seven/old-orchard | Old Orchard: Wake the orchard's irrigation line under old roots. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/old-orchard-painted.png` |
+| 62 | chapter-seven/windfallen-fruit | Windfallen Fruit: Sort fallen fruit from blocked channels. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/windfallen-fruit-painted.png` |
+| 63 | chapter-seven/branch-bridge | Branch Bridge: Move branch braces into a safe walking path. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/branch-bridge-painted.png` |
+| 64 | chapter-seven/bee-box-row | Bee Box Row: Warm lanterns near bee boxes without startling them. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/bee-box-row-painted.png` |
+| 65 | chapter-seven/cider-press | Cider Press: Repair gears in a little cider press. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/cider-press-painted.png` |
+| 66 | chapter-seven/scarecrow-wires | Scarecrow Wires: Untangle signal wires around a rain-soaked scarecrow. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/scarecrow-wires-painted.png` |
+| 67 | chapter-seven/root-cellar | Root Cellar: Open cellar vents to keep stored food dry. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/root-cellar-painted.png` |
+| 68 | chapter-seven/moon-apple-tree | Moon Apple Tree: Reflect moonlight onto a rare glowing tree. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/moon-apple-tree-painted.png` |
+| 69 | chapter-seven/birdhouse-lane | Birdhouse Lane: Rehang birdhouses so they guide the route. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/birdhouse-lane-painted.png` |
+| 70 | chapter-seven/hollow-tree-door | Hollow Tree Door: Unlock a hidden door in an old hollow tree. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/hollow-tree-door-painted.png` |
 | 71 | chapter-eight/glassworks-quarter | Glassworks Quarter: Bring color back to the rainy glass district. | generated | `assets/sprites/world/glassworks-quarter-painted.png` |
 | 72 | chapter-eight/prism-lamp-row | Prism Lamp Row: Rotate prisms to split light into path markers. | generated | `assets/sprites/world/prism-lamp-row-painted.png` |
 | 73 | chapter-eight/cracked-skylights | Cracked Skylights: Patch skylight panes before water reaches the furnace. | generated | `assets/sprites/world/cracked-skylights-painted.png` |
