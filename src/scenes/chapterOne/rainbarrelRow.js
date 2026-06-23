@@ -40,12 +40,7 @@ export function createRainbarrelRowScene() {
       { x: 1485, y: 300, scale: 1.46 },
       { x: 1930, y: 280, scale: 1.55 }
     ],
-    cottages: [
-      { x: 380, y: 534, scale: 2.05, lit: false },
-      { x: 850, y: 526, scale: 2.2, lit: true },
-      { x: 1340, y: 532, scale: 2.1, lit: false },
-      { x: 1760, y: 537, scale: 2.0, lit: false }
-    ],
+    cottages: [],
     lamps: [
       { x: 305, y: 560, lit: true },
       { x: 1010, y: 560, lit: false },
@@ -78,6 +73,7 @@ export function createRainbarrelRowScene() {
       x: 1110,
       y: 560,
       radius: 240,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: storm drain clogged.",

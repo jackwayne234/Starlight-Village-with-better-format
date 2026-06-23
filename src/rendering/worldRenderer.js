@@ -508,6 +508,9 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.chapterFiveLandmark) {
     drawChapterFiveLandmark(ctx, scene.chapterFiveLandmark, time, scene.world.powerLevel);
   }
+  if (scene.chapterSixLandmark) {
+    drawChapterSixLandmark(ctx, scene.chapterSixLandmark, time, scene.world.powerLevel);
+  }
   if (scene.bridge) {
     drawFootbridge(ctx, scene.bridge, time);
   }
@@ -601,12 +604,234 @@ function drawChapterFiveLandmark(ctx, landmark, time, powerLevel) {
   ctx.restore();
 }
 
+function drawChapterSixLandmark(ctx, landmark, time, powerLevel) {
+  const fixed = landmark.fixed || powerLevel > 0.95;
+  const x = landmark.x;
+  const groundY = landmark.groundY;
+
+  ctx.save();
+  drawWaterRowShadow(ctx, x, groundY);
+
+  if (landmark.type === "rooftopChannels") {
+    drawRooftopChannels(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "floodedCellar") {
+    drawFloodedCellar(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "laundryLines") {
+    drawLaundryLines(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "pumpAlley") {
+    drawPumpAlley(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "overflowGarden") {
+    drawOverflowGarden(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "neighborhoodFountain") {
+    drawNeighborhoodFountain(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "cisternHouse") {
+    drawCisternHouse(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "gutterBell") {
+    drawGutterBell(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "stormwaterGate") {
+    drawStormwaterGate(ctx, x, groundY, fixed, time);
+  }
+
+  if (fixed) {
+    warmGlow(ctx, x, groundY - 150, 255, 0.22 + Math.sin(time * 3) * 0.035);
+  }
+
+  ctx.restore();
+}
+
+function drawWaterRowShadow(ctx, x, groundY) {
+  ctx.fillStyle = "rgba(10, 27, 29, 0.7)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 18, 455, 76, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+}
+
 function drawRidgeShadow(ctx, x, groundY) {
   ctx.fillStyle = "rgba(12, 28, 28, 0.68)";
   ctx.beginPath();
   ctx.ellipse(x, groundY - 18, 465, 78, -0.02, 0, Math.PI * 2);
   ctx.fill();
 }
+
+function drawRooftopChannels(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 430, fixed);
+  ctx.fillStyle = fixed ? "#596758" : "#354b45";
+  roundedRect(ctx, x - 186, groundY - 224, 372, 188, 10);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "#314841" : "#21362f";
+  ctx.beginPath();
+  ctx.moveTo(x - 226, groundY - 224);
+  ctx.lineTo(x, groundY - 324);
+  ctx.lineTo(x + 226, groundY - 224);
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(126, 190, 191, 0.78)" : "rgba(74, 101, 96, 0.72)";
+  ctx.lineWidth = 9;
+  ctx.lineCap = "round";
+  [-128, 0, 128].forEach((offset, index) => {
+    ctx.beginPath();
+    ctx.moveTo(x + offset - 68, groundY - 238 - Math.abs(offset) * 0.28);
+    ctx.bezierCurveTo(x + offset - 24, groundY - 204, x + offset + 40, groundY - 206, x + offset + 86, groundY - 180);
+    ctx.stroke();
+    if (fixed) {
+      drawWaterDrip(ctx, x + offset + 86, groundY - 176, time + index * 0.5);
+    }
+  });
+  drawRainBarrelShape(ctx, x - 232, groundY - 72, fixed, time);
+  drawRainBarrelShape(ctx, x + 232, groundY - 72, fixed, time + 0.7);
+}
+
+function drawFloodedCellar(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 440, fixed);
+  ctx.fillStyle = fixed ? "#536257" : "#2e443e";
+  roundedRect(ctx, x - 202, groundY - 238, 404, 196, 12);
+  ctx.fill();
+  ctx.fillStyle = "#162522";
+  roundedRect(ctx, x - 92, groundY - 170, 184, 128, 10);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(126, 190, 191, 0.62)" : "rgba(126, 190, 191, 0.28)";
+  ctx.lineWidth = fixed ? 8 : 14;
+  ctx.beginPath();
+  ctx.moveTo(x - 78, groundY - 54);
+  ctx.bezierCurveTo(x - 26, groundY - 42, x + 28, groundY - 42, x + 82, groundY - 54);
+  ctx.stroke();
+  drawPumpHandle(ctx, x - 166, groundY - 92, fixed, time);
+  drawValveWheel(ctx, x + 158, groundY - 120, fixed, time);
+}
+
+function drawLaundryLines(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 470, fixed);
+  const sag = fixed ? 18 : 52;
+  [-216, 216].forEach((offset) => {
+    ctx.fillStyle = fixed ? "#596658" : "#314842";
+    roundedRect(ctx, x + offset - 24, groundY - 292, 48, 260, 10);
+    ctx.fill();
+    drawValveWheel(ctx, x + offset, groundY - 262, fixed, time + offset * 0.01);
+  });
+  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.55)" : "rgba(154, 176, 166, 0.42)";
+  ctx.lineWidth = 6;
+  [-210, -168].forEach((lineY, index) => {
+    ctx.beginPath();
+    ctx.moveTo(x - 216, groundY + lineY);
+    ctx.quadraticCurveTo(x, groundY + lineY + sag, x + 216, groundY + lineY);
+    ctx.stroke();
+    drawCloth(ctx, x - 70 + index * 140, groundY + lineY + sag * 0.55, fixed);
+  });
+}
+
+function drawPumpAlley(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 420, fixed);
+  ctx.strokeStyle = fixed ? "rgba(126, 190, 191, 0.68)" : "rgba(74, 101, 96, 0.62)";
+  ctx.lineWidth = 12;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 246, groundY - 74);
+  ctx.lineTo(x - 102, groundY - 74);
+  ctx.lineTo(x - 42, groundY - 130);
+  ctx.lineTo(x + 58, groundY - 130);
+  ctx.lineTo(x + 114, groundY - 74);
+  ctx.lineTo(x + 248, groundY - 74);
+  ctx.stroke();
+  drawPumpHandle(ctx, x, groundY - 132, fixed, time);
+  drawValveWheel(ctx, x - 190, groundY - 76, fixed, time);
+  drawValveWheel(ctx, x + 190, groundY - 76, fixed, time + 0.5);
+}
+
+function drawOverflowGarden(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 470, fixed);
+  ctx.fillStyle = fixed ? "#45594b" : "#283f38";
+  roundedRect(ctx, x - 220, groundY - 174, 440, 126, 16);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(126, 190, 191, 0.72)" : "rgba(74, 101, 96, 0.68)";
+  ctx.lineWidth = 8;
+  ctx.lineCap = "round";
+  [-140, 0, 140].forEach((offset, index) => {
+    ctx.beginPath();
+    ctx.moveTo(x + offset - 90, groundY - 58);
+    ctx.bezierCurveTo(x + offset - 46, groundY - 112, x + offset + 40, groundY - 112, x + offset + 90, groundY - 58);
+    ctx.stroke();
+    drawGardenStem(ctx, x + offset, groundY - 136, fixed, time + index * 0.5);
+  });
+}
+
+function drawNeighborhoodFountain(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 410, fixed);
+  ctx.fillStyle = fixed ? "#596658" : "#354b45";
+  roundedRect(ctx, x - 170, groundY - 122, 340, 78, 18);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "#687463" : "#3d544e";
+  roundedRect(ctx, x - 82, groundY - 214, 164, 104, 18);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "rgba(126, 190, 191, 0.68)" : "rgba(126, 190, 191, 0.2)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 78, 122, 24, 0, 0, Math.PI * 2);
+  ctx.fill();
+  if (fixed) {
+    drawWaterDrip(ctx, x, groundY - 184, time);
+    drawWaterDrip(ctx, x - 42, groundY - 150, time + 0.4);
+    drawWaterDrip(ctx, x + 42, groundY - 150, time + 0.8);
+  }
+}
+
+function drawCisternHouse(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 500, fixed);
+  [-150, 0, 150].forEach((offset, index) => {
+    drawCisternTank(ctx, x + offset, groundY - 74, fixed, time + index * 0.45);
+  });
+  ctx.strokeStyle = fixed ? "rgba(126, 190, 191, 0.68)" : "rgba(74, 101, 96, 0.62)";
+  ctx.lineWidth = 8;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 150, groundY - 204);
+  ctx.lineTo(x, groundY - 204);
+  ctx.lineTo(x + 150, groundY - 204);
+  ctx.stroke();
+}
+
+function drawGutterBell(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 420, fixed);
+  ctx.fillStyle = fixed ? "#596658" : "#314842";
+  roundedRect(ctx, x - 170, groundY - 280, 340, 74, 8);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(126, 190, 191, 0.72)" : "rgba(74, 101, 96, 0.64)";
+  ctx.lineWidth = 9;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 138, groundY - 244);
+  ctx.bezierCurveTo(x - 62, groundY - 214, x + 54, groundY - 214, x + 134, groundY - 244);
+  ctx.stroke();
+  drawBell(ctx, x, groundY - 142, fixed, time);
+  drawRainBarrelShape(ctx, x, groundY - 56, fixed, time);
+  if (fixed) {
+    drawWaterDrip(ctx, x, groundY - 206, time);
+  }
+}
+
+function drawStormwaterGate(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 500, fixed);
+  ctx.fillStyle = fixed ? "#566357" : "#324842";
+  roundedRect(ctx, x - 220, groundY - 294, 440, 250, 16);
+  ctx.fill();
+  ctx.fillStyle = "#172522";
+  roundedRect(ctx, x - 142, groundY - 232, 284, 188, 14);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "#7b846b" : "#46594f";
+  ctx.lineWidth = 12;
+  [-96, -48, 0, 48, 96].forEach((offset) => {
+    ctx.beginPath();
+    ctx.moveTo(x + offset, groundY - 226);
+    ctx.lineTo(x + offset, fixed ? groundY - 82 : groundY - 44);
+    ctx.stroke();
+  });
+  ctx.strokeStyle = fixed ? "rgba(126, 190, 191, 0.72)" : "rgba(126, 190, 191, 0.22)";
+  ctx.lineWidth = fixed ? 10 : 5;
+  ctx.beginPath();
+  ctx.moveTo(x - 150, groundY - 46);
+  ctx.bezierCurveTo(x - 72, groundY - 18, x + 74, groundY - 18, x + 150, groundY - 46);
+  ctx.stroke();
+  drawValveWheel(ctx, x + 266, groundY - 172, fixed, time);
+}
+
 
 function drawKeeperCottage(ctx, x, groundY, fixed, time) {
   drawStoneBase(ctx, x, groundY, 390, fixed);
@@ -4071,6 +4296,92 @@ function drawRainBarrelShape(ctx, x, groundY, fixed, time) {
   if (fixed) {
     warmGlow(ctx, x, groundY - 72, 58, 0.26 + Math.sin(time * 4) * 0.04);
   }
+}
+
+function drawWaterDrip(ctx, x, y, time) {
+  drawGutterDrip(ctx, x, y, time, x * 0.01);
+}
+
+function drawPumpHandle(ctx, x, y, fixed, time) {
+  ctx.fillStyle = fixed ? "#60705f" : "#314842";
+  roundedRect(ctx, x - 40, y - 12, 80, 106, 14);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "#d0a76d" : "#716a56";
+  ctx.lineWidth = 9;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x + 12, y - 8);
+  ctx.quadraticCurveTo(x + 80, y - 54 + Math.sin(time * 2) * (fixed ? 5 : 0), x + 110, y - 8);
+  ctx.stroke();
+  ctx.strokeStyle = fixed ? "rgba(126, 190, 191, 0.62)" : "rgba(126, 190, 191, 0.2)";
+  ctx.lineWidth = 6;
+  ctx.beginPath();
+  ctx.moveTo(x - 44, y + 30);
+  ctx.lineTo(x - 86, y + 30);
+  ctx.stroke();
+}
+
+function drawValveWheel(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(fixed ? Math.sin(time * 0.9) * 0.08 : 0);
+  ctx.strokeStyle = fixed ? "#d0a76d" : "#716a56";
+  ctx.lineWidth = 6;
+  ctx.beginPath();
+  ctx.arc(0, 0, 26, 0, Math.PI * 2);
+  ctx.moveTo(-26, 0);
+  ctx.lineTo(26, 0);
+  ctx.moveTo(0, -26);
+  ctx.lineTo(0, 26);
+  ctx.stroke();
+  ctx.restore();
+  if (fixed) {
+    warmGlow(ctx, x, y, 44, 0.12 + Math.sin(time * 4) * 0.02);
+  }
+}
+
+function drawCloth(ctx, x, y, fixed) {
+  ctx.fillStyle = fixed ? "#66796d" : "#3d514a";
+  roundedRect(ctx, x - 34, y - 8, 68, 54, 7);
+  ctx.fill();
+  ctx.strokeStyle = "rgba(18, 28, 27, 0.35)";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(x, y - 6);
+  ctx.lineTo(x, y + 44);
+  ctx.stroke();
+}
+
+function drawGardenStem(ctx, x, y, fixed, time) {
+  ctx.strokeStyle = fixed ? "#7fa174" : "#476251";
+  ctx.lineWidth = 5;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x, y + 42);
+  ctx.quadraticCurveTo(x + Math.sin(time) * 12, y + 8, x, y - 26);
+  ctx.stroke();
+  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.62)" : "rgba(126, 190, 191, 0.16)";
+  ctx.beginPath();
+  ctx.ellipse(x - 18, y - 6, 22, 10, -0.45, 0, Math.PI * 2);
+  ctx.ellipse(x + 18, y - 18, 22, 10, 0.45, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawCisternTank(ctx, x, groundY, fixed, time) {
+  ctx.fillStyle = fixed ? "#5a624f" : "#344941";
+  roundedRect(ctx, x - 58, groundY - 160, 116, 152, 18);
+  ctx.fill();
+  ctx.strokeStyle = "rgba(19, 29, 27, 0.48)";
+  ctx.lineWidth = 5;
+  [-116, -72, -28].forEach((offset) => {
+    ctx.beginPath();
+    ctx.moveTo(x - 54, groundY + offset);
+    ctx.lineTo(x + 54, groundY + offset);
+    ctx.stroke();
+  });
+  ctx.fillStyle = fixed ? `rgba(126, 190, 191, ${0.34 + Math.sin(time * 3) * 0.04})` : "rgba(126, 190, 191, 0.12)";
+  roundedRect(ctx, x - 8, groundY - 130, 16, 82, 8);
+  ctx.fill();
 }
 
 function drawFootbridge(ctx, bridge, time) {

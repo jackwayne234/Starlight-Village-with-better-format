@@ -64,16 +64,16 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 48 | chapter-five/storm-shutters | Storm Shutters: Lock tower shutters in a wind-safe sequence. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/storm-shutters-painted.png` |
 | 49 | chapter-five/relay-balcony | Relay Balcony: Connect balcony relays for a wider beacon sweep. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/relay-balcony-painted.png` |
 | 50 | chapter-five/hill-descent | Hill Descent: Light the downward path toward Rainbarrel Row. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/hill-descent-painted.png` |
-| 51 | chapter-six/rainbarrel-row | Rainbarrel Row: Route stormwater through barrels and gutters. | exists/review | `assets/sprites/world/rainbarrel-row-painted.png` |
-| 52 | chapter-six/rooftop-channels | Rooftop Channels: Turn roof channels to keep water out of homes. | generated | `assets/sprites/world/rooftop-channels-painted.png` |
-| 53 | chapter-six/flooded-cellar | Flooded Cellar: Pump water from a cellar by ordering valves correctly. | generated | `assets/sprites/world/flooded-cellar-painted.png` |
-| 54 | chapter-six/laundry-lines | Laundry Lines: Raise and lower lines to create a dry crossing. | generated | `assets/sprites/world/laundry-lines-painted.png` |
-| 55 | chapter-six/pump-alley | Pump Alley: Restart a shared hand pump with pipe-routing. | generated | `assets/sprites/world/pump-alley-painted.png` |
-| 56 | chapter-six/overflow-garden | Overflow Garden: Redirect extra water into garden beds. | generated | `assets/sprites/world/overflow-garden-painted.png` |
-| 57 | chapter-six/neighborhood-fountain | Neighborhood Fountain: Restore a tiny fountain that marks the district center. | generated | `assets/sprites/world/neighborhood-fountain-painted.png` |
-| 58 | chapter-six/cistern-house | Cistern House: Balance cistern levels across three tanks. | generated | `assets/sprites/world/cistern-house-painted.png` |
-| 59 | chapter-six/gutter-bell | Gutter Bell: Make a water bell ring when overflow is safe. | generated | `assets/sprites/world/gutter-bell-painted.png` |
-| 60 | chapter-six/stormwater-gate | Stormwater Gate: Open the big drain gate toward the outer village. | generated | `assets/sprites/world/stormwater-gate-painted.png` |
+| 51 | chapter-six/rainbarrel-row | Rainbarrel Row: Route stormwater through barrels and gutters. | reviewed/keep existing side-view treatment | `assets/sprites/world/rain-barrel-trimmed.png` |
+| 52 | chapter-six/rooftop-channels | Rooftop Channels: Turn roof channels to keep water out of homes. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/rooftop-channels-painted.png` |
+| 53 | chapter-six/flooded-cellar | Flooded Cellar: Pump water from a cellar by ordering valves correctly. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/flooded-cellar-painted.png` |
+| 54 | chapter-six/laundry-lines | Laundry Lines: Raise and lower lines to create a dry crossing. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/laundry-lines-painted.png` |
+| 55 | chapter-six/pump-alley | Pump Alley: Restart a shared hand pump with pipe-routing. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/pump-alley-painted.png` |
+| 56 | chapter-six/overflow-garden | Overflow Garden: Redirect extra water into garden beds. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/overflow-garden-painted.png` |
+| 57 | chapter-six/neighborhood-fountain | Neighborhood Fountain: Restore a tiny fountain that marks the district center. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/neighborhood-fountain-painted.png` |
+| 58 | chapter-six/cistern-house | Cistern House: Balance cistern levels across three tanks. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/cistern-house-painted.png` |
+| 59 | chapter-six/gutter-bell | Gutter Bell: Make a water bell ring when overflow is safe. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/gutter-bell-painted.png` |
+| 60 | chapter-six/stormwater-gate | Stormwater Gate: Open the big drain gate toward the outer village. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/stormwater-gate-painted.png` |
 | 61 | chapter-seven/old-orchard | Old Orchard: Wake the orchard's irrigation line under old roots. | generated | `assets/sprites/world/old-orchard-painted.png` |
 | 62 | chapter-seven/windfallen-fruit | Windfallen Fruit: Sort fallen fruit from blocked channels. | generated | `assets/sprites/world/windfallen-fruit-painted.png` |
 | 63 | chapter-seven/branch-bridge | Branch Bridge: Move branch braces into a safe walking path. | generated | `assets/sprites/world/branch-bridge-painted.png` |
