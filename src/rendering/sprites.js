@@ -42,6 +42,7 @@ export const sprites = {
     frogsongLock: loadImage(`${WORLD}/frogsong-lock-painted.png?v=painted-route-ch2`),
     sunkenSignpost: loadImage(`${WORLD}/sunken-signpost-painted.png?v=painted-route-ch2`),
     mistPool: loadImage(`${WORLD}/mist-pool-painted.png?v=painted-route-ch2`),
+    mossGate: loadImage(`${WORLD}/moss-gate-painted.png?v=painted-route-ch2`),
     tree: loadImage(`${WORLD}/tree-trimmed.png`),
     pine: loadImage(`${WORLD}/pine-tree-trimmed.png`),
     lamp: loadImage(`${WORLD}/lamp-trimmed.png`),

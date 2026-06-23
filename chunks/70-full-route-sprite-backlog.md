@@ -29,7 +29,7 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 14 | chapter-two/frogsong-lock | Frogsong Lock: Match short call patterns to open a reed gate. | wired | `assets/sprites/world/frogsong-lock-painted.png` |
 | 15 | chapter-two/sunken-signpost | Sunken Signpost: Rebuild a half-submerged direction marker without using arrows. | wired | `assets/sprites/world/sunken-signpost-painted.png` |
 | 16 | chapter-two/mist-pool | Mist Pool: Tune warm vents to thin the mist. | wired | `assets/sprites/world/mist-pool-painted.png` |
-| 17 | chapter-two/moss-gate | Moss Gate: Feed water through root lines to open a mossy gate. | generated | `assets/sprites/world/moss-gate-painted.png` |
+| 17 | chapter-two/moss-gate | Moss Gate: Feed water through root lines to open a mossy gate. | wired | `assets/sprites/world/moss-gate-painted.png` |
 | 18 | chapter-two/old-fen-shrine | Old Fen Shrine: Align rain bowls so drops ring the shrine stones. | generated | `assets/sprites/world/old-fen-shrine-painted.png` |
 | 19 | chapter-two/glowfen-ferry | Glowfen Ferry: Repair the ferry pulley and cross the dark water. | generated | `assets/sprites/world/glowfen-ferry-painted.png` |
 | 20 | chapter-two/reedwatch-bank | Reedwatch Bank: Light reed markers to show the way back to town. | generated | `assets/sprites/world/reedwatch-bank-painted.png` |

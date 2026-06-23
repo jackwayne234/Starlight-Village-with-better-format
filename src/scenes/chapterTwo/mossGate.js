@@ -13,6 +13,14 @@ export function createMossGateScene() {
   scene.showSignpost = false;
   scene.backdrop = { moonX: 940, moonY: 142, cloudDrift: 1.02, hillOffset: 62, ridgeOffset: 96 };
   scene.mossGate = { x: 1160, groundY: 652, fixed: false, gateOpen: false };
+  scene.paintedLandmark = {
+    sprite: "mossGate",
+    state: scene.mossGate,
+    x: 1160,
+    groundY: 674,
+    height: 500,
+    glow: { heightRatio: 0.52, radius: 180, fixedIntensity: 0.44, dimIntensity: 0.14, pulse: 0.06 }
+  };
   scene.layers = {
     trees: [
       { x: 55, y: 264, scale: 1.62 },
@@ -40,10 +48,7 @@ export function createMossGateScene() {
       { x: 1980, y: 638, active: false }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 920, y: 624, kind: "seed" },
-      { x: 1390, y: 626, kind: "coil" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 330, y: 664, width: 132, height: 20 },
       { x: 1900, y: 660, width: 146, height: 18 }
@@ -63,6 +68,7 @@ export function createMossGateScene() {
       x: 1160,
       y: 552,
       radius: 275,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: moss gate roots are dry and locked.",
