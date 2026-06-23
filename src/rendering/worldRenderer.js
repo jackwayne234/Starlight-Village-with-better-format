@@ -505,6 +505,9 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.summitPath) {
     drawSummitPath(ctx, scene.summitPath, time, scene.world.powerLevel);
   }
+  if (scene.chapterFiveLandmark) {
+    drawChapterFiveLandmark(ctx, scene.chapterFiveLandmark, time, scene.world.powerLevel);
+  }
   if (scene.bridge) {
     drawFootbridge(ctx, scene.bridge, time);
   }
@@ -561,6 +564,407 @@ function drawPaintedLandmark(ctx, landmark, time, powerLevel) {
   }
 
   return true;
+}
+
+function drawChapterFiveLandmark(ctx, landmark, time, powerLevel) {
+  const fixed = landmark.fixed || powerLevel > 0.95;
+  const x = landmark.x;
+  const groundY = landmark.groundY;
+
+  ctx.save();
+  drawRidgeShadow(ctx, x, groundY);
+
+  if (landmark.type === "keeperCottage") {
+    drawKeeperCottage(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "lensRoom") {
+    drawLensRoom(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "fuelShed") {
+    drawFuelShed(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "mirrorArray") {
+    drawMirrorArray(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "bellPlatform") {
+    drawBellPlatform(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "oldFlagRoom") {
+    drawOldFlagRoom(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "stormShutters") {
+    drawStormShutters(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "relayBalcony") {
+    drawRelayBalcony(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "hillDescent") {
+    drawHillDescent(ctx, x, groundY, fixed, time);
+  }
+
+  if (fixed) {
+    warmGlow(ctx, x, groundY - 172, 265, 0.24 + Math.sin(time * 3) * 0.035);
+  }
+
+  ctx.restore();
+}
+
+function drawRidgeShadow(ctx, x, groundY) {
+  ctx.fillStyle = "rgba(12, 28, 28, 0.68)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 18, 465, 78, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawKeeperCottage(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 390, fixed);
+  ctx.fillStyle = fixed ? "#5f6858" : "#354b45";
+  roundedRect(ctx, x - 172, groundY - 242, 344, 206, 10);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "#324741" : "#223731";
+  ctx.beginPath();
+  ctx.moveTo(x - 202, groundY - 242);
+  ctx.lineTo(x, groundY - 330);
+  ctx.lineTo(x + 202, groundY - 242);
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle = "rgba(12, 22, 22, 0.46)";
+  ctx.lineWidth = 6;
+  for (let i = -150; i <= 150; i += 50) {
+    ctx.beginPath();
+    ctx.moveTo(x + i, groundY - 236);
+    ctx.lineTo(x + i + 26, groundY - 308);
+    ctx.stroke();
+  }
+  drawWarmWindow(ctx, x - 92, groundY - 160, fixed, time);
+  drawWarmWindow(ctx, x + 86, groundY - 160, fixed, time + 0.8);
+  ctx.fillStyle = "#24322e";
+  roundedRect(ctx, x - 34, groundY - 116, 68, 80, 8);
+  ctx.fill();
+  drawChimney(ctx, x + 112, groundY - 294, fixed, time);
+}
+
+function drawLensRoom(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 430, fixed);
+  ctx.fillStyle = fixed ? "#596653" : "#354b45";
+  roundedRect(ctx, x - 184, groundY - 248, 368, 150, 12);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "#6f7a63" : "#40554e";
+  roundedRect(ctx, x - 148, groundY - 320, 296, 92, 44);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.34)" : "rgba(143, 217, 240, 0.12)";
+  ctx.lineWidth = 6;
+  for (let i = -90; i <= 90; i += 45) {
+    ctx.beginPath();
+    ctx.moveTo(x + i, groundY - 314);
+    ctx.lineTo(x + i, groundY - 136);
+    ctx.stroke();
+  }
+  drawBeaconLens(ctx, x, groundY - 214, 76, fixed, time);
+  drawBeaconLens(ctx, x - 96, groundY - 192, 42, fixed, time + 0.7);
+  drawBeaconLens(ctx, x + 96, groundY - 192, 42, fixed, time + 1.3);
+}
+
+function drawFuelShed(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 390, fixed);
+  ctx.fillStyle = fixed ? "#596653" : "#344941";
+  roundedRect(ctx, x - 176, groundY - 232, 352, 196, 10);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "#334942" : "#23352f";
+  ctx.beginPath();
+  ctx.moveTo(x - 204, groundY - 232);
+  ctx.lineTo(x, groundY - 300);
+  ctx.lineTo(x + 204, groundY - 232);
+  ctx.closePath();
+  ctx.fill();
+  [-92, 0, 92].forEach((offset, index) => drawFuelValve(ctx, x + offset, groundY - 142, fixed, time + index * 0.4));
+  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.4)" : "rgba(84, 101, 91, 0.55)";
+  ctx.lineWidth = 7;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 148, groundY - 78);
+  ctx.bezierCurveTo(x - 60, groundY - 40, x + 70, groundY - 40, x + 150, groundY - 78);
+  ctx.stroke();
+  drawWarmWindow(ctx, x + 134, groundY - 198, fixed, time);
+}
+
+function drawMirrorArray(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 470, fixed);
+  ctx.strokeStyle = fixed ? "#6f765f" : "#40534c";
+  ctx.lineWidth = 10;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 290, groundY - 44);
+  ctx.lineTo(x - 210, groundY - 156);
+  ctx.lineTo(x, groundY - 190);
+  ctx.lineTo(x + 210, groundY - 156);
+  ctx.lineTo(x + 290, groundY - 44);
+  ctx.stroke();
+  [-210, 0, 210].forEach((offset, index) => drawMirror(ctx, x + offset, groundY - 182 + (index === 1 ? -32 : 0), fixed, time + index * 0.6));
+  if (fixed) {
+    drawLightBeam(ctx, x - 206, groundY - 190, x, groundY - 226, time);
+    drawLightBeam(ctx, x, groundY - 226, x + 206, groundY - 190, time + 0.4);
+  }
+}
+
+function drawBellPlatform(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 420, fixed);
+  ctx.strokeStyle = fixed ? "#6d765f" : "#40534c";
+  ctx.lineWidth = 16;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 188, groundY - 34);
+  ctx.lineTo(x - 188, groundY - 268);
+  ctx.lineTo(x + 188, groundY - 268);
+  ctx.lineTo(x + 188, groundY - 34);
+  ctx.stroke();
+  ctx.strokeStyle = "rgba(24, 35, 31, 0.5)";
+  ctx.lineWidth = 5;
+  [-138, -70, 0, 70, 138].forEach((offset) => {
+    ctx.beginPath();
+    ctx.moveTo(x + offset, groundY - 34);
+    ctx.lineTo(x + offset, groundY - 268);
+    ctx.stroke();
+  });
+  drawBell(ctx, x, groundY - 188, fixed, time);
+  drawBellStriker(ctx, x, groundY - 100, fixed, time);
+}
+
+function drawOldFlagRoom(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 390, fixed);
+  ctx.fillStyle = fixed ? "#596653" : "#344941";
+  roundedRect(ctx, x - 170, groundY - 238, 340, 202, 10);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "#2f443e" : "#21352f";
+  roundedRect(ctx, x - 140, groundY - 284, 280, 62, 8);
+  ctx.fill();
+  const colors = fixed ? ["#6d3e43", "#46605e", "#7a6b45"] : ["#4b3438", "#344848", "#544d3c"];
+  colors.forEach((color, index) => {
+    ctx.fillStyle = color;
+    roundedRect(ctx, x - 112 + index * 82, groundY - 174, 60, 58, 6);
+    ctx.fill();
+    ctx.strokeStyle = "rgba(20, 26, 24, 0.5)";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+  });
+  drawWarmWindow(ctx, x, groundY - 218, fixed, time);
+}
+
+function drawStormShutters(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 410, fixed);
+  ctx.fillStyle = fixed ? "#586553" : "#354b45";
+  roundedRect(ctx, x - 172, groundY - 278, 344, 242, 10);
+  ctx.fill();
+  [-96, 0, 96].forEach((offset, index) => {
+    const closed = fixed ? 0 : (index - 1) * 0.18;
+    drawShutterPair(ctx, x + offset, groundY - 174, fixed, closed, time + index * 0.4);
+  });
+  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.34)" : "rgba(92, 109, 99, 0.6)";
+  ctx.lineWidth = 6;
+  ctx.beginPath();
+  ctx.moveTo(x - 160, groundY - 78);
+  ctx.lineTo(x + 160, groundY - 78);
+  ctx.stroke();
+}
+
+function drawRelayBalcony(ctx, x, groundY, fixed, time) {
+  drawStoneBase(ctx, x, groundY, 430, fixed);
+  ctx.fillStyle = fixed ? "#586553" : "#354b45";
+  roundedRect(ctx, x - 192, groundY - 214, 384, 92, 10);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "#768166" : "#43564e";
+  ctx.lineWidth = 12;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 214, groundY - 118);
+  ctx.lineTo(x + 214, groundY - 118);
+  ctx.moveTo(x - 184, groundY - 34);
+  ctx.lineTo(x - 184, groundY - 210);
+  ctx.moveTo(x + 184, groundY - 34);
+  ctx.lineTo(x + 184, groundY - 210);
+  ctx.stroke();
+  [-114, 0, 114].forEach((offset, index) => drawRelayBox(ctx, x + offset, groundY - 166, fixed, time + index * 0.5));
+  if (fixed) {
+    drawLightBeam(ctx, x - 156, groundY - 180, x + 156, groundY - 180, time);
+  }
+}
+
+function drawHillDescent(ctx, x, groundY, fixed, time) {
+  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.42)" : "rgba(92, 109, 99, 0.62)";
+  ctx.lineWidth = 24;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 310, groundY - 208);
+  ctx.bezierCurveTo(x - 172, groundY - 162, x - 120, groundY - 72, x + 70, groundY - 50);
+  ctx.bezierCurveTo(x + 180, groundY - 38, x + 252, groundY - 72, x + 322, groundY - 32);
+  ctx.stroke();
+  drawStoneBase(ctx, x, groundY, 460, fixed);
+  [-260, -92, 92, 260].forEach((offset, index) => {
+    const y = groundY - 190 + index * 46;
+    drawPathLamp(ctx, x + offset, y, fixed, time + index * 0.55);
+  });
+  ctx.strokeStyle = "rgba(52, 61, 55, 0.7)";
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.moveTo(x - 330, groundY - 222);
+  ctx.bezierCurveTo(x - 116, groundY - 144, x - 102, groundY - 80, x + 330, groundY - 48);
+  ctx.stroke();
+}
+
+function drawStoneBase(ctx, x, groundY, width, fixed) {
+  ctx.fillStyle = fixed ? "#4e5c52" : "#2d423c";
+  roundedRect(ctx, x - width / 2, groundY - 66, width, 54, 12);
+  ctx.fill();
+  ctx.strokeStyle = "rgba(12, 22, 22, 0.42)";
+  ctx.lineWidth = 3;
+  for (let sx = x - width / 2 + 34; sx < x + width / 2; sx += 62) {
+    ctx.beginPath();
+    ctx.moveTo(sx, groundY - 64);
+    ctx.lineTo(sx + 10, groundY - 14);
+    ctx.stroke();
+  }
+}
+
+function drawWarmWindow(ctx, x, y, fixed, time) {
+  ctx.fillStyle = fixed ? `rgba(255, 216, 135, ${0.58 + Math.sin(time * 3) * 0.05})` : "rgba(143, 217, 240, 0.12)";
+  roundedRect(ctx, x - 30, y - 24, 60, 48, 6);
+  ctx.fill();
+  if (fixed) {
+    warmGlow(ctx, x, y, 70, 0.18 + Math.sin(time * 3) * 0.03);
+  }
+}
+
+function drawChimney(ctx, x, y, fixed, time) {
+  ctx.fillStyle = fixed ? "#536157" : "#2e423c";
+  roundedRect(ctx, x - 24, y - 78, 48, 92, 7);
+  ctx.fill();
+  ctx.fillStyle = "rgba(222, 235, 221, 0.16)";
+  ctx.beginPath();
+  ctx.ellipse(x + Math.sin(time) * 8, y - 96, 44, 14, -0.1, 0, Math.PI * 2);
+  ctx.ellipse(x + 36 + Math.sin(time * 0.8) * 10, y - 126, 60, 16, 0.04, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawBeaconLens(ctx, x, y, radius, fixed, time) {
+  ctx.fillStyle = fixed ? "rgba(207, 231, 202, 0.52)" : "rgba(143, 217, 240, 0.16)";
+  ctx.beginPath();
+  ctx.ellipse(x, y, radius, radius * 0.78, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "#c4b16f" : "#5d6858";
+  ctx.lineWidth = Math.max(4, radius * 0.12);
+  ctx.stroke();
+  ctx.strokeStyle = fixed ? `rgba(255, 239, 181, ${0.28 + Math.sin(time * 3) * 0.04})` : "rgba(150, 176, 176, 0.16)";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(x - radius * 0.46, y + radius * 0.28);
+  ctx.lineTo(x + radius * 0.42, y - radius * 0.32);
+  ctx.stroke();
+}
+
+function drawFuelValve(ctx, x, y, fixed, time) {
+  ctx.strokeStyle = fixed ? "#d0a76d" : "#716a56";
+  ctx.lineWidth = 6;
+  ctx.beginPath();
+  ctx.arc(x, y, 26, 0, Math.PI * 2);
+  ctx.moveTo(x - 26, y);
+  ctx.lineTo(x + 26, y);
+  ctx.moveTo(x, y - 26);
+  ctx.lineTo(x, y + 26);
+  ctx.stroke();
+  if (fixed) {
+    warmGlow(ctx, x, y, 42, 0.12 + Math.sin(time * 4) * 0.02);
+  }
+}
+
+function drawMirror(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(fixed ? Math.sin(time * 0.8) * 0.03 : -0.16);
+  ctx.fillStyle = fixed ? "rgba(210, 234, 220, 0.52)" : "rgba(140, 166, 166, 0.2)";
+  ctx.beginPath();
+  ctx.ellipse(0, 0, 48, 66, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "#c4a86d" : "#5f6858";
+  ctx.lineWidth = 8;
+  ctx.stroke();
+  ctx.strokeStyle = "#4a554a";
+  ctx.lineWidth = 7;
+  ctx.beginPath();
+  ctx.moveTo(0, 66);
+  ctx.lineTo(0, 126);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawLightBeam(ctx, x1, y1, x2, y2, time) {
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  ctx.strokeStyle = `rgba(255, 239, 181, ${0.2 + Math.sin(time * 4) * 0.03})`;
+  ctx.lineWidth = 7;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x2, y2);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawBell(ctx, x, y, fixed, time) {
+  ctx.fillStyle = fixed ? "#b89054" : "#746b52";
+  ctx.beginPath();
+  ctx.moveTo(x - 54, y + 48);
+  ctx.quadraticCurveTo(x - 38, y - 42, x, y - 48);
+  ctx.quadraticCurveTo(x + 38, y - 42, x + 54, y + 48);
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle = "rgba(29, 32, 28, 0.5)";
+  ctx.lineWidth = 5;
+  ctx.stroke();
+  if (fixed) {
+    warmGlow(ctx, x, y, 105, 0.16 + Math.sin(time * 4) * 0.03);
+  }
+}
+
+function drawBellStriker(ctx, x, y, fixed, time) {
+  ctx.strokeStyle = fixed ? "#d0a76d" : "#716a56";
+  ctx.lineWidth = 8;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 90, y + 18);
+  ctx.lineTo(x + (fixed ? Math.sin(time * 4) * 8 : -24), y - 40);
+  ctx.stroke();
+}
+
+function drawShutterPair(ctx, x, y, fixed, angle, time) {
+  ctx.fillStyle = fixed ? "rgba(255, 216, 135, 0.34)" : "rgba(143, 217, 240, 0.08)";
+  roundedRect(ctx, x - 34, y - 44, 68, 88, 5);
+  ctx.fill();
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle + Math.sin(time * 2) * (fixed ? 0 : 0.02));
+  ctx.fillStyle = fixed ? "#4a5a51" : "#293d37";
+  roundedRect(ctx, -56, -48, 38, 96, 5);
+  roundedRect(ctx, 18, -48, 38, 96, 5);
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawRelayBox(ctx, x, y, fixed, time) {
+  ctx.fillStyle = fixed ? "#63705b" : "#344941";
+  roundedRect(ctx, x - 38, y - 32, 76, 64, 8);
+  ctx.fill();
+  ctx.fillStyle = fixed ? `rgba(216, 244, 157, ${0.5 + Math.sin(time * 4) * 0.06})` : "rgba(143, 217, 240, 0.12)";
+  ctx.beginPath();
+  ctx.arc(x - 16, y - 2, 8, 0, Math.PI * 2);
+  ctx.arc(x + 16, y - 2, 8, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawPathLamp(ctx, x, y, fixed, time) {
+  ctx.strokeStyle = fixed ? "#6d765f" : "#40534c";
+  ctx.lineWidth = 8;
+  ctx.beginPath();
+  ctx.moveTo(x, y + 84);
+  ctx.lineTo(x, y);
+  ctx.stroke();
+  ctx.fillStyle = fixed ? `rgba(255, 216, 135, ${0.58 + Math.sin(time * 3) * 0.05})` : "rgba(143, 217, 240, 0.12)";
+  roundedRect(ctx, x - 18, y - 34, 36, 40, 6);
+  ctx.fill();
+  if (fixed) {
+    warmGlow(ctx, x, y - 12, 74, 0.18 + Math.sin(time * 3) * 0.03);
+  }
 }
 
 function drawMossGate(ctx, gate, time, powerLevel) {

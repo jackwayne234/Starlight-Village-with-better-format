@@ -55,15 +55,15 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 39 | chapter-four/summit-path | Summit Path: Light path markers through the high mist. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/summit-path-painted.png` |
 | 40 | chapter-four/beacon-approach | Beacon Approach: Open the final gate before Beacon Hill. | wired | `assets/sprites/world/beacon-approach-painted.png` |
 | 41 | chapter-five/beacon-hill | Beacon Hill Signal Tower: Restore the tower beacon and send light across the storm. | reviewed/keep existing side-view treatment | `assets/sprites/world/beacon-tower-large-door.png` |
-| 42 | chapter-five/keeper-cottage | Keeper's Cottage: Route chimney draft and stove sparks to warm the cottage. | generated | `assets/sprites/world/keeper-cottage-painted.png` |
-| 43 | chapter-five/lens-room | Lens Room: Align lenses so the beacon beam focuses. | generated | `assets/sprites/world/lens-room-painted.png` |
-| 44 | chapter-five/fuel-shed | Fuel Shed: Sort fuel valves so the tower burns steadily. | generated | `assets/sprites/world/fuel-shed-painted.png` |
-| 45 | chapter-five/mirror-array | Mirror Array: Turn mirrors to bounce light toward the village. | generated | `assets/sprites/world/mirror-array-painted.png` |
-| 46 | chapter-five/bell-platform | Bell Platform: Repair a bell striker that signals the lowlands. | generated | `assets/sprites/world/bell-platform-painted.png` |
-| 47 | chapter-five/old-flag-room | Old Flag Room: Restore folded storm flags as memory objects, not hanging clutter. | generated | `assets/sprites/world/old-flag-room-painted.png` |
-| 48 | chapter-five/storm-shutters | Storm Shutters: Lock tower shutters in a wind-safe sequence. | generated | `assets/sprites/world/storm-shutters-painted.png` |
-| 49 | chapter-five/relay-balcony | Relay Balcony: Connect balcony relays for a wider beacon sweep. | generated | `assets/sprites/world/relay-balcony-painted.png` |
-| 50 | chapter-five/hill-descent | Hill Descent: Light the downward path toward Rainbarrel Row. | generated | `assets/sprites/world/hill-descent-painted.png` |
+| 42 | chapter-five/keeper-cottage | Keeper's Cottage: Route chimney draft and stove sparks to warm the cottage. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/keeper-cottage-painted.png` |
+| 43 | chapter-five/lens-room | Lens Room: Align lenses so the beacon beam focuses. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/lens-room-painted.png` |
+| 44 | chapter-five/fuel-shed | Fuel Shed: Sort fuel valves so the tower burns steadily. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/fuel-shed-painted.png` |
+| 45 | chapter-five/mirror-array | Mirror Array: Turn mirrors to bounce light toward the village. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/mirror-array-painted.png` |
+| 46 | chapter-five/bell-platform | Bell Platform: Repair a bell striker that signals the lowlands. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/bell-platform-painted.png` |
+| 47 | chapter-five/old-flag-room | Old Flag Room: Restore folded storm flags as memory objects, not hanging clutter. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/old-flag-room-painted.png` |
+| 48 | chapter-five/storm-shutters | Storm Shutters: Lock tower shutters in a wind-safe sequence. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/storm-shutters-painted.png` |
+| 49 | chapter-five/relay-balcony | Relay Balcony: Connect balcony relays for a wider beacon sweep. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/relay-balcony-painted.png` |
+| 50 | chapter-five/hill-descent | Hill Descent: Light the downward path toward Rainbarrel Row. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/hill-descent-painted.png` |
 | 51 | chapter-six/rainbarrel-row | Rainbarrel Row: Route stormwater through barrels and gutters. | exists/review | `assets/sprites/world/rainbarrel-row-painted.png` |
 | 52 | chapter-six/rooftop-channels | Rooftop Channels: Turn roof channels to keep water out of homes. | generated | `assets/sprites/world/rooftop-channels-painted.png` |
 | 53 | chapter-six/flooded-cellar | Flooded Cellar: Pump water from a cellar by ordering valves correctly. | generated | `assets/sprites/world/flooded-cellar-painted.png` |

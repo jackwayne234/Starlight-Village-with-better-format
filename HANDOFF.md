@@ -20,6 +20,15 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - `chapter-three/mossline-switchyard`
 - `chapter-four/stormedge-rise`
 - `chapter-five/beacon-hill`
+- `chapter-five/keeper-cottage`
+- `chapter-five/lens-room`
+- `chapter-five/fuel-shed`
+- `chapter-five/mirror-array`
+- `chapter-five/bell-platform`
+- `chapter-five/old-flag-room`
+- `chapter-five/storm-shutters`
+- `chapter-five/relay-balcony`
+- `chapter-five/hill-descent`
 - `chapter-six/rainbarrel-row`
 
 ## Current Playtest State
@@ -94,6 +103,7 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Chapter 4 route sprite wiring continued on `2026-06-23`: Summit Path was reviewed and kept on a new bespoke side-view marker-path renderer because `summit-path-painted.png` has a green-screen background, cropped neighboring fragments at both side edges, and an angled/isometric path view. The new scene has no random cottages, loose repair props, broken-branch clutter, or generic marker, preserves the rainy ridge/forest mood, and routes onward to Beacon Approach. Local preview and source checks passed at `http://127.0.0.1:5267/?scene=chapter-four/summit-path&x=1120&preview=1`; browser screenshot verification was not available in this thread because no callable browser-control tool was exposed. See `chunks/75-chapter-four-route-sprite-wiring.md`.
 - Chapter 4 route sprite wiring finished on `2026-06-23`: Beacon Approach now uses the cleaned `beacon-approach-painted.png` gate through the shared `paintedLandmark` path because the asset reads as a strong front-facing route landmark after green-screen cleanup. Chapter 4 now has no random cottages, loose repair props, broken-branch clutter, or generic markers across all 10 scenes, and the route flows onward to Beacon Hill. Local preview and source checks passed at `http://127.0.0.1:5268/?scene=chapter-four/beacon-approach&x=1120&preview=1`; browser screenshot verification was not available in this thread because no callable browser-control tool was exposed. See `chunks/75-chapter-four-route-sprite-wiring.md`.
 - Chapter 5 route sprite wiring started on `2026-06-23`: Beacon Hill was reviewed and kept on the existing large-door beacon treatment because `beacon-tower-large-door.png` is the current strong side-view/front-facing tower landmark and `beacon-hill-painted.png` is not present in the workspace. The scene now hides the generic repair marker and its old Rainbarrel Row route text was corrected to point onward to Keeper's Cottage. Beacon Hill still has no random cottages, loose repair props, broken-branch clutter, cable/flag clutter, or generic marker. Local preview and source checks passed at `http://127.0.0.1:5269/?scene=chapter-five/beacon-hill&x=1120&preview=1`; browser screenshot verification was not available in this thread because no callable browser-control tool was exposed. See `chunks/76-chapter-five-route-sprite-wiring.md`.
+- Chapter 5 route sprite wiring finished on `2026-06-23`: Keeper's Cottage through Hill Descent were reviewed against their generated `*-painted.png` assets and kept on bespoke side-view landmark treatments because the generated assets lean angled/three-quarter/isometric rather than matching the game camera. All nine new scenes have one strong side-view landmark, no random cottages, no loose repair props, no broken-branch clutter, and no generic markers. The route now flows from Beacon Hill through Keeper's Cottage, Lens Room, Fuel Shed, Mirror Array, Bell Platform, Old Flag Room, Storm Shutters, Relay Balcony, and Hill Descent, then onward to Rainbarrel Row. Local preview, source, full-route, asset, and in-app browser checks passed at `http://127.0.0.1:5271/?scene=chapter-five/<scene>&x=1120&preview=1`. See `chunks/76-chapter-five-route-sprite-wiring.md`.
 - Workshop Lift became bespoke on `2026-06-22`: it now has a crank, platform, roof shelf, raised/repaired visual state, route checks, and a chunk note in `chunks/42-workshop-lift-scene.md`.
 - Schoolhouse Lanterns became bespoke on `2026-06-22`: it now has a schoolhouse facade, three lantern posts, dark/lit chain state, route checks, and a chunk note in `chunks/43-schoolhouse-lanterns-scene.md`.
 - Market Awnings became bespoke on `2026-06-22`: it now has market stalls, colored awnings, dark/draining runoff state, route checks, and a chunk note in `chunks/44-market-awnings-scene.md`.
@@ -131,7 +141,7 @@ Continue the route-order sprite wiring pass.
 
 Next likely stop:
 
-1. Continue route-order sprite wiring at `chapter-five/beacon-hill`.
-2. Continue route-order sprite wiring at `chapter-five/keeper-cottage`.
+1. Continue route-order sprite wiring at `chapter-six/rainbarrel-row`.
+2. Continue route-order sprite wiring at `chapter-six/rooftop-channels`.
 3. Keep the format rule: one strong landmark sprite, no random houses, no loose repair props, and no generic marker unless intentionally needed.
 4. Preview each edited scene with `?scene=<scene-id>&preview=1`.
