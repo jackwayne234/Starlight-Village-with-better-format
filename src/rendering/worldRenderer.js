@@ -490,6 +490,9 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.weatherVaneRoof) {
     drawWeatherVaneRoof(ctx, scene.weatherVaneRoof, time, scene.world.powerLevel);
   }
+  if (scene.cliffRopeLift) {
+    drawCliffRopeLift(ctx, scene.cliffRopeLift, time, scene.world.powerLevel);
+  }
   if (scene.bridge) {
     drawFootbridge(ctx, scene.bridge, time);
   }
@@ -3946,6 +3949,214 @@ function drawWeatherVaneMast(ctx, x, y, fixed, time) {
     warmGlow(ctx, 0, -118, 72, 0.34 + Math.sin(time * 4) * 0.05);
   }
 
+  ctx.restore();
+}
+
+function drawCliffRopeLift(ctx, lift, time, powerLevel = 0) {
+  const { x, groundY } = lift;
+  const fixed = lift.fixed || lift.basketRaised || powerLevel > 0.95;
+  const pulse = 0.5 + Math.sin(time * 3.2) * 0.5;
+  const basketY = groundY - (fixed ? 224 : 176 + Math.sin(time * 1.4) * 4);
+
+  ctx.save();
+
+  const skyGlow = ctx.createLinearGradient(x, groundY - 410, x, groundY - 100);
+  skyGlow.addColorStop(0, fixed ? "rgba(105, 179, 190, 0.15)" : "rgba(65, 101, 124, 0.12)");
+  skyGlow.addColorStop(1, "rgba(18, 30, 39, 0)");
+  ctx.fillStyle = skyGlow;
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 246, 470, 168, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "rgba(13, 24, 27, 0.72)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 8, 520, 74, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+
+  drawCliffFace(ctx, x - 330, groundY, 250, 330, fixed, time, -1);
+  drawCliffFace(ctx, x + 330, groundY, 250, 330, fixed, time, 1);
+  drawLiftPost(ctx, x - 312, groundY - 126, fixed, time, -0.05);
+  drawLiftPost(ctx, x + 312, groundY - 126, fixed, time, 0.05);
+  drawLiftRope(ctx, x - 312, groundY - 430, x + 312, groundY - 430, fixed);
+  drawLiftRope(ctx, x - 242, groundY - 414, x - 86, basketY - 82, fixed);
+  drawLiftRope(ctx, x + 242, groundY - 414, x + 86, basketY - 82, fixed);
+  drawLiftPulley(ctx, x - 86, groundY - 430, fixed, time);
+  drawLiftPulley(ctx, x + 86, groundY - 430, fixed, time + 0.7);
+  drawLiftBasket(ctx, x, basketY, fixed, time);
+  drawLiftGuideLamp(ctx, x - 214, groundY - 322, fixed, time, 0);
+  drawLiftGuideLamp(ctx, x + 214, groundY - 322, fixed, time, 1);
+
+  if (fixed) {
+    warmGlow(ctx, x, basketY - 54, 220, 0.28 + pulse * 0.06);
+    warmGlow(ctx, x, groundY - 418, 160, 0.2 + pulse * 0.05);
+  } else {
+    warmGlow(ctx, x, basketY - 54, 150, 0.1 + powerLevel * 0.12);
+  }
+
+  ctx.restore();
+}
+
+function drawCliffFace(ctx, x, groundY, width, height, fixed, time, side) {
+  const gradient = ctx.createLinearGradient(x, groundY - height, x, groundY);
+  gradient.addColorStop(0, fixed ? "#344f4f" : "#243b40");
+  gradient.addColorStop(0.56, fixed ? "#263c3c" : "#1a2e34");
+  gradient.addColorStop(1, "#102129");
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.moveTo(x - width / 2, groundY - 22);
+  ctx.lineTo(x - width * 0.44, groundY - height + 42);
+  ctx.quadraticCurveTo(x - width * 0.18, groundY - height - 12, x + width * 0.3, groundY - height + 10);
+  ctx.lineTo(x + width / 2, groundY - 28);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.strokeStyle = fixed ? "rgba(168, 204, 190, 0.18)" : "rgba(128, 174, 181, 0.14)";
+  ctx.lineWidth = 4;
+  ctx.lineCap = "round";
+  for (let i = 0; i < 4; i += 1) {
+    const rockX = x - width * 0.28 + i * width * 0.18;
+    ctx.beginPath();
+    ctx.moveTo(rockX, groundY - height + 88 + i * 18);
+    ctx.quadraticCurveTo(rockX + side * 28, groundY - height + 160 + Math.sin(time + i) * 4, rockX - side * 18, groundY - 70);
+    ctx.stroke();
+  }
+
+  ctx.fillStyle = fixed ? "rgba(126, 149, 93, 0.54)" : "rgba(75, 104, 77, 0.46)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - height + 28, width * 0.44, 22, -0.04, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawLiftPost(ctx, x, y, fixed, time, lean) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(lean + Math.sin(time * 1.2) * 0.01);
+  ctx.strokeStyle = fixed ? "#6c4b2d" : "#4f382b";
+  ctx.lineWidth = 16;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(0, 116);
+  ctx.lineTo(0, -190);
+  ctx.stroke();
+
+  ctx.strokeStyle = fixed ? "rgba(224, 190, 122, 0.28)" : "rgba(151, 190, 190, 0.16)";
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(-5, 86);
+  ctx.lineTo(3, -162);
+  ctx.stroke();
+
+  ctx.strokeStyle = "#7b5630";
+  ctx.lineWidth = 7;
+  for (let i = -1; i <= 1; i += 1) {
+    ctx.beginPath();
+    ctx.moveTo(-22, -102 + i * 42);
+    ctx.quadraticCurveTo(0, -88 + i * 42, 22, -104 + i * 42);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawLiftRope(ctx, x1, y1, x2, y2, fixed) {
+  ctx.save();
+  ctx.strokeStyle = fixed ? "#b98348" : "#7a5535";
+  ctx.lineWidth = 7;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.quadraticCurveTo((x1 + x2) / 2, Math.min(y1, y2) + 22, x2, y2);
+  ctx.stroke();
+
+  ctx.strokeStyle = fixed ? "rgba(246, 216, 142, 0.26)" : "rgba(183, 216, 213, 0.13)";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawLiftPulley(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(time * (fixed ? 0.45 : 0.16));
+  ctx.fillStyle = fixed ? "#8c6337" : "#563d2d";
+  ctx.beginPath();
+  ctx.arc(0, 0, 35, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "#e0b96f" : "#9fae9b";
+  ctx.lineWidth = 7;
+  ctx.stroke();
+  ctx.strokeStyle = "rgba(13, 24, 27, 0.68)";
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(-24, 0);
+  ctx.lineTo(24, 0);
+  ctx.moveTo(0, -24);
+  ctx.lineTo(0, 24);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawLiftBasket(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.fillStyle = "rgba(12, 24, 27, 0.52)";
+  ctx.beginPath();
+  ctx.ellipse(x, y + 70, 164, 24, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  const bodyGradient = ctx.createLinearGradient(x, y - 76, x, y + 64);
+  bodyGradient.addColorStop(0, fixed ? "#8a5f35" : "#5a3b27");
+  bodyGradient.addColorStop(1, fixed ? "#503624" : "#30251f");
+  ctx.fillStyle = bodyGradient;
+  roundedRect(ctx, x - 132, y - 78, 264, 138, 12);
+  ctx.fill();
+
+  ctx.strokeStyle = fixed ? "#1d2930" : "#162329";
+  ctx.lineWidth = 8;
+  roundedRect(ctx, x - 132, y - 78, 264, 138, 12);
+  ctx.stroke();
+
+  ctx.strokeStyle = fixed ? "rgba(241, 198, 111, 0.34)" : "rgba(142, 180, 184, 0.18)";
+  ctx.lineWidth = 5;
+  for (let i = -1; i <= 1; i += 1) {
+    ctx.beginPath();
+    ctx.moveTo(x - 114, y - 26 + i * 34);
+    ctx.lineTo(x + 114, y - 26 + i * 34);
+    ctx.stroke();
+  }
+
+  ctx.strokeStyle = fixed ? "#c48a45" : "#795236";
+  ctx.lineWidth = 6;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 86, y - 78);
+  ctx.lineTo(x - 44, y - 138);
+  ctx.moveTo(x + 86, y - 78);
+  ctx.lineTo(x + 44, y - 138);
+  ctx.stroke();
+
+  ctx.fillStyle = fixed ? `rgba(255, 220, 131, ${0.34 + Math.sin(time * 3) * 0.04})` : "rgba(126, 177, 184, 0.16)";
+  roundedRect(ctx, x - 44, y - 36, 88, 48, 8);
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawLiftGuideLamp(ctx, x, y, fixed, time, index) {
+  const lit = fixed || Math.sin(time * 2.6 + index * 1.4) > 0.3;
+  ctx.save();
+  ctx.strokeStyle = fixed ? "#5e684f" : "#334941";
+  ctx.lineWidth = 7;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x, y + 74);
+  ctx.lineTo(x, y - 40);
+  ctx.stroke();
+
+  ctx.fillStyle = lit ? (fixed ? "rgba(230, 226, 156, 0.82)" : "rgba(255, 196, 100, 0.42)") : "rgba(118, 164, 171, 0.14)";
+  ctx.beginPath();
+  ctx.arc(x, y - 50, 13, 0, Math.PI * 2);
+  ctx.fill();
+  if (lit) {
+    warmGlow(ctx, x, y - 50, fixed ? 72 : 42, fixed ? 0.22 : 0.1);
+  }
   ctx.restore();
 }
 

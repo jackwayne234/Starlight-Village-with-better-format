@@ -21,6 +21,12 @@ Continue the full-route sprite integration pass into Chapter 4, preserving the r
 - Hid the generic repair marker for Weather Vane Roof.
 - Removed loose repair props and broken-branch clutter from Weather Vane Roof.
 - Preserved the Stormedge rainy ridge mood, storm-gauge puzzle theme, route text, and route to Cliff Rope Lift.
+- Reviewed `chapter-four/cliff-rope-lift` against `assets/sprites/world/cliff-rope-lift-painted.png`.
+- Chose to keep Cliff Rope Lift on a bespoke side-view treatment because the generated painted asset reads as an angled/isometric basket and still carries a bright green-screen background.
+- Added a hand-built Cliff Rope Lift scene and renderer with side-view cliff faces, rope span, twin pulleys, a lift basket, guide lamps, repaired glow, and no random side cottages.
+- Hid the generic repair marker for Cliff Rope Lift.
+- Removed loose repair props and broken-branch clutter from Cliff Rope Lift.
+- Preserved the Stormedge rainy ridge mood, storm-gauge puzzle theme, route text, and route to Wind Chime Pass.
 
 ## Verification
 
@@ -37,7 +43,15 @@ Continue the full-route sprite integration pass into Chapter 4, preserving the r
 - Local preview server responded at:
   - `http://127.0.0.1:5260/?scene=chapter-four/weather-vane-roof&x=1120&preview=1`
 - Local probes confirmed the Weather Vane Roof scene module and `assets/sprites/world/weather-vane-roof-painted.png` respond from the preview server.
+- Static scene-data check confirms `chapter-four/cliff-rope-lift` remains custom with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, `showMarker: false`, and route flow to `chapter-four/wind-chime-pass`.
+- Asset review confirmed `assets/sprites/world/cliff-rope-lift-painted.png` is `397x359`, but it was not wired because its angled/isometric basket view and bright green-screen background do not match the side-view camera rule.
+- Syntax/import checks passed for `src/scenes/chapterFour/cliffRopeLift.js`, `src/scenes/sceneRegistry.js`, and `src/rendering/worldRenderer.js` using the bundled Node runtime.
+- Full route walk still reaches all 100 scenes from `chapter-one/starlight-village` to `chapter-ten/celebration-square`, and includes `chapter-four/cliff-rope-lift` before `chapter-four/wind-chime-pass`.
+- Local preview server responded at:
+  - `http://127.0.0.1:5261/?scene=chapter-four/cliff-rope-lift&x=1120&preview=1`
+- Local probes confirmed the Cliff Rope Lift scene module and `assets/sprites/world/cliff-rope-lift-painted.png` respond from the preview server.
+- In-app browser preview rendered the bespoke Cliff Rope Lift scene at `1280x720` with no console errors.
 
 ## Next
 
-Continue route-order sprite wiring at `chapter-four/cliff-rope-lift`.
+Continue route-order sprite wiring at `chapter-four/wind-chime-pass`.
