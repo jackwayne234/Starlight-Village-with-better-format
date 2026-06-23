@@ -45,6 +45,7 @@ export const sprites = {
     mossGate: loadImage(`${WORLD}/moss-gate-painted.png?v=painted-route-ch2`),
     oldFenShrine: loadImage(`${WORLD}/old-fen-shrine-painted.png?v=painted-route-ch2`),
     glowfenFerry: loadImage(`${WORLD}/glowfen-ferry-painted.png?v=painted-route-ch2`),
+    reedwatchBank: loadImage(`${WORLD}/reedwatch-bank-painted.png?v=painted-route-ch2`),
     tree: loadImage(`${WORLD}/tree-trimmed.png`),
     pine: loadImage(`${WORLD}/pine-tree-trimmed.png`),
     lamp: loadImage(`${WORLD}/lamp-trimmed.png`),

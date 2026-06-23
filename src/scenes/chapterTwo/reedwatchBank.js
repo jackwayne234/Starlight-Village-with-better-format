@@ -13,6 +13,14 @@ export function createReedwatchBankScene() {
   scene.showSignpost = false;
   scene.backdrop = { moonX: 990, moonY: 126, cloudDrift: 1.12, hillOffset: 72, ridgeOffset: 108 };
   scene.reedwatchBank = { x: 1160, groundY: 654, fixed: false, markersLit: false };
+  scene.paintedLandmark = {
+    sprite: "reedwatchBank",
+    state: scene.reedwatchBank,
+    x: 1160,
+    groundY: 674,
+    height: 430,
+    glow: { heightRatio: 0.55, radius: 170, fixedIntensity: 0.42, dimIntensity: 0.12, pulse: 0.05 }
+  };
   scene.layers = {
     trees: [
       { x: 70, y: 270, scale: 1.6 },
@@ -44,11 +52,7 @@ export function createReedwatchBankScene() {
       { x: 1985, y: 638, active: false }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 900, y: 624, kind: "seed" },
-      { x: 1220, y: 626, kind: "coil" },
-      { x: 1460, y: 624, kind: "gear" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 375, y: 664, width: 132, height: 20 },
       { x: 1160, y: 668, width: 420, height: 30 },
@@ -69,6 +73,7 @@ export function createReedwatchBankScene() {
       x: 1160,
       y: 550,
       radius: 282,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: reedwatch markers are dark and the safe bank path is hidden.",
