@@ -37,7 +37,7 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 21 | chapter-three/mossline-switchyard | Mossline Switchyard: Restore the main junction line through a rotate-path relay. | wired | `assets/sprites/world/mossline-switchyard-painted.png` |
 | 22 | chapter-three/cargo-cart-turntable | Cargo Cart Turntable: Rotate track pieces so a stuck cart can roll aside. | wired | `assets/sprites/world/cargo-cart-turntable-painted.png` |
 | 23 | chapter-three/signal-arm-row | Signal Arm Row: Set semaphore arms to the correct storm-safe pattern. | wired | `assets/sprites/world/signal-arm-row-painted.png` |
-| 24 | chapter-three/conductor-booth | Conductor Booth: Reconnect the booth board so route lamps respond. | generated | `assets/sprites/world/conductor-booth-painted.png` |
+| 24 | chapter-three/conductor-booth | Conductor Booth: Reconnect the booth board so route lamps respond. | reviewed/keep hand-built | `assets/sprites/world/conductor-booth-painted.png` |
 | 25 | chapter-three/crane-hook-yard | Crane Hook Yard: Guide a crane hook around obstacles to lift a fallen beam. | generated | `assets/sprites/world/crane-hook-yard-painted.png` |
 | 26 | chapter-three/sparking-relay-shed | Sparking Relay Shed: Route power away from puddles before closing the circuit. | exists/review | `assets/sprites/world/sparking-relay-shed-painted.png` |
 | 27 | chapter-three/rain-slick-rails | Rain-Slick Rails: Place sand valves to make the rails usable. | exists/review | `assets/sprites/world/rain-slick-rails-painted.png` |

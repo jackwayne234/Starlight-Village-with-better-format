@@ -27,6 +27,11 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 - Removed the loose gear/coil/seed repair props and the foreground conduit-coil clutter from Signal Arm Row.
 - Hid the generic repair marker for Signal Arm Row.
 - Kept the existing rainy forest layers, Mossline lamps, puddles, route text, semaphore state, and beacon-signal path puzzle.
+- Reviewed `chapter-three/conductor-booth` against its existing hand-built booth/route-board art.
+- Chose to keep the existing hand-built Conductor Booth renderer for now because it matches the game's side-view staging better than the generated `conductor-booth-painted.png`, which reads as a three-quarter angled/isometric object.
+- Removed the loose coil/gear repair props and foreground conduit-coil clutter from Conductor Booth.
+- Hid the generic repair marker for Conductor Booth.
+- Kept the existing rainy forest layers, Mossline lamps, puddles, route text, lit-board state, and junction-line path puzzle.
 
 ## Verification
 
@@ -36,6 +41,10 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 - Asset probe confirmed `assets/sprites/world/cargo-cart-turntable-painted.png` is `408x302` with transparent edge pixels and opaque center pixels.
 - Static scene-data check confirms `chapter-three/signal-arm-row` has `paintedLandmark.sprite: "signalArmRow"`, `0` cottages, `0` repair parts, `0` broken branches, no foreground conduit-coil clutter, and `showMarker: false`.
 - Asset probe confirmed `assets/sprites/world/signal-arm-row-painted.png` is `421x390` with transparent corner pixels and opaque landmark pixels.
+- Static scene-data check confirms `chapter-three/conductor-booth` remains hand-built with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, no foreground conduit-coil clutter, and `showMarker: false`.
+- Local preview server responded at:
+  - `http://127.0.0.1:5251/?scene=chapter-three/conductor-booth&x=1120&preview=1`
+- Local probes confirmed the Conductor Booth scene module and `assets/sprites/world/conductor-booth-painted.png` respond from the preview server.
 - Local preview server responded at:
   - `http://127.0.0.1:5249/?scene=chapter-three/cargo-cart-turntable&x=1120&preview=1`
 - Local preview server responded at:
@@ -52,4 +61,4 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 
 ## Next
 
-Continue route-order sprite wiring at `chapter-three/conductor-booth`.
+Continue route-order sprite wiring at `chapter-three/crane-hook-yard`.

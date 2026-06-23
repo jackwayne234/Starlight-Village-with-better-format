@@ -36,15 +36,11 @@ export function createConductorBoothScene() {
     ],
     foliage: [
       { kind: "mosslineSwitchFoliage", x: 735, groundY: 670, height: 124, alpha: 0.9 },
-      { kind: "mosslineConduitCoils", x: 990, groundY: 682, height: 112, alpha: 0.9 },
       { kind: "mosslinePuddleGround", x: 1290, groundY: 696, height: 116, alpha: 0.8 },
       { kind: "mosslineSwitchFoliage", x: 1540, groundY: 670, height: 126, alpha: 0.9 }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 940, y: 624, kind: "coil" },
-      { x: 1370, y: 626, kind: "gear" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 255, y: 662, width: 160, height: 18 },
       { x: 1160, y: 668, width: 440, height: 30 },
@@ -65,6 +61,7 @@ export function createConductorBoothScene() {
       x: 1160,
       y: 544,
       radius: 284,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: conductor booth route board is disconnected.",
