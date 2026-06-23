@@ -104,13 +104,13 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 88 | chapter-nine/underground-stream | Underground Stream: Raise stepping stones in a current-lit cavern. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/underground-stream-painted.png` |
 | 89 | chapter-nine/sealed-workshop | Sealed Workshop: Restore a sealed repair workshop left by earlier keepers. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/sealed-workshop-painted.png` |
 | 90 | chapter-nine/heart-engine | Ancient Heart Engine: Repair the oldest machine that keeps rainwater moving. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/heart-engine-painted.png` |
-| 91 | chapter-ten/festival-return | Festival Return: Come back to town as repaired lights begin to gather. | generated | `assets/sprites/world/festival-return-painted.png` |
-| 92 | chapter-ten/lantern-parade | Lantern Parade: Arrange lantern carts into a safe parade route. | generated | `assets/sprites/world/lantern-parade-painted.png` |
-| 93 | chapter-ten/music-stage | Music Stage: Repair stage lights and music-box timing. | generated | `assets/sprites/world/music-stage-painted.png` |
-| 94 | chapter-ten/food-stalls | Food Stalls: Route warmth and water so stalls can reopen. | generated | `assets/sprites/world/food-stalls-painted.png` |
-| 95 | chapter-ten/memory-wall | Memory Wall: Light small memory tiles from places visited. | generated | `assets/sprites/world/memory-wall-painted.png` |
-| 96 | chapter-ten/kite-rigging | Kite Rigging: Tune festival kites to carry storm ribbons safely. | generated | `assets/sprites/world/kite-rigging-painted.png` |
-| 97 | chapter-ten/fireworks-safety | Fireworks Safety: Check launch paths with a non-explosive signal puzzle. | generated | `assets/sprites/world/fireworks-safety-painted.png` |
-| 98 | chapter-ten/star-map | Star Map: Connect all region constellations into one village map. | generated | `assets/sprites/world/star-map-painted.png` |
-| 99 | chapter-ten/town-clock | Town Clock: Sync the clock with every restored district signal. | generated | `assets/sprites/world/town-clock-painted.png` |
-| 100 | chapter-ten/celebration-square | Celebration Square: Final celebration scene where the village feels whole. | generated | `assets/sprites/world/celebration-square-painted.png` |
+| 91 | chapter-ten/festival-return | Festival Return: Come back to town as repaired lights begin to gather. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/festival-return-painted.png` |
+| 92 | chapter-ten/lantern-parade | Lantern Parade: Arrange lantern carts into a safe parade route. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/lantern-parade-painted.png` |
+| 93 | chapter-ten/music-stage | Music Stage: Repair stage lights and music-box timing. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/music-stage-painted.png` |
+| 94 | chapter-ten/food-stalls | Food Stalls: Route warmth and water so stalls can reopen. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/food-stalls-painted.png` |
+| 95 | chapter-ten/memory-wall | Memory Wall: Light small memory tiles from places visited. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/memory-wall-painted.png` |
+| 96 | chapter-ten/kite-rigging | Kite Rigging: Tune festival kites to carry storm ribbons safely. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/kite-rigging-painted.png` |
+| 97 | chapter-ten/fireworks-safety | Fireworks Safety: Check launch paths with a non-explosive signal puzzle. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/fireworks-safety-painted.png` |
+| 98 | chapter-ten/star-map | Star Map: Connect all region constellations into one village map. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/star-map-painted.png` |
+| 99 | chapter-ten/town-clock | Town Clock: Sync the clock with every restored district signal. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/town-clock-painted.png` |
+| 100 | chapter-ten/celebration-square | Celebration Square: Final celebration scene where the village feels whole. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/celebration-square-painted.png` |

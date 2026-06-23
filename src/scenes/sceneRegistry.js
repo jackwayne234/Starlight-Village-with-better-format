@@ -80,6 +80,18 @@ import {
   createUndergroundStreamScene,
   createUnderVillageScene
 } from "./chapterNine/routeScenes.js";
+import {
+  createCelebrationSquareScene,
+  createFestivalReturnScene,
+  createFireworksSafetyScene,
+  createFoodStallsScene,
+  createKiteRiggingScene,
+  createLanternParadeScene,
+  createMemoryWallScene,
+  createMusicStageScene,
+  createStarMapScene,
+  createTownClockScene
+} from "./chapterTen/routeScenes.js";
 import { createCargoCartTurntableScene } from "./chapterThree/cargoCartTurntable.js";
 import { createConductorBoothScene } from "./chapterThree/conductorBooth.js";
 import { createCraneHookYardScene } from "./chapterThree/craneHookYard.js";
@@ -198,7 +210,17 @@ export const sceneIds = {
   echoDoor: "chapter-nine/echo-door",
   forgottenMachine: "chapter-nine/forgotten-machine",
   gearRoom: "chapter-nine/gear-room",
-  heartEngine: "chapter-nine/heart-engine"
+  heartEngine: "chapter-nine/heart-engine",
+  festivalReturn: "chapter-ten/festival-return",
+  lanternParade: "chapter-ten/lantern-parade",
+  musicStage: "chapter-ten/music-stage",
+  foodStalls: "chapter-ten/food-stalls",
+  memoryWall: "chapter-ten/memory-wall",
+  kiteRigging: "chapter-ten/kite-rigging",
+  fireworksSafety: "chapter-ten/fireworks-safety",
+  starMap: "chapter-ten/star-map",
+  townClock: "chapter-ten/town-clock",
+  celebrationSquare: "chapter-ten/celebration-square"
 };
 
 const handBuiltSceneFactories = {
@@ -229,6 +251,16 @@ const handBuiltSceneFactories = {
   [sceneIds.forgottenMachine]: createForgottenMachineScene,
   [sceneIds.gearRoom]: createGearRoomScene,
   [sceneIds.heartEngine]: createHeartEngineScene,
+  [sceneIds.festivalReturn]: createFestivalReturnScene,
+  [sceneIds.lanternParade]: createLanternParadeScene,
+  [sceneIds.musicStage]: createMusicStageScene,
+  [sceneIds.foodStalls]: createFoodStallsScene,
+  [sceneIds.memoryWall]: createMemoryWallScene,
+  [sceneIds.kiteRigging]: createKiteRiggingScene,
+  [sceneIds.fireworksSafety]: createFireworksSafetyScene,
+  [sceneIds.starMap]: createStarMapScene,
+  [sceneIds.townClock]: createTownClockScene,
+  [sceneIds.celebrationSquare]: createCelebrationSquareScene,
   [sceneIds.rainSlickRails]: createRainSlickRailsScene,
   [sceneIds.sparkingRelayShed]: createSparkingRelayShedScene,
   [sceneIds.tunnelMouth]: createTunnelMouthScene,

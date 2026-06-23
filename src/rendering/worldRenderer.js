@@ -520,6 +520,9 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.chapterNineLandmark) {
     drawChapterNineLandmark(ctx, scene.chapterNineLandmark, time, scene.world.powerLevel);
   }
+  if (scene.chapterTenLandmark) {
+    drawChapterTenLandmark(ctx, scene.chapterTenLandmark, time, scene.world.powerLevel);
+  }
   if (scene.bridge) {
     drawFootbridge(ctx, scene.bridge, time);
   }
@@ -757,6 +760,437 @@ function drawChapterNineLandmark(ctx, landmark, time, powerLevel) {
   }
 
   ctx.restore();
+}
+
+function drawChapterTenLandmark(ctx, landmark, time, powerLevel) {
+  const fixed = landmark.fixed || powerLevel > 0.95;
+  const x = landmark.x;
+  const groundY = landmark.groundY;
+
+  ctx.save();
+  drawFestivalNightShadow(ctx, x, groundY);
+
+  if (landmark.type === "festivalReturn") {
+    drawFestivalReturnLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "lanternParade") {
+    drawLanternParadeLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "musicStage") {
+    drawMusicStageLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "foodStalls") {
+    drawFoodStallsLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "memoryWall") {
+    drawMemoryWallLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "kiteRigging") {
+    drawKiteRiggingLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "fireworksSafety") {
+    drawFireworksSafetyLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "starMap") {
+    drawStarMapLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "townClock") {
+    drawTownClockLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "celebrationSquare") {
+    drawCelebrationSquareLandmark(ctx, x, groundY, fixed, time);
+  }
+
+  if (fixed) {
+    rainbowGlow(ctx, x, groundY - 196, 330, 0.16 + Math.sin(time * 2.8) * 0.025);
+  }
+
+  ctx.restore();
+}
+
+function drawFestivalNightShadow(ctx, x, groundY) {
+  ctx.fillStyle = "rgba(10, 22, 24, 0.62)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 18, 515, 78, 0.02, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawFestivalStoneBase(ctx, x, groundY, width, fixed) {
+  const baseGradient = ctx.createLinearGradient(x, groundY - 64, x, groundY + 4);
+  baseGradient.addColorStop(0, fixed ? "#34454a" : "#26363d");
+  baseGradient.addColorStop(1, "#16252c");
+  ctx.fillStyle = baseGradient;
+  roundedRect(ctx, x - width / 2, groundY - 66, width, 74, 14);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(210, 180, 104, 0.34)" : "rgba(111, 136, 139, 0.32)";
+  ctx.lineWidth = 4;
+  roundedRect(ctx, x - width / 2, groundY - 66, width, 74, 14);
+  ctx.stroke();
+}
+
+function drawFestivalPost(ctx, x, y, height, fixed, time, index = 0) {
+  ctx.save();
+  ctx.strokeStyle = fixed ? "#7a5331" : "#4b372b";
+  ctx.lineWidth = 16;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x, y - height);
+  ctx.stroke();
+  ctx.strokeStyle = fixed ? "rgba(245, 198, 116, 0.28)" : "rgba(139, 176, 178, 0.16)";
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(x - 4, y - 10);
+  ctx.lineTo(x - 2, y - height + 10);
+  ctx.stroke();
+  drawTinyFestivalLantern(ctx, x, y - height - 18, fixed, time + index);
+  ctx.restore();
+}
+
+function drawFestivalBunting(ctx, x1, y1, x2, y2, fixed, time) {
+  ctx.save();
+  ctx.strokeStyle = fixed ? "rgba(220, 170, 92, 0.72)" : "rgba(111, 139, 142, 0.48)";
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.quadraticCurveTo((x1 + x2) / 2, Math.max(y1, y2) + 34, x2, y2);
+  ctx.stroke();
+  const colors = ["#a9424d", "#bd8d3f", "#3f7988", "#705a8c"];
+  for (let i = 0; i < 7; i += 1) {
+    const t = (i + 1) / 8;
+    const cx = x1 + (x2 - x1) * t;
+    const cy = y1 + (y2 - y1) * t + Math.sin(t * Math.PI) * 30;
+    ctx.fillStyle = fixed ? colors[i % colors.length] : "#4d5860";
+    ctx.beginPath();
+    ctx.moveTo(cx - 12, cy - 4);
+    ctx.lineTo(cx + 12, cy - 4);
+    ctx.lineTo(cx, cy + 24 + Math.sin(time * 1.6 + i) * 2);
+    ctx.closePath();
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawFestivalReturnLandmark(ctx, x, groundY, fixed, time) {
+  drawFestivalStoneBase(ctx, x, groundY, 560, fixed);
+  drawFestivalPost(ctx, x - 232, groundY - 32, 304, fixed, time, 0);
+  drawFestivalPost(ctx, x + 232, groundY - 32, 304, fixed, time, 1);
+  ctx.strokeStyle = fixed ? "#8a6038" : "#523b2d";
+  ctx.lineWidth = 22;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 238, groundY - 336);
+  ctx.quadraticCurveTo(x, groundY - 424, x + 238, groundY - 336);
+  ctx.stroke();
+  drawFestivalBunting(ctx, x - 196, groundY - 318, x + 196, groundY - 318, fixed, time);
+  drawStarLantern(ctx, x, groundY - 356, fixed, time);
+}
+
+function drawLanternParadeLandmark(ctx, x, groundY, fixed, time) {
+  drawFestivalStoneBase(ctx, x, groundY, 590, fixed);
+  ctx.fillStyle = fixed ? "#744b2e" : "#45342c";
+  roundedRect(ctx, x - 230, groundY - 190, 460, 146, 18);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(232, 183, 103, 0.38)" : "rgba(125, 150, 152, 0.24)";
+  ctx.lineWidth = 6;
+  roundedRect(ctx, x - 230, groundY - 190, 460, 146, 18);
+  ctx.stroke();
+  [-160, -54, 54, 160].forEach((offset, index) => {
+    drawFestivalLanternBox(ctx, x + offset, groundY - 198, fixed, time + index);
+    drawParadeWheel(ctx, x + offset * 0.9, groundY - 34, fixed, time + index);
+  });
+  drawFestivalBunting(ctx, x - 206, groundY - 178, x + 206, groundY - 178, fixed, time);
+}
+
+function drawFestivalLanternBox(ctx, x, y, fixed, time) {
+  ctx.fillStyle = "#2c2523";
+  roundedRect(ctx, x - 32, y - 68, 64, 86, 12);
+  ctx.fill();
+  ctx.fillStyle = fixed ? `rgba(255, 206, 111, ${0.7 + Math.sin(time * 3) * 0.08})` : "rgba(106, 145, 151, 0.22)";
+  roundedRect(ctx, x - 22, y - 56, 44, 62, 8);
+  ctx.fill();
+}
+
+function drawParadeWheel(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(time * (fixed ? 0.18 : 0.06));
+  ctx.fillStyle = "#1a2025";
+  ctx.beginPath();
+  ctx.arc(0, 0, 32, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "#c8914d" : "#6e5a45";
+  ctx.lineWidth = 6;
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(-22, 0);
+  ctx.lineTo(22, 0);
+  ctx.moveTo(0, -22);
+  ctx.lineTo(0, 22);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawMusicStageLandmark(ctx, x, groundY, fixed, time) {
+  drawFestivalStoneBase(ctx, x, groundY, 620, fixed);
+  ctx.fillStyle = fixed ? "#5f3e2e" : "#372c28";
+  roundedRect(ctx, x - 270, groundY - 142, 540, 104, 14);
+  ctx.fill();
+  drawFestivalPost(ctx, x - 246, groundY - 142, 236, fixed, time, 0);
+  drawFestivalPost(ctx, x + 246, groundY - 142, 236, fixed, time, 1);
+  ctx.strokeStyle = fixed ? "#805934" : "#48382c";
+  ctx.lineWidth = 16;
+  ctx.beginPath();
+  ctx.moveTo(x - 276, groundY - 372);
+  ctx.lineTo(x + 276, groundY - 372);
+  ctx.stroke();
+  drawFestivalBunting(ctx, x - 230, groundY - 350, x + 230, groundY - 350, fixed, time);
+  drawMusicBox(ctx, x, groundY - 206, fixed, time);
+  [-170, 170].forEach((offset, index) => drawStageLamp(ctx, x + offset, groundY - 286, fixed, time + index));
+}
+
+function drawMusicBox(ctx, x, y, fixed, time) {
+  ctx.fillStyle = fixed ? "#69472f" : "#3c322d";
+  roundedRect(ctx, x - 92, y - 58, 184, 116, 16);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "#cc9650" : "#75888b";
+  ctx.lineWidth = 5;
+  roundedRect(ctx, x - 92, y - 58, 184, 116, 16);
+  ctx.stroke();
+  ctx.strokeStyle = fixed ? "rgba(255, 220, 134, 0.72)" : "rgba(128, 172, 181, 0.32)";
+  ctx.lineWidth = 4;
+  for (let i = 0; i < 4; i += 1) {
+    const noteX = x - 42 + i * 28;
+    ctx.beginPath();
+    ctx.moveTo(noteX, y + 20);
+    ctx.lineTo(noteX, y - 26 + Math.sin(time * 2 + i) * 4);
+    ctx.stroke();
+  }
+}
+
+function drawStageLamp(ctx, x, y, fixed, time) {
+  ctx.fillStyle = fixed ? `rgba(255, 214, 124, ${0.52 + Math.sin(time * 3) * 0.08})` : "rgba(103, 146, 154, 0.18)";
+  ctx.beginPath();
+  ctx.ellipse(x, y, 48, 22, 0, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawFoodStallsLandmark(ctx, x, groundY, fixed, time) {
+  drawFestivalStoneBase(ctx, x, groundY, 620, fixed);
+  ctx.fillStyle = fixed ? "#5b3f2d" : "#382e29";
+  roundedRect(ctx, x - 270, groundY - 228, 540, 188, 16);
+  ctx.fill();
+  const awningColors = fixed ? ["#8f4347", "#d9c184", "#426d78", "#ba7b48"] : ["#4d4f55", "#6a6355", "#3d555d", "#635247"];
+  awningColors.forEach((color, index) => {
+    ctx.fillStyle = color;
+    const awningX = x - 270 + index * 135;
+    ctx.beginPath();
+    ctx.moveTo(awningX, groundY - 228);
+    ctx.lineTo(awningX + 135, groundY - 228);
+    ctx.lineTo(awningX + 116, groundY - 170);
+    ctx.lineTo(awningX + 18, groundY - 170);
+    ctx.closePath();
+    ctx.fill();
+  });
+  [-150, 0, 150].forEach((offset, index) => {
+    drawFoodPot(ctx, x + offset, groundY - 116, fixed, time + index);
+  });
+}
+
+function drawFoodPot(ctx, x, y, fixed, time) {
+  ctx.fillStyle = "#211f1f";
+  ctx.beginPath();
+  ctx.ellipse(x, y + 22, 54, 20, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "#7a5738" : "#463a32";
+  roundedRect(ctx, x - 48, y - 4, 96, 52, 12);
+  ctx.fill();
+  if (fixed) {
+    ctx.strokeStyle = `rgba(232, 231, 196, ${0.28 + Math.sin(time * 2.6) * 0.05})`;
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(x - 22, y - 16);
+    ctx.quadraticCurveTo(x - 34, y - 48, x - 16, y - 70);
+    ctx.moveTo(x + 18, y - 14);
+    ctx.quadraticCurveTo(x + 32, y - 48, x + 10, y - 72);
+    ctx.stroke();
+  }
+}
+
+function drawMemoryWallLandmark(ctx, x, groundY, fixed, time) {
+  drawFestivalStoneBase(ctx, x, groundY, 620, fixed);
+  ctx.fillStyle = fixed ? "#304247" : "#243138";
+  roundedRect(ctx, x - 286, groundY - 320, 572, 286, 18);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(207, 181, 108, 0.42)" : "rgba(92, 117, 122, 0.42)";
+  ctx.lineWidth = 6;
+  roundedRect(ctx, x - 286, groundY - 320, 572, 286, 18);
+  ctx.stroke();
+  for (let row = 0; row < 3; row += 1) {
+    for (let col = 0; col < 5; col += 1) {
+      const tileX = x - 204 + col * 102;
+      const tileY = groundY - 260 + row * 76;
+      drawMemoryTile(ctx, tileX, tileY, fixed, time + row + col, row * 5 + col);
+    }
+  }
+}
+
+function drawMemoryTile(ctx, x, y, fixed, time, index) {
+  const colors = ["#d8b45d", "#62a09b", "#8e6bb0", "#d06a5c", "#79a85a"];
+  ctx.fillStyle = fixed ? colors[index % colors.length] : "#40515a";
+  roundedRect(ctx, x - 32, y - 26, 64, 52, 8);
+  ctx.fill();
+  if (fixed) {
+    warmGlow(ctx, x, y, 48, 0.055 + Math.sin(time * 2) * 0.01);
+  }
+}
+
+function drawKiteRiggingLandmark(ctx, x, groundY, fixed, time) {
+  drawFestivalStoneBase(ctx, x, groundY, 620, fixed);
+  drawFestivalPost(ctx, x - 232, groundY - 42, 330, fixed, time, 0);
+  drawFestivalPost(ctx, x + 232, groundY - 42, 330, fixed, time, 1);
+  ctx.strokeStyle = fixed ? "#9b7043" : "#584332";
+  ctx.lineWidth = 12;
+  ctx.beginPath();
+  ctx.moveTo(x - 244, groundY - 342);
+  ctx.lineTo(x + 244, groundY - 342);
+  ctx.stroke();
+  [-138, 0, 138].forEach((offset, index) => drawFestivalKite(ctx, x + offset, groundY - 230, fixed, time + index, index));
+}
+
+function drawFestivalKite(ctx, x, y, fixed, time, index) {
+  const sway = Math.sin(time * 1.5) * 8;
+  const colors = fixed ? ["#b84952", "#3f8290", "#d0a649"] : ["#505d63", "#475960", "#665e4f"];
+  ctx.save();
+  ctx.translate(x + sway, y);
+  ctx.fillStyle = colors[index % colors.length];
+  ctx.beginPath();
+  ctx.moveTo(0, -70);
+  ctx.lineTo(54, 0);
+  ctx.lineTo(0, 70);
+  ctx.lineTo(-54, 0);
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(239, 216, 137, 0.5)" : "rgba(127, 159, 164, 0.26)";
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(0, -70);
+  ctx.lineTo(0, 70);
+  ctx.moveTo(-54, 0);
+  ctx.lineTo(54, 0);
+  ctx.stroke();
+  ctx.restore();
+  ctx.strokeStyle = fixed ? "rgba(220, 172, 95, 0.7)" : "rgba(102, 129, 134, 0.44)";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(x, y + 70);
+  ctx.quadraticCurveTo(x - 20, y + 126, x + Math.sin(time) * 18, y + 190);
+  ctx.stroke();
+}
+
+function drawFireworksSafetyLandmark(ctx, x, groundY, fixed, time) {
+  drawFestivalStoneBase(ctx, x, groundY, 560, fixed);
+  ctx.fillStyle = fixed ? "#3f4d50" : "#29373d";
+  roundedRect(ctx, x - 220, groundY - 178, 440, 120, 16);
+  ctx.fill();
+  [-150, -50, 50, 150].forEach((offset, index) => {
+    drawSafetyTube(ctx, x + offset, groundY - 182, fixed, time + index);
+  });
+  drawFestivalSignalPanel(ctx, x, groundY - 100, fixed, time);
+}
+
+function drawSafetyTube(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(-0.18 + Math.sin(time * 1.2) * 0.02);
+  ctx.fillStyle = fixed ? "#6d4c34" : "#403630";
+  roundedRect(ctx, -18, -116, 36, 124, 10);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "rgba(101, 216, 151, 0.66)" : "rgba(112, 150, 154, 0.2)";
+  ctx.beginPath();
+  ctx.arc(0, -124, 13, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawFestivalSignalPanel(ctx, x, y, fixed, time) {
+  ctx.fillStyle = fixed ? "#263a3d" : "#202d32";
+  roundedRect(ctx, x - 80, y - 44, 160, 88, 12);
+  ctx.fill();
+  [-42, 0, 42].forEach((offset, index) => {
+    ctx.fillStyle = fixed ? `rgba(100, 220, 146, ${0.6 + Math.sin(time * 2 + index) * 0.08})` : "rgba(105, 142, 148, 0.22)";
+    ctx.beginPath();
+    ctx.arc(x + offset, y, 14, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+function drawStarMapLandmark(ctx, x, groundY, fixed, time) {
+  drawFestivalStoneBase(ctx, x, groundY, 560, fixed);
+  ctx.fillStyle = fixed ? "#263c47" : "#202f38";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 214, 238, 118, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(218, 190, 112, 0.68)" : "rgba(98, 126, 132, 0.46)";
+  ctx.lineWidth = 8;
+  ctx.stroke();
+  const stars = [
+    [-112, -34], [-58, -72], [4, -46], [76, -82], [128, -28],
+    [-78, 28], [-8, 18], [58, 42], [114, 18]
+  ];
+  ctx.strokeStyle = fixed ? "rgba(244, 222, 139, 0.58)" : "rgba(112, 151, 158, 0.22)";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  stars.forEach(([sx, sy], index) => {
+    const px = x + sx;
+    const py = groundY - 214 + sy;
+    if (index === 0) ctx.moveTo(px, py);
+    else ctx.lineTo(px, py);
+  });
+  ctx.stroke();
+  stars.forEach(([sx, sy], index) => {
+    ctx.fillStyle = fixed ? `rgba(255, 228, 138, ${0.72 + Math.sin(time * 2 + index) * 0.08})` : "rgba(118, 155, 162, 0.32)";
+    ctx.beginPath();
+    ctx.arc(x + sx, groundY - 214 + sy, 8, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+function drawTownClockLandmark(ctx, x, groundY, fixed, time) {
+  drawFestivalStoneBase(ctx, x, groundY, 440, fixed);
+  ctx.fillStyle = fixed ? "#314045" : "#253239";
+  roundedRect(ctx, x - 92, groundY - 320, 184, 280, 18);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "#9f7240" : "#5e5040";
+  ctx.lineWidth = 10;
+  roundedRect(ctx, x - 92, groundY - 320, 184, 280, 18);
+  ctx.stroke();
+  drawClockFace(ctx, x, groundY - 250, fixed, time);
+  drawStarLantern(ctx, x, groundY - 374, fixed, time);
+  [-136, 136].forEach((offset, index) => drawTinyFestivalLantern(ctx, x + offset, groundY - 236, fixed, time + index));
+}
+
+function drawClockFace(ctx, x, y, fixed, time) {
+  ctx.fillStyle = fixed ? "#dfc889" : "#6a6659";
+  ctx.beginPath();
+  ctx.arc(x, y, 66, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = "#2a2522";
+  ctx.lineWidth = 7;
+  ctx.stroke();
+  ctx.strokeStyle = fixed ? "#443221" : "#27323a";
+  ctx.lineWidth = 5;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + Math.sin(time * 0.5) * 26, y - 44);
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + 36, y + 18);
+  ctx.stroke();
+}
+
+function drawCelebrationSquareLandmark(ctx, x, groundY, fixed, time) {
+  drawFestivalStoneBase(ctx, x, groundY, 660, fixed);
+  [-276, 276].forEach((offset, index) => drawFestivalPost(ctx, x + offset, groundY - 42, 238, fixed, time, index));
+  drawFestivalBunting(ctx, x - 276, groundY - 278, x + 276, groundY - 278, fixed, time);
+  ctx.fillStyle = fixed ? "#304247" : "#25353b";
+  roundedRect(ctx, x - 140, groundY - 230, 280, 178, 22);
+  ctx.fill();
+  drawStarLantern(ctx, x, groundY - 250, fixed, time);
+  [-192, -96, 96, 192].forEach((offset, index) => {
+    drawTinyFestivalLantern(ctx, x + offset, groundY - 122 - (index % 2) * 28, fixed, time + index);
+  });
 }
 
 function drawUnderVillageShadow(ctx, x, groundY) {
