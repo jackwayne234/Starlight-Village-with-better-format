@@ -20,6 +20,13 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 - Removed the loose gear/coil repair props and the foreground conduit-coil clutter from Cargo Cart Turntable.
 - Hid the generic repair marker for Cargo Cart Turntable.
 - Kept the existing rainy forest layers, Mossline lamps, puddles, route text, and rail-signal path puzzle.
+- Reviewed `chapter-three/signal-arm-row` against its existing hand-built semaphore/rail art.
+- Chose to wire `assets/sprites/world/signal-arm-row-painted.png` because the generated asset is a stronger single row-of-signals landmark, while the older canvas semaphore renderer remains available as fallback if the painted sprite does not load.
+- Cleaned the painted Signal Arm Row PNG so the generated green background is transparent.
+- Wired Signal Arm Row through the shared `paintedLandmark` renderer path with `paintedLandmark.sprite: "signalArmRow"`.
+- Removed the loose gear/coil/seed repair props and the foreground conduit-coil clutter from Signal Arm Row.
+- Hid the generic repair marker for Signal Arm Row.
+- Kept the existing rainy forest layers, Mossline lamps, puddles, route text, semaphore state, and beacon-signal path puzzle.
 
 ## Verification
 
@@ -27,10 +34,16 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 - Asset probe confirmed `assets/sprites/world/mossline-switchyard-painted.png` is `386x422` with transparent edge pixels.
 - Static scene-data check confirms `chapter-three/cargo-cart-turntable` has `paintedLandmark.sprite: "cargoCartTurntable"`, `0` cottages, `0` repair parts, `0` broken branches, no foreground conduit-coil clutter, and `showMarker: false`.
 - Asset probe confirmed `assets/sprites/world/cargo-cart-turntable-painted.png` is `408x302` with transparent edge pixels and opaque center pixels.
+- Static scene-data check confirms `chapter-three/signal-arm-row` has `paintedLandmark.sprite: "signalArmRow"`, `0` cottages, `0` repair parts, `0` broken branches, no foreground conduit-coil clutter, and `showMarker: false`.
+- Asset probe confirmed `assets/sprites/world/signal-arm-row-painted.png` is `421x390` with transparent corner pixels and opaque landmark pixels.
 - Local preview server responded at:
   - `http://127.0.0.1:5249/?scene=chapter-three/cargo-cart-turntable&x=1120&preview=1`
+- Local preview server responded at:
+  - `http://127.0.0.1:5250/?scene=chapter-three/signal-arm-row&x=1120&preview=1`
 - Painted sprite asset responded at `http://127.0.0.1:5249/assets/sprites/world/cargo-cart-turntable-painted.png?v=painted-route-ch3`.
+- Painted sprite asset responded at `http://127.0.0.1:5250/assets/sprites/world/signal-arm-row-painted.png?v=painted-route-ch3`.
 - In-app browser preview rendered the painted Cargo Cart Turntable landmark with no console errors in the centered view.
+- In-app browser preview rendered the painted Signal Arm Row landmark with no console errors in the centered view.
 - Local preview server responded at:
   - `http://127.0.0.1:5248/?scene=chapter-three/mossline-switchyard&preview=1`
   - `http://127.0.0.1:5248/?scene=chapter-three/mossline-switchyard&x=1120&preview=1`
@@ -39,4 +52,4 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 
 ## Next
 
-Continue route-order sprite wiring at `chapter-three/signal-arm-row`.
+Continue route-order sprite wiring at `chapter-three/conductor-booth`.

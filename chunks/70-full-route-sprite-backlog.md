@@ -5,6 +5,7 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 ## Format Rule
 
 - Each route scene should have one primary painted landmark sprite saved under `assets/sprites/world/`.
+- Future generated sprites must use a side-view camera/framing that matches the game. Avoid bird's-eye views, top-down layouts, and angled/isometric views.
 - Keep chroma-key or source images beside the final alpha PNG when useful, using `*-source.png`.
 - Scene data should avoid generic cottages and loose gear/coil/seed props unless those are the actual landmark.
 - The robot scan line and puzzle popup should carry the repair beat; generic repair markers should usually be hidden for sprite-led scenes.
@@ -35,7 +36,7 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 20 | chapter-two/reedwatch-bank | Reedwatch Bank: Light reed markers to show the way back to town. | wired | `assets/sprites/world/reedwatch-bank-painted.png` |
 | 21 | chapter-three/mossline-switchyard | Mossline Switchyard: Restore the main junction line through a rotate-path relay. | wired | `assets/sprites/world/mossline-switchyard-painted.png` |
 | 22 | chapter-three/cargo-cart-turntable | Cargo Cart Turntable: Rotate track pieces so a stuck cart can roll aside. | wired | `assets/sprites/world/cargo-cart-turntable-painted.png` |
-| 23 | chapter-three/signal-arm-row | Signal Arm Row: Set semaphore arms to the correct storm-safe pattern. | generated | `assets/sprites/world/signal-arm-row-painted.png` |
+| 23 | chapter-three/signal-arm-row | Signal Arm Row: Set semaphore arms to the correct storm-safe pattern. | wired | `assets/sprites/world/signal-arm-row-painted.png` |
 | 24 | chapter-three/conductor-booth | Conductor Booth: Reconnect the booth board so route lamps respond. | generated | `assets/sprites/world/conductor-booth-painted.png` |
 | 25 | chapter-three/crane-hook-yard | Crane Hook Yard: Guide a crane hook around obstacles to lift a fallen beam. | generated | `assets/sprites/world/crane-hook-yard-painted.png` |
 | 26 | chapter-three/sparking-relay-shed | Sparking Relay Shed: Route power away from puddles before closing the circuit. | exists/review | `assets/sprites/world/sparking-relay-shed-painted.png` |

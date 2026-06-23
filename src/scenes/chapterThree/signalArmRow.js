@@ -13,6 +13,14 @@ export function createSignalArmRowScene() {
   scene.showSignpost = false;
   scene.backdrop = { moonX: 955, moonY: 140, cloudDrift: 1.03, hillOffset: 48, ridgeOffset: 70 };
   scene.signalArmRow = { x: 1160, groundY: 654, fixed: false, armsAligned: false };
+  scene.paintedLandmark = {
+    sprite: "signalArmRow",
+    state: scene.signalArmRow,
+    x: 1160,
+    groundY: 678,
+    height: 430,
+    glow: { heightRatio: 0.56, radius: 240, fixedIntensity: 0.32, dimIntensity: 0.1, pulse: 0.04 }
+  };
   scene.layers = {
     trees: [
       { x: 75, y: 280, scale: 1.54 },
@@ -37,16 +45,11 @@ export function createSignalArmRowScene() {
     ],
     foliage: [
       { kind: "mosslineSwitchFoliage", x: 735, groundY: 670, height: 124, alpha: 0.9 },
-      { kind: "mosslineConduitCoils", x: 1030, groundY: 682, height: 112, alpha: 0.88 },
       { kind: "mosslinePuddleGround", x: 1260, groundY: 696, height: 116, alpha: 0.8 },
       { kind: "mosslineSwitchFoliage", x: 1540, groundY: 670, height: 126, alpha: 0.9 }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 905, y: 624, kind: "gear" },
-      { x: 1165, y: 626, kind: "coil" },
-      { x: 1430, y: 624, kind: "seed" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 255, y: 662, width: 160, height: 18 },
       { x: 1160, y: 668, width: 470, height: 30 },
@@ -67,6 +70,7 @@ export function createSignalArmRowScene() {
       x: 1160,
       y: 536,
       radius: 286,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: signal arms are pointing in unsafe storm patterns.",

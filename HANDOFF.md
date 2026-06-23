@@ -55,6 +55,7 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Actor scale pass on `2026-06-22`: the apprentice is rendered smaller across scenes so entrances read closer to kid scale; robot scale/follow distance and bubble avoidance zones were adjusted with it.
 - Large-door beacon sprite added on `2026-06-22`: Beacon Hill now uses `beacon-tower-large-door.png`, a new generated beacon art asset with a much larger arched entrance; the old cleaned beacon sprite remains available.
 - Playtest URLs can use `preview=1` to skip the title screen and disable repair triggers while visually inspecting a scene.
+- Future route sprites should be generated and selected as side-view landmarks only, matching the game's side-view camera. Avoid bird's-eye, top-down, or angled/isometric sprite views.
 - Beacon Hill has foreground brush/reeds around the large-door beacon's left base to soften the sprite placement edge.
 - Arrow signposts were removed globally on `2026-06-22`; Beacon Hill's extra painted cable/flag decorations were removed too.
 - Full-game planning started on `2026-06-22`: `FULL_GAME_100_SCENE_PLAN.md` now proposes 100 scenes grouped into 10 chapters, plus a one-scene-at-a-time chunk strategy for future sessions.
@@ -74,6 +75,7 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Chapter 2 route sprite wiring finished on `2026-06-23`: Reedwatch Bank now uses `reedwatch-bank-painted.png` through the shared `paintedLandmark` path, with loose seed/coil/gear props and the generic repair marker removed. Preview and asset probes passed at `http://127.0.0.1:5247/?scene=chapter-two/reedwatch-bank&preview=1` and `http://127.0.0.1:5247/?scene=chapter-two/reedwatch-bank&x=1120&preview=1`. See `chunks/73-chapter-two-route-sprite-wiring.md`.
 - Chapter 3 route sprite wiring started on `2026-06-23`: Mossline Switchyard now uses `mossline-switchyard-painted.png` through the shared `paintedLandmark` path after review, with the older hand-built switchyard renderer kept as fallback, the generic signpost hidden, and the generic repair marker removed. Local preview and asset probes passed at `http://127.0.0.1:5248/?scene=chapter-three/mossline-switchyard&preview=1`, `http://127.0.0.1:5248/?scene=chapter-three/mossline-switchyard&x=1120&preview=1`, and the painted asset URL. See `chunks/74-chapter-three-route-sprite-wiring.md`.
 - Chapter 3 route sprite wiring continued on `2026-06-23`: Cargo Cart Turntable now uses `cargo-cart-turntable-painted.png` through the shared `paintedLandmark` path after review, with the older hand-built turntable/cart renderer kept as fallback, the generated green PNG background cleaned to transparency, loose gear/coil props and conduit-coil clutter removed, and the generic repair marker hidden. Local preview and asset probes passed at `http://127.0.0.1:5249/?scene=chapter-three/cargo-cart-turntable&x=1120&preview=1` and the painted asset URL. See `chunks/74-chapter-three-route-sprite-wiring.md`.
+- Chapter 3 route sprite wiring continued on `2026-06-23`: Signal Arm Row now uses `signal-arm-row-painted.png` through the shared `paintedLandmark` path after review, with the older hand-built semaphore/rail renderer kept as fallback, the generated green PNG background cleaned to transparency, loose gear/coil/seed props and conduit-coil clutter removed, and the generic repair marker hidden. See `chunks/74-chapter-three-route-sprite-wiring.md`.
 - Workshop Lift became bespoke on `2026-06-22`: it now has a crank, platform, roof shelf, raised/repaired visual state, route checks, and a chunk note in `chunks/42-workshop-lift-scene.md`.
 - Schoolhouse Lanterns became bespoke on `2026-06-22`: it now has a schoolhouse facade, three lantern posts, dark/lit chain state, route checks, and a chunk note in `chunks/43-schoolhouse-lanterns-scene.md`.
 - Market Awnings became bespoke on `2026-06-22`: it now has market stalls, colored awnings, dark/draining runoff state, route checks, and a chunk note in `chunks/44-market-awnings-scene.md`.
@@ -111,7 +113,7 @@ Continue the route-order sprite wiring pass.
 
 Next likely stop:
 
-1. Continue route-order sprite wiring at `chapter-three/signal-arm-row`.
-2. Review whether Signal Arm Row should keep its existing hand-built semaphore/rail art or swap to `signal-arm-row-painted.png`.
+1. Continue route-order sprite wiring at `chapter-three/conductor-booth`.
+2. Review whether Conductor Booth should keep its existing hand-built booth/board art or swap to `conductor-booth-painted.png`.
 3. Keep the format rule: one strong landmark sprite, no random houses, no loose repair props, and no generic marker unless intentionally needed.
 4. Preview each edited scene with `?scene=<scene-id>&preview=1`.

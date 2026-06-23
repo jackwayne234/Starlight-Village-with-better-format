@@ -33,5 +33,6 @@ Review the full 100-scene route for missing landmark sprites, then generate a fu
 ## Notes
 
 - This pass produced the sprite assets, but most scenes are not yet wired to render their new landmark sprite.
+- Future sprite generation should use side-view camera/framing only, matching the game's side-view scene composition. Do not use bird's-eye, top-down, or angled/isometric landmark views.
 - Some generated assets should get visual QA during integration. Known first cleanup candidate: `last-platform-painted.png` includes a small neighboring rail fragment at the far left from the source sheet crop.
 - Next implementation pass should wire the generated sprites into scene renderers in route order, using Bakery Gutter and Bell Rope Corner as the pattern.
