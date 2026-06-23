@@ -15,6 +15,7 @@ import { createStarlightVillageScene } from "./chapterOne/starlightVillage.js";
 import { createStormedgeRiseScene } from "./chapterOne/stormedgeRise.js";
 import { createCliffRopeLiftScene } from "./chapterFour/cliffRopeLift.js";
 import { createLightningRodFieldScene } from "./chapterFour/lightningRodField.js";
+import { createLookoutPostScene } from "./chapterFour/lookoutPost.js";
 import { createWeatherVaneRoofScene } from "./chapterFour/weatherVaneRoof.js";
 import { createWindChimePassScene } from "./chapterFour/windChimePass.js";
 import { createCargoCartTurntableScene } from "./chapterThree/cargoCartTurntable.js";
@@ -65,6 +66,7 @@ export const sceneIds = {
   lanternLilyPool: "chapter-two/lantern-lily-pool",
   lastPlatform: "chapter-three/last-platform",
   lightningRodField: "chapter-four/lightning-rod-field",
+  lookoutPost: "chapter-four/lookout-post",
   marketAwnings: "chapter-one/market-awnings",
   mayorPorch: "chapter-one/mayor-porch",
   mistPool: "chapter-two/mist-pool",
@@ -111,6 +113,7 @@ const handBuiltSceneFactories = {
   [sceneIds.lanternLilyPool]: createLanternLilyPoolScene,
   [sceneIds.lastPlatform]: createLastPlatformScene,
   [sceneIds.lightningRodField]: createLightningRodFieldScene,
+  [sceneIds.lookoutPost]: createLookoutPostScene,
   [sceneIds.mistPool]: createMistPoolScene,
   [sceneIds.mossGate]: createMossGateScene,
   [sceneIds.oldFenShrine]: createOldFenShrineScene,

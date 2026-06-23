@@ -37,6 +37,12 @@ Continue the full-route sprite integration pass into Chapter 4, preserving the r
 - Cleaned the bright green-screen background from `lightning-rod-field-painted.png`.
 - Added a hand-built Lightning Rod Field scene with the painted rod cluster as the one strong landmark, no random side cottages, no loose repair props, no broken-branch clutter, and no generic marker.
 - Preserved the Stormedge rainy ridge mood, grounding repair theme, route text, and route to Lookout Post.
+- Reviewed `chapter-four/lookout-post` against `assets/sprites/world/lookout-post-painted.png`.
+- Chose to keep Lookout Post on a bespoke side-view treatment because the generated painted asset reads as a three-quarter/isometric deck and scope rather than the game's side-view route camera.
+- Added a hand-built Lookout Post scene and renderer with a side-view ridge deck, telescope/scope landmark, distant beacon glimmer, repaired scope glow, and no random side cottages.
+- Hid the generic repair marker for Lookout Post.
+- Removed loose repair props and broken-branch clutter from Lookout Post.
+- Preserved the Stormedge rainy ridge mood, archive-lens repair theme, route text, and route to Cracked Stair.
 
 ## Verification
 
@@ -75,7 +81,14 @@ Continue the full-route sprite integration pass into Chapter 4, preserving the r
 - Local preview server responded at:
   - `http://127.0.0.1:5263/?scene=chapter-four/lightning-rod-field&x=1120&preview=1`
 - Local probes confirmed the Lightning Rod Field scene module and `assets/sprites/world/lightning-rod-field-painted.png` respond from the preview server.
+- Static scene-data check confirms `chapter-four/lookout-post` remains custom with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, `showMarker: false`, and route flow to `chapter-four/cracked-stair`.
+- Asset review confirmed `assets/sprites/world/lookout-post-painted.png` is `363x357` RGBA, but it was not wired because its three-quarter/isometric deck and scope do not match the side-view camera rule.
+- Syntax/import checks passed for `src/scenes/chapterFour/lookoutPost.js`, `src/scenes/sceneRegistry.js`, and `src/rendering/worldRenderer.js` using the bundled Node runtime.
+- Full route walk still reaches all 100 scenes from `chapter-one/starlight-village` to `chapter-ten/celebration-square`, and includes `chapter-four/lookout-post` between `chapter-four/lightning-rod-field` and `chapter-four/cracked-stair`.
+- Local preview server responded at:
+  - `http://127.0.0.1:5264/?scene=chapter-four/lookout-post&x=1120&preview=1`
+- Local probes confirmed the Lookout Post scene module and `assets/sprites/world/lookout-post-painted.png` respond from the preview server.
 
 ## Next
 
-Continue route-order sprite wiring at `chapter-four/lookout-post`.
+Continue route-order sprite wiring at `chapter-four/cracked-stair`.

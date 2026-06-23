@@ -493,6 +493,9 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.cliffRopeLift) {
     drawCliffRopeLift(ctx, scene.cliffRopeLift, time, scene.world.powerLevel);
   }
+  if (scene.lookoutPost) {
+    drawLookoutPost(ctx, scene.lookoutPost, time, scene.world.powerLevel);
+  }
   if (scene.bridge) {
     drawFootbridge(ctx, scene.bridge, time);
   }
@@ -3993,6 +3996,216 @@ function drawCliffRopeLift(ctx, lift, time, powerLevel = 0) {
     warmGlow(ctx, x, basketY - 54, 150, 0.1 + powerLevel * 0.12);
   }
 
+  ctx.restore();
+}
+
+function drawLookoutPost(ctx, post, time, powerLevel = 0) {
+  const { x, groundY } = post;
+  const fixed = post.fixed || post.scopeAligned || powerLevel > 0.95;
+  const pulse = 0.5 + Math.sin(time * 3.1) * 0.5;
+  const scopeY = groundY - 312;
+
+  ctx.save();
+
+  const skyGlow = ctx.createLinearGradient(x, groundY - 430, x, groundY - 116);
+  skyGlow.addColorStop(0, fixed ? "rgba(107, 184, 197, 0.16)" : "rgba(64, 101, 123, 0.12)");
+  skyGlow.addColorStop(1, "rgba(18, 30, 39, 0)");
+  ctx.fillStyle = skyGlow;
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 246, 470, 166, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "rgba(13, 24, 27, 0.72)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 10, 470, 64, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+
+  drawLookoutRock(ctx, x - 258, groundY, 218, 198, fixed, time, -1);
+  drawLookoutRock(ctx, x + 258, groundY, 218, 198, fixed, time, 1);
+  drawLookoutDeck(ctx, x, groundY, fixed, time);
+  drawLookoutScope(ctx, x, scopeY, fixed, time);
+  drawBeaconGlimmer(ctx, x + 300, groundY - 276, fixed, time);
+
+  warmGlow(ctx, x, scopeY - 8, fixed ? 170 : 112, (fixed ? 0.26 : 0.1) + pulse * (fixed ? 0.06 : 0.02) + powerLevel * 0.08);
+  if (fixed) {
+    warmGlow(ctx, x + 300, groundY - 276, 86, 0.28 + pulse * 0.08);
+  }
+
+  ctx.restore();
+}
+
+function drawLookoutRock(ctx, x, groundY, width, height, fixed, time, side) {
+  const gradient = ctx.createLinearGradient(x, groundY - height, x, groundY);
+  gradient.addColorStop(0, fixed ? "#344f4d" : "#263d42");
+  gradient.addColorStop(0.62, fixed ? "#263d3d" : "#1a3035");
+  gradient.addColorStop(1, "#102129");
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.moveTo(x - width / 2, groundY - 18);
+  ctx.lineTo(x - width * 0.38, groundY - height + 44);
+  ctx.quadraticCurveTo(x - width * 0.14, groundY - height - 4, x + width * 0.32, groundY - height + 18);
+  ctx.lineTo(x + width / 2, groundY - 24);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.strokeStyle = fixed ? "rgba(168, 204, 190, 0.2)" : "rgba(128, 174, 181, 0.14)";
+  ctx.lineWidth = 4;
+  ctx.lineCap = "round";
+  for (let i = 0; i < 3; i += 1) {
+    const rockX = x - width * 0.26 + i * width * 0.2;
+    ctx.beginPath();
+    ctx.moveTo(rockX, groundY - height + 72 + i * 18);
+    ctx.quadraticCurveTo(rockX + side * 24, groundY - height + 122 + Math.sin(time + i) * 3, rockX - side * 16, groundY - 58);
+    ctx.stroke();
+  }
+}
+
+function drawLookoutDeck(ctx, x, groundY, fixed, time) {
+  const deckY = groundY - 190;
+  const plankGradient = ctx.createLinearGradient(x, deckY - 34, x, deckY + 34);
+  plankGradient.addColorStop(0, fixed ? "#855b34" : "#513827");
+  plankGradient.addColorStop(1, fixed ? "#4e3828" : "#2f261f");
+
+  ctx.fillStyle = "rgba(10, 18, 22, 0.48)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 32, 310, 40, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = plankGradient;
+  roundedRect(ctx, x - 250, deckY - 34, 500, 68, 10);
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(15, 24, 28, 0.72)";
+  ctx.lineWidth = 7;
+  roundedRect(ctx, x - 250, deckY - 34, 500, 68, 10);
+  ctx.stroke();
+
+  ctx.strokeStyle = fixed ? "rgba(229, 190, 115, 0.28)" : "rgba(144, 183, 185, 0.14)";
+  ctx.lineWidth = 4;
+  for (let i = -4; i <= 4; i += 1) {
+    const plankX = x + i * 54;
+    ctx.beginPath();
+    ctx.moveTo(plankX, deckY - 29);
+    ctx.lineTo(plankX + Math.sin(time + i) * 2, deckY + 29);
+    ctx.stroke();
+  }
+
+  [-228, -78, 78, 228].forEach((offset, index) => {
+    drawLookoutPostRail(ctx, x + offset, deckY - 6, fixed, time + index * 0.4);
+  });
+
+  ctx.strokeStyle = fixed ? "#7b5630" : "#4d3728";
+  ctx.lineWidth = 12;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 236, deckY - 108);
+  ctx.lineTo(x + 236, deckY - 108);
+  ctx.stroke();
+
+  ctx.strokeStyle = fixed ? "rgba(235, 196, 118, 0.22)" : "rgba(147, 185, 187, 0.13)";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(x - 236, deckY - 112);
+  ctx.lineTo(x + 236, deckY - 112);
+  ctx.stroke();
+}
+
+function drawLookoutPostRail(ctx, x, deckY, fixed, time) {
+  ctx.save();
+  ctx.translate(x, deckY);
+  ctx.rotate(Math.sin(time * 1.1) * 0.01);
+  ctx.fillStyle = fixed ? "#765331" : "#4a3629";
+  roundedRect(ctx, -14, -104, 28, 130, 7);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "#bd8643" : "#705035";
+  roundedRect(ctx, -20, -114, 40, 24, 6);
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawLookoutScope(ctx, x, y, fixed, time) {
+  const sway = Math.sin(time * 1.25) * (fixed ? 0.01 : 0.04);
+
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(sway);
+
+  ctx.strokeStyle = fixed ? "#9a6a38" : "#5e442f";
+  ctx.lineWidth = 13;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(0, 118);
+  ctx.lineTo(0, 30);
+  ctx.stroke();
+
+  ctx.fillStyle = fixed ? "#b57c3d" : "#6b4a31";
+  ctx.beginPath();
+  ctx.arc(0, 28, 24, 0, Math.PI * 2);
+  ctx.fill();
+
+  const bodyGradient = ctx.createLinearGradient(-145, -28, 145, 28);
+  bodyGradient.addColorStop(0, fixed ? "#d7a956" : "#725034");
+  bodyGradient.addColorStop(0.5, fixed ? "#8a5a32" : "#3e3129");
+  bodyGradient.addColorStop(1, fixed ? "#d1a15a" : "#6b4c34");
+  ctx.fillStyle = bodyGradient;
+  roundedRect(ctx, -142, -38, 284, 76, 28);
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(16, 23, 28, 0.68)";
+  ctx.lineWidth = 8;
+  roundedRect(ctx, -142, -38, 284, 76, 28);
+  ctx.stroke();
+
+  ctx.fillStyle = fixed ? "rgba(186, 236, 232, 0.72)" : "rgba(117, 177, 188, 0.32)";
+  ctx.beginPath();
+  ctx.ellipse(-134, 0, 26, 34, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(245, 220, 139, 0.52)" : "rgba(143, 183, 187, 0.22)";
+  ctx.lineWidth = 5;
+  ctx.stroke();
+
+  ctx.fillStyle = fixed ? "rgba(255, 225, 134, 0.48)" : "rgba(122, 176, 187, 0.16)";
+  roundedRect(ctx, 94, -28, 50, 56, 18);
+  ctx.fill();
+
+  if (fixed) {
+    ctx.globalCompositeOperation = "screen";
+    const beam = ctx.createLinearGradient(-160, 0, -430, -18);
+    beam.addColorStop(0, "rgba(225, 244, 199, 0.22)");
+    beam.addColorStop(1, "rgba(225, 244, 199, 0)");
+    ctx.fillStyle = beam;
+    ctx.beginPath();
+    ctx.moveTo(-160, -24);
+    ctx.lineTo(-430, -78);
+    ctx.lineTo(-430, 42);
+    ctx.lineTo(-160, 24);
+    ctx.closePath();
+    ctx.fill();
+    ctx.globalCompositeOperation = "source-over";
+  }
+
+  ctx.restore();
+}
+
+function drawBeaconGlimmer(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.strokeStyle = fixed ? "rgba(230, 213, 142, 0.54)" : "rgba(103, 145, 153, 0.26)";
+  ctx.lineWidth = 5;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x, y + 48);
+  ctx.lineTo(x, y - 48);
+  ctx.moveTo(x - 32, y + 32);
+  ctx.lineTo(x, y - 48);
+  ctx.lineTo(x + 32, y + 32);
+  ctx.stroke();
+
+  ctx.fillStyle = fixed
+    ? `rgba(255, 225, 132, ${0.56 + Math.sin(time * 4) * 0.08})`
+    : "rgba(132, 177, 188, 0.2)";
+  ctx.beginPath();
+  ctx.arc(x, y - 58, 14, 0, Math.PI * 2);
+  ctx.fill();
   ctx.restore();
 }
 
