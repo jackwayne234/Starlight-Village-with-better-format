@@ -496,6 +496,9 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.lookoutPost) {
     drawLookoutPost(ctx, scene.lookoutPost, time, scene.world.powerLevel);
   }
+  if (scene.crackedStair) {
+    drawCrackedStair(ctx, scene.crackedStair, time, scene.world.powerLevel);
+  }
   if (scene.bridge) {
     drawFootbridge(ctx, scene.bridge, time);
   }
@@ -4031,6 +4034,176 @@ function drawLookoutPost(ctx, post, time, powerLevel = 0) {
     warmGlow(ctx, x + 300, groundY - 276, 86, 0.28 + pulse * 0.08);
   }
 
+  ctx.restore();
+}
+
+function drawCrackedStair(ctx, stair, time, powerLevel = 0) {
+  const { x, groundY } = stair;
+  const fixed = stair.fixed || stair.bracesLocked || powerLevel > 0.95;
+  const pulse = 0.5 + Math.sin(time * 3) * 0.5;
+  const stairTopY = groundY - 310;
+  const stairBottomY = groundY - 54;
+  const leftX = x - 288;
+  const rightX = x + 288;
+
+  ctx.save();
+
+  const skyGlow = ctx.createLinearGradient(x, groundY - 420, x, groundY - 120);
+  skyGlow.addColorStop(0, fixed ? "rgba(108, 184, 196, 0.15)" : "rgba(63, 99, 122, 0.12)");
+  skyGlow.addColorStop(1, "rgba(18, 30, 39, 0)");
+  ctx.fillStyle = skyGlow;
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 238, 500, 168, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "rgba(12, 23, 27, 0.74)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 10, 520, 66, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+
+  drawStairRidge(ctx, leftX - 68, groundY, 230, 232, fixed, time, -1);
+  drawStairRidge(ctx, rightX + 68, groundY, 230, 232, fixed, time, 1);
+
+  const sideGradient = ctx.createLinearGradient(x, stairTopY, x, stairBottomY);
+  sideGradient.addColorStop(0, fixed ? "#385452" : "#2b4145");
+  sideGradient.addColorStop(0.66, fixed ? "#263d3d" : "#1b3035");
+  sideGradient.addColorStop(1, "#102129");
+
+  ctx.fillStyle = sideGradient;
+  ctx.beginPath();
+  ctx.moveTo(leftX, stairBottomY);
+  ctx.lineTo(x - 78, stairTopY);
+  ctx.lineTo(x + 78, stairTopY);
+  ctx.lineTo(rightX, stairBottomY);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(11, 18, 22, 0.72)";
+  ctx.lineWidth = 8;
+  ctx.lineJoin = "round";
+  ctx.stroke();
+
+  const stepCount = 7;
+  for (let i = 0; i < stepCount; i += 1) {
+    const t = i / (stepCount - 1);
+    const y = stairBottomY - t * (stairBottomY - stairTopY);
+    const width = 520 - t * 250;
+    drawStairStep(ctx, x, y, width, fixed, time + i * 0.34, i);
+  }
+
+  drawStairBrace(ctx, x - 168, groundY - 34, x - 30, stairTopY + 58, fixed, time);
+  drawStairBrace(ctx, x + 168, groundY - 34, x + 30, stairTopY + 58, fixed, time + 0.6);
+  drawBraceLatch(ctx, x - 74, groundY - 178, fixed, time);
+  drawBraceLatch(ctx, x + 74, groundY - 178, fixed, time + 0.8);
+
+  if (!fixed) {
+    ctx.strokeStyle = "rgba(153, 201, 207, 0.34)";
+    ctx.lineWidth = 4;
+    ctx.lineCap = "round";
+    [-92, 18, 120].forEach((offset, index) => {
+      ctx.beginPath();
+      ctx.moveTo(x + offset, stairTopY + 38 + index * 34);
+      ctx.quadraticCurveTo(x + offset + 24, stairTopY + 72 + index * 38, x + offset - 18, stairTopY + 120 + index * 42);
+      ctx.stroke();
+    });
+  }
+
+  warmGlow(ctx, x, groundY - 188, fixed ? 230 : 130, (fixed ? 0.24 : 0.1) + pulse * (fixed ? 0.06 : 0.02) + powerLevel * 0.08);
+  if (fixed) {
+    warmGlow(ctx, x, stairTopY + 30, 130, 0.24 + pulse * 0.06);
+  }
+
+  ctx.restore();
+}
+
+function drawStairRidge(ctx, x, groundY, width, height, fixed, time, side) {
+  const gradient = ctx.createLinearGradient(x, groundY - height, x, groundY);
+  gradient.addColorStop(0, fixed ? "#344f4d" : "#263d42");
+  gradient.addColorStop(0.7, fixed ? "#223b3d" : "#1a3035");
+  gradient.addColorStop(1, "#102129");
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.moveTo(x - width / 2, groundY - 16);
+  ctx.lineTo(x - width * 0.34, groundY - height + 42);
+  ctx.quadraticCurveTo(x - width * 0.06, groundY - height - 8, x + width * 0.34, groundY - height + 26);
+  ctx.lineTo(x + width / 2, groundY - 20);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.strokeStyle = fixed ? "rgba(170, 205, 190, 0.2)" : "rgba(128, 174, 181, 0.14)";
+  ctx.lineWidth = 4;
+  ctx.lineCap = "round";
+  for (let i = 0; i < 3; i += 1) {
+    ctx.beginPath();
+    ctx.moveTo(x - width * 0.24 + i * width * 0.2, groundY - height + 62 + i * 16);
+    ctx.quadraticCurveTo(x + side * (24 + i * 6), groundY - height + 122 + Math.sin(time + i) * 3, x - side * 18, groundY - 54);
+    ctx.stroke();
+  }
+}
+
+function drawStairStep(ctx, x, y, width, fixed, time, index) {
+  const topGradient = ctx.createLinearGradient(x - width / 2, y - 14, x + width / 2, y + 14);
+  topGradient.addColorStop(0, fixed ? "#536d66" : "#354d51");
+  topGradient.addColorStop(0.5, fixed ? "#405a58" : "#283f45");
+  topGradient.addColorStop(1, fixed ? "#263d3e" : "#172a31");
+  ctx.fillStyle = topGradient;
+  roundedRect(ctx, x - width / 2, y - 17, width, 34, 8);
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(10, 17, 21, 0.62)";
+  ctx.lineWidth = 5;
+  roundedRect(ctx, x - width / 2, y - 17, width, 34, 8);
+  ctx.stroke();
+
+  ctx.strokeStyle = fixed ? "rgba(229, 196, 123, 0.22)" : "rgba(155, 196, 199, 0.15)";
+  ctx.lineWidth = 3;
+  ctx.lineCap = "round";
+  const crack = Math.sin(time + index) * 3;
+  ctx.beginPath();
+  ctx.moveTo(x - width * 0.18, y - 8);
+  ctx.lineTo(x - width * 0.08 + crack, y + 2);
+  ctx.lineTo(x - width * 0.02, y + 11);
+  ctx.stroke();
+}
+
+function drawStairBrace(ctx, footX, footY, topX, topY, fixed, time) {
+  const sway = Math.sin(time * 1.4) * (fixed ? 0.01 : 0.04);
+  ctx.save();
+  ctx.translate(footX, footY);
+  ctx.rotate(sway);
+  ctx.strokeStyle = fixed ? "#9a6a38" : "#5a422e";
+  ctx.lineWidth = 18;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(topX - footX, topY - footY);
+  ctx.stroke();
+
+  ctx.strokeStyle = fixed ? "rgba(237, 197, 116, 0.34)" : "rgba(153, 184, 184, 0.16)";
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.moveTo(4, -8);
+  ctx.lineTo(topX - footX + 4, topY - footY + 8);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawBraceLatch(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.fillStyle = fixed ? "#d4a24f" : "#657b7d";
+  roundedRect(ctx, -34, -22, 68, 44, 10);
+  ctx.fill();
+  ctx.strokeStyle = "rgba(12, 18, 20, 0.64)";
+  ctx.lineWidth = 5;
+  roundedRect(ctx, -34, -22, 68, 44, 10);
+  ctx.stroke();
+
+  ctx.strokeStyle = fixed ? "rgba(255, 226, 142, 0.78)" : "rgba(185, 217, 219, 0.36)";
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.arc(0, 0, 16 + Math.sin(time * 3) * (fixed ? 1 : 2), 0, Math.PI * 2);
+  ctx.stroke();
   ctx.restore();
 }
 

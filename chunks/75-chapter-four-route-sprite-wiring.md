@@ -43,6 +43,12 @@ Continue the full-route sprite integration pass into Chapter 4, preserving the r
 - Hid the generic repair marker for Lookout Post.
 - Removed loose repair props and broken-branch clutter from Lookout Post.
 - Preserved the Stormedge rainy ridge mood, archive-lens repair theme, route text, and route to Cracked Stair.
+- Reviewed `chapter-four/cracked-stair` against `assets/sprites/world/cracked-stair-painted.png`.
+- Chose to keep Cracked Stair on a bespoke side-view treatment because the generated stair asset has a bright green background and reads as an angled/isometric stair block rather than the game's side-view ridge camera.
+- Added a hand-built Cracked Stair scene and renderer with side-view stone steps, ridge rock shoulders, locking wooden braces, repaired latch glow, and no random side cottages.
+- Hid the generic repair marker for Cracked Stair.
+- Removed loose repair props and broken-branch clutter from Cracked Stair.
+- Preserved the Stormedge rainy ridge mood, brace-lock repair theme, route text, and route to Cloud Harvester.
 
 ## Verification
 
@@ -88,7 +94,15 @@ Continue the full-route sprite integration pass into Chapter 4, preserving the r
 - Local preview server responded at:
   - `http://127.0.0.1:5264/?scene=chapter-four/lookout-post&x=1120&preview=1`
 - Local probes confirmed the Lookout Post scene module and `assets/sprites/world/lookout-post-painted.png` respond from the preview server.
+- Static scene-data check confirms `chapter-four/cracked-stair` remains custom with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, `showMarker: false`, and route flow to `chapter-four/cloud-harvester`.
+- Asset review confirmed `assets/sprites/world/cracked-stair-painted.png` is `396x326`, but it was not wired because its green-screen background and angled/isometric stair view do not match the side-view camera rule.
+- Syntax/import checks passed for `src/scenes/chapterFour/crackedStair.js`, `src/scenes/sceneRegistry.js`, and `src/rendering/worldRenderer.js` using the bundled Node runtime.
+- Full route walk still reaches all 100 scenes from `chapter-one/starlight-village` to `chapter-ten/celebration-square`, and includes `chapter-four/cracked-stair` between `chapter-four/lookout-post` and `chapter-four/cloud-harvester`.
+- Local preview server responded at:
+  - `http://127.0.0.1:5265/?scene=chapter-four/cracked-stair&x=1120&preview=1`
+- Local probes confirmed the Cracked Stair scene module and `assets/sprites/world/cracked-stair-painted.png` respond from the preview server.
+- Browser screenshot verification was attempted but the bundled Playwright install has no browser executable in this runtime.
 
 ## Next
 
-Continue route-order sprite wiring at `chapter-four/cracked-stair`.
+Continue route-order sprite wiring at `chapter-four/cloud-harvester`.
