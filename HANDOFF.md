@@ -64,6 +64,7 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Bell Rope Corner was upgraded to the Bakery Gutter quality format on `2026-06-23`: `assets/sprites/world/bell-rope-corner-painted.png` is now the main bell/rope/pulley landmark, random side cottages and loose ground gears/coils were removed, the generic repair marker is hidden, and the old canvas bell remains as a fallback; continue applying this format scene-by-scene.
 - Full-route sprite production pass landed on `2026-06-23`: `chunks/70-full-route-sprite-backlog.md` lists all 100 route sprite needs, Chapters 1-10 now have generated `*-painted.png` landmark assets and source sheets in `assets/sprites/world/`, and `chunks/71-route-sprite-production-pass.md` records the asset pass. Most generated sprites still need renderer wiring in route order.
 - Chapter 1 route sprite wiring continued on `2026-06-23`: Workshop Lift through Festival Square now use generated painted landmark sprites through a shared `paintedLandmark` renderer path, with random cottages, loose repair props, and generic repair markers removed. See `chunks/72-chapter-one-route-sprite-wiring.md`.
+- Chapter 2 route sprite wiring started on `2026-06-23`: Glowfen Grove was reviewed and left on its existing hand-built/root-pump art for now, while Lantern Lily Pool and Bog Bridge now use generated painted sprites through the shared `paintedLandmark` path with loose repair props and generic markers removed. See `chunks/73-chapter-two-route-sprite-wiring.md`.
 - Workshop Lift became bespoke on `2026-06-22`: it now has a crank, platform, roof shelf, raised/repaired visual state, route checks, and a chunk note in `chunks/42-workshop-lift-scene.md`.
 - Schoolhouse Lanterns became bespoke on `2026-06-22`: it now has a schoolhouse facade, three lantern posts, dark/lit chain state, route checks, and a chunk note in `chunks/43-schoolhouse-lanterns-scene.md`.
 - Market Awnings became bespoke on `2026-06-22`: it now has market stalls, colored awnings, dark/draining runoff state, route checks, and a chunk note in `chunks/44-market-awnings-scene.md`.
@@ -93,7 +94,7 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Tunnel Mouth became bespoke on `2026-06-22`: it now has a wet stone tunnel portal, warning-lamp sequence, dense flanking woods, no placeholder prop clutter, safe green repaired state, route checks, and a chunk note in `chunks/67-tunnel-mouth-scene.md`.
 - Clock Signal became bespoke on `2026-06-22`: it now has a wet station clock, pulse wires, rail signal lamps, dense flanking woods, synced green repaired state, route checks, and a chunk note in `chunks/68-clock-signal-scene.md`.
 - Last Platform became bespoke on `2026-06-22`: it now has a final platform shelter, end-of-line track stop, hill-road lamp, dense flanking woods, lit/open repaired state, route checks, and a chunk note in `chunks/69-last-platform-scene.md`.
-- Local preview verification used `http://127.0.0.1:5208/` most recently because earlier preview ports were occupied or unavailable.
+- Local preview verification used `http://127.0.0.1:5240/` most recently because earlier preview ports were occupied or unavailable.
 
 ## Suggested Next Step
 
@@ -101,7 +102,7 @@ Continue the route-order sprite wiring pass.
 
 Next likely stop:
 
-1. Review whether `chapter-two/glowfen-grove` should keep its existing hand-built/root-pump landmark art for now.
-2. If Glowfen Grove is left as an existing/review scene, wire `chapter-two/lantern-lily-pool` next using the shared `paintedLandmark` pattern.
+1. Wire `chapter-two/frogsong-lock` next using the shared `paintedLandmark` pattern.
+2. Continue Chapter 2 route-order wiring scene by scene after Frogsong Lock.
 3. Keep the format rule: one strong landmark sprite, no random houses, no loose repair props, and no generic marker unless intentionally needed.
 4. Preview each edited scene with `?scene=<scene-id>&preview=1`.

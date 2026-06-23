@@ -23,9 +23,9 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 8 | chapter-one/rain-drain-corner | Rain Drain Corner: Clear a clogged drain maze before the lane floods. | wired | `assets/sprites/world/rain-drain-corner-painted.png` |
 | 9 | chapter-one/mayor-porch | Mayor's Porch: Repair a porch signal chime that tells neighbors the route is safe. | wired | `assets/sprites/world/mayor-porch-painted.png` |
 | 10 | chapter-one/festival-square | Festival Square: Power the square's first star lantern and open the path outward. | wired | `assets/sprites/world/festival-square-painted.png` |
-| 11 | chapter-two/glowfen-grove | Glowfen Grove: Restore the root pump so glowing water moves again. | exists/review | `assets/sprites/world/glowfen-grove-painted.png` |
-| 12 | chapter-two/lantern-lily-pool | Lantern Lily Pool: Rotate lily pads to carry light across the water. | generated | `assets/sprites/world/lantern-lily-pool-painted.png` |
-| 13 | chapter-two/bog-bridge | Bog Bridge: Raise stepping stones in a safe sequence. | generated | `assets/sprites/world/bog-bridge-painted.png` |
+| 11 | chapter-two/glowfen-grove | Glowfen Grove: Restore the root pump so glowing water moves again. | reviewed/keep hand-built | `assets/sprites/world/glowfen-grove-painted.png` |
+| 12 | chapter-two/lantern-lily-pool | Lantern Lily Pool: Rotate lily pads to carry light across the water. | wired | `assets/sprites/world/lantern-lily-pool-painted.png` |
+| 13 | chapter-two/bog-bridge | Bog Bridge: Raise stepping stones in a safe sequence. | wired | `assets/sprites/world/bog-bridge-painted.png` |
 | 14 | chapter-two/frogsong-lock | Frogsong Lock: Match short call patterns to open a reed gate. | generated | `assets/sprites/world/frogsong-lock-painted.png` |
 | 15 | chapter-two/sunken-signpost | Sunken Signpost: Rebuild a half-submerged direction marker without using arrows. | generated | `assets/sprites/world/sunken-signpost-painted.png` |
 | 16 | chapter-two/mist-pool | Mist Pool: Tune warm vents to thin the mist. | generated | `assets/sprites/world/mist-pool-painted.png` |

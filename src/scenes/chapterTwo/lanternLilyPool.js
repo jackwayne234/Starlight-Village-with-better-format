@@ -18,6 +18,14 @@ export function createLanternLilyPoolScene() {
     fixed: false,
     liliesLit: false
   };
+  scene.paintedLandmark = {
+    sprite: "lanternLilyPool",
+    state: scene.lanternLilyPool,
+    x: 1160,
+    groundY: 672,
+    height: 500,
+    glow: { heightRatio: 0.48, radius: 165, fixedIntensity: 0.42, dimIntensity: 0.16, pulse: 0.06 }
+  };
   scene.layers = {
     trees: [
       { x: 50, y: 264, scale: 1.62 },
@@ -44,10 +52,7 @@ export function createLanternLilyPoolScene() {
       { x: 1980, y: 638, active: false }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 910, y: 624, kind: "seed" },
-      { x: 1400, y: 626, kind: "coil" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 330, y: 664, width: 132, height: 20 },
       { x: 1900, y: 660, width: 146, height: 18 }
@@ -67,6 +72,7 @@ export function createLanternLilyPoolScene() {
       x: 1160,
       y: 552,
       radius: 275,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: lantern lilies are not carrying light across the pool.",
