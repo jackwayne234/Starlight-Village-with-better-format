@@ -42,7 +42,6 @@ export function createClockSignalScene() {
     ],
     foliage: [
       { kind: "mosslineSwitchFoliage", x: 650, groundY: 672, height: 126, alpha: 0.88 },
-      { kind: "mosslineConduitCoils", x: 1010, groundY: 682, height: 118, alpha: 0.86 },
       { kind: "mosslinePuddleGround", x: 1305, groundY: 696, height: 126, alpha: 0.78 },
       { kind: "mosslineSwitchFoliage", x: 1605, groundY: 672, height: 124, alpha: 0.88 }
     ],

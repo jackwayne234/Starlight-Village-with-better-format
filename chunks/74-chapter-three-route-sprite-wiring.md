@@ -55,6 +55,12 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 - Removed the remaining foreground conduit-coil clutter from Tunnel Mouth.
 - Hid the generic repair marker for Tunnel Mouth.
 - Kept the existing rainy forest layers, Mossline lamps, puddles, mist, route text, warning-lamp repair state, and archive-lens path puzzle.
+- Reviewed `chapter-three/clock-signal` against its existing bespoke side-view station-clock treatment.
+- Chose to keep the existing Clock Signal renderer because it already gives the scene a front-facing wet station clock, rail signal lamps, pulse wires, platform base, wooded rail edges, and repaired synced-green state that match the side-view game camera.
+- Confirmed `assets/sprites/world/clock-signal-painted.png` has a strong front-facing clock but also still carries green-screen cleanup residue and a cropped neighboring rail fragment, so it should not be wired for this scene yet.
+- Removed the remaining foreground conduit-coil clutter from Clock Signal.
+- Kept the generic repair marker hidden for Clock Signal.
+- Kept the existing rainy forest layers, Mossline lamps, puddles, mist, route text, clock/lamp pulse repair state, and rail-signal path puzzle.
 
 ## Verification
 
@@ -74,6 +80,11 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 - Asset review confirmed `assets/sprites/world/rain-slick-rails-sprite.png` is the older top-down/angled rail sprite and was not wired.
 - Static scene-data check confirms `chapter-three/tunnel-mouth` remains on its custom side-view tunnel renderer with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, no foreground conduit-coil clutter, and `showMarker: false`.
 - Asset review confirmed `assets/sprites/world/tunnel-mouth-painted.png` is `392x382` RGBA with transparent corner pixels, but it was not wired because its angled rail framing does not match the side-view camera rule.
+- Static scene-data check confirms `chapter-three/clock-signal` remains on its custom side-view station-clock renderer with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, no foreground conduit-coil clutter, and `showMarker: false`.
+- Asset review confirmed `assets/sprites/world/clock-signal-painted.png` is `361x420` RGBA with transparent corner pixels, but it was not wired because the existing renderer better preserves the side-view clock/lamp/wire/platform repair state and the generated asset still includes cleanup residue/cropped neighboring art.
+- Local preview server responded at:
+  - `http://127.0.0.1:5256/?scene=chapter-three/clock-signal&x=1120&preview=1`
+- Local probes confirmed the Clock Signal scene module and `assets/sprites/world/clock-signal-painted.png` respond from the preview server.
 - Local preview server responded at:
   - `http://127.0.0.1:5255/?scene=chapter-three/tunnel-mouth&x=1120&preview=1`
 - Local probes confirmed the Tunnel Mouth scene module and `assets/sprites/world/tunnel-mouth-painted.png` respond from the preview server.
@@ -103,4 +114,4 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 
 ## Next
 
-Continue route-order sprite wiring at `chapter-three/clock-signal`.
+Continue route-order sprite wiring at `chapter-three/last-platform`.
