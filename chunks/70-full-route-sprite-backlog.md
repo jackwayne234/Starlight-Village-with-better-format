@@ -31,7 +31,7 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 16 | chapter-two/mist-pool | Mist Pool: Tune warm vents to thin the mist. | wired | `assets/sprites/world/mist-pool-painted.png` |
 | 17 | chapter-two/moss-gate | Moss Gate: Feed water through root lines to open a mossy gate. | wired | `assets/sprites/world/moss-gate-painted.png` |
 | 18 | chapter-two/old-fen-shrine | Old Fen Shrine: Align rain bowls so drops ring the shrine stones. | wired | `assets/sprites/world/old-fen-shrine-painted.png` |
-| 19 | chapter-two/glowfen-ferry | Glowfen Ferry: Repair the ferry pulley and cross the dark water. | generated | `assets/sprites/world/glowfen-ferry-painted.png` |
+| 19 | chapter-two/glowfen-ferry | Glowfen Ferry: Repair the ferry pulley and cross the dark water. | wired | `assets/sprites/world/glowfen-ferry-painted.png` |
 | 20 | chapter-two/reedwatch-bank | Reedwatch Bank: Light reed markers to show the way back to town. | generated | `assets/sprites/world/reedwatch-bank-painted.png` |
 | 21 | chapter-three/mossline-switchyard | Mossline Switchyard: Restore the main junction line through a rotate-path relay. | generated | `assets/sprites/world/mossline-switchyard-painted.png` |
 | 22 | chapter-three/cargo-cart-turntable | Cargo Cart Turntable: Rotate track pieces so a stuck cart can roll aside. | generated | `assets/sprites/world/cargo-cart-turntable-painted.png` |

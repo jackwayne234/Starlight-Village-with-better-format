@@ -13,6 +13,14 @@ export function createGlowfenFerryScene() {
   scene.showSignpost = false;
   scene.backdrop = { moonX: 970, moonY: 138, cloudDrift: 1.08, hillOffset: 66, ridgeOffset: 100 };
   scene.glowfenFerry = { x: 1180, groundY: 652, fixed: false, ferryDocked: false };
+  scene.paintedLandmark = {
+    sprite: "glowfenFerry",
+    state: scene.glowfenFerry,
+    x: 1180,
+    groundY: 674,
+    height: 500,
+    glow: { heightRatio: 0.5, radius: 185, fixedIntensity: 0.42, dimIntensity: 0.13, pulse: 0.06 }
+  };
   scene.layers = {
     trees: [
       { x: 65, y: 272, scale: 1.58 },
@@ -42,10 +50,7 @@ export function createGlowfenFerryScene() {
       { x: 1985, y: 638, active: false }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 900, y: 624, kind: "coil" },
-      { x: 1465, y: 626, kind: "gear" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 380, y: 664, width: 132, height: 20 },
       { x: 1180, y: 666, width: 540, height: 32 },
@@ -66,6 +71,7 @@ export function createGlowfenFerryScene() {
       x: 1180,
       y: 548,
       radius: 282,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: ferry pulley line is slack and the platform has drifted out.",
