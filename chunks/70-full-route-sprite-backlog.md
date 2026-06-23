@@ -39,7 +39,7 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 23 | chapter-three/signal-arm-row | Signal Arm Row: Set semaphore arms to the correct storm-safe pattern. | wired | `assets/sprites/world/signal-arm-row-painted.png` |
 | 24 | chapter-three/conductor-booth | Conductor Booth: Reconnect the booth board so route lamps respond. | reviewed/keep hand-built | `assets/sprites/world/conductor-booth-painted.png` |
 | 25 | chapter-three/crane-hook-yard | Crane Hook Yard: Guide a crane hook around obstacles to lift a fallen beam. | reviewed/keep hand-built | `assets/sprites/world/crane-hook-yard-painted.png` |
-| 26 | chapter-three/sparking-relay-shed | Sparking Relay Shed: Route power away from puddles before closing the circuit. | exists/review | `assets/sprites/world/sparking-relay-shed-painted.png` |
+| 26 | chapter-three/sparking-relay-shed | Sparking Relay Shed: Route power away from puddles before closing the circuit. | reviewed/keep existing painted treatment | `assets/sprites/world/sparking-relay-shed-painted.png` |
 | 27 | chapter-three/rain-slick-rails | Rain-Slick Rails: Place sand valves to make the rails usable. | exists/review | `assets/sprites/world/rain-slick-rails-painted.png` |
 | 28 | chapter-three/tunnel-mouth | Tunnel Mouth: Clear the tunnel warning lamps in the correct order. | generated | `assets/sprites/world/tunnel-mouth-painted.png` |
 | 29 | chapter-three/clock-signal | Clock Signal: Sync a wet station clock with the rail signal pulses. | generated | `assets/sprites/world/clock-signal-painted.png` |

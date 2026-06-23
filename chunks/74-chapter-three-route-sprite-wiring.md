@@ -37,6 +37,11 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 - Removed the loose gear/coil repair props and foreground conduit-coil clutter from Crane Hook Yard.
 - Hid the generic repair marker for Crane Hook Yard.
 - Kept the existing rainy forest layers, Mossline lamps, puddles, route text, animated hook, lifted-beam state, and rail-signal path puzzle.
+- Reviewed `chapter-three/sparking-relay-shed` against the route-sprite format.
+- Chose to keep the existing Sparking Relay Shed renderer because it already uses `assets/sprites/world/sparking-relay-shed-painted.png` as a side-view/front-facing painted shed landmark while preserving the custom relay board, wet cables, sparks, puddle danger, and repaired glow overlays.
+- Removed the loose coil/gear repair props and foreground conduit-coil clutter from Sparking Relay Shed.
+- Hid the generic repair marker for Sparking Relay Shed.
+- Kept the existing rainy forest layers, Mossline lamps, puddles, route text, calmed-sparks repair state, and storm-gauge path puzzle.
 
 ## Verification
 
@@ -49,6 +54,8 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 - Static scene-data check confirms `chapter-three/conductor-booth` remains hand-built with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, no foreground conduit-coil clutter, and `showMarker: false`.
 - Static scene-data check confirms `chapter-three/crane-hook-yard` remains hand-built with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, no foreground conduit-coil clutter, and `showMarker: false`.
 - Asset probe confirmed `assets/sprites/world/crane-hook-yard-painted.png` is `417x389` with transparent corner pixels and an opaque center, but the asset was not wired because its three-quarter rail framing does not match the side-view camera rule.
+- Static scene-data check confirms `chapter-three/sparking-relay-shed` remains on its custom painted-shed renderer with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, no foreground conduit-coil clutter, and `showMarker: false`.
+- Asset probe confirmed `assets/sprites/world/sparking-relay-shed-painted.png` is `1095x1137` RGBA with alpha, and the asset stayed wired through the existing `sparkingRelayShed` renderer path.
 - Full route walk still reaches all 100 scenes from `chapter-one/starlight-village` to `chapter-ten/celebration-square`.
 - Local preview server responded at:
   - `http://127.0.0.1:5252/?scene=chapter-three/crane-hook-yard&x=1120&preview=1`
@@ -72,4 +79,4 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 
 ## Next
 
-Continue route-order sprite wiring at `chapter-three/sparking-relay-shed`.
+Continue route-order sprite wiring at `chapter-three/rain-slick-rails`.

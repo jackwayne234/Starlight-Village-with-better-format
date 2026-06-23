@@ -36,15 +36,11 @@ export function createSparkingRelayShedScene() {
     ],
     foliage: [
       { kind: "mosslineSwitchFoliage", x: 720, groundY: 670, height: 124, alpha: 0.88 },
-      { kind: "mosslineConduitCoils", x: 980, groundY: 682, height: 116, alpha: 0.9 },
       { kind: "mosslinePuddleGround", x: 1265, groundY: 696, height: 122, alpha: 0.82 },
       { kind: "mosslineSwitchFoliage", x: 1555, groundY: 670, height: 126, alpha: 0.88 }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 910, y: 624, kind: "coil" },
-      { x: 1365, y: 626, kind: "gear" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 255, y: 662, width: 160, height: 18 },
       { x: 1160, y: 670, width: 500, height: 32 },
@@ -65,6 +61,7 @@ export function createSparkingRelayShedScene() {
       x: 1160,
       y: 536,
       radius: 292,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: relay sparks are jumping toward the puddles.",

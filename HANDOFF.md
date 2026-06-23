@@ -78,6 +78,7 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Chapter 3 route sprite wiring continued on `2026-06-23`: Signal Arm Row now uses `signal-arm-row-painted.png` through the shared `paintedLandmark` path after review, with the older hand-built semaphore/rail renderer kept as fallback, the generated green PNG background cleaned to transparency, loose gear/coil/seed props and conduit-coil clutter removed, and the generic repair marker hidden. See `chunks/74-chapter-three-route-sprite-wiring.md`.
 - Chapter 3 route sprite wiring continued on `2026-06-23`: Conductor Booth was reviewed and left on its existing hand-built side-view booth/route-board renderer because `conductor-booth-painted.png` reads as an angled/isometric object. Loose coil/gear props, foreground conduit-coil clutter, and the generic repair marker were removed. See `chunks/74-chapter-three-route-sprite-wiring.md`.
 - Chapter 3 route sprite wiring continued on `2026-06-23`: Crane Hook Yard was reviewed and left on its existing hand-built side-view crane/hook renderer because `crane-hook-yard-painted.png` reads as a three-quarter/isometric rail object. Loose gear/coil props, foreground conduit-coil clutter, and the generic repair marker were removed. See `chunks/74-chapter-three-route-sprite-wiring.md`.
+- Chapter 3 route sprite wiring continued on `2026-06-23`: Sparking Relay Shed was reviewed and kept on its existing custom painted-shed renderer because it already uses the side-view/front-facing `sparking-relay-shed-painted.png` landmark while preserving relay-board, cable, spark, puddle-danger, and repaired-glow overlays. Loose coil/gear props, foreground conduit-coil clutter, and the generic repair marker were removed. See `chunks/74-chapter-three-route-sprite-wiring.md`.
 - Workshop Lift became bespoke on `2026-06-22`: it now has a crank, platform, roof shelf, raised/repaired visual state, route checks, and a chunk note in `chunks/42-workshop-lift-scene.md`.
 - Schoolhouse Lanterns became bespoke on `2026-06-22`: it now has a schoolhouse facade, three lantern posts, dark/lit chain state, route checks, and a chunk note in `chunks/43-schoolhouse-lanterns-scene.md`.
 - Market Awnings became bespoke on `2026-06-22`: it now has market stalls, colored awnings, dark/draining runoff state, route checks, and a chunk note in `chunks/44-market-awnings-scene.md`.
@@ -115,7 +116,7 @@ Continue the route-order sprite wiring pass.
 
 Next likely stop:
 
-1. Continue route-order sprite wiring at `chapter-three/sparking-relay-shed`.
-2. Review whether Sparking Relay Shed should keep its existing painted shed treatment or swap to `sparking-relay-shed-painted.png`.
+1. Continue route-order sprite wiring at `chapter-three/rain-slick-rails`.
+2. Review whether Rain-Slick Rails should keep its existing bespoke side-view rail sprite treatment or swap to `rain-slick-rails-painted.png`.
 3. Keep the format rule: one strong landmark sprite, no random houses, no loose repair props, and no generic marker unless intentionally needed.
 4. Preview each edited scene with `?scene=<scene-id>&preview=1`.
