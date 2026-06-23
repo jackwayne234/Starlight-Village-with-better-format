@@ -84,16 +84,16 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 68 | chapter-seven/moon-apple-tree | Moon Apple Tree: Reflect moonlight onto a rare glowing tree. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/moon-apple-tree-painted.png` |
 | 69 | chapter-seven/birdhouse-lane | Birdhouse Lane: Rehang birdhouses so they guide the route. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/birdhouse-lane-painted.png` |
 | 70 | chapter-seven/hollow-tree-door | Hollow Tree Door: Unlock a hidden door in an old hollow tree. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/hollow-tree-door-painted.png` |
-| 71 | chapter-eight/glassworks-quarter | Glassworks Quarter: Bring color back to the rainy glass district. | generated | `assets/sprites/world/glassworks-quarter-painted.png` |
-| 72 | chapter-eight/prism-lamp-row | Prism Lamp Row: Rotate prisms to split light into path markers. | generated | `assets/sprites/world/prism-lamp-row-painted.png` |
-| 73 | chapter-eight/cracked-skylights | Cracked Skylights: Patch skylight panes before water reaches the furnace. | generated | `assets/sprites/world/cracked-skylights-painted.png` |
-| 74 | chapter-eight/furnace-bellows | Furnace Bellows: Time bellows valves to revive a warm furnace glow. | generated | `assets/sprites/world/furnace-bellows-painted.png` |
-| 75 | chapter-eight/color-filter-hall | Color Filter Hall: Slide color filters into the correct signal order. | generated | `assets/sprites/world/color-filter-hall-painted.png` |
-| 76 | chapter-eight/mirror-maze | Mirror Maze: Aim reflected light through a compact mirror puzzle. | generated | `assets/sprites/world/mirror-maze-painted.png` |
-| 77 | chapter-eight/stained-glass-path | Stained Glass Path: Repair floor panes so the path lights underfoot. | generated | `assets/sprites/world/stained-glass-path-painted.png` |
-| 78 | chapter-eight/cooling-pipes | Cooling Pipes: Route cooling water around fragile glass molds. | generated | `assets/sprites/world/cooling-pipes-painted.png` |
-| 79 | chapter-eight/lens-grinder | Lens Grinder: Align gears that polish a beacon lens. | generated | `assets/sprites/world/lens-grinder-painted.png` |
-| 80 | chapter-eight/rainbow-tower | Rainbow Tower: Restore the quarter's tall color signal. | generated | `assets/sprites/world/rainbow-tower-painted.png` |
+| 71 | chapter-eight/glassworks-quarter | Glassworks Quarter: Bring color back to the rainy glass district. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/glassworks-quarter-painted.png` |
+| 72 | chapter-eight/prism-lamp-row | Prism Lamp Row: Rotate prisms to split light into path markers. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/prism-lamp-row-painted.png` |
+| 73 | chapter-eight/cracked-skylights | Cracked Skylights: Patch skylight panes before water reaches the furnace. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/cracked-skylights-painted.png` |
+| 74 | chapter-eight/furnace-bellows | Furnace Bellows: Time bellows valves to revive a warm furnace glow. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/furnace-bellows-painted.png` |
+| 75 | chapter-eight/color-filter-hall | Color Filter Hall: Slide color filters into the correct signal order. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/color-filter-hall-painted.png` |
+| 76 | chapter-eight/mirror-maze | Mirror Maze: Aim reflected light through a compact mirror puzzle. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/mirror-maze-painted.png` |
+| 77 | chapter-eight/stained-glass-path | Stained Glass Path: Repair floor panes so the path lights underfoot. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/stained-glass-path-painted.png` |
+| 78 | chapter-eight/cooling-pipes | Cooling Pipes: Route cooling water around fragile glass molds. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/cooling-pipes-painted.png` |
+| 79 | chapter-eight/lens-grinder | Lens Grinder: Align gears that polish a beacon lens. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/lens-grinder-painted.png` |
+| 80 | chapter-eight/rainbow-tower | Rainbow Tower: Restore the quarter's tall color signal. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/rainbow-tower-painted.png` |
 | 81 | chapter-nine/under-village | Under-Village Door: Open the hidden service door beneath town. | generated | `assets/sprites/world/under-village-painted.png` |
 | 82 | chapter-nine/echo-door | Echo Door: Match pipe tones to open a round stone door. | generated | `assets/sprites/world/echo-door-painted.png` |
 | 83 | chapter-nine/old-pipe-crossing | Old Pipe Crossing: Rotate pipe bridges into a walkable crossing. | generated | `assets/sprites/world/old-pipe-crossing-painted.png` |

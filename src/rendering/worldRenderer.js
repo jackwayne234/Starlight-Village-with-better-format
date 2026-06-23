@@ -514,6 +514,9 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.chapterSevenLandmark) {
     drawChapterSevenLandmark(ctx, scene.chapterSevenLandmark, time, scene.world.powerLevel);
   }
+  if (scene.chapterEightLandmark) {
+    drawChapterEightLandmark(ctx, scene.chapterEightLandmark, time, scene.world.powerLevel);
+  }
   if (scene.bridge) {
     drawFootbridge(ctx, scene.bridge, time);
   }
@@ -677,6 +680,383 @@ function drawChapterSevenLandmark(ctx, landmark, time, powerLevel) {
   }
 
   ctx.restore();
+}
+
+function drawChapterEightLandmark(ctx, landmark, time, powerLevel) {
+  const fixed = landmark.fixed || powerLevel > 0.95;
+  const x = landmark.x;
+  const groundY = landmark.groundY;
+
+  ctx.save();
+  drawGlassworksShadow(ctx, x, groundY);
+
+  if (landmark.type === "glassworksQuarter") {
+    drawGlassworksQuarterLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "prismLampRow") {
+    drawPrismLampRowLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "crackedSkylights") {
+    drawCrackedSkylightsLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "furnaceBellows") {
+    drawFurnaceBellowsLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "colorFilterHall") {
+    drawColorFilterHallLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "mirrorMaze") {
+    drawMirrorMazeLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "stainedGlassPath") {
+    drawStainedGlassPathLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "coolingPipes") {
+    drawCoolingPipesLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "lensGrinder") {
+    drawLensGrinderLandmark(ctx, x, groundY, fixed, time);
+  } else if (landmark.type === "rainbowTower") {
+    drawRainbowTowerLandmark(ctx, x, groundY, fixed, time);
+  }
+
+  if (fixed) {
+    rainbowGlow(ctx, x, groundY - 190, 305, 0.18 + Math.sin(time * 3) * 0.028);
+  }
+
+  ctx.restore();
+}
+
+function drawGlassworksShadow(ctx, x, groundY) {
+  ctx.fillStyle = "rgba(9, 20, 25, 0.72)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 18, 480, 78, 0.02, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawGlassworksQuarterLandmark(ctx, x, groundY, fixed, time) {
+  drawGlassStoneBase(ctx, x, groundY, 510, fixed);
+  ctx.fillStyle = fixed ? "#334c51" : "#24353b";
+  roundedRect(ctx, x - 160, groundY - 394, 320, 352, 18);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "#1f343b" : "#17272d";
+  roundedRect(ctx, x - 128, groundY - 350, 256, 272, 10);
+  ctx.fill();
+  drawGlassPaneGrid(ctx, x, groundY - 214, 232, 240, fixed, time);
+  drawWarmWindow(ctx, x - 206, groundY - 162, fixed, time);
+  drawValveWheel(ctx, x + 204, groundY - 142, fixed, time);
+  drawGlassDome(ctx, x, groundY - 420, 194, fixed);
+}
+
+function drawPrismLampRowLandmark(ctx, x, groundY, fixed, time) {
+  drawGlassStoneBase(ctx, x, groundY, 560, fixed);
+  [-210, -70, 70, 210].forEach((offset, index) => {
+    ctx.fillStyle = fixed ? "#4d5148" : "#303c3d";
+    roundedRect(ctx, x + offset - 18, groundY - 266, 36, 218, 8);
+    ctx.fill();
+    ctx.strokeStyle = fixed ? "rgba(139, 187, 186, 0.6)" : "rgba(86, 113, 116, 0.58)";
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    ctx.moveTo(x + offset, groundY - 132);
+    ctx.lineTo(x + offset + 112, groundY - 132 + Math.sin(index) * 12);
+    ctx.stroke();
+    drawPrismGem(ctx, x + offset, groundY - 304, 42, colorForIndex(index), fixed, time + index * 0.35);
+  });
+  if (fixed) {
+    ["rgba(231,82,74,0.32)", "rgba(82,168,232,0.32)", "rgba(244,209,84,0.3)", "rgba(102,210,146,0.3)"].forEach((color, index) => {
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 8;
+      ctx.beginPath();
+      ctx.moveTo(x - 210 + index * 140, groundY - 272);
+      ctx.lineTo(x - 252 + index * 168, groundY - 58);
+      ctx.stroke();
+    });
+  }
+}
+
+function drawCrackedSkylightsLandmark(ctx, x, groundY, fixed, time) {
+  drawGlassStoneBase(ctx, x, groundY, 500, fixed);
+  ctx.fillStyle = fixed ? "#2f474f" : "#23353d";
+  roundedRect(ctx, x - 246, groundY - 284, 492, 116, 14);
+  ctx.fill();
+  [-164, 0, 164].forEach((offset, index) => {
+    drawSkylightPane(ctx, x + offset, groundY - 226, fixed, time + index * 0.3);
+  });
+  ctx.strokeStyle = fixed ? "rgba(195, 226, 216, 0.52)" : "rgba(111, 136, 136, 0.48)";
+  ctx.lineWidth = 10;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 260, groundY - 166);
+  ctx.lineTo(x + 260, groundY - 166);
+  ctx.stroke();
+  if (!fixed) {
+    drawWaterDrip(ctx, x - 82, groundY - 166, time);
+    drawWaterDrip(ctx, x + 142, groundY - 166, time + 0.4);
+  }
+}
+
+function drawFurnaceBellowsLandmark(ctx, x, groundY, fixed, time) {
+  drawGlassStoneBase(ctx, x, groundY, 500, fixed);
+  ctx.fillStyle = fixed ? "#3c4647" : "#293638";
+  roundedRect(ctx, x - 164, groundY - 312, 210, 270, 24);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "#7b452d" : "#2a2827";
+  roundedRect(ctx, x - 104, groundY - 206, 96, 104, 28);
+  ctx.fill();
+  if (fixed) {
+    warmGlow(ctx, x - 56, groundY - 154, 118, 0.32 + Math.sin(time * 3) * 0.04);
+  }
+  ctx.fillStyle = fixed ? "#584535" : "#38312d";
+  roundedRect(ctx, x + 78, groundY - 232, 178, 116, 38);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "#756553" : "#48413a";
+  ctx.lineWidth = 12;
+  ctx.beginPath();
+  ctx.moveTo(x + 46, groundY - 164);
+  ctx.lineTo(x + 78, groundY - 164);
+  ctx.moveTo(x + 256, groundY - 176);
+  ctx.lineTo(x + 304, groundY - 210 + Math.sin(time * 2) * (fixed ? 8 : 2));
+  ctx.stroke();
+  drawValveWheel(ctx, x + 300, groundY - 242, fixed, time);
+}
+
+function drawColorFilterHallLandmark(ctx, x, groundY, fixed, time) {
+  drawGlassStoneBase(ctx, x, groundY, 520, fixed);
+  ctx.strokeStyle = fixed ? "#5f665a" : "#3e4949";
+  ctx.lineWidth = 16;
+  ctx.lineCap = "round";
+  ctx.strokeRect(x - 248, groundY - 320, 496, 230);
+  const colors = ["#d84b47", "#e7b64d", "#4ab76f", "#4994d6", "#895bc4"];
+  colors.forEach((color, index) => {
+    const panelX = x - 208 + index * 104;
+    ctx.fillStyle = fixed ? color : "rgba(68, 86, 88, 0.72)";
+    roundedRect(ctx, panelX - 34, groundY - 286, 68, 164, 10);
+    ctx.fill();
+    ctx.strokeStyle = "rgba(16, 25, 26, 0.44)";
+    ctx.lineWidth = 4;
+    ctx.stroke();
+    if (fixed) {
+      warmGlow(ctx, panelX, groundY - 204, 68, 0.08 + Math.sin(time + index) * 0.012);
+    }
+  });
+}
+
+function drawMirrorMazeLandmark(ctx, x, groundY, fixed, time) {
+  drawGlassStoneBase(ctx, x, groundY, 520, fixed);
+  [-178, -58, 82, 202].forEach((offset, index) => {
+    drawMirrorPanel(ctx, x + offset, groundY - 190 - (index % 2) * 44, fixed, index % 2 ? -0.12 : 0.12);
+  });
+  drawBeaconLens(ctx, x - 16, groundY - 126, 54, fixed, time);
+  if (fixed) {
+    drawLightBeam(ctx, x - 178, groundY - 204, x - 16, groundY - 126, time);
+    drawLightBeam(ctx, x - 16, groundY - 126, x + 202, groundY - 190, time + 0.35);
+  }
+}
+
+function drawStainedGlassPathLandmark(ctx, x, groundY, fixed, time) {
+  drawGlassStoneBase(ctx, x, groundY, 560, fixed);
+  const colors = ["#9a3d42", "#315f96", "#c4a343", "#3d805b", "#7a4e9b"];
+  colors.forEach((color, index) => {
+    const panelX = x - 224 + index * 112;
+    ctx.fillStyle = fixed ? color : "#2c4449";
+    ctx.beginPath();
+    ctx.moveTo(panelX - 52, groundY - 120);
+    ctx.lineTo(panelX + 44, groundY - 146);
+    ctx.lineTo(panelX + 62, groundY - 66);
+    ctx.lineTo(panelX - 40, groundY - 48);
+    ctx.closePath();
+    ctx.fill();
+    ctx.strokeStyle = "rgba(11, 18, 20, 0.56)";
+    ctx.lineWidth = 5;
+    ctx.stroke();
+  });
+  ctx.strokeStyle = fixed ? "rgba(214, 236, 219, 0.5)" : "rgba(96, 120, 123, 0.46)";
+  ctx.lineWidth = 8;
+  ctx.beginPath();
+  ctx.moveTo(x - 292, groundY - 42);
+  ctx.lineTo(x + 292, groundY - 150);
+  ctx.stroke();
+  if (fixed) {
+    rainbowGlow(ctx, x, groundY - 100, 260, 0.16 + Math.sin(time * 2) * 0.02);
+  }
+}
+
+function drawCoolingPipesLandmark(ctx, x, groundY, fixed, time) {
+  drawGlassStoneBase(ctx, x, groundY, 540, fixed);
+  ctx.strokeStyle = fixed ? "#52666a" : "#34464b";
+  ctx.lineWidth = 22;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 240, groundY - 260);
+  ctx.lineTo(x - 240, groundY - 120);
+  ctx.lineTo(x - 80, groundY - 120);
+  ctx.lineTo(x - 80, groundY - 292);
+  ctx.lineTo(x + 88, groundY - 292);
+  ctx.lineTo(x + 88, groundY - 120);
+  ctx.lineTo(x + 242, groundY - 120);
+  ctx.lineTo(x + 242, groundY - 252);
+  ctx.stroke();
+  [-180, 0, 180].forEach((offset, index) => {
+    ctx.fillStyle = fixed ? "#2b7185" : "#243f47";
+    roundedRect(ctx, x + offset - 38, groundY - 230, 76, 160, 18);
+    ctx.fill();
+    if (fixed) {
+      warmGlow(ctx, x + offset, groundY - 150, 70, 0.1 + Math.sin(time + index) * 0.018);
+    }
+  });
+  drawValveWheel(ctx, x - 290, groundY - 176, fixed, time);
+}
+
+function drawLensGrinderLandmark(ctx, x, groundY, fixed, time) {
+  drawGlassStoneBase(ctx, x, groundY, 500, fixed);
+  ctx.fillStyle = fixed ? "#46514d" : "#2c3a3a";
+  roundedRect(ctx, x - 210, groundY - 144, 420, 92, 16);
+  ctx.fill();
+  drawBeaconLens(ctx, x - 72, groundY - 182, 62, fixed, time);
+  ctx.save();
+  ctx.translate(x + 116, groundY - 222);
+  ctx.rotate(time * (fixed ? 0.55 : 0.08));
+  ctx.strokeStyle = fixed ? "#aeb8aa" : "#687274";
+  ctx.lineWidth = 16;
+  ctx.beginPath();
+  ctx.arc(0, 0, 72, 0, Math.PI * 2);
+  ctx.stroke();
+  [0, Math.PI / 2, Math.PI, Math.PI * 1.5].forEach((angle) => {
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(Math.cos(angle) * 72, Math.sin(angle) * 72);
+    ctx.stroke();
+  });
+  ctx.restore();
+  drawValveWheel(ctx, x + 244, groundY - 140, fixed, time);
+}
+
+function drawRainbowTowerLandmark(ctx, x, groundY, fixed, time) {
+  drawGlassStoneBase(ctx, x, groundY, 360, fixed);
+  ctx.fillStyle = fixed ? "#32474f" : "#24343b";
+  roundedRect(ctx, x - 82, groundY - 490, 164, 448, 32);
+  ctx.fill();
+  ["#d84b47", "#e49a44", "#d7c247", "#4aa96a", "#4894d8", "#7759c8"].forEach((color, index) => {
+    const chamberY = groundY - 438 + index * 58;
+    ctx.fillStyle = fixed ? color : "#2f454a";
+    roundedRect(ctx, x - 48, chamberY, 96, 42, 18);
+    ctx.fill();
+    if (fixed) {
+      warmGlow(ctx, x, chamberY + 21, 72, 0.08 + Math.sin(time + index) * 0.014);
+    }
+  });
+  drawGlassDome(ctx, x, groundY - 510, 120, fixed);
+  ctx.strokeStyle = fixed ? "rgba(220, 239, 222, 0.52)" : "rgba(93, 119, 121, 0.5)";
+  ctx.lineWidth = 8;
+  ctx.beginPath();
+  ctx.moveTo(x - 96, groundY - 70);
+  ctx.lineTo(x + 96, groundY - 70);
+  ctx.stroke();
+}
+
+function drawGlassStoneBase(ctx, x, groundY, width, fixed) {
+  ctx.fillStyle = fixed ? "#44534f" : "#2a3a3a";
+  roundedRect(ctx, x - width / 2, groundY - 82, width, 54, 18);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "rgba(102, 148, 146, 0.26)" : "rgba(52, 75, 78, 0.28)";
+  roundedRect(ctx, x - width / 2 + 22, groundY - 72, width - 44, 18, 9);
+  ctx.fill();
+}
+
+function drawGlassDome(ctx, x, y, width, fixed) {
+  ctx.fillStyle = fixed ? "#28434b" : "#1d3038";
+  ctx.beginPath();
+  ctx.ellipse(x, y, width / 2, width * 0.28, 0, Math.PI, Math.PI * 2);
+  ctx.lineTo(x + width / 2, y + 28);
+  ctx.lineTo(x - width / 2, y + 28);
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(190, 225, 218, 0.52)" : "rgba(105, 132, 134, 0.48)";
+  ctx.lineWidth = 5;
+  ctx.stroke();
+}
+
+function drawGlassPaneGrid(ctx, x, y, width, height, fixed, time) {
+  const colors = fixed ? ["#9a3d42", "#315f96", "#c4a343", "#3d805b"] : ["#29464d", "#26404a", "#30494b", "#263e43"];
+  colors.forEach((color, index) => {
+    const col = index % 2;
+    const row = Math.floor(index / 2);
+    ctx.fillStyle = color;
+    roundedRect(ctx, x - width / 2 + col * (width / 2) + 8, y - height / 2 + row * (height / 2) + 8, width / 2 - 16, height / 2 - 16, 8);
+    ctx.fill();
+    if (fixed) {
+      warmGlow(ctx, x - width / 4 + col * (width / 2), y - height / 4 + row * (height / 2), 70, 0.06 + Math.sin(time + index) * 0.012);
+    }
+  });
+  ctx.strokeStyle = "rgba(12, 22, 24, 0.58)";
+  ctx.lineWidth = 5;
+  ctx.strokeRect(x - width / 2, y - height / 2, width, height);
+  ctx.beginPath();
+  ctx.moveTo(x, y - height / 2);
+  ctx.lineTo(x, y + height / 2);
+  ctx.moveTo(x - width / 2, y);
+  ctx.lineTo(x + width / 2, y);
+  ctx.stroke();
+}
+
+function drawPrismGem(ctx, x, y, radius, color, fixed, time) {
+  ctx.fillStyle = fixed ? color : "#2f4c52";
+  ctx.beginPath();
+  ctx.moveTo(x, y - radius);
+  ctx.lineTo(x + radius * 0.74, y - radius * 0.1);
+  ctx.lineTo(x + radius * 0.45, y + radius);
+  ctx.lineTo(x - radius * 0.45, y + radius);
+  ctx.lineTo(x - radius * 0.74, y - radius * 0.1);
+  ctx.closePath();
+  ctx.fill();
+  ctx.strokeStyle = "rgba(14, 23, 24, 0.55)";
+  ctx.lineWidth = 4;
+  ctx.stroke();
+  if (fixed) {
+    warmGlow(ctx, x, y, radius * 1.7, 0.12 + Math.sin(time * 2) * 0.02);
+  }
+}
+
+function drawSkylightPane(ctx, x, y, fixed, time) {
+  ctx.fillStyle = fixed ? "#4f7780" : "#2a454e";
+  roundedRect(ctx, x - 62, y - 42, 124, 84, 10);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(193, 228, 222, 0.58)" : "rgba(105, 132, 134, 0.5)";
+  ctx.lineWidth = 4;
+  ctx.stroke();
+  if (!fixed) {
+    ctx.beginPath();
+    ctx.moveTo(x - 30, y - 28);
+    ctx.lineTo(x + 4, y + 4);
+    ctx.lineTo(x - 12, y + 34);
+    ctx.moveTo(x + 18, y - 30);
+    ctx.lineTo(x + 42, y + 22);
+    ctx.stroke();
+  } else {
+    warmGlow(ctx, x, y, 58, 0.07 + Math.sin(time) * 0.012);
+  }
+}
+
+function drawMirrorPanel(ctx, x, y, fixed, tilt) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(tilt);
+  ctx.fillStyle = fixed ? "#5e7b80" : "#344e55";
+  roundedRect(ctx, -38, -108, 76, 216, 8);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(206, 230, 224, 0.55)" : "rgba(104, 130, 132, 0.5)";
+  ctx.lineWidth = 5;
+  ctx.stroke();
+  ctx.restore();
+}
+
+function rainbowGlow(ctx, cx, cy, radius, intensity) {
+  const gradient = ctx.createRadialGradient(cx, cy, 10, cx, cy, radius);
+  gradient.addColorStop(0, `rgba(240, 214, 112, ${intensity})`);
+  gradient.addColorStop(0.35, `rgba(89, 168, 220, ${intensity * 0.72})`);
+  gradient.addColorStop(0.68, `rgba(179, 92, 205, ${intensity * 0.48})`);
+  gradient.addColorStop(1, "rgba(179, 92, 205, 0)");
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function colorForIndex(index) {
+  return ["#d84b47", "#4894d8", "#d7c247", "#4aa96a"][index % 4];
 }
 
 function drawOrchardShadow(ctx, x, groundY) {
