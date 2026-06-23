@@ -13,6 +13,7 @@ import { createOldFootbridgeScene } from "./chapterOne/oldFootbridge.js";
 import { createRainDrainCornerScene } from "./chapterOne/rainDrainCorner.js";
 import { createStarlightVillageScene } from "./chapterOne/starlightVillage.js";
 import { createStormedgeRiseScene } from "./chapterOne/stormedgeRise.js";
+import { createWeatherVaneRoofScene } from "./chapterFour/weatherVaneRoof.js";
 import { createCargoCartTurntableScene } from "./chapterThree/cargoCartTurntable.js";
 import { createConductorBoothScene } from "./chapterThree/conductorBooth.js";
 import { createCraneHookYardScene } from "./chapterThree/craneHookYard.js";
@@ -74,7 +75,8 @@ export const sceneIds = {
   signalArmRow: "chapter-three/signal-arm-row",
   stormedgeRise: "chapter-four/stormedge-rise",
   sunkenSignpost: "chapter-two/sunken-signpost",
-  starlightVillage: "chapter-one/starlight-village"
+  starlightVillage: "chapter-one/starlight-village",
+  weatherVaneRoof: "chapter-four/weather-vane-roof"
 };
 
 const handBuiltSceneFactories = {
@@ -111,6 +113,7 @@ const handBuiltSceneFactories = {
   [sceneIds.signalArmRow]: createSignalArmRowScene,
   [sceneIds.stormedgeRise]: createStormedgeRiseScene,
   [sceneIds.starlightVillage]: createStarlightVillageScene,
+  [sceneIds.weatherVaneRoof]: createWeatherVaneRoofScene,
   "chapter-one/beacon-hill": createBeaconHillScene,
   "chapter-one/glowfen-grove": createGlowfenGroveScene,
   "chapter-one/mossline-switchyard": createMosslineSwitchyardScene,

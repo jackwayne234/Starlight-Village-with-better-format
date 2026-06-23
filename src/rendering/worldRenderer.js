@@ -487,6 +487,9 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.lastPlatform) {
     drawLastPlatform(ctx, scene.lastPlatform, time, scene.world.powerLevel);
   }
+  if (scene.weatherVaneRoof) {
+    drawWeatherVaneRoof(ctx, scene.weatherVaneRoof, time, scene.world.powerLevel);
+  }
   if (scene.bridge) {
     drawFootbridge(ctx, scene.bridge, time);
   }
@@ -3800,6 +3803,169 @@ function drawStormRidge(ctx, ridge, time, powerLevel = 0) {
   ctx.moveTo(gauge.x, gauge.y - 8);
   ctx.lineTo(gauge.x + Math.cos(time * 0.8) * 25, gauge.y - 8 - Math.abs(Math.sin(time * 0.8)) * 25);
   ctx.stroke();
+}
+
+function drawWeatherVaneRoof(ctx, roof, time, powerLevel = 0) {
+  const { x, groundY } = roof;
+  const fixed = roof.fixed || roof.vaneAligned || powerLevel > 0.95;
+  const pulse = 0.5 + Math.sin(time * 3.4) * 0.5;
+  const glow = fixed ? 0.46 + pulse * 0.08 : 0.18 + powerLevel * 0.18;
+
+  ctx.save();
+
+  const skyGlow = ctx.createLinearGradient(x, groundY - 360, x, groundY - 96);
+  skyGlow.addColorStop(0, fixed ? "rgba(101, 182, 197, 0.16)" : "rgba(64, 102, 125, 0.12)");
+  skyGlow.addColorStop(1, "rgba(20, 31, 42, 0)");
+  ctx.fillStyle = skyGlow;
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 228, 430, 156, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "rgba(14, 23, 28, 0.68)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY + 6, 370, 30, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  const roofGradient = ctx.createLinearGradient(x, groundY - 272, x, groundY - 44);
+  roofGradient.addColorStop(0, "#214a55");
+  roofGradient.addColorStop(0.5, "#193541");
+  roofGradient.addColorStop(1, "#101e27");
+  ctx.fillStyle = roofGradient;
+  ctx.beginPath();
+  ctx.moveTo(x - 360, groundY - 74);
+  ctx.lineTo(x - 258, groundY - 206);
+  ctx.quadraticCurveTo(x - 118, groundY - 270, x, groundY - 286);
+  ctx.quadraticCurveTo(x + 132, groundY - 268, x + 258, groundY - 206);
+  ctx.lineTo(x + 360, groundY - 74);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(188, 228, 225, 0.32)";
+  ctx.lineWidth = 3;
+  for (let i = -5; i <= 5; i += 1) {
+    const topX = x + i * 42;
+    const bottomX = x + i * 66;
+    ctx.beginPath();
+    ctx.moveTo(topX, groundY - 260 + Math.abs(i) * 7);
+    ctx.lineTo(bottomX, groundY - 82);
+    ctx.stroke();
+  }
+
+  ctx.strokeStyle = "rgba(11, 18, 22, 0.62)";
+  ctx.lineWidth = 10;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 375, groundY - 72);
+  ctx.quadraticCurveTo(x, groundY - 34, x + 375, groundY - 72);
+  ctx.stroke();
+
+  const gutterGradient = ctx.createLinearGradient(x - 360, groundY - 96, x + 360, groundY - 64);
+  gutterGradient.addColorStop(0, "#5a3b24");
+  gutterGradient.addColorStop(0.45, "#b07538");
+  gutterGradient.addColorStop(1, "#543520");
+  ctx.strokeStyle = gutterGradient;
+  ctx.lineWidth = 18;
+  ctx.beginPath();
+  ctx.moveTo(x - 360, groundY - 78);
+  ctx.quadraticCurveTo(x, groundY - 42, x + 360, groundY - 78);
+  ctx.stroke();
+
+  ctx.fillStyle = "#273d43";
+  roundedRect(ctx, x - 44, groundY - 110, 88, 100, 12);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "rgba(255, 218, 126, 0.54)" : "rgba(129, 183, 192, 0.26)";
+  roundedRect(ctx, x - 24, groundY - 80, 48, 34, 6);
+  ctx.fill();
+
+  drawWeatherVaneMast(ctx, x, groundY - 286, fixed, time);
+  drawWindChannelLouvers(ctx, x, groundY, fixed, time);
+
+  warmGlow(ctx, x, groundY - 302, 118, glow);
+  if (fixed) {
+    warmGlow(ctx, x, groundY - 66, 260, 0.22);
+  }
+
+  ctx.restore();
+}
+
+function drawWeatherVaneMast(ctx, x, y, fixed, time) {
+  const sway = Math.sin(time * 1.6) * (fixed ? 0.02 : 0.08);
+
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(sway);
+
+  ctx.strokeStyle = "#6f4b2a";
+  ctx.lineWidth = 10;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(0, 18);
+  ctx.lineTo(0, -126);
+  ctx.stroke();
+
+  ctx.fillStyle = "#b9823e";
+  ctx.beginPath();
+  ctx.arc(0, -118, 18, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.strokeStyle = fixed ? "rgba(255, 226, 142, 0.92)" : "rgba(189, 220, 222, 0.72)";
+  ctx.lineWidth = 8;
+  ctx.beginPath();
+  ctx.moveTo(-148, -118);
+  ctx.lineTo(150, -118);
+  ctx.stroke();
+
+  ctx.fillStyle = fixed ? "#f0c46a" : "#7f9aa0";
+  ctx.beginPath();
+  ctx.moveTo(-178, -118);
+  ctx.lineTo(-126, -144);
+  ctx.lineTo(-138, -118);
+  ctx.lineTo(-126, -92);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = fixed ? "#d89a42" : "#5e7379";
+  ctx.beginPath();
+  ctx.moveTo(150, -118);
+  ctx.lineTo(228, -158);
+  ctx.lineTo(204, -118);
+  ctx.lineTo(228, -78);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(15, 23, 26, 0.5)";
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(166, -126);
+  ctx.lineTo(212, -148);
+  ctx.moveTo(166, -110);
+  ctx.lineTo(212, -88);
+  ctx.stroke();
+
+  if (fixed) {
+    warmGlow(ctx, 0, -118, 72, 0.34 + Math.sin(time * 4) * 0.05);
+  }
+
+  ctx.restore();
+}
+
+function drawWindChannelLouvers(ctx, x, groundY, fixed, time) {
+  const open = fixed ? 1 : 0.35 + Math.sin(time * 1.8) * 0.08;
+  const channels = [-188, -94, 94, 188];
+
+  channels.forEach((offset, index) => {
+    const y = groundY - 156 + (index % 2) * 18;
+    ctx.save();
+    ctx.translate(x + offset, y);
+    ctx.rotate((offset < 0 ? -0.12 : 0.12) * open);
+    ctx.fillStyle = "#182c35";
+    roundedRect(ctx, -58, -13, 116, 26, 7);
+    ctx.fill();
+    ctx.fillStyle = fixed ? "rgba(255, 214, 124, 0.52)" : "rgba(109, 177, 190, 0.2)";
+    roundedRect(ctx, -46, -7, 92, 14, 6);
+    ctx.fill();
+    ctx.restore();
+  });
 }
 
 function drawBeaconHill(ctx, beaconHill, time) {
