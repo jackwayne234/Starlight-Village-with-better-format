@@ -13,6 +13,7 @@ import { createOldFootbridgeScene } from "./chapterOne/oldFootbridge.js";
 import { createRainDrainCornerScene } from "./chapterOne/rainDrainCorner.js";
 import { createStarlightVillageScene } from "./chapterOne/starlightVillage.js";
 import { createStormedgeRiseScene } from "./chapterOne/stormedgeRise.js";
+import { createBeaconApproachScene } from "./chapterFour/beaconApproach.js";
 import { createCloudHarvesterScene } from "./chapterFour/cloudHarvester.js";
 import { createCliffRopeLiftScene } from "./chapterFour/cliffRopeLift.js";
 import { createCrackedStairScene } from "./chapterFour/crackedStair.js";
@@ -48,6 +49,7 @@ import { addTreeDensity } from "./treeDensity.js";
 
 export const sceneIds = {
   beaconHill: "chapter-five/beacon-hill",
+  beaconApproach: "chapter-four/beacon-approach",
   bakeryGutter: "chapter-one/bakery-gutter",
   bellRopeCorner: "chapter-one/bell-rope-corner",
   bogBridge: "chapter-two/bog-bridge",
@@ -95,6 +97,7 @@ export const sceneIds = {
 
 const handBuiltSceneFactories = {
   [sceneIds.bakeryGutter]: createBakeryGutterScene,
+  [sceneIds.beaconApproach]: createBeaconApproachScene,
   [sceneIds.bellRopeCorner]: createBellRopeCornerScene,
   [sceneIds.beaconHill]: createBeaconHillScene,
   [sceneIds.bogBridge]: createBogBridgeScene,

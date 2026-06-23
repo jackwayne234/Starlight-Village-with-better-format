@@ -1,6 +1,6 @@
 # Chunk 75: Chapter Four Route Sprite Wiring
 
-Status: in progress
+Status: complete
 
 ## Goal
 
@@ -61,6 +61,12 @@ Continue the full-route sprite integration pass into Chapter 4, preserving the r
 - Hid the generic repair marker for Summit Path.
 - Removed loose repair props and broken-branch clutter from Summit Path.
 - Preserved the Stormedge rainy ridge/forest mood, high-mist marker-light repair theme, route text, and route to Beacon Approach.
+- Reviewed `chapter-four/beacon-approach` against `assets/sprites/world/beacon-approach-painted.png`.
+- Chose to wire Beacon Approach through the shared `paintedLandmark` path because the generated gate reads as a strong front-facing route landmark rather than top-down or isometric after green-screen cleanup.
+- Cleaned the bright green-screen background from `beacon-approach-painted.png`.
+- Added a hand-built Beacon Approach scene with the painted gate as the one strong landmark, no random side cottages, no loose repair props, no broken-branch clutter, and no generic marker.
+- Preserved the Stormedge rainy ridge/forest mood, final beacon-gate repair theme, route text, and route to Beacon Hill.
+- Finished the Chapter 4 route-sprite wiring pass.
 
 ## Verification
 
@@ -130,7 +136,16 @@ Continue the full-route sprite integration pass into Chapter 4, preserving the r
   - `http://127.0.0.1:5267/?scene=chapter-four/summit-path&x=1120&preview=1`
 - Local probes confirmed the Summit Path scene module and `assets/sprites/world/summit-path-painted.png` respond from the preview server.
 - Browser screenshot verification was not available in this thread because no callable browser-control tool was exposed.
+- Static scene-data check confirms `chapter-four/beacon-approach` uses `paintedLandmark.sprite: "beaconApproach"`, `0` cottages, `0` repair parts, `0` broken branches, `showMarker: false`, and route flow to `chapter-five/beacon-hill`.
+- Asset review confirmed `assets/sprites/world/beacon-approach-painted.png` is `330x331` RGBA after green-screen cleanup, with `37251` fully transparent pixels and an opaque gate center.
+- Syntax/import checks passed for `src/scenes/chapterFour/beaconApproach.js`, `src/scenes/sceneRegistry.js`, and `src/rendering/sprites.js` using the bundled Node runtime.
+- Full route walk still reaches all 100 scenes from `chapter-one/starlight-village` to `chapter-ten/celebration-square`; Chapter 4 now walks `stormedge-rise` -> `weather-vane-roof` -> `cliff-rope-lift` -> `wind-chime-pass` -> `lightning-rod-field` -> `lookout-post` -> `cracked-stair` -> `cloud-harvester` -> `summit-path` -> `beacon-approach`, then continues to `chapter-five/beacon-hill`.
+- Static Chapter 4 format check confirms all 10 Chapter 4 scenes have `0` cottages, `0` repair parts, `0` broken branches, and `showMarker: false`; Wind Chime Pass, Lightning Rod Field, and Beacon Approach use the shared `paintedLandmark` path, while the other reviewed scenes stay on bespoke side-view treatments.
+- Local preview server responded at:
+  - `http://127.0.0.1:5268/?scene=chapter-four/beacon-approach&x=1120&preview=1`
+- Local probes confirmed the Beacon Approach scene module and `assets/sprites/world/beacon-approach-painted.png` respond from the preview server.
+- Browser screenshot verification was not available in this thread because no callable browser-control tool was exposed.
 
 ## Next
 
-Continue route-order sprite wiring at `chapter-four/beacon-approach`.
+Continue route-order sprite wiring at `chapter-five/beacon-hill`.

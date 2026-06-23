@@ -51,6 +51,7 @@ export const sprites = {
     signalArmRow: loadImage(`${WORLD}/signal-arm-row-painted.png?v=painted-route-ch3`),
     windChimePass: loadImage(`${WORLD}/wind-chime-pass-painted.png?v=painted-route-ch4`),
     lightningRodField: loadImage(`${WORLD}/lightning-rod-field-painted.png?v=painted-route-ch4`),
+    beaconApproach: loadImage(`${WORLD}/beacon-approach-painted.png?v=painted-route-ch4-final`),
     tree: loadImage(`${WORLD}/tree-trimmed.png`),
     pine: loadImage(`${WORLD}/pine-tree-trimmed.png`),
     lamp: loadImage(`${WORLD}/lamp-trimmed.png`),
