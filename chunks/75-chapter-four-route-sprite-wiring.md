@@ -32,6 +32,11 @@ Continue the full-route sprite integration pass into Chapter 4, preserving the r
 - Cleaned the bright green-screen background and tiny neighboring crop fragment from `wind-chime-pass-painted.png`.
 - Added a hand-built Wind Chime Pass scene with the painted chime arch as the one strong landmark, no random side cottages, no loose repair props, no broken-branch clutter, and no generic marker.
 - Preserved the Stormedge rainy ridge mood, calm-gust repair theme, route text, and route to Lightning Rod Field.
+- Reviewed `chapter-four/lightning-rod-field` against `assets/sprites/world/lightning-rod-field-painted.png`.
+- Chose to wire Lightning Rod Field through the shared `paintedLandmark` path because the cleaned generated rods read as a strong side-view/front-facing ridge landmark rather than top-down or isometric.
+- Cleaned the bright green-screen background from `lightning-rod-field-painted.png`.
+- Added a hand-built Lightning Rod Field scene with the painted rod cluster as the one strong landmark, no random side cottages, no loose repair props, no broken-branch clutter, and no generic marker.
+- Preserved the Stormedge rainy ridge mood, grounding repair theme, route text, and route to Lookout Post.
 
 ## Verification
 
@@ -63,7 +68,14 @@ Continue the full-route sprite integration pass into Chapter 4, preserving the r
 - Local preview server responded at:
   - `http://127.0.0.1:5262/?scene=chapter-four/wind-chime-pass&x=1120&preview=1`
 - Local probes confirmed the Wind Chime Pass scene module and `assets/sprites/world/wind-chime-pass-painted.png` respond from the preview server.
+- Static scene-data check confirms `chapter-four/lightning-rod-field` uses `paintedLandmark.sprite: "lightningRodField"`, `0` cottages, `0` repair parts, `0` broken branches, `showMarker: false`, and route flow to `chapter-four/lookout-post`.
+- Asset review confirmed `assets/sprites/world/lightning-rod-field-painted.png` is `356x381` RGBA with `98093` fully transparent pixels after green-screen cleanup, and the rod cluster reads as a side-view/front-facing landmark rather than top-down or isometric.
+- Syntax/import checks passed for `src/scenes/chapterFour/lightningRodField.js`, `src/scenes/sceneRegistry.js`, and `src/rendering/sprites.js` using the bundled Node runtime.
+- Full route walk still reaches all 100 scenes from `chapter-one/starlight-village` to `chapter-ten/celebration-square`, and includes `chapter-four/lightning-rod-field` between `chapter-four/wind-chime-pass` and `chapter-four/lookout-post`.
+- Local preview server responded at:
+  - `http://127.0.0.1:5263/?scene=chapter-four/lightning-rod-field&x=1120&preview=1`
+- Local probes confirmed the Lightning Rod Field scene module and `assets/sprites/world/lightning-rod-field-painted.png` respond from the preview server.
 
 ## Next
 
-Continue route-order sprite wiring at `chapter-four/lightning-rod-field`.
+Continue route-order sprite wiring at `chapter-four/lookout-post`.

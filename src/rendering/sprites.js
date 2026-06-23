@@ -50,6 +50,7 @@ export const sprites = {
     cargoCartTurntable: loadImage(`${WORLD}/cargo-cart-turntable-painted.png?v=painted-route-ch3`),
     signalArmRow: loadImage(`${WORLD}/signal-arm-row-painted.png?v=painted-route-ch3`),
     windChimePass: loadImage(`${WORLD}/wind-chime-pass-painted.png?v=painted-route-ch4`),
+    lightningRodField: loadImage(`${WORLD}/lightning-rod-field-painted.png?v=painted-route-ch4`),
     tree: loadImage(`${WORLD}/tree-trimmed.png`),
     pine: loadImage(`${WORLD}/pine-tree-trimmed.png`),
     lamp: loadImage(`${WORLD}/lamp-trimmed.png`),
