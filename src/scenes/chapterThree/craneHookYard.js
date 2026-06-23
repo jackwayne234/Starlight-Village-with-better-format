@@ -36,15 +36,11 @@ export function createCraneHookYardScene() {
     ],
     foliage: [
       { kind: "mosslineSwitchFoliage", x: 735, groundY: 670, height: 124, alpha: 0.88 },
-      { kind: "mosslineConduitCoils", x: 1000, groundY: 682, height: 112, alpha: 0.9 },
       { kind: "mosslinePuddleGround", x: 1300, groundY: 696, height: 116, alpha: 0.8 },
       { kind: "mosslineSwitchFoliage", x: 1540, groundY: 670, height: 126, alpha: 0.88 }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 930, y: 624, kind: "gear" },
-      { x: 1375, y: 626, kind: "coil" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 255, y: 662, width: 160, height: 18 },
       { x: 1160, y: 668, width: 460, height: 30 },
@@ -65,6 +61,7 @@ export function createCraneHookYardScene() {
       x: 1160,
       y: 532,
       radius: 292,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: crane hook controls are offline and a beam is blocking the rail.",
