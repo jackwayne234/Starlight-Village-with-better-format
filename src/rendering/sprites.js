@@ -21,6 +21,8 @@ export const sprites = {
   },
   robot: {
     idle: loadImage(`${ROBOT}/robot-cover-idle-trimmed.png`),
+    idleLeft: loadImage(`${ROBOT}/robot-cover-idle-left-trimmed.png`),
+    scanLeft: loadImage(`${ROBOT}/robot-scan-left-trimmed.png`),
     scan: loadImage(`${ROBOT}/robot-scan-trimmed.png`)
   },
   world: {
@@ -62,6 +64,7 @@ export const sprites = {
     mosslineOvergrownSwitchBox: loadImage(`${WORLD}/mossline-overgrown-switch-box-trimmed.png`),
     mosslineConduitCoils: loadImage(`${WORLD}/mossline-conduit-coils-trimmed.png`),
     mosslinePuddleGround: loadImage(`${WORLD}/mossline-puddle-ground-trimmed.png`),
+    sparkingRelayShed: loadImage(`${WORLD}/sparking-relay-shed-painted.png?v=painted-relay-shed`),
     // Seamless, horizontally-tiling textures for the path band, the stream, and
     // the grass behind the path. Fill existing shapes; no cutout (full-bleed).
     pathTile: loadImage(`${WORLD}/path-tile.png`),

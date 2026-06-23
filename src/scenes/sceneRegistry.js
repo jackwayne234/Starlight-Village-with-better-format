@@ -17,6 +17,7 @@ import { createCargoCartTurntableScene } from "./chapterThree/cargoCartTurntable
 import { createConductorBoothScene } from "./chapterThree/conductorBooth.js";
 import { createCraneHookYardScene } from "./chapterThree/craneHookYard.js";
 import { createSignalArmRowScene } from "./chapterThree/signalArmRow.js";
+import { createSparkingRelayShedScene } from "./chapterThree/sparkingRelayShed.js";
 import { createGlassrailCrossingScene } from "./chapterTwo/glassrailCrossing.js";
 import { createLanternMarketScene } from "./chapterTwo/lanternMarket.js";
 import { createLanternLilyPoolScene } from "./chapterTwo/lanternLilyPool.js";
@@ -40,6 +41,7 @@ export const sceneIds = {
   cargoCartTurntable: "chapter-three/cargo-cart-turntable",
   conductorBooth: "chapter-three/conductor-booth",
   craneHookYard: "chapter-three/crane-hook-yard",
+  sparkingRelayShed: "chapter-three/sparking-relay-shed",
   workshopLift: "chapter-one/workshop-lift",
   glassrailCrossing: "chapter-two/glassrail-crossing",
   festivalSquare: "chapter-one/festival-square",
@@ -74,6 +76,7 @@ const handBuiltSceneFactories = {
   [sceneIds.cargoCartTurntable]: createCargoCartTurntableScene,
   [sceneIds.conductorBooth]: createConductorBoothScene,
   [sceneIds.craneHookYard]: createCraneHookYardScene,
+  [sceneIds.sparkingRelayShed]: createSparkingRelayShedScene,
   [sceneIds.workshopLift]: createWorkshopLiftScene,
   [sceneIds.glowfenGrove]: createGlowfenGroveScene,
   [sceneIds.mosslineSwitchyard]: createMosslineSwitchyardScene,

@@ -1,5 +1,5 @@
 import { config } from "../core/config.js";
-import { sprites, imageReady } from "./sprites.js?v=large-door-beacon-opaque";
+import { sprites, imageReady } from "./sprites.js?v=painted-relay-shed";
 
 const { colors } = config;
 
@@ -468,6 +468,9 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.craneHookYard) {
     drawCraneHookYard(ctx, scene.craneHookYard, time, scene.world.powerLevel);
   }
+  if (scene.sparkingRelayShed) {
+    drawSparkingRelayShed(ctx, scene.sparkingRelayShed, time, scene.world.powerLevel);
+  }
   if (scene.bridge) {
     drawFootbridge(ctx, scene.bridge, time);
   }
@@ -808,6 +811,146 @@ function drawCraneControlBox(ctx, x, y, fixed, time) {
   ctx.arc(x - 16, y - 8, 9 + Math.sin(time * 4) * (fixed ? 1 : 0), 0, Math.PI * 2);
   ctx.arc(x + 16, y - 8, 9 + Math.sin(time * 4 + 1) * (fixed ? 1 : 0), 0, Math.PI * 2);
   ctx.fill();
+  ctx.restore();
+}
+
+function drawSparkingRelayShed(ctx, shed, time, powerLevel) {
+  const fixed = shed.fixed || shed.sparksCalmed || powerLevel > 0.95;
+  const x = shed.x;
+  const groundY = shed.groundY;
+
+  ctx.save();
+  ctx.fillStyle = "rgba(18, 35, 34, 0.68)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 18, 456, 76, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+  drawSwitchyardRail(ctx, x - 390, groundY - 42, x + 390, groundY - 42, fixed);
+  drawRelayPuddle(ctx, x, groundY - 14, fixed, time);
+
+  if (imageReady(sprites.world.sparkingRelayShed)) {
+    drawWorldSprite(ctx, sprites.world.sparkingRelayShed, x, groundY + 48, 636);
+  } else {
+    drawRelayShedShell(ctx, x, groundY, fixed);
+  }
+
+  drawRelayBoard(ctx, x, groundY - 164, fixed, time);
+  drawWetPowerCable(ctx, x - 246, groundY - 96, x - 112, groundY - 132, fixed, time);
+  drawWetPowerCable(ctx, x + 246, groundY - 96, x + 112, groundY - 132, fixed, time + 0.8);
+
+  if (!fixed) {
+    drawRelaySpark(ctx, x - 96, groundY - 184, time);
+    drawRelaySpark(ctx, x + 86, groundY - 142, time + 1.4);
+    drawRelaySpark(ctx, x + 22, groundY - 210, time + 2.1);
+  } else {
+    warmGlow(ctx, x, groundY - 162, 260, 0.28 + Math.sin(time * 3) * 0.04);
+  }
+
+  ctx.restore();
+}
+
+function drawRelayShedShell(ctx, x, groundY, fixed) {
+  ctx.save();
+  ctx.fillStyle = fixed ? "#53644f" : "#344b45";
+  roundedRect(ctx, x - 170, groundY - 248, 340, 216, 10);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "#65735b" : "#3e554e";
+  ctx.beginPath();
+  ctx.moveTo(x - 194, groundY - 248);
+  ctx.lineTo(x, groundY - 318);
+  ctx.lineTo(x + 194, groundY - 248);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(25, 38, 35, 0.76)";
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.moveTo(x - 132, groundY - 240);
+  ctx.lineTo(x - 132, groundY - 42);
+  ctx.moveTo(x + 132, groundY - 240);
+  ctx.lineTo(x + 132, groundY - 42);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawRelayPuddle(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.fillStyle = fixed ? "rgba(69, 112, 111, 0.22)" : "rgba(53, 111, 124, 0.48)";
+  ctx.beginPath();
+  ctx.ellipse(x - 70, y, fixed ? 170 : 230, fixed ? 22 : 34, 0.02, 0, Math.PI * 2);
+  ctx.ellipse(x + 154, y + 4, fixed ? 92 : 126, fixed ? 15 : 22, -0.04, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(189, 238, 230, 0.22)" : "rgba(143, 217, 240, 0.42)";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.ellipse(x - 72 + Math.sin(time) * 4, y - 2, fixed ? 126 : 186, fixed ? 13 : 23, 0.02, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawRelayBoard(ctx, x, y, fixed, time) {
+  const nodes = [
+    { x: -82, y: -38 },
+    { x: -22, y: -8 },
+    { x: 46, y: -36 },
+    { x: 92, y: 20 },
+    { x: -78, y: 38 },
+    { x: 18, y: 42 }
+  ];
+
+  ctx.save();
+  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.22)" : "rgba(143, 217, 240, 0.08)";
+  roundedRect(ctx, x - 122, y - 72, 244, 132, 8);
+  ctx.fill();
+
+  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.62)" : "rgba(72, 93, 86, 0.66)";
+  ctx.lineWidth = fixed ? 5 : 4;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x + nodes[0].x, y + nodes[0].y);
+  ctx.lineTo(x + nodes[1].x, y + nodes[1].y);
+  ctx.lineTo(x + nodes[2].x, y + nodes[2].y);
+  ctx.moveTo(x + nodes[1].x, y + nodes[1].y);
+  ctx.lineTo(x + nodes[5].x, y + nodes[5].y);
+  ctx.lineTo(x + nodes[3].x, y + nodes[3].y);
+  ctx.moveTo(x + nodes[4].x, y + nodes[4].y);
+  ctx.lineTo(x + nodes[5].x, y + nodes[5].y);
+  ctx.stroke();
+
+  nodes.forEach((node, index) => {
+    ctx.fillStyle = fixed ? "rgba(255, 223, 156, 0.72)" : "rgba(143, 217, 240, 0.14)";
+    ctx.beginPath();
+    ctx.arc(x + node.x, y + node.y, 9 + Math.sin(time * 4 + index) * (fixed ? 1 : 0), 0, Math.PI * 2);
+    ctx.fill();
+  });
+  ctx.restore();
+}
+
+function drawWetPowerCable(ctx, fromX, fromY, toX, toY, fixed, time) {
+  ctx.save();
+  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.52)" : "rgba(92, 107, 96, 0.68)";
+  ctx.lineWidth = fixed ? 5 : 6;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(fromX, fromY);
+  ctx.quadraticCurveTo((fromX + toX) / 2, fromY + (fixed ? 4 : 32 + Math.sin(time * 2) * 3), toX, toY);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawRelaySpark(ctx, x, y, time) {
+  const jitter = Math.sin(time * 15) * 6;
+
+  ctx.save();
+  ctx.strokeStyle = "rgba(255, 223, 156, 0.86)";
+  ctx.lineWidth = 3;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + 16 + jitter, y - 18);
+  ctx.lineTo(x + 4, y - 5);
+  ctx.lineTo(x + 24 - jitter, y + 8);
+  ctx.stroke();
+  warmGlow(ctx, x + 8, y - 4, 64, 0.22 + Math.sin(time * 12) * 0.06);
   ctx.restore();
 }
 

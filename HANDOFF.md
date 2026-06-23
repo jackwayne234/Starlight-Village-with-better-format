@@ -81,17 +81,20 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Signal Arm Row became bespoke on `2026-06-22`: it now has semaphore posts, wet rails, scrambled/aligned signal state, route checks, and a chunk note in `chunks/59-signal-arm-row-scene.md`.
 - Conductor Booth became bespoke on `2026-06-22`: it now has a rail control shelter, dead/lit route board state, route checks, and a chunk note in `chunks/60-conductor-booth-scene.md`.
 - Crane Hook Yard became bespoke on `2026-06-22`: it now has a crane frame, hanging hook, fallen/lifted beam state, route checks, and a chunk note in `chunks/61-crane-hook-yard-scene.md`.
+- Sparking Relay Shed became bespoke on `2026-06-22`: it now uses a painted PNG shed sprite derived from the existing workshop-shed art, with wet board, sparks, puddles, calmed/repaired power state, route checks, and a chunk note in `chunks/62-sparking-relay-shed-scene.md`.
+- Robot direction polish on `2026-06-22`: the robot now has mirrored left-facing idle/scan sprites, follows the player's travel side, and uses a short lifted behind-the-player side-swap so it no longer cuts across in front of the player.
+- Chapter repair label polish on `2026-06-22`: the top-left HUD now uses a warm V1-inspired two-line label driven by `fullGameCatalog.js`, showing chapter/region plus scene-local chapter progress like `Sparking Relay Shed - Repair 6 of 10`; see `chunks/63-chapter-repair-label.md`.
 - Local preview verification used `http://127.0.0.1:5208/` most recently because earlier preview ports were occupied or unavailable.
 
 ## Suggested Next Step
 
 Continue the one-scene-at-a-time plan without stopping for approval between scenes.
 
-Chunk 62 should continue Mossline Switchyard polish.
+Chunk 64 should continue Mossline Switchyard polish.
 
-Polish `chapter-three/sparking-relay-shed`:
+Polish `chapter-three/rain-slick-rails`:
 
-1. Add a bespoke relay shed with sparking relays, puddles, and a wet power board.
-2. Make completion visibly calm the sparks and route power away from water.
-3. Preview it with `?scene=chapter-three/sparking-relay-shed&preview=1`.
-4. Leave `chapter-three/rain-slick-rails` as the next route stop.
+1. Add bespoke rain-slick rails with sand valves, wet track shine, and a clear rail path.
+2. Make completion visibly sand or dry the rails so they read usable.
+3. Preview it with `?scene=chapter-three/rain-slick-rails&preview=1`.
+4. Leave `chapter-three/tunnel-mouth` as the next route stop.

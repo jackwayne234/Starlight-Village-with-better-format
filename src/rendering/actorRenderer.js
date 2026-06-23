@@ -1,5 +1,5 @@
 import { config } from "../core/config.js";
-import { sprites, imageReady } from "./sprites.js";
+import { sprites, imageReady } from "./sprites.js?v=robot-facing";
 
 const { colors } = config;
 
@@ -11,8 +11,13 @@ export function drawActors(ctx, scene, time, cameraX) {
   ctx.save();
   ctx.translate(-cameraX, 0);
   drawRepairBeam(ctx, scene, time);
-  drawPlayer(ctx, scene.player, time);
-  drawRobot(ctx, scene.robot, time);
+  if (scene.robot.sideSwapTimer > 0) {
+    drawRobot(ctx, scene.robot, time);
+    drawPlayer(ctx, scene.player, time);
+  } else {
+    drawPlayer(ctx, scene.player, time);
+    drawRobot(ctx, scene.robot, time);
+  }
   ctx.restore();
 }
 
@@ -29,14 +34,6 @@ function drawPlayer(ctx, player, time) {
   const footY = player.y + 88;
   const actorScale = player.scale ?? 1;
   const playerHeight = PLAYER_HEIGHT * actorScale;
-
-  // Soft contact shadow, unaffected by the sprite flip.
-  ctx.save();
-  ctx.fillStyle = "rgba(22, 27, 24, 0.28)";
-  ctx.beginPath();
-  ctx.ellipse(player.x, player.y + 86, 50 * actorScale, 12 * actorScale, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.restore();
 
   const scale = playerHeight / frame.image.naturalHeight;
   const drawW = frame.image.naturalWidth * scale;
@@ -68,7 +65,10 @@ function drawRobot(ctx, robot, time) {
   const celebrating = robot.pose === "celebrate";
   const active = robot.pose === "scan" || robot.pose === "route" || celebrating;
   const hover = Math.sin(time * (celebrating ? 5.4 : 2.6)) * (celebrating ? 12 : 8);
-  const image = active ? sprites.robot.scan : sprites.robot.idle;
+  const facingLeft = robot.facing < 0;
+  const image = active
+    ? facingLeft ? sprites.robot.scanLeft : sprites.robot.scan
+    : facingLeft ? sprites.robot.idleLeft : sprites.robot.idle;
   const robotWidth = ROBOT_WIDTH * (robot.scale ?? 1);
 
   if (!imageReady(image)) {
@@ -133,10 +133,6 @@ function drawPlayerVector(ctx, player, time) {
   ctx.save();
   ctx.translate(player.x, player.y + bob);
   ctx.scale(player.facing, 1);
-  ctx.fillStyle = "rgba(22, 27, 24, 0.28)";
-  ctx.beginPath();
-  ctx.ellipse(0, 86, 52, 12, 0, 0, Math.PI * 2);
-  ctx.fill();
   ctx.strokeStyle = "#273138";
   ctx.lineWidth = 12;
   ctx.lineCap = "round";

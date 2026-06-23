@@ -2,7 +2,7 @@ import { updateCamera } from "./camera.js";
 import { updatePlayer } from "../entities/player.js";
 import { updateRobot } from "../entities/robot.js";
 import { updateRepairFlow } from "../interaction/repairFlow.js?v=comment-bubble-softening";
-import { renderScene } from "../rendering/renderPipeline.js?v=beacon-remove-flags-wire";
+import { renderScene } from "../rendering/renderPipeline.js?v=chapter-repair-label";
 import { drawTitleScreen } from "../ui/titleScreen.js?v=browser-route-smoke-2";
 import { sfx } from "../audio/gameAudio.js";
 

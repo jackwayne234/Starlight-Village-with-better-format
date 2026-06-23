@@ -1,4 +1,4 @@
-import { createGame } from "./core/game.js?v=route-100-spine";
+import { createGame } from "./core/game.js?v=chapter-repair-label";
 import { createInput } from "./core/input.js";
 import { clearProgress, saveProgress } from "./core/progress.js";
 import { createInitialScene, createScene } from "./scenes/sceneRegistry.js?v=route-100-spine";

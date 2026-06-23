@@ -45,6 +45,11 @@ export function createBaseScene({ id, title, worldWidth = 2200, startMessage }) 
       x: 484,
       y: 420,
       scale: 0.9,
+      facing: 1,
+      followSide: 1,
+      previousFollowSide: 1,
+      sideSwapTimer: 0,
+      sideSwapDuration: 0.52,
       pose: "idle",
       reactionTimer: 0
     },

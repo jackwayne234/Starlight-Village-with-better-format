@@ -1,3 +1,5 @@
+import { fullGameScenes } from "../scenes/fullGameCatalog.js";
+
 export function drawHud(ctx, scene, width, height) {
   if (scene.repairTarget && (scene.flow.mode === "puzzle" || scene.flow.mode === "puzzle-complete")) {
     drawRepairOverlay(ctx, scene.repairTarget, width, height);
@@ -6,7 +8,7 @@ export function drawHud(ctx, scene, width, height) {
 
   drawTitle(ctx, scene);
   const occupiedBubbles = [
-    { x: 28, y: 28, width: 310, height: 50 },
+    { x: 28, y: 28, width: 430, height: 72 },
     ...getCharacterFaceAvoidanceRects(scene, width)
   ];
   drawDialogueBubble(ctx, scene, width, height, occupiedBubbles);
@@ -255,12 +257,83 @@ function drawSpeechBubble(ctx, rect, anchor, style) {
 }
 
 function drawTitle(ctx, scene) {
-  ctx.fillStyle = "rgba(20, 30, 28, 0.42)";
-  roundedRect(ctx, 28, 28, 310, 50, 8);
+  const left = 28;
+  const top = 28;
+  const width = 430;
+  const height = 72;
+  const progress = getSceneProgressLabel(scene);
+
+  ctx.save();
+  ctx.shadowColor = "rgba(9, 12, 11, 0.58)";
+  ctx.shadowBlur = 16;
+  ctx.shadowOffsetY = 4;
+  ctx.fillStyle = "rgba(35, 32, 24, 0.38)";
+  roundedRect(ctx, left, top, width, height, 8);
   ctx.fill();
-  ctx.fillStyle = "rgba(242, 229, 186, 0.92)";
-  ctx.font = "600 22px system-ui, sans-serif";
-  ctx.fillText(scene.title, 48, 60);
+  ctx.shadowColor = "transparent";
+  ctx.strokeStyle = "rgba(255, 216, 135, 0.2)";
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  const glow = ctx.createLinearGradient(left, top, left + width, top);
+  glow.addColorStop(0, "rgba(255, 216, 135, 0.13)");
+  glow.addColorStop(0.44, "rgba(255, 216, 135, 0.04)");
+  glow.addColorStop(1, "rgba(143, 217, 240, 0.03)");
+  ctx.fillStyle = glow;
+  roundedRect(ctx, left + 1, top + 1, width - 2, height - 2, 7);
+  ctx.fill();
+
+  ctx.fillStyle = "rgba(255, 239, 196, 0.97)";
+  ctx.shadowColor = "rgba(8, 12, 13, 0.74)";
+  ctx.shadowBlur = 8;
+  ctx.shadowOffsetY = 2;
+  ctx.font = "700 18px system-ui, sans-serif";
+  ctx.fillText(progress.chapter, 48, 52);
+
+  ctx.fillStyle = "rgba(232, 221, 190, 0.88)";
+  ctx.shadowBlur = 6;
+  ctx.font = "600 15px system-ui, sans-serif";
+  ctx.fillText(progress.repair, 48, 73);
+  ctx.restore();
+}
+
+function getSceneProgressLabel(scene) {
+  const entry = fullGameScenes.find((candidate) => candidate.id === scene.id);
+  if (!entry) {
+    return {
+      chapter: scene.title,
+      repair: ""
+    };
+  }
+
+  const chapterId = entry.id.split("/")[0];
+  const chapterIds = [...new Set(fullGameScenes.map((candidate) => candidate.id.split("/")[0]))];
+  const chapterScenes = fullGameScenes.filter((candidate) => candidate.id.startsWith(`${chapterId}/`));
+  const chapterNumber = chapterIds.indexOf(chapterId) + 1;
+  const repairNumber = chapterScenes.findIndex((candidate) => candidate.id === entry.id) + 1;
+  const chapterName = getShortChapterName(entry.region);
+
+  return {
+    chapter: `Chapter ${chapterNumber}: ${chapterName}`,
+    repair: `${scene.title} - Repair ${repairNumber} of ${chapterScenes.length}`
+  };
+}
+
+function getShortChapterName(region) {
+  const names = {
+    "Starlight Village Core": "Starlight",
+    "Glowfen Wetlands": "Glowfen",
+    "Mossline Switchyard": "Mossline",
+    "Stormedge Rise": "Stormedge",
+    "Beacon Hill": "Beacon Hill",
+    "Rainbarrel Row": "Rainbarrel",
+    "Old Orchard": "Old Orchard",
+    "Glassworks Quarter": "Glassworks",
+    "Under-Village": "Under-Village",
+    "Festival Night": "Festival"
+  };
+
+  return names[region] ?? region;
 }
 
 function drawContinuePrompt(ctx, scene, width, height) {

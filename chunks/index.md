@@ -51,3 +51,5 @@ High-level list only. All details live inside each chunk file.
 | 59 | Signal Arm Row Scene | complete |
 | 60 | Conductor Booth Scene | complete |
 | 61 | Crane Hook Yard Scene | complete |
+| 62 | Sparking Relay Shed Scene | complete |
+| 63 | Chapter Repair Label | complete |

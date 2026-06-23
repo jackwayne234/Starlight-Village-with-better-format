@@ -398,6 +398,17 @@ function applyRepairEffect(scene, target) {
     });
   }
 
+  if (target.id === "sparking-relay-shed" && scene.sparkingRelayShed) {
+    scene.sparkingRelayShed.fixed = true;
+    scene.sparkingRelayShed.sparksCalmed = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
   if (target.id === "archive-lens-array") {
     if (scene.observatory?.lens) scene.observatory.lens.lit = true;
     if (scene.observatory?.tower) scene.observatory.tower.lit = true;
