@@ -494,7 +494,7 @@ function drawSceneLandmarks(ctx, scene, time) {
     drawSwitchyard(ctx, scene.switchyard, time);
   }
   if (scene.ridge) {
-    drawStormRidge(ctx, scene.ridge, time);
+    drawStormRidge(ctx, scene.ridge, time, scene.world.powerLevel);
   }
   if (scene.beaconHill) {
     drawBeaconHill(ctx, scene.beaconHill, time);
@@ -3763,7 +3763,7 @@ function drawPowerLineSpan(ctx, image, fromPole, toPole) {
   ctx.drawImage(image, x - width / 2, y - height / 2, width, height);
 }
 
-function drawStormRidge(ctx, ridge, time) {
+function drawStormRidge(ctx, ridge, time, powerLevel = 0) {
   ridge.posts.forEach((post) => {
     ctx.save();
     ctx.translate(post.x, post.y);
@@ -3778,12 +3778,13 @@ function drawStormRidge(ctx, ridge, time) {
     ctx.restore();
   });
   const gauge = ridge.gauge;
+  const gaugeLit = gauge.lit || powerLevel > 0.95;
   const gaugeImage = sprites.world.stormGauge;
   if (imageReady(gaugeImage)) {
     const groundY = gauge.y + 60;
     const height = 292;
     drawWorldSprite(ctx, gaugeImage, gauge.x, groundY, height);
-    warmGlow(ctx, gauge.x, groundY - height * 0.62, 46, gauge.lit ? 0.55 + Math.sin(time * 3.4) * 0.06 : 0.18);
+    warmGlow(ctx, gauge.x, groundY - height * 0.62, 46, gaugeLit ? 0.55 + Math.sin(time * 3.4) * 0.06 : 0.18);
     return;
   }
   ctx.fillStyle = "#5f4832";
@@ -3794,7 +3795,7 @@ function drawStormRidge(ctx, ridge, time) {
   ctx.beginPath();
   ctx.arc(gauge.x, gauge.y - 8, 30, Math.PI, 0);
   ctx.stroke();
-  ctx.strokeStyle = gauge.lit ? "rgba(255, 229, 141, 0.9)" : "rgba(143, 217, 240, 0.55)";
+  ctx.strokeStyle = gaugeLit ? "rgba(255, 229, 141, 0.9)" : "rgba(143, 217, 240, 0.55)";
   ctx.beginPath();
   ctx.moveTo(gauge.x, gauge.y - 8);
   ctx.lineTo(gauge.x + Math.cos(time * 0.8) * 25, gauge.y - 8 - Math.abs(Math.sin(time * 0.8)) * 25);

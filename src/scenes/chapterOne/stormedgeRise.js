@@ -27,7 +27,7 @@ export function createStormedgeRiseScene() {
       { x: 1360, y: 300, scale: 1.46 },
       { x: 1740, y: 280, scale: 1.55 }
     ],
-    cottages: [{ x: 1680, y: 537, scale: 2.0, lit: true }],
+    cottages: [],
     lamps: [
       { x: 410, y: 560, lit: true },
       { x: 925, y: 560, lit: false },
@@ -58,6 +58,7 @@ export function createStormedgeRiseScene() {
       x: 1115,
       y: 508,
       radius: 230,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: storm gauge unstable.",
