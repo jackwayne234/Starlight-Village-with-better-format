@@ -49,6 +49,12 @@ Continue the full-route sprite integration pass into Chapter 4, preserving the r
 - Hid the generic repair marker for Cracked Stair.
 - Removed loose repair props and broken-branch clutter from Cracked Stair.
 - Preserved the Stormedge rainy ridge mood, brace-lock repair theme, route text, and route to Cloud Harvester.
+- Reviewed `chapter-four/cloud-harvester` against `assets/sprites/world/cloud-harvester-painted.png`.
+- Chose to keep Cloud Harvester on a bespoke side-view treatment because the generated condenser asset has a bright green-screen background, a cropped neighboring fragment at the right edge, and a three-quarter/isometric machine view rather than the game's side-view ridge camera.
+- Added a hand-built Cloud Harvester scene and renderer with a side-view rain condenser, collector bowl, glass tank, pipe basins, gauge, repaired clean-water glow, and no random side cottages.
+- Hid the generic repair marker for Cloud Harvester.
+- Removed loose repair props and broken-branch clutter from Cloud Harvester.
+- Preserved the Stormedge rainy ridge mood, clean-water condenser repair theme, route text, and route to Summit Path.
 
 ## Verification
 
@@ -102,7 +108,15 @@ Continue the full-route sprite integration pass into Chapter 4, preserving the r
   - `http://127.0.0.1:5265/?scene=chapter-four/cracked-stair&x=1120&preview=1`
 - Local probes confirmed the Cracked Stair scene module and `assets/sprites/world/cracked-stair-painted.png` respond from the preview server.
 - Browser screenshot verification was attempted but the bundled Playwright install has no browser executable in this runtime.
+- Static scene-data check confirms `chapter-four/cloud-harvester` remains custom with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, `showMarker: false`, and route flow to `chapter-four/summit-path`.
+- Asset review confirmed `assets/sprites/world/cloud-harvester-painted.png` is `397x352`, but it was not wired because its green-screen background, cropped neighboring fragment, and angled/isometric machine view do not match the side-view camera rule.
+- Syntax/import checks passed for `src/scenes/chapterFour/cloudHarvester.js`, `src/scenes/sceneRegistry.js`, and `src/rendering/worldRenderer.js` using the bundled Node runtime.
+- Full route walk still reaches all 100 scenes from `chapter-one/starlight-village` to `chapter-ten/celebration-square`, and includes `chapter-four/cloud-harvester` between `chapter-four/cracked-stair` and `chapter-four/summit-path`.
+- Local preview server responded at:
+  - `http://127.0.0.1:5266/?scene=chapter-four/cloud-harvester&x=1120&preview=1`
+- Local probes confirmed the Cloud Harvester scene module and `assets/sprites/world/cloud-harvester-painted.png` respond from the preview server.
+- Browser screenshot verification was not available in this thread because no callable browser-control tool was exposed.
 
 ## Next
 
-Continue route-order sprite wiring at `chapter-four/cloud-harvester`.
+Continue route-order sprite wiring at `chapter-four/summit-path`.

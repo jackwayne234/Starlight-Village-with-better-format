@@ -13,6 +13,7 @@ import { createOldFootbridgeScene } from "./chapterOne/oldFootbridge.js";
 import { createRainDrainCornerScene } from "./chapterOne/rainDrainCorner.js";
 import { createStarlightVillageScene } from "./chapterOne/starlightVillage.js";
 import { createStormedgeRiseScene } from "./chapterOne/stormedgeRise.js";
+import { createCloudHarvesterScene } from "./chapterFour/cloudHarvester.js";
 import { createCliffRopeLiftScene } from "./chapterFour/cliffRopeLift.js";
 import { createCrackedStairScene } from "./chapterFour/crackedStair.js";
 import { createLightningRodFieldScene } from "./chapterFour/lightningRodField.js";
@@ -52,6 +53,7 @@ export const sceneIds = {
   cargoCartTurntable: "chapter-three/cargo-cart-turntable",
   clockSignal: "chapter-three/clock-signal",
   cliffRopeLift: "chapter-four/cliff-rope-lift",
+  cloudHarvester: "chapter-four/cloud-harvester",
   crackedStair: "chapter-four/cracked-stair",
   conductorBooth: "chapter-three/conductor-booth",
   craneHookYard: "chapter-three/crane-hook-yard",
@@ -97,6 +99,7 @@ const handBuiltSceneFactories = {
   [sceneIds.cargoCartTurntable]: createCargoCartTurntableScene,
   [sceneIds.clockSignal]: createClockSignalScene,
   [sceneIds.cliffRopeLift]: createCliffRopeLiftScene,
+  [sceneIds.cloudHarvester]: createCloudHarvesterScene,
   [sceneIds.crackedStair]: createCrackedStairScene,
   [sceneIds.conductorBooth]: createConductorBoothScene,
   [sceneIds.craneHookYard]: createCraneHookYardScene,

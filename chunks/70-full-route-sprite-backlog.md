@@ -51,7 +51,7 @@ Purpose: convert every route scene to the Bakery Gutter format: one strong landm
 | 35 | chapter-four/lightning-rod-field | Lightning Rod Field: Ground rods in a safe pattern before the next strike. | wired | `assets/sprites/world/lightning-rod-field-painted.png` |
 | 36 | chapter-four/lookout-post | Lookout Post: Repair a lookout scope and spot the beacon tower. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/lookout-post-painted.png` |
 | 37 | chapter-four/cracked-stair | Cracked Stair: Lock stone braces under a rain-damaged stairway. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/cracked-stair-painted.png` |
-| 38 | chapter-four/cloud-harvester | Cloud Harvester: Tune a strange old machine that condenses rain into clean water. | generated | `assets/sprites/world/cloud-harvester-painted.png` |
+| 38 | chapter-four/cloud-harvester | Cloud Harvester: Tune a strange old machine that condenses rain into clean water. | reviewed/keep bespoke side-view treatment | `assets/sprites/world/cloud-harvester-painted.png` |
 | 39 | chapter-four/summit-path | Summit Path: Light path markers through the high mist. | generated | `assets/sprites/world/summit-path-painted.png` |
 | 40 | chapter-four/beacon-approach | Beacon Approach: Open the final gate before Beacon Hill. | generated | `assets/sprites/world/beacon-approach-painted.png` |
 | 41 | chapter-five/beacon-hill | Beacon Hill Signal Tower: Restore the tower beacon and send light across the storm. | exists/review | `assets/sprites/world/beacon-hill-painted.png` |

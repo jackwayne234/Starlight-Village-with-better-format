@@ -499,6 +499,9 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.crackedStair) {
     drawCrackedStair(ctx, scene.crackedStair, time, scene.world.powerLevel);
   }
+  if (scene.cloudHarvester) {
+    drawCloudHarvester(ctx, scene.cloudHarvester, time, scene.world.powerLevel);
+  }
   if (scene.bridge) {
     drawFootbridge(ctx, scene.bridge, time);
   }
@@ -4112,6 +4115,246 @@ function drawCrackedStair(ctx, stair, time, powerLevel = 0) {
   if (fixed) {
     warmGlow(ctx, x, stairTopY + 30, 130, 0.24 + pulse * 0.06);
   }
+
+  ctx.restore();
+}
+
+function drawCloudHarvester(ctx, harvester, time, powerLevel = 0) {
+  const { x, groundY } = harvester;
+  const fixed = harvester.fixed || harvester.condenserTuned || powerLevel > 0.95;
+  const pulse = 0.5 + Math.sin(time * 3.2) * 0.5;
+  const glow = (fixed ? 0.26 : 0.1) + pulse * (fixed ? 0.08 : 0.02) + powerLevel * 0.08;
+
+  ctx.save();
+
+  const skyGlow = ctx.createLinearGradient(x, groundY - 430, x, groundY - 110);
+  skyGlow.addColorStop(0, fixed ? "rgba(111, 186, 198, 0.16)" : "rgba(63, 100, 122, 0.12)");
+  skyGlow.addColorStop(1, "rgba(18, 30, 39, 0)");
+  ctx.fillStyle = skyGlow;
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 244, 510, 170, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "rgba(12, 23, 27, 0.74)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 8, 520, 68, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+
+  drawHarvesterRidgeBase(ctx, x, groundY, fixed, time);
+  drawHarvesterBasin(ctx, x - 230, groundY - 52, fixed, time, -1);
+  drawHarvesterBasin(ctx, x + 230, groundY - 52, fixed, time, 1);
+  drawHarvesterTank(ctx, x, groundY - 164, fixed, time);
+  drawHarvesterPipes(ctx, x, groundY, fixed, time);
+  drawHarvesterCollector(ctx, x, groundY - 374, fixed, time);
+  drawHarvesterGauge(ctx, x + 166, groundY - 230, fixed, time);
+
+  warmGlow(ctx, x, groundY - 236, fixed ? 240 : 150, glow);
+  if (fixed) {
+    warmGlow(ctx, x - 230, groundY - 64, 112, 0.2 + pulse * 0.05);
+    warmGlow(ctx, x + 230, groundY - 64, 112, 0.2 + pulse * 0.05);
+  }
+
+  ctx.restore();
+}
+
+function drawHarvesterRidgeBase(ctx, x, groundY, fixed, time) {
+  const baseGradient = ctx.createLinearGradient(x, groundY - 110, x, groundY + 8);
+  baseGradient.addColorStop(0, fixed ? "#38524d" : "#2a4242");
+  baseGradient.addColorStop(0.62, fixed ? "#253d3b" : "#1c3234");
+  baseGradient.addColorStop(1, "#102329");
+
+  ctx.fillStyle = baseGradient;
+  ctx.beginPath();
+  ctx.moveTo(x - 360, groundY - 24);
+  ctx.quadraticCurveTo(x - 250, groundY - 104, x - 92, groundY - 92);
+  ctx.quadraticCurveTo(x + 52, groundY - 134, x + 190, groundY - 92);
+  ctx.quadraticCurveTo(x + 318, groundY - 92, x + 360, groundY - 24);
+  ctx.lineTo(x + 316, groundY + 8);
+  ctx.quadraticCurveTo(x, groundY + 38, x - 316, groundY + 8);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(12, 19, 22, 0.58)";
+  ctx.lineWidth = 7;
+  ctx.stroke();
+
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  ctx.strokeStyle = fixed ? "rgba(231, 207, 140, 0.18)" : "rgba(169, 218, 222, 0.12)";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(x - 288, groundY - 58);
+  ctx.quadraticCurveTo(x - 70, groundY - 116 + Math.sin(time) * 2, x + 274, groundY - 56);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawHarvesterTank(ctx, x, y, fixed, time) {
+  const tankGradient = ctx.createRadialGradient(x - 54, y - 34, 18, x, y, 148);
+  tankGradient.addColorStop(0, fixed ? "rgba(154, 232, 222, 0.72)" : "rgba(128, 198, 200, 0.56)");
+  tankGradient.addColorStop(0.48, fixed ? "rgba(55, 117, 119, 0.58)" : "rgba(36, 83, 90, 0.56)");
+  tankGradient.addColorStop(1, "rgba(12, 27, 34, 0.72)");
+
+  ctx.fillStyle = tankGradient;
+  ctx.beginPath();
+  ctx.ellipse(x, y, 126, 118, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.strokeStyle = "#72502f";
+  ctx.lineWidth = 15;
+  ctx.stroke();
+
+  ctx.strokeStyle = fixed ? "rgba(244, 222, 148, 0.82)" : "rgba(129, 181, 187, 0.56)";
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.ellipse(x, y + 34 + Math.sin(time * 1.6) * 2, 86, 26, 0, 0, Math.PI * 2);
+  ctx.stroke();
+
+  ctx.fillStyle = "rgba(238, 250, 244, 0.42)";
+  ctx.beginPath();
+  ctx.ellipse(x - 46, y - 50, 20, 36, -0.58, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawHarvesterCollector(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.fillStyle = "#241a16";
+  roundedRect(ctx, x - 40, y + 64, 80, 86, 12);
+  ctx.fill();
+
+  const bowlGradient = ctx.createLinearGradient(x, y - 58, x, y + 58);
+  bowlGradient.addColorStop(0, fixed ? "#a57a43" : "#6f5c45");
+  bowlGradient.addColorStop(0.42, fixed ? "#d09a4a" : "#8b6b42");
+  bowlGradient.addColorStop(1, "#2b211b");
+  ctx.fillStyle = bowlGradient;
+  ctx.beginPath();
+  ctx.moveTo(x - 158, y - 18);
+  ctx.quadraticCurveTo(x, y + 68, x + 158, y - 18);
+  ctx.quadraticCurveTo(x + 88, y + 36, x, y + 42);
+  ctx.quadraticCurveTo(x - 88, y + 36, x - 158, y - 18);
+  ctx.fill();
+
+  ctx.strokeStyle = fixed ? "rgba(248, 225, 147, 0.86)" : "rgba(146, 181, 183, 0.64)";
+  ctx.lineWidth = 10;
+  ctx.beginPath();
+  ctx.ellipse(x, y - 22, 160, 38, 0, 0, Math.PI * 2);
+  ctx.stroke();
+
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  ctx.strokeStyle = `rgba(190, 232, 226, ${fixed ? 0.34 : 0.18})`;
+  ctx.lineWidth = 3;
+  for (let i = -2; i <= 2; i += 1) {
+    const rainX = x + i * 42 + Math.sin(time * 1.4 + i) * 6;
+    ctx.beginPath();
+    ctx.moveTo(rainX, y - 126);
+    ctx.lineTo(rainX - 8, y - 58);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  ctx.restore();
+}
+
+function drawHarvesterPipes(ctx, x, groundY, fixed, time) {
+  const pipeColor = fixed ? "#b7793d" : "#6f5a44";
+  const shine = fixed ? "rgba(247, 219, 141, 0.54)" : "rgba(139, 190, 194, 0.26)";
+
+  ctx.save();
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.strokeStyle = "rgba(10, 18, 20, 0.64)";
+  ctx.lineWidth = 21;
+  ctx.beginPath();
+  ctx.moveTo(x - 126, groundY - 170);
+  ctx.lineTo(x - 238, groundY - 170);
+  ctx.lineTo(x - 238, groundY - 94);
+  ctx.moveTo(x + 126, groundY - 170);
+  ctx.lineTo(x + 238, groundY - 170);
+  ctx.lineTo(x + 238, groundY - 94);
+  ctx.stroke();
+
+  ctx.strokeStyle = pipeColor;
+  ctx.lineWidth = 12;
+  ctx.stroke();
+
+  ctx.strokeStyle = shine;
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(x - 126, groundY - 176);
+  ctx.lineTo(x - 232, groundY - 176);
+  ctx.moveTo(x + 126, groundY - 176);
+  ctx.lineTo(x + 232, groundY - 176);
+  ctx.stroke();
+
+  if (fixed) {
+    ctx.save();
+    ctx.globalCompositeOperation = "screen";
+    ctx.strokeStyle = `rgba(220, 238, 219, ${0.28 + Math.sin(time * 2.2) * 0.04})`;
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(x - 238, groundY - 104);
+    ctx.quadraticCurveTo(x - 232, groundY - 76, x - 230, groundY - 58);
+    ctx.moveTo(x + 238, groundY - 104);
+    ctx.quadraticCurveTo(x + 232, groundY - 76, x + 230, groundY - 58);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  ctx.restore();
+}
+
+function drawHarvesterBasin(ctx, x, y, fixed, time, side) {
+  ctx.save();
+  ctx.fillStyle = "rgba(13, 25, 28, 0.62)";
+  ctx.beginPath();
+  ctx.ellipse(x, y + 52, 94, 22, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  const bowl = ctx.createLinearGradient(x, y - 36, x, y + 42);
+  bowl.addColorStop(0, fixed ? "#9a7040" : "#604f40");
+  bowl.addColorStop(0.5, fixed ? "#c58a42" : "#7a6041");
+  bowl.addColorStop(1, "#211b18");
+  ctx.fillStyle = bowl;
+  ctx.beginPath();
+  ctx.moveTo(x - 76, y - 12);
+  ctx.quadraticCurveTo(x, y + 58, x + 76, y - 12);
+  ctx.quadraticCurveTo(x + 42, y + 18, x, y + 20);
+  ctx.quadraticCurveTo(x - 42, y + 18, x - 76, y - 12);
+  ctx.fill();
+
+  ctx.strokeStyle = fixed ? "rgba(245, 221, 146, 0.72)" : "rgba(129, 181, 187, 0.48)";
+  ctx.lineWidth = 6;
+  ctx.beginPath();
+  ctx.ellipse(x, y - 14, 78, 18, 0, 0, Math.PI * 2);
+  ctx.stroke();
+
+  ctx.fillStyle = fixed ? "rgba(118, 203, 190, 0.44)" : "rgba(61, 121, 131, 0.3)";
+  ctx.beginPath();
+  ctx.ellipse(x + side * Math.sin(time * 1.5) * 2, y - 8, 58, 10, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawHarvesterGauge(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.fillStyle = "rgba(24, 28, 25, 0.9)";
+  ctx.beginPath();
+  ctx.arc(x, y, 34, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.strokeStyle = fixed ? "rgba(245, 221, 146, 0.82)" : "rgba(129, 181, 187, 0.56)";
+  ctx.lineWidth = 5;
+  ctx.stroke();
+
+  ctx.strokeStyle = fixed ? "rgba(255, 229, 141, 0.9)" : "rgba(143, 217, 240, 0.55)";
+  ctx.lineWidth = 4;
+  ctx.lineCap = "round";
+  const angle = fixed ? -0.4 + Math.sin(time * 1.8) * 0.04 : -1.9 + Math.sin(time * 1.5) * 0.2;
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + Math.cos(angle) * 24, y + Math.sin(angle) * 24);
+  ctx.stroke();
 
   ctx.restore();
 }
