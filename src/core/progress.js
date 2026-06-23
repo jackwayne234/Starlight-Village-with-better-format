@@ -104,6 +104,227 @@ function restoreRepairEffect(scene, repair) {
     });
   }
 
+  if (repair.id === "bakery-gutter" && scene.bakeryGutter) {
+    scene.bakeryGutter.fixed = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+  }
+
+  if (repair.id === "bell-rope-corner" && scene.bellRopeCorner) {
+    scene.bellRopeCorner.fixed = true;
+    scene.bellRopeCorner.bellLit = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+  }
+
+  if (repair.id === "workshop-lift" && scene.workshopLift) {
+    scene.workshopLift.fixed = true;
+    scene.workshopLift.platformRaised = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+  }
+
+  if (repair.id === "schoolhouse-lanterns" && scene.schoolhouseLanterns) {
+    scene.schoolhouseLanterns.fixed = true;
+    scene.schoolhouseLanterns.posts.forEach((post) => {
+      post.lit = true;
+    });
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+  }
+
+  if (repair.id === "market-awnings" && scene.marketAwnings) {
+    scene.marketAwnings.fixed = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+  }
+
+  if (repair.id === "old-footbridge" && scene.oldFootbridge) {
+    scene.oldFootbridge.fixed = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+  }
+
+  if (repair.id === "rain-drain-corner" && scene.rainDrainCorner) {
+    scene.rainDrainCorner.fixed = true;
+    scene.rainDrainCorner.waterHigh = false;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+  }
+
+  if (repair.id === "mayor-porch" && scene.mayorPorch) {
+    scene.mayorPorch.fixed = true;
+    scene.mayorPorch.chimeLit = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+  }
+
+  if (repair.id === "festival-square" && scene.festivalSquare) {
+    scene.festivalSquare.fixed = true;
+    scene.festivalSquare.starLit = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
+  if (repair.id === "lantern-lily-pool" && scene.lanternLilyPool) {
+    scene.lanternLilyPool.fixed = true;
+    scene.lanternLilyPool.liliesLit = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
+  if (repair.id === "bog-bridge" && scene.bogBridge) {
+    scene.bogBridge.fixed = true;
+    scene.bogBridge.stonesRaised = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
+  if (repair.id === "frogsong-lock" && scene.frogsongLock) {
+    scene.frogsongLock.fixed = true;
+    scene.frogsongLock.gateOpen = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
+  if (repair.id === "sunken-signpost" && scene.sunkenSignpost) {
+    scene.sunkenSignpost.fixed = true;
+    scene.sunkenSignpost.markerRaised = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
+  if (repair.id === "mist-pool" && scene.mistPool) {
+    scene.mistPool.fixed = true;
+    scene.mistPool.mistThin = true;
+    scene.layers.mistBands = scene.layers.mistBands.map((band) => ({
+      ...band,
+      width: Math.max(160, band.width * 0.55)
+    }));
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
+  if (repair.id === "moss-gate" && scene.mossGate) {
+    scene.mossGate.fixed = true;
+    scene.mossGate.gateOpen = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
+  if (repair.id === "old-fen-shrine" && scene.oldFenShrine) {
+    scene.oldFenShrine.fixed = true;
+    scene.oldFenShrine.bowlsAligned = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
+  if (repair.id === "glowfen-ferry" && scene.glowfenFerry) {
+    scene.glowfenFerry.fixed = true;
+    scene.glowfenFerry.ferryDocked = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
+  if (repair.id === "reedwatch-bank" && scene.reedwatchBank) {
+    scene.reedwatchBank.fixed = true;
+    scene.reedwatchBank.markersLit = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
+  if (repair.id === "cargo-cart-turntable" && scene.cargoCartTurntable) {
+    scene.cargoCartTurntable.fixed = true;
+    scene.cargoCartTurntable.cartMoved = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
+  if (repair.id === "signal-arm-row" && scene.signalArmRow) {
+    scene.signalArmRow.fixed = true;
+    scene.signalArmRow.armsAligned = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
+  if (repair.id === "conductor-booth" && scene.conductorBooth) {
+    scene.conductorBooth.fixed = true;
+    scene.conductorBooth.boardLit = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
+  if (repair.id === "crane-hook-yard" && scene.craneHookYard) {
+    scene.craneHookYard.fixed = true;
+    scene.craneHookYard.beamLifted = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
   if (repair.id === "archive-lens-array") {
     if (scene.observatory?.lens) scene.observatory.lens.lit = true;
     if (scene.observatory?.tower) scene.observatory.tower.lit = true;

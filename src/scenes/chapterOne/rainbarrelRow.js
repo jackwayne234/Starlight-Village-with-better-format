@@ -2,7 +2,7 @@ import { createBaseScene } from "../baseScene.js";
 
 export function createRainbarrelRowScene() {
   const scene = createBaseScene({
-    id: "chapter-one/rainbarrel-row",
+    id: "chapter-six/rainbarrel-row",
     title: "Rainbarrel Row",
     worldWidth: 2050,
     startMessage: ""
@@ -84,8 +84,8 @@ export function createRainbarrelRowScene() {
       puzzleText: "Rotate the channels to redirect the runoff.",
       rewardText: "Stormwater redirected. The village repairs are holding.",
       onwardText: "The village repairs are holding through the rain.",
-      nextText: "The repaired lane opens toward Lantern Market.",
-      nextSceneId: "chapter-two/lantern-market",
+      nextText: "The repaired lane opens toward Rooftop Channels.",
+      nextSceneId: "chapter-six/rooftop-channels",
       reactions: [
         { text: "No more water at the door!", x: 740, y: 318 },
         { text: "The barrels are behaving again!", x: 1540, y: 326 },
@@ -95,7 +95,7 @@ export function createRainbarrelRowScene() {
         scan: { speaker: "robot", text: "Runoff is pooling near the doors." },
         puzzle: { speaker: "player", text: "Let's give all this rain somewhere safe to go." },
         reward: { speaker: "robot", text: "Runoff channel restored." },
-        next: { speaker: "player", text: "The village can breathe again." }
+        next: { speaker: "player", text: "The rooftops need us next." }
       }
     }
   ];

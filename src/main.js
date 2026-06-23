@@ -1,19 +1,33 @@
-import { createGame } from "./core/game.js";
+import { createGame } from "./core/game.js?v=route-100-spine";
 import { createInput } from "./core/input.js";
 import { clearProgress, saveProgress } from "./core/progress.js";
-import { createInitialScene, createScene } from "./scenes/sceneRegistry.js";
+import { createInitialScene, createScene } from "./scenes/sceneRegistry.js?v=route-100-spine";
 import { primeAudio, unlockAudio } from "./audio/gameAudio.js";
 
 const canvas = document.querySelector("#game");
 const ctx = canvas.getContext("2d");
 const input = createInput();
 clearProgress();
-const firstScene = createInitialScene();
+const playtestParams = new URLSearchParams(window.location.search);
+const playtestSceneId = playtestParams.get("scene");
+const previewMode = playtestParams.get("preview") === "1";
+const firstScene = playtestSceneId ? createScene(playtestSceneId) : createInitialScene();
+const playtestX = Number(playtestParams.get("x"));
+if (playtestSceneId && Number.isFinite(playtestX)) {
+  firstScene.player.x = playtestX;
+  firstScene.robot.x = playtestX + 96;
+}
+if (previewMode) {
+  firstScene.repairs = [];
+  firstScene.repairTarget = null;
+  firstScene.flow.message = "";
+}
 const game = createGame({
   canvas,
   ctx,
   input,
   firstScene,
+  autoStart: previewMode,
   persistProgress: saveProgress,
   createScene
 });

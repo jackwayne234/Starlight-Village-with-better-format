@@ -27,18 +27,20 @@ function drawPlayer(ctx, player, time) {
   const cheerLift = celebrating ? Math.sin(player.reactionTimer * Math.PI * 5) * 5 - 7 : 0;
   const bob = cheerLift; // no idle float; only the celebration hop lifts the boy
   const footY = player.y + 88;
+  const actorScale = player.scale ?? 1;
+  const playerHeight = PLAYER_HEIGHT * actorScale;
 
   // Soft contact shadow, unaffected by the sprite flip.
   ctx.save();
   ctx.fillStyle = "rgba(22, 27, 24, 0.28)";
   ctx.beginPath();
-  ctx.ellipse(player.x, player.y + 86, 50, 12, 0, 0, Math.PI * 2);
+  ctx.ellipse(player.x, player.y + 86, 50 * actorScale, 12 * actorScale, 0, 0, Math.PI * 2);
   ctx.fill();
   ctx.restore();
 
-  const scale = PLAYER_HEIGHT / frame.image.naturalHeight;
+  const scale = playerHeight / frame.image.naturalHeight;
   const drawW = frame.image.naturalWidth * scale;
-  const drawH = PLAYER_HEIGHT;
+  const drawH = playerHeight;
   const flip = player.facing * frame.facing;
 
   ctx.save();
@@ -67,6 +69,7 @@ function drawRobot(ctx, robot, time) {
   const active = robot.pose === "scan" || robot.pose === "route" || celebrating;
   const hover = Math.sin(time * (celebrating ? 5.4 : 2.6)) * (celebrating ? 12 : 8);
   const image = active ? sprites.robot.scan : sprites.robot.idle;
+  const robotWidth = ROBOT_WIDTH * (robot.scale ?? 1);
 
   if (!imageReady(image)) {
     drawRobotVector(ctx, robot, time);
@@ -79,7 +82,7 @@ function drawRobot(ctx, robot, time) {
   // Glow halo behind the robot, brighter when it is working. Sized off the
   // robot so the halo stays tight as the sprite scales.
   const pulse = celebrating ? 0.42 : active ? 0.34 : 0.22;
-  const reach = ROBOT_WIDTH * (active ? 1.05 : 0.72);
+  const reach = robotWidth * (active ? 1.05 : 0.72);
   const glow = ctx.createRadialGradient(0, 0, 12, 0, 0, reach);
   glow.addColorStop(0, `rgba(143, 217, 240, ${pulse})`);
   glow.addColorStop(1, "rgba(143, 217, 240, 0)");
@@ -88,8 +91,8 @@ function drawRobot(ctx, robot, time) {
   ctx.arc(0, 0, reach, 0, Math.PI * 2);
   ctx.fill();
 
-  const scale = ROBOT_WIDTH / image.naturalWidth;
-  const drawW = ROBOT_WIDTH;
+  const scale = robotWidth / image.naturalWidth;
+  const drawW = robotWidth;
   const drawH = image.naturalHeight * scale;
   // Anchor each pose by where the robot's BODY sits in the image, so the body
   // stays centered on robot.y while the scan beam hangs below it.

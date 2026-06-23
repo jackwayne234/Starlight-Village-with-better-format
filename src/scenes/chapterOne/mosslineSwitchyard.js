@@ -2,7 +2,7 @@ import { createBaseScene } from "../baseScene.js";
 
 export function createMosslineSwitchyardScene() {
   const scene = createBaseScene({
-    id: "chapter-one/mossline-switchyard",
+    id: "chapter-three/mossline-switchyard",
     title: "Mossline Switchyard",
     worldWidth: 2050,
     startMessage: ""
@@ -78,8 +78,8 @@ export function createMosslineSwitchyardScene() {
       puzzleText: "Rotate the paths to reconnect the mossline junction.",
       rewardText: "Switchyard line restored. Current steadies through the trees.",
       onwardText: "The storm road climbs toward the ridge.",
-      nextText: "Heading toward Stormedge Rise.",
-      nextSceneId: "chapter-one/stormedge-rise",
+      nextText: "Heading toward Cargo Cart Turntable.",
+      nextSceneId: "chapter-three/cargo-cart-turntable",
       reactions: [
         { text: "Junction current is steady!", x: 1165, y: 470 },
         { text: "Line readings look beautiful.", x: "robot", y: "robotTop" }
@@ -88,7 +88,7 @@ export function createMosslineSwitchyardScene() {
         scan: { speaker: "robot", text: "That junction is full of wet copper sighs." },
         puzzle: { speaker: "player", text: "Easy current. Straight through the mossline." },
         reward: { speaker: "robot", text: "Line readings look beautiful." },
-        next: { speaker: "robot", text: "Stormedge Rise is calling louder now." }
+        next: { speaker: "robot", text: "The cargo cart turntable is calling louder now." }
       }
     }
   ];

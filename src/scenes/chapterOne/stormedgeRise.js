@@ -2,7 +2,7 @@ import { createBaseScene } from "../baseScene.js";
 
 export function createStormedgeRiseScene() {
   const scene = createBaseScene({
-    id: "chapter-one/stormedge-rise",
+    id: "chapter-four/stormedge-rise",
     title: "Stormedge Rise",
     worldWidth: 2050,
     startMessage: ""
@@ -63,9 +63,9 @@ export function createStormedgeRiseScene() {
       scanText: "Robot scan: storm gauge unstable.",
       puzzleText: "Rotate the signal paths to steady the storm gauge.",
       rewardText: "Storm gauge stabilized. The wind readings settle.",
-      onwardText: "The beacon hill path is open.",
-      nextText: "Climbing to Beacon Hill.",
-      nextSceneId: "chapter-one/beacon-hill",
+      onwardText: "The weather vane path is open.",
+      nextText: "Climbing to Weather Vane Roof.",
+      nextSceneId: "chapter-four/weather-vane-roof",
       reactions: [
         { text: "The gauge is holding!", x: 1115, y: 408 },
         { text: "Storm data stabilized.", x: "robot", y: "robotTop" }
@@ -74,7 +74,7 @@ export function createStormedgeRiseScene() {
         scan: { speaker: "robot", text: "Wind numbers are doing cartwheels." },
         puzzle: { speaker: "player", text: "Hold steady. Let the gauge breathe." },
         reward: { speaker: "robot", text: "Storm data stabilized." },
-        next: { speaker: "robot", text: "Beacon Hill is above the tree line." }
+        next: { speaker: "robot", text: "The weather vane roof is above the tree line." }
       }
     }
   ];

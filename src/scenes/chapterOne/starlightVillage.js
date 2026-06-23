@@ -65,7 +65,7 @@ export function createStarlightVillageScene() {
       rewardText: "Water wheel restored. The village lights breathe back on.",
       onwardText: "",
       nextText: "The lane opens toward Glowfen Grove.",
-      nextSceneId: "chapter-one/glowfen-grove",
+      nextSceneId: "chapter-one/bakery-gutter",
       reactions: [
         { text: "The lights are back!", x: 560, y: 330 }
       ],
@@ -73,7 +73,7 @@ export function createStarlightVillageScene() {
         scan: { speaker: "robot", text: "Main wheel is asleep. I found the sleepy part." },
         puzzle: { speaker: "player", text: "Okay. Turn the channels until the wheel catches." },
         reward: { speaker: "robot", text: "Village current is back. Nicely routed." },
-        next: { speaker: "robot", text: "Power is stable. Glowfen Grove is waiting." }
+        next: { speaker: "robot", text: "Power is stable. The bakery gutter is next." }
       }
     }
   ];

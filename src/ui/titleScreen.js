@@ -101,7 +101,7 @@ function drawSubtitle(ctx, x, y) {
   ctx.textAlign = "center";
   ctx.fillStyle = "rgba(190, 224, 232, 0.92)";
   ctx.font = "600 19px system-ui, sans-serif";
-  ctx.fillText("Chapter One — a cozy rainy repair tale", x, y);
+  ctx.fillText("One hundred rainy repairs across Starlight Village", x, y);
 }
 
 function drawStartPrompt(ctx, x, y, time) {
@@ -111,8 +111,8 @@ function drawStartPrompt(ctx, x, y, time) {
   ctx.globalAlpha *= Math.max(0.2, pulse);
   ctx.textAlign = "center";
   ctx.fillStyle = "rgba(255, 234, 168, 0.98)";
-  ctx.font = "700 24px system-ui, sans-serif";
-  ctx.fillText("Press Space to Begin", x, y);
+  ctx.font = "700 23px system-ui, sans-serif";
+  ctx.fillText("Press Space, Enter, or E to Begin", x, y);
   ctx.restore();
 }
 

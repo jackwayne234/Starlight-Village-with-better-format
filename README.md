@@ -16,15 +16,16 @@ Open:
 http://127.0.0.1:5200/
 ```
 
-## Current V2 Slice
+## Current Route Spine
 
-- One rainy story route across Chapters 1 and 2.
-- Nine locations: Starlight Village, Glowfen Grove, Mossline Switchyard, Stormedge Rise, Beacon Hill, Rainbarrel Row, Lantern Market, Glassrail Crossing, and Old Observatory.
+- One rainy story route across 10 chapters and 100 scenes.
+- The route starts at Water Wheel Yard and ends at Celebration Square.
+- The current spine uses a catalog builder for first-draft scenes, with hand-built landmark scenes preserved for the opener, Glowfen Grove, Mossline Switchyard, Stormedge Rise, Beacon Hill, and Rainbarrel Row.
 - Apprentice and floating robot companion.
 - Left/right walking with a scrolling camera.
-- All Chapter 1 repairs use rotate-path puzzles.
-- One repair target in each Chapter 1 location.
-- Chapter 2 complete summary after Old Observatory.
+- Each scene currently has one repair target.
+- Most first-draft scenes use rotate-path puzzles until bespoke puzzle chunks replace them.
+- Final completion happens after the 100th scene.
 - Short character dialogue bubbles.
 - Progress saved in browser storage.
 
@@ -45,6 +46,7 @@ http://127.0.0.1:5200/
 
 ## Known Limits
 
-- This is still a small V2 slice, not the full Chapter 1 remake.
-- Art is canvas-drawn placeholder/polish art, not final bitmap assets.
+- The 100-scene route is a playable spine, not 100 bespoke finished scenes.
+- Catalog-built scenes are intentionally first drafts.
+- Art is mixed: some scenes use bespoke sprites and tuned canvas layouts, while many catalog scenes use shared placeholder composition.
 - Progress uses local browser storage only.

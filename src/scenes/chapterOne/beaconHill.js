@@ -2,7 +2,7 @@ import { createBaseScene } from "../baseScene.js";
 
 export function createBeaconHillScene() {
   const scene = createBaseScene({
-    id: "chapter-one/beacon-hill",
+    id: "chapter-five/beacon-hill",
     title: "Beacon Hill Signal Tower",
     worldWidth: 2100,
     startMessage: ""
@@ -10,19 +10,13 @@ export function createBeaconHillScene() {
 
   scene.player.x = 310;
   scene.robot.x = 422;
+  scene.showSignpost = false;
   scene.backdrop = { moonX: 1025, moonY: 132, cloudDrift: 1.25, hillOffset: 140, ridgeOffset: 176 };
   scene.beaconHill = {
-    tower: { x: 1240, y: 552, lit: false },
+    tower: { x: 1240, groundY: 610, height: 800, sprite: "beaconTowerLargeDoor", lit: false },
     shed: { x: 1640, y: 540, lit: true },
-    flags: [
-      { x: 870, y: 382, color: "#d8aa57" },
-      { x: 1330, y: 268, color: "#c97945" },
-      { x: 1815, y: 386, color: "#8fd9f0" }
-    ],
-    cables: [
-      { fromX: 560, fromY: 388, toX: 1240, toY: 250 },
-      { fromX: 1240, fromY: 250, toX: 1760, toY: 405 }
-    ]
+    flags: [],
+    cables: []
   };
   scene.layers = {
     trees: [
@@ -34,9 +28,14 @@ export function createBeaconHillScene() {
       { x: 1940, y: 280, scale: 1.55 }
     ],
     cottages: [],
+    foliage: [
+      { kind: "rainyRocksReeds", x: 1000, groundY: 653, height: 142, alpha: 0.92 },
+      { kind: "glowfenLeafLitter", x: 1075, groundY: 669, height: 118, alpha: 0.86 },
+      { kind: "rainyRocksReeds", x: 1145, groundY: 659, height: 110, alpha: 0.84 }
+    ],
     lamps: [
       { x: 430, y: 560, lit: true },
-      { x: 965, y: 560, lit: true },
+      { x: 915, y: 560, lit: true },
       { x: 1810, y: 560, lit: false }
     ],
     glowPlants: [
@@ -63,24 +62,24 @@ export function createBeaconHillScene() {
       puzzleTheme: "beacon-signal",
       x: 1240,
       y: 500,
-      radius: 250,
+      radius: 280,
       complete: false,
       progress: 0,
       scanText: "Robot scan: beacon signal weak.",
       puzzleText: "Rotate the signal paths to tune the beacon.",
       rewardText: "Beacon restored. Warm light crosses the hill.",
       onwardText: "One stormwater call remains.",
-      nextText: "Heading to Rainbarrel Row.",
-      nextSceneId: "chapter-one/rainbarrel-row",
+      nextText: "Heading to the keeper's cottage.",
+      nextSceneId: "chapter-five/keeper-cottage",
       reactions: [
-        { text: "The beacon is shining!", x: 1240, y: 352 },
+        { text: "The beacon is shining!", x: 1240, y: 350 },
         { text: "Signal restored.", x: "robot", y: "robotTop" }
       ],
       dialogue: {
         scan: { speaker: "robot", text: "Beacon signal is whisper-thin." },
         puzzle: { speaker: "player", text: "Let's give the village something bright to follow." },
         reward: { speaker: "robot", text: "Signal restored. Rainbarrel Row is next." },
-        next: { speaker: "robot", text: "Last call: stormwater." }
+        next: { speaker: "robot", text: "The keeper's cottage is next." }
       }
     }
   ];

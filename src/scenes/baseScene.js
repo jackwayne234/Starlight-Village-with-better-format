@@ -35,6 +35,7 @@ export function createBaseScene({ id, title, worldWidth = 2200, startMessage }) 
     player: {
       x: 365,
       y: 562,
+      scale: 0.7,
       facing: 1,
       walking: false,
       reaction: "idle",
@@ -43,6 +44,7 @@ export function createBaseScene({ id, title, worldWidth = 2200, startMessage }) 
     robot: {
       x: 484,
       y: 420,
+      scale: 0.9,
       pose: "idle",
       reactionTimer: 0
     },
@@ -51,6 +53,7 @@ export function createBaseScene({ id, title, worldWidth = 2200, startMessage }) 
     repairTarget: null,
     nextSceneId: null,
     chapterComplete: null,
+    showSignpost: true,
     progressDirty: false,
     dialogue: {
       speaker: null,

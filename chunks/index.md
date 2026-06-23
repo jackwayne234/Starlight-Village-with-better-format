@@ -20,3 +20,34 @@ High-level list only. All details live inside each chunk file.
 | 28 | Old Observatory Asset Pack | complete |
 | 29 | Glowfen Foliage Grounding | complete |
 | 30 | Mossline Switchyard Sprites | complete |
+| 31 | Browser Route Smoke | complete |
+| 32 | Comment Bubble Softening | complete |
+| 33 | Beacon Hill Depth Pass | complete |
+| 34 | Beacon Tower Matte Cleanup | complete |
+| 35 | Shed Handle Matte Cleanup | complete |
+| 36 | Actor Scale Pass | complete |
+| 37 | Large Door Beacon Sprite | complete |
+| 38 | Full Game 100 Scene Plan | complete |
+| 39 | Full Game Route Spine | complete |
+| 40 | Bakery Gutter Scene | complete |
+| 41 | Bell Rope Corner Scene | complete |
+| 42 | Workshop Lift Scene | complete |
+| 43 | Schoolhouse Lanterns Scene | complete |
+| 44 | Market Awnings Scene | complete |
+| 45 | Old Footbridge Scene | complete |
+| 46 | Rain Drain Corner Scene | complete |
+| 47 | Mayor's Porch Scene | complete |
+| 48 | Festival Square Scene | complete |
+| 49 | Lantern Lily Pool Scene | complete |
+| 50 | Bog Bridge Scene | complete |
+| 51 | Frogsong Lock Scene | complete |
+| 52 | Sunken Signpost Scene | complete |
+| 53 | Mist Pool Scene | complete |
+| 54 | Moss Gate Scene | complete |
+| 55 | Old Fen Shrine Scene | complete |
+| 56 | Glowfen Ferry Scene | complete |
+| 57 | Reedwatch Bank Scene | complete |
+| 58 | Cargo Cart Turntable Scene | complete |
+| 59 | Signal Arm Row Scene | complete |
+| 60 | Conductor Booth Scene | complete |
+| 61 | Crane Hook Yard Scene | complete |

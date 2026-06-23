@@ -1,9 +1,9 @@
 import { config } from "../core/config.js";
-import { drawActors } from "./actorRenderer.js";
+import { drawActors } from "./actorRenderer.js?v=actor-scale-pass-2";
 import { drawBackdrop } from "./backdropRenderer.js";
 import { drawWeather } from "./weatherRenderer.js";
-import { drawWorld } from "./worldRenderer.js";
-import { drawHud } from "../ui/hud.js";
+import { drawWorld } from "./worldRenderer.js?v=beacon-remove-flags-wire";
+import { drawHud } from "../ui/hud.js?v=actor-scale-pass";
 
 export function renderScene(ctx, scene, time, transition = null, options = {}) {
   const { hud = true } = options;

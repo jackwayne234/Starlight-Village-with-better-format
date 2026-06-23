@@ -5,7 +5,10 @@ export function drawHud(ctx, scene, width, height) {
   }
 
   drawTitle(ctx, scene);
-  const occupiedBubbles = [{ x: 28, y: 28, width: 310, height: 50 }];
+  const occupiedBubbles = [
+    { x: 28, y: 28, width: 310, height: 50 },
+    ...getCharacterFaceAvoidanceRects(scene, width)
+  ];
   drawDialogueBubble(ctx, scene, width, height, occupiedBubbles);
   drawReactionBubbles(ctx, scene, width, height, occupiedBubbles);
   drawContinuePrompt(ctx, scene, width, height);
@@ -113,10 +116,10 @@ function drawReactionBubbles(ctx, scene, width, height, occupiedBubbles) {
     ctx.save();
     ctx.globalAlpha = alpha;
     drawSpeechBubble(ctx, rect, screenAnchor, {
-      fill: "rgba(250, 240, 210, 0.95)",
-      stroke: "rgba(71, 58, 43, 0.34)"
+      fill: "rgba(250, 240, 210, 0.58)",
+      stroke: "rgba(71, 58, 43, 0.22)"
     });
-    ctx.fillStyle = "rgba(38, 43, 35, 0.96)";
+    ctx.fillStyle = "rgba(31, 37, 31, 0.82)";
     ctx.font = "600 14px system-ui, sans-serif";
     ctx.textAlign = "center";
     wrapText(ctx, bubble.text, rect.x + rect.width / 2, rect.y + 21, rect.width - 28, 17);
@@ -169,10 +172,10 @@ function drawDialogueBubble(ctx, scene, width, height, occupiedBubbles) {
   ctx.save();
   ctx.globalAlpha = alpha;
   drawSpeechBubble(ctx, rect, screenAnchor, {
-    fill: "rgba(255, 247, 220, 0.97)",
-    stroke: scene.dialogue.speaker === "player" ? "rgba(83, 127, 145, 0.5)" : "rgba(143, 217, 240, 0.48)"
+    fill: "rgba(255, 247, 220, 0.64)",
+    stroke: scene.dialogue.speaker === "player" ? "rgba(83, 127, 145, 0.28)" : "rgba(143, 217, 240, 0.26)"
   });
-  ctx.fillStyle = "rgba(36, 42, 34, 0.96)";
+  ctx.fillStyle = "rgba(31, 38, 32, 0.84)";
   ctx.font = "600 15px system-ui, sans-serif";
   ctx.textAlign = "left";
   wrapText(ctx, scene.dialogue.text, rect.x + 20, rect.y + 27, rect.width - 40, 19);
@@ -184,10 +187,11 @@ function placeSpeechBubble(rect, occupiedBubbles, width, height, anchor) {
   const margin = 20;
   const messageTop = height - 118;
   const positions = [
-    { x: anchor.x - rect.width / 2, y: anchor.y - rect.height - 30 },
-    { x: anchor.x - rect.width * 0.18, y: anchor.y - rect.height - 18 },
-    { x: anchor.x - rect.width * 0.82, y: anchor.y - rect.height - 18 },
-    { x: anchor.x - rect.width / 2, y: anchor.y + 22 }
+    { x: anchor.x - rect.width * 0.12, y: anchor.y - rect.height - 34 },
+    { x: anchor.x - rect.width * 0.88, y: anchor.y - rect.height - 34 },
+    { x: anchor.x - rect.width / 2, y: anchor.y - rect.height - 86 },
+    { x: anchor.x - rect.width / 2, y: anchor.y + 46 },
+    { x: anchor.x - rect.width / 2, y: anchor.y - rect.height - 30 }
   ];
 
   for (const position of positions) {
@@ -203,6 +207,18 @@ function placeSpeechBubble(rect, occupiedBubbles, width, height, anchor) {
   }
 
   return null;
+}
+
+function getCharacterFaceAvoidanceRects(scene, width) {
+  const playerX = clamp(scene.player.x - scene.camera.x, 0, width);
+  const robotX = clamp(scene.robot.x - scene.camera.x, 0, width);
+  const playerScale = scene.player.scale ?? 1;
+  const robotScale = scene.robot.scale ?? 1;
+
+  return [
+    { x: playerX - 54 * playerScale, y: scene.player.y - 224 * playerScale, width: 108 * playerScale, height: 118 * playerScale },
+    { x: robotX - 58 * robotScale, y: scene.robot.y - 100 * robotScale, width: 116 * robotScale, height: 104 * robotScale }
+  ];
 }
 
 function drawSpeechBubble(ctx, rect, anchor, style) {

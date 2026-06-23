@@ -1,17 +1,17 @@
 import { updateCamera } from "./camera.js";
 import { updatePlayer } from "../entities/player.js";
 import { updateRobot } from "../entities/robot.js";
-import { updateRepairFlow } from "../interaction/repairFlow.js";
-import { renderScene } from "../rendering/renderPipeline.js";
-import { drawTitleScreen } from "../ui/titleScreen.js";
+import { updateRepairFlow } from "../interaction/repairFlow.js?v=comment-bubble-softening";
+import { renderScene } from "../rendering/renderPipeline.js?v=beacon-remove-flags-wire";
+import { drawTitleScreen } from "../ui/titleScreen.js?v=browser-route-smoke-2";
 import { sfx } from "../audio/gameAudio.js";
 
-export function createGame({ canvas, ctx, input, firstScene, persistProgress, createScene }) {
+export function createGame({ canvas, ctx, input, firstScene, autoStart = false, persistProgress, createScene }) {
   let scene = firstScene;
   let lastTime = 0;
   let running = false;
   let transition = null;
-  let started = false;
+  let started = autoStart;
   let titleAlpha = 0;
   let thunderTimer = 7;
 

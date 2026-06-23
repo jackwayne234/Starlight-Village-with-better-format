@@ -2,7 +2,7 @@ import { createBaseScene } from "../baseScene.js";
 
 export function createGlowfenGroveScene() {
   const scene = createBaseScene({
-    id: "chapter-one/glowfen-grove",
+    id: "chapter-two/glowfen-grove",
     title: "Glowfen Grove",
     worldWidth: 1900,
     startMessage: ""
@@ -79,8 +79,8 @@ export function createGlowfenGroveScene() {
       puzzleText: "Rotate the root channels to wake the pump.",
       rewardText: "Root pump restored. Glowfen Grove breathes again.",
       onwardText: "The grove is stable.",
-      nextText: "Heading toward Mossline Switchyard.",
-      nextSceneId: "chapter-one/mossline-switchyard",
+      nextText: "Heading toward Lantern Lily Pool.",
+      nextSceneId: "chapter-two/lantern-lily-pool",
       reactions: [
         { text: "The path is glowing again!", x: 850, y: 492 },
         { text: "Bridge network restored.", x: "robot", y: "robotTop" }
@@ -89,7 +89,7 @@ export function createGlowfenGroveScene() {
         scan: { speaker: "robot", text: "These roots are holding their breath." },
         puzzle: { speaker: "player", text: "Easy path, steady light. Wake the roots." },
         reward: { speaker: "robot", text: "Root pressure steady. The plants approve." },
-        next: { speaker: "player", text: "The switchyard should be just past the glow plants." }
+        next: { speaker: "player", text: "The lily pool should be just past the glow plants." }
       }
     }
   ];

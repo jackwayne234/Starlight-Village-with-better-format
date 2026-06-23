@@ -1,5 +1,5 @@
 export function updateRobot(scene, dt) {
-  const targetX = scene.player.x + 112;
+  const targetX = scene.player.x + 96;
   // Float low, beside the boy's shins, rather than up by his head.
   const targetY = scene.player.y - 8;
 
