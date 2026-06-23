@@ -18,6 +18,14 @@ export function createSunkenSignpostScene() {
     fixed: false,
     markerRaised: false
   };
+  scene.paintedLandmark = {
+    sprite: "sunkenSignpost",
+    state: scene.sunkenSignpost,
+    x: 1160,
+    groundY: 674,
+    height: 500,
+    glow: { heightRatio: 0.52, radius: 154, fixedIntensity: 0.4, dimIntensity: 0.14, pulse: 0.05 }
+  };
   scene.layers = {
     trees: [
       { x: 55, y: 264, scale: 1.62 },
@@ -43,13 +51,8 @@ export function createSunkenSignpostScene() {
       { x: 140, y: 640, active: true },
       { x: 1980, y: 638, active: false }
     ],
-    brokenBranches: [
-      { x: 1020, y: 636, scale: 0.62 }
-    ],
-    repairParts: [
-      { x: 920, y: 624, kind: "gear" },
-      { x: 1390, y: 626, kind: "seed" }
-    ],
+    brokenBranches: [],
+    repairParts: [],
     puddles: [
       { x: 330, y: 664, width: 132, height: 20 },
       { x: 1900, y: 660, width: 146, height: 18 }
@@ -69,6 +72,7 @@ export function createSunkenSignpostScene() {
       x: 1160,
       y: 552,
       radius: 275,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: path marker is sunk under the reeds.",
