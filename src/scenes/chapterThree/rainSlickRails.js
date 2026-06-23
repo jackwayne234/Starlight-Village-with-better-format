@@ -36,7 +36,6 @@ export function createRainSlickRailsScene() {
     ],
     foliage: [
       { kind: "mosslineSwitchFoliage", x: 710, groundY: 670, height: 124, alpha: 0.88 },
-      { kind: "mosslineConduitCoils", x: 972, groundY: 682, height: 114, alpha: 0.9 },
       { kind: "mosslinePuddleGround", x: 1248, groundY: 696, height: 124, alpha: 0.82 },
       { kind: "mosslineSwitchFoliage", x: 1565, groundY: 670, height: 126, alpha: 0.88 }
     ],
@@ -62,6 +61,7 @@ export function createRainSlickRailsScene() {
       x: 1160,
       y: 540,
       radius: 292,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: the rails are too slick for the next cart.",

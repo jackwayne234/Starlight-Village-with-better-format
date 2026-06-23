@@ -42,6 +42,13 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 - Removed the loose coil/gear repair props and foreground conduit-coil clutter from Sparking Relay Shed.
 - Hid the generic repair marker for Sparking Relay Shed.
 - Kept the existing rainy forest layers, Mossline lamps, puddles, route text, calmed-sparks repair state, and storm-gauge path puzzle.
+- Reviewed `chapter-three/rain-slick-rails` against its existing bespoke side-view rail treatment.
+- Chose to keep the existing Rain-Slick Rails renderer because it already uses `assets/sprites/world/rain-slick-rails-side-sprite.png`, a side-view rail-crossing sprite that matches the game camera, while preserving custom sand valves, sand pipes, wet-rail shine, sanded repair state, forest cut, and warning-lamp overlays.
+- Confirmed the older `assets/sprites/world/rain-slick-rails-sprite.png` reads top-down/angled and should remain unused for this scene.
+- Confirmed `assets/sprites/world/rain-slick-rails-painted.png` is not present in the workspace, so the backlog now points at the actual side-view sprite.
+- Removed foreground conduit-coil clutter from Rain-Slick Rails.
+- Hid the generic repair marker for Rain-Slick Rails.
+- Kept the existing rainy forest layers, Mossline lamps, puddles, route text, sand-valve repair state, and water-routing path puzzle.
 
 ## Verification
 
@@ -56,6 +63,12 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 - Asset probe confirmed `assets/sprites/world/crane-hook-yard-painted.png` is `417x389` with transparent corner pixels and an opaque center, but the asset was not wired because its three-quarter rail framing does not match the side-view camera rule.
 - Static scene-data check confirms `chapter-three/sparking-relay-shed` remains on its custom painted-shed renderer with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, no foreground conduit-coil clutter, and `showMarker: false`.
 - Asset probe confirmed `assets/sprites/world/sparking-relay-shed-painted.png` is `1095x1137` RGBA with alpha, and the asset stayed wired through the existing `sparkingRelayShed` renderer path.
+- Static scene-data check confirms `chapter-three/rain-slick-rails` remains on its custom side-view rail renderer with no `paintedLandmark`, `0` cottages, `0` repair parts, `0` broken branches, no foreground conduit-coil clutter, and `showMarker: false`.
+- Asset probe confirmed `assets/sprites/world/rain-slick-rails-side-sprite.png` is `1832x367` RGBA with alpha, and the asset stayed wired through the existing `rainSlickRails` renderer path.
+- Asset review confirmed `assets/sprites/world/rain-slick-rails-sprite.png` is the older top-down/angled rail sprite and was not wired.
+- Local preview server responded at:
+  - `http://127.0.0.1:5253/?scene=chapter-three/rain-slick-rails&x=1120&preview=1`
+- Local probes confirmed the Rain-Slick Rails scene module and side-view rail sprite respond from the preview server.
 - Full route walk still reaches all 100 scenes from `chapter-one/starlight-village` to `chapter-ten/celebration-square`.
 - Local preview server responded at:
   - `http://127.0.0.1:5252/?scene=chapter-three/crane-hook-yard&x=1120&preview=1`
@@ -79,4 +92,4 @@ Continue the full-route sprite integration pass into Chapter 3, preserving the r
 
 ## Next
 
-Continue route-order sprite wiring at `chapter-three/rain-slick-rails`.
+Continue route-order sprite wiring at `chapter-three/tunnel-mouth`.
