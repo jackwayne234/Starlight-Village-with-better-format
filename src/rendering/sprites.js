@@ -28,6 +28,7 @@ export const sprites = {
   world: {
     waterWheel: loadImage(`${WORLD}/water-wheel-trimmed.png`),
     cottage: loadImage(`${WORLD}/cottage-trimmed.png`),
+    bakery: loadImage(`${WORLD}/bakery-painted.png?v=painted-bakery`),
     tree: loadImage(`${WORLD}/tree-trimmed.png`),
     pine: loadImage(`${WORLD}/pine-tree-trimmed.png`),
     lamp: loadImage(`${WORLD}/lamp-trimmed.png`),
@@ -65,6 +66,9 @@ export const sprites = {
     mosslineConduitCoils: loadImage(`${WORLD}/mossline-conduit-coils-trimmed.png`),
     mosslinePuddleGround: loadImage(`${WORLD}/mossline-puddle-ground-trimmed.png`),
     sparkingRelayShed: loadImage(`${WORLD}/sparking-relay-shed-painted.png?v=painted-relay-shed`),
+    rainSlickRails: loadImage(`${WORLD}/rain-slick-rails-side-sprite.png?v=rain-slick-side-sprite`),
+    rainSlickPuddle: loadImage(`${WORLD}/rain-slick-puddle-sprite.png?v=rain-slick-sprites`),
+    rainSlickSandValve: loadImage(`${WORLD}/rain-slick-sand-valve-sprite.png?v=rain-slick-valve-sprite`),
     // Seamless, horizontally-tiling textures for the path band, the stream, and
     // the grass behind the path. Fill existing shapes; no cutout (full-bleed).
     pathTile: loadImage(`${WORLD}/path-tile.png`),

@@ -336,6 +336,50 @@ function restoreRepairEffect(scene, repair) {
     });
   }
 
+  if (repair.id === "rain-slick-rails" && scene.rainSlickRails) {
+    scene.rainSlickRails.fixed = true;
+    scene.rainSlickRails.railsSanded = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
+  if (repair.id === "tunnel-mouth" && scene.tunnelMouth) {
+    scene.tunnelMouth.fixed = true;
+    scene.tunnelMouth.warningLampsSafe = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
+  if (repair.id === "clock-signal" && scene.clockSignal) {
+    scene.clockSignal.fixed = true;
+    scene.clockSignal.clockSynced = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
+  if (repair.id === "last-platform" && scene.lastPlatform) {
+    scene.lastPlatform.fixed = true;
+    scene.lastPlatform.platformLit = true;
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
+
   if (repair.id === "archive-lens-array") {
     if (scene.observatory?.lens) scene.observatory.lens.lit = true;
     if (scene.observatory?.tower) scene.observatory.tower.lit = true;

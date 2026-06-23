@@ -16,8 +16,12 @@ import { createStormedgeRiseScene } from "./chapterOne/stormedgeRise.js";
 import { createCargoCartTurntableScene } from "./chapterThree/cargoCartTurntable.js";
 import { createConductorBoothScene } from "./chapterThree/conductorBooth.js";
 import { createCraneHookYardScene } from "./chapterThree/craneHookYard.js";
+import { createClockSignalScene } from "./chapterThree/clockSignal.js";
+import { createRainSlickRailsScene } from "./chapterThree/rainSlickRails.js";
+import { createLastPlatformScene } from "./chapterThree/lastPlatform.js";
 import { createSignalArmRowScene } from "./chapterThree/signalArmRow.js";
 import { createSparkingRelayShedScene } from "./chapterThree/sparkingRelayShed.js";
+import { createTunnelMouthScene } from "./chapterThree/tunnelMouth.js";
 import { createGlassrailCrossingScene } from "./chapterTwo/glassrailCrossing.js";
 import { createLanternMarketScene } from "./chapterTwo/lanternMarket.js";
 import { createLanternLilyPoolScene } from "./chapterTwo/lanternLilyPool.js";
@@ -32,6 +36,7 @@ import { createMossGateScene } from "./chapterTwo/mossGate.js";
 import { createOldFenShrineScene } from "./chapterTwo/oldFenShrine.js";
 import { fullGameSceneById, fullGameSceneIds } from "./fullGameCatalog.js";
 import { createPlannedScene } from "./plannedSceneFactory.js";
+import { addTreeDensity } from "./treeDensity.js";
 
 export const sceneIds = {
   beaconHill: "chapter-five/beacon-hill",
@@ -39,9 +44,12 @@ export const sceneIds = {
   bellRopeCorner: "chapter-one/bell-rope-corner",
   bogBridge: "chapter-two/bog-bridge",
   cargoCartTurntable: "chapter-three/cargo-cart-turntable",
+  clockSignal: "chapter-three/clock-signal",
   conductorBooth: "chapter-three/conductor-booth",
   craneHookYard: "chapter-three/crane-hook-yard",
+  rainSlickRails: "chapter-three/rain-slick-rails",
   sparkingRelayShed: "chapter-three/sparking-relay-shed",
+  tunnelMouth: "chapter-three/tunnel-mouth",
   workshopLift: "chapter-one/workshop-lift",
   glassrailCrossing: "chapter-two/glassrail-crossing",
   festivalSquare: "chapter-one/festival-square",
@@ -50,6 +58,7 @@ export const sceneIds = {
   glowfenGrove: "chapter-two/glowfen-grove",
   lanternMarket: "chapter-two/lantern-market",
   lanternLilyPool: "chapter-two/lantern-lily-pool",
+  lastPlatform: "chapter-three/last-platform",
   marketAwnings: "chapter-one/market-awnings",
   mayorPorch: "chapter-one/mayor-porch",
   mistPool: "chapter-two/mist-pool",
@@ -74,9 +83,12 @@ const handBuiltSceneFactories = {
   [sceneIds.beaconHill]: createBeaconHillScene,
   [sceneIds.bogBridge]: createBogBridgeScene,
   [sceneIds.cargoCartTurntable]: createCargoCartTurntableScene,
+  [sceneIds.clockSignal]: createClockSignalScene,
   [sceneIds.conductorBooth]: createConductorBoothScene,
   [sceneIds.craneHookYard]: createCraneHookYardScene,
+  [sceneIds.rainSlickRails]: createRainSlickRailsScene,
   [sceneIds.sparkingRelayShed]: createSparkingRelayShedScene,
+  [sceneIds.tunnelMouth]: createTunnelMouthScene,
   [sceneIds.workshopLift]: createWorkshopLiftScene,
   [sceneIds.glowfenGrove]: createGlowfenGroveScene,
   [sceneIds.mosslineSwitchyard]: createMosslineSwitchyardScene,
@@ -88,6 +100,7 @@ const handBuiltSceneFactories = {
   [sceneIds.frogsongLock]: createFrogsongLockScene,
   [sceneIds.glowfenFerry]: createGlowfenFerryScene,
   [sceneIds.lanternLilyPool]: createLanternLilyPoolScene,
+  [sceneIds.lastPlatform]: createLastPlatformScene,
   [sceneIds.mistPool]: createMistPoolScene,
   [sceneIds.mossGate]: createMossGateScene,
   [sceneIds.oldFenShrine]: createOldFenShrineScene,
@@ -118,11 +131,11 @@ const handBuiltSceneFactories = {
 export function createScene(sceneId) {
   const factory = handBuiltSceneFactories[sceneId];
   if (factory) {
-    return factory();
+    return addTreeDensity(factory());
   }
 
   if (fullGameSceneById.has(sceneId)) {
-    return createPlannedScene(sceneId);
+    return addTreeDensity(createPlannedScene(sceneId));
   }
 
   if (!factory) {

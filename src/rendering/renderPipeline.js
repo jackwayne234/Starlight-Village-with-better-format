@@ -1,7 +1,7 @@
 import { config } from "../core/config.js";
-import { drawActors } from "./actorRenderer.js?v=no-follow-ovals";
+import { drawActors } from "./actorRenderer.js?v=robot-scan-restored";
 import { drawBackdrop } from "./backdropRenderer.js";
-import { drawWeather } from "./weatherRenderer.js";
+import { drawWeather } from "./weatherRenderer.js?v=no-bottom-ovals";
 import { drawWorld } from "./worldRenderer.js?v=large-painted-relay-shed";
 import { drawHud } from "../ui/hud.js?v=chapter-repair-label";
 

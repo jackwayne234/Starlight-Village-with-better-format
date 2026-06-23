@@ -26,10 +26,7 @@ export function createBakeryGutterScene() {
       { x: 1660, y: 280, scale: 1.5 },
       { x: 2065, y: 300, scale: 1.38 }
     ],
-    cottages: [
-      { x: 430, y: 536, scale: 1.92, lit: true },
-      { x: 1810, y: 536, scale: 1.94, lit: false }
-    ],
+    cottages: [],
     foliage: [
       { kind: "rainyRocksReeds", x: 720, groundY: 658, height: 96, alpha: 0.72 },
       { kind: "glowfenLeafLitter", x: 1515, groundY: 680, height: 98, alpha: 0.78 }
@@ -44,10 +41,7 @@ export function createBakeryGutterScene() {
       { x: 2060, y: 638, active: false }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 915, y: 624, kind: "coil" },
-      { x: 1320, y: 626, kind: "gear" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 640, y: 664, width: 132, height: 20 },
       { x: 1190, y: 662, width: 220, height: 23 },
@@ -68,6 +62,7 @@ export function createBakeryGutterScene() {
       x: 1180,
       y: 548,
       radius: 250,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: bakery gutter is spilling into the awning.",

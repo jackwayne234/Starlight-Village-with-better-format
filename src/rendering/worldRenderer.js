@@ -90,7 +90,7 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
   if (activeRepair?.id === "root-pump") {
     drawRootPump(ctx, activeRepair, time, powerLevel);
   }
-  if (activeRepair && !["water-wheel", "root-pump", "archive-lens-array"].includes(activeRepair.id)) {
+  if (activeRepair && activeRepair.showMarker !== false && !["water-wheel", "root-pump", "archive-lens-array"].includes(activeRepair.id)) {
     drawRepairMarker(ctx, activeRepair, time, powerLevel);
   }
   if (activeRepair) {
@@ -471,6 +471,18 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.sparkingRelayShed) {
     drawSparkingRelayShed(ctx, scene.sparkingRelayShed, time, scene.world.powerLevel);
   }
+  if (scene.rainSlickRails) {
+    drawRainSlickRails(ctx, scene.rainSlickRails, time, scene.world.powerLevel);
+  }
+  if (scene.tunnelMouth) {
+    drawTunnelMouth(ctx, scene.tunnelMouth, time, scene.world.powerLevel);
+  }
+  if (scene.clockSignal) {
+    drawClockSignal(ctx, scene.clockSignal, time, scene.world.powerLevel);
+  }
+  if (scene.lastPlatform) {
+    drawLastPlatform(ctx, scene.lastPlatform, time, scene.world.powerLevel);
+  }
   if (scene.bridge) {
     drawFootbridge(ctx, scene.bridge, time);
   }
@@ -845,6 +857,1087 @@ function drawSparkingRelayShed(ctx, shed, time, powerLevel) {
     warmGlow(ctx, x, groundY - 162, 260, 0.28 + Math.sin(time * 3) * 0.04);
   }
 
+  ctx.restore();
+}
+
+function drawRainSlickRails(ctx, rails, time, powerLevel) {
+  const fixed = rails.fixed || rails.railsSanded || powerLevel > 0.95;
+  const x = rails.x;
+  const groundY = rails.groundY;
+
+  ctx.save();
+  ctx.fillStyle = "rgba(18, 35, 34, 0.68)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 18, 470, 76, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+
+  drawRailCrossingBackdrop(ctx, x, groundY, fixed, time);
+  drawWetRailBed(ctx, x, groundY, fixed, time);
+  if (!imageReady(sprites.world.rainSlickRails)) {
+    drawCrossingPlanks(ctx, x, groundY, fixed, time);
+  }
+  drawSandValve(ctx, x - 238, groundY - 88, fixed, time, -1);
+  drawSandValve(ctx, x + 238, groundY - 88, fixed, time + 0.7, 1);
+  drawSandPipe(ctx, x - 238, groundY - 88, x - 86, groundY - 48, fixed, time);
+  drawSandPipe(ctx, x + 238, groundY - 88, x + 86, groundY - 48, fixed, time + 0.8);
+  drawRailPathCheck(ctx, x, groundY - 68, fixed, time);
+
+  if (fixed) {
+    warmGlow(ctx, x, groundY - 76, 250, 0.24 + Math.sin(time * 3) * 0.04);
+  }
+
+  ctx.restore();
+}
+
+function drawTunnelMouth(ctx, tunnel, time, powerLevel) {
+  const fixed = tunnel.fixed || tunnel.warningLampsSafe || powerLevel > 0.95;
+  const x = tunnel.x;
+  const groundY = tunnel.groundY;
+
+  ctx.save();
+  ctx.fillStyle = "rgba(12, 28, 28, 0.72)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 16, 500, 80, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+
+  drawTunnelForestWalls(ctx, x, groundY, fixed, time);
+  drawTunnelPortal(ctx, x, groundY, fixed, time);
+  drawTunnelTrack(ctx, x, groundY, fixed, time);
+  drawTunnelLamp(ctx, x - 270, groundY - 166, fixed, time, 0);
+  drawTunnelLamp(ctx, x - 118, groundY - 224, fixed, time, 1);
+  drawTunnelLamp(ctx, x + 118, groundY - 224, fixed, time, 2);
+  drawTunnelLamp(ctx, x + 270, groundY - 166, fixed, time, 3);
+  drawTunnelThreshold(ctx, x, groundY, fixed, time);
+
+  if (fixed) {
+    warmGlow(ctx, x, groundY - 190, 320, 0.24 + Math.sin(time * 3) * 0.035);
+  }
+
+  ctx.restore();
+}
+
+function drawTunnelForestWalls(ctx, x, groundY, fixed, time) {
+  const trees = [
+    { dx: -560, h: 300, lift: 74, sway: 0 },
+    { dx: -470, h: 260, lift: 48, sway: 0.7 },
+    { dx: -386, h: 222, lift: 28, sway: 1.4 },
+    { dx: 560, h: 306, lift: 76, sway: 0.4 },
+    { dx: 470, h: 264, lift: 50, sway: 1.1 },
+    { dx: 386, h: 226, lift: 28, sway: 1.8 }
+  ];
+
+  trees.forEach((tree) => {
+    drawRailEdgePine(ctx, x + tree.dx, groundY - tree.lift, tree.h, fixed, time + tree.sway);
+  });
+  drawRailEdgeBrush(ctx, x - 420, groundY - 30, 300, fixed, time);
+  drawRailEdgeBrush(ctx, x + 420, groundY - 30, 300, fixed, time + 0.9);
+}
+
+function drawTunnelPortal(ctx, x, groundY, fixed, time) {
+  ctx.save();
+  const stone = fixed ? "#566257" : "#334a46";
+  const stoneDark = fixed ? "#334239" : "#1d312f";
+
+  ctx.fillStyle = "rgba(6, 14, 16, 0.76)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 120, 262, 260, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = stoneDark;
+  ctx.beginPath();
+  ctx.moveTo(x - 314, groundY - 18);
+  ctx.bezierCurveTo(x - 310, groundY - 280, x - 164, groundY - 394, x, groundY - 398);
+  ctx.bezierCurveTo(x + 164, groundY - 394, x + 310, groundY - 280, x + 314, groundY - 18);
+  ctx.lineTo(x + 240, groundY - 18);
+  ctx.bezierCurveTo(x + 222, groundY - 226, x + 120, groundY - 302, x, groundY - 306);
+  ctx.bezierCurveTo(x - 120, groundY - 302, x - 222, groundY - 226, x - 240, groundY - 18);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.strokeStyle = stone;
+  ctx.lineWidth = 30;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 260, groundY - 28);
+  ctx.bezierCurveTo(x - 240, groundY - 274, x - 128, groundY - 360, x, groundY - 362);
+  ctx.bezierCurveTo(x + 128, groundY - 360, x + 240, groundY - 274, x + 260, groundY - 28);
+  ctx.stroke();
+
+  drawTunnelStoneBlocks(ctx, x, groundY, fixed, time);
+
+  const innerGlow = ctx.createRadialGradient(x, groundY - 154, 50, x, groundY - 154, 230);
+  innerGlow.addColorStop(0, fixed ? "rgba(194, 231, 156, 0.18)" : "rgba(94, 136, 140, 0.08)");
+  innerGlow.addColorStop(1, "rgba(0, 0, 0, 0)");
+  ctx.fillStyle = innerGlow;
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 142, 220, 218, 0, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  ctx.strokeStyle = fixed ? "rgba(215, 238, 170, 0.2)" : `rgba(172, 218, 222, ${0.09 + Math.sin(time * 2.2) * 0.02})`;
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(x - 236, groundY - 30);
+  ctx.bezierCurveTo(x - 212, groundY - 236, x - 108, groundY - 324, x, groundY - 330);
+  ctx.bezierCurveTo(x + 108, groundY - 324, x + 212, groundY - 236, x + 236, groundY - 30);
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.restore();
+}
+
+function drawTunnelStoneBlocks(ctx, x, groundY, fixed, time) {
+  const blocks = [
+    { dx: -214, dy: -72, w: 64, h: 34 },
+    { dx: -250, dy: -145, w: 58, h: 32 },
+    { dx: -214, dy: -228, w: 62, h: 30 },
+    { dx: -132, dy: -306, w: 70, h: 32 },
+    { dx: -36, dy: -350, w: 72, h: 30 },
+    { dx: 86, dy: -318, w: 68, h: 32 },
+    { dx: 180, dy: -242, w: 62, h: 30 },
+    { dx: 238, dy: -158, w: 58, h: 32 },
+    { dx: 210, dy: -76, w: 64, h: 34 }
+  ];
+
+  ctx.save();
+  blocks.forEach((block, index) => {
+    ctx.fillStyle = fixed ? "rgba(110, 124, 98, 0.5)" : "rgba(53, 73, 68, 0.62)";
+    roundedRect(ctx, x + block.dx - block.w / 2, groundY + block.dy - block.h / 2, block.w, block.h, 8);
+    ctx.fill();
+    ctx.strokeStyle = fixed ? "rgba(214, 206, 153, 0.12)" : "rgba(169, 218, 220, 0.1)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(x + block.dx - block.w * 0.3, groundY + block.dy - block.h * 0.12);
+    ctx.lineTo(x + block.dx + block.w * 0.28, groundY + block.dy - block.h * 0.18 + Math.sin(time + index) * 0.8);
+    ctx.stroke();
+  });
+  ctx.restore();
+}
+
+function drawTunnelTrack(ctx, x, groundY, fixed, time) {
+  ctx.save();
+  ctx.strokeStyle = fixed ? "rgba(144, 139, 100, 0.62)" : "rgba(62, 82, 78, 0.68)";
+  ctx.lineWidth = 7;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 170, groundY - 20);
+  ctx.bezierCurveTo(x - 110, groundY - 98, x - 72, groundY - 156, x - 36, groundY - 228);
+  ctx.moveTo(x + 170, groundY - 20);
+  ctx.bezierCurveTo(x + 110, groundY - 98, x + 72, groundY - 156, x + 36, groundY - 228);
+  ctx.stroke();
+
+  ctx.strokeStyle = fixed ? "rgba(86, 78, 52, 0.55)" : "rgba(21, 34, 32, 0.58)";
+  ctx.lineWidth = 6;
+  for (let i = 0; i < 6; i += 1) {
+    const t = i / 5;
+    const y = groundY - 32 - t * 160;
+    const half = 150 - t * 105;
+    ctx.beginPath();
+    ctx.moveTo(x - half, y);
+    ctx.lineTo(x + half, y);
+    ctx.stroke();
+  }
+
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  ctx.strokeStyle = fixed ? "rgba(218, 214, 153, 0.28)" : `rgba(172, 218, 222, ${0.12 + Math.sin(time * 2.6) * 0.03})`;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(x - 158, groundY - 28);
+  ctx.bezierCurveTo(x - 104, groundY - 100, x - 68, groundY - 156, x - 34, groundY - 226);
+  ctx.moveTo(x + 158, groundY - 28);
+  ctx.bezierCurveTo(x + 104, groundY - 100, x + 68, groundY - 156, x + 34, groundY - 226);
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.restore();
+}
+
+function drawTunnelLamp(ctx, x, y, fixed, time, index) {
+  const unsettled = Math.sin(time * 3.4 + index * 1.3) > 0.12;
+  const lit = fixed || unsettled;
+
+  ctx.save();
+  ctx.strokeStyle = fixed ? "#50614f" : "#273d38";
+  ctx.lineWidth = 7;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x, y + 62);
+  ctx.lineTo(x, y - 10);
+  ctx.stroke();
+
+  ctx.fillStyle = fixed ? "#617057" : "#344c46";
+  roundedRect(ctx, x - 30, y - 24, 60, 34, 8);
+  ctx.fill();
+
+  ctx.fillStyle = fixed ? "rgba(184, 244, 150, 0.78)" : lit ? "rgba(255, 196, 100, 0.62)" : "rgba(143, 217, 240, 0.13)";
+  ctx.beginPath();
+  ctx.arc(x - 12, y - 7, 9, 0, Math.PI * 2);
+  ctx.arc(x + 12, y - 7, 9, 0, Math.PI * 2);
+  ctx.fill();
+
+  if (lit) {
+    warmGlow(ctx, x, y - 7, fixed ? 74 : 44, fixed ? 0.24 : 0.12);
+  }
+  ctx.restore();
+}
+
+function drawTunnelThreshold(ctx, x, groundY, fixed, time) {
+  ctx.save();
+  const gradient = ctx.createRadialGradient(x, groundY - 24, 70, x, groundY - 24, 340);
+  gradient.addColorStop(0, fixed ? "rgba(56, 76, 56, 0.62)" : "rgba(19, 49, 51, 0.56)");
+  gradient.addColorStop(0.7, "rgba(8, 20, 21, 0.26)");
+  gradient.addColorStop(1, "rgba(8, 20, 21, 0)");
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 18, 340, 60, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+
+  if (fixed) {
+    ctx.strokeStyle = "rgba(184, 244, 150, 0.34)";
+    ctx.lineWidth = 5;
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    ctx.moveTo(x - 220, groundY - 48);
+    ctx.bezierCurveTo(x - 90, groundY - 82, x + 90, groundY - 82, x + 220, groundY - 48);
+    ctx.stroke();
+  } else {
+    ctx.save();
+    ctx.globalCompositeOperation = "screen";
+    ctx.strokeStyle = `rgba(172, 218, 222, ${0.12 + Math.sin(time * 2.8) * 0.03})`;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.ellipse(x, groundY - 18, 226, 20, 0.02, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  ctx.restore();
+}
+
+function drawClockSignal(ctx, clock, time, powerLevel) {
+  const fixed = clock.fixed || clock.clockSynced || powerLevel > 0.95;
+  const x = clock.x;
+  const groundY = clock.groundY;
+  const pulse = fixed ? 0.5 + Math.sin(time * 4) * 0.5 : Math.max(0, Math.sin(time * 3.1));
+
+  ctx.save();
+  ctx.fillStyle = "rgba(18, 35, 34, 0.68)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 18, 470, 76, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+
+  drawClockSignalWoods(ctx, x, groundY, fixed, time);
+  drawSwitchyardRail(ctx, x - 380, groundY - 42, x + 380, groundY - 42, fixed);
+  drawClockSignalMast(ctx, x, groundY, fixed, time, pulse);
+  drawClockPulseWire(ctx, x - 260, groundY - 164, x - 72, groundY - 216, fixed, pulse);
+  drawClockPulseWire(ctx, x + 260, groundY - 164, x + 72, groundY - 216, fixed, pulse);
+  drawClockSignalLamp(ctx, x - 310, groundY - 112, fixed, time, 0);
+  drawClockSignalLamp(ctx, x + 310, groundY - 112, fixed, time, 1);
+  drawClockPlatform(ctx, x, groundY, fixed, time);
+
+  if (fixed) {
+    warmGlow(ctx, x, groundY - 230, 280, 0.26 + Math.sin(time * 3) * 0.04);
+  }
+
+  ctx.restore();
+}
+
+function drawClockSignalWoods(ctx, x, groundY, fixed, time) {
+  [
+    { dx: -540, h: 286, lift: 62, sway: 0.2 },
+    { dx: -450, h: 236, lift: 34, sway: 0.9 },
+    { dx: -356, h: 194, lift: 12, sway: 1.6 },
+    { dx: 540, h: 292, lift: 64, sway: 0.5 },
+    { dx: 450, h: 240, lift: 36, sway: 1.2 },
+    { dx: 356, h: 198, lift: 12, sway: 1.9 }
+  ].forEach((tree) => {
+    drawRailEdgePine(ctx, x + tree.dx, groundY - tree.lift, tree.h, fixed, time + tree.sway);
+  });
+  drawRailEdgeBrush(ctx, x - 390, groundY - 30, 310, fixed, time);
+  drawRailEdgeBrush(ctx, x + 390, groundY - 30, 310, fixed, time + 0.8);
+}
+
+function drawClockSignalMast(ctx, x, groundY, fixed, time, pulse) {
+  ctx.save();
+  ctx.fillStyle = fixed ? "#5f6b59" : "#344d46";
+  roundedRect(ctx, x - 38, groundY - 326, 76, 288, 12);
+  ctx.fill();
+
+  ctx.fillStyle = fixed ? "#71785f" : "#40564e";
+  roundedRect(ctx, x - 132, groundY - 404, 264, 122, 14);
+  ctx.fill();
+  ctx.fillStyle = "rgba(10, 20, 21, 0.66)";
+  roundedRect(ctx, x - 106, groundY - 382, 212, 82, 12);
+  ctx.fill();
+
+  const faceGlow = fixed ? 0.38 + pulse * 0.2 : 0.1 + Math.max(0, Math.sin(time * 2.5)) * 0.12;
+  ctx.fillStyle = fixed ? "rgba(226, 229, 172, 0.9)" : "rgba(143, 217, 240, 0.22)";
+  ctx.beginPath();
+  ctx.arc(x, groundY - 341, 36, 0, Math.PI * 2);
+  ctx.fill();
+  warmGlow(ctx, x, groundY - 341, 86, faceGlow);
+
+  ctx.strokeStyle = fixed ? "#4f523f" : "#263b38";
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.arc(x, groundY - 341, 36, 0, Math.PI * 2);
+  ctx.moveTo(x, groundY - 341);
+  ctx.lineTo(x + Math.cos(time * (fixed ? 1.6 : 2.8)) * 22, groundY - 341 + Math.sin(time * (fixed ? 1.6 : 2.8)) * 22);
+  ctx.moveTo(x, groundY - 341);
+  ctx.lineTo(x + Math.cos(time * (fixed ? 0.45 : 1.25) - 1.2) * 16, groundY - 341 + Math.sin(time * (fixed ? 0.45 : 1.25) - 1.2) * 16);
+  ctx.stroke();
+
+  ctx.fillStyle = fixed ? "rgba(184, 244, 150, 0.72)" : "rgba(255, 196, 100, 0.3)";
+  [-72, 72].forEach((offset, index) => {
+    const active = fixed || Math.sin(time * 3.4 + index) > 0.1;
+    ctx.fillStyle = active ? (fixed ? "rgba(184, 244, 150, 0.72)" : "rgba(255, 196, 100, 0.44)") : "rgba(143, 217, 240, 0.12)";
+    ctx.beginPath();
+    ctx.arc(x + offset, groundY - 338, 12, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  ctx.fillStyle = fixed ? "#626d57" : "#334a44";
+  roundedRect(ctx, x - 86, groundY - 92, 172, 54, 8);
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawClockPulseWire(ctx, x1, y1, x2, y2, fixed, pulse) {
+  ctx.save();
+  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.42)" : "rgba(92, 126, 123, 0.34)";
+  ctx.lineWidth = fixed ? 5 : 4;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.quadraticCurveTo((x1 + x2) / 2, y1 - 46, x2, y2);
+  ctx.stroke();
+
+  if (fixed) {
+    ctx.globalCompositeOperation = "screen";
+    ctx.strokeStyle = `rgba(216, 244, 157, ${0.14 + pulse * 0.22})`;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.quadraticCurveTo((x1 + x2) / 2, y1 - 46, x2, y2);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawClockSignalLamp(ctx, x, y, fixed, time, index) {
+  const lit = fixed || Math.sin(time * 3.2 + index * 1.7) > 0.2;
+  ctx.save();
+  ctx.strokeStyle = fixed ? "#50614f" : "#273d38";
+  ctx.lineWidth = 8;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x, y + 70);
+  ctx.lineTo(x, y - 76);
+  ctx.stroke();
+
+  ctx.fillStyle = fixed ? "#617057" : "#344c46";
+  roundedRect(ctx, x - 34, y - 84, 68, 38, 8);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "rgba(184, 244, 150, 0.78)" : lit ? "rgba(255, 196, 100, 0.58)" : "rgba(143, 217, 240, 0.13)";
+  ctx.beginPath();
+  ctx.arc(x - 14, y - 64, 10, 0, Math.PI * 2);
+  ctx.arc(x + 14, y - 64, 10, 0, Math.PI * 2);
+  ctx.fill();
+  if (lit) {
+    warmGlow(ctx, x, y - 64, fixed ? 74 : 46, fixed ? 0.24 : 0.12);
+  }
+  ctx.restore();
+}
+
+function drawClockPlatform(ctx, x, groundY, fixed, time) {
+  ctx.save();
+  ctx.fillStyle = fixed ? "rgba(72, 82, 58, 0.72)" : "rgba(34, 54, 49, 0.76)";
+  roundedRect(ctx, x - 235, groundY - 64, 470, 42, 12);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(226, 218, 159, 0.18)" : `rgba(172, 218, 222, ${0.11 + Math.sin(time * 2.6) * 0.02})`;
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(x - 210, groundY - 58);
+  ctx.bezierCurveTo(x - 80, groundY - 76, x + 80, groundY - 76, x + 210, groundY - 58);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawLastPlatform(ctx, platform, time, powerLevel) {
+  const fixed = platform.fixed || platform.platformLit || powerLevel > 0.95;
+  const x = platform.x;
+  const groundY = platform.groundY;
+
+  ctx.save();
+  ctx.fillStyle = "rgba(18, 35, 34, 0.68)";
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 18, 480, 76, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+
+  drawLastPlatformWoods(ctx, x, groundY, fixed, time);
+  drawSwitchyardRail(ctx, x - 390, groundY - 44, x + 186, groundY - 44, fixed);
+  drawLastPlatformShelter(ctx, x - 70, groundY, fixed, time);
+  drawEndOfLineStop(ctx, x + 260, groundY - 44, fixed);
+  drawHillRoadMarker(ctx, x + 345, groundY - 112, fixed, time);
+  drawLastPlatformLamp(ctx, x + 105, groundY - 194, fixed, time);
+  drawHillRoadGlow(ctx, x + 420, groundY - 80, fixed, time);
+
+  if (fixed) {
+    warmGlow(ctx, x + 105, groundY - 220, 260, 0.28 + Math.sin(time * 3) * 0.04);
+  }
+
+  ctx.restore();
+}
+
+function drawLastPlatformWoods(ctx, x, groundY, fixed, time) {
+  [
+    { dx: -548, h: 288, lift: 64, sway: 0.1 },
+    { dx: -452, h: 238, lift: 36, sway: 0.8 },
+    { dx: -354, h: 196, lift: 14, sway: 1.5 },
+    { dx: 570, h: 302, lift: 70, sway: 0.4 },
+    { dx: 478, h: 248, lift: 42, sway: 1.1 },
+    { dx: 384, h: 204, lift: 18, sway: 1.8 }
+  ].forEach((tree) => {
+    drawRailEdgePine(ctx, x + tree.dx, groundY - tree.lift, tree.h, fixed, time + tree.sway);
+  });
+  drawRailEdgeBrush(ctx, x - 390, groundY - 30, 310, fixed, time);
+  drawRailEdgeBrush(ctx, x + 410, groundY - 30, 330, fixed, time + 0.8);
+}
+
+function drawLastPlatformShelter(ctx, x, groundY, fixed, time) {
+  ctx.save();
+  ctx.fillStyle = fixed ? "#5f6b59" : "#344d46";
+  roundedRect(ctx, x - 210, groundY - 172, 420, 116, 12);
+  ctx.fill();
+
+  ctx.fillStyle = fixed ? "#72785f" : "#40564e";
+  ctx.beginPath();
+  ctx.moveTo(x - 238, groundY - 172);
+  ctx.lineTo(x - 160, groundY - 238);
+  ctx.lineTo(x + 178, groundY - 238);
+  ctx.lineTo(x + 238, groundY - 172);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = "rgba(16, 28, 28, 0.7)";
+  roundedRect(ctx, x - 172, groundY - 142, 118, 58, 8);
+  roundedRect(ctx, x + 42, groundY - 142, 118, 58, 8);
+  ctx.fill();
+
+  ctx.fillStyle = fixed ? "rgba(226, 229, 172, 0.42)" : "rgba(143, 217, 240, 0.1)";
+  roundedRect(ctx, x - 44, groundY - 128, 78, 72, 8);
+  ctx.fill();
+
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  ctx.strokeStyle = fixed ? "rgba(226, 218, 159, 0.18)" : `rgba(172, 218, 222, ${0.1 + Math.sin(time * 2.6) * 0.02})`;
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(x - 222, groundY - 170);
+  ctx.lineTo(x + 218, groundY - 172);
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.fillStyle = fixed ? "rgba(72, 82, 58, 0.74)" : "rgba(34, 54, 49, 0.78)";
+  roundedRect(ctx, x - 260, groundY - 64, 520, 42, 12);
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawEndOfLineStop(ctx, x, y, fixed) {
+  ctx.save();
+  ctx.strokeStyle = fixed ? "#6a674f" : "#394f49";
+  ctx.lineWidth = 12;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 34, y - 42);
+  ctx.lineTo(x + 34, y + 42);
+  ctx.moveTo(x + 34, y - 42);
+  ctx.lineTo(x - 34, y + 42);
+  ctx.stroke();
+  ctx.fillStyle = fixed ? "rgba(216, 194, 126, 0.26)" : "rgba(143, 217, 240, 0.1)";
+  ctx.beginPath();
+  ctx.ellipse(x, y + 54, 76, 16, 0.04, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawHillRoadMarker(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.strokeStyle = fixed ? "#586654" : "#2d443f";
+  ctx.lineWidth = 8;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x, y + 88);
+  ctx.lineTo(x, y - 60);
+  ctx.stroke();
+
+  ctx.fillStyle = fixed ? "#6f765d" : "#3a514a";
+  roundedRect(ctx, x - 46, y - 70, 92, 46, 8);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "rgba(184, 244, 150, 0.72)" : "rgba(143, 217, 240, 0.12)";
+  ctx.beginPath();
+  ctx.arc(x, y - 48, 15, 0, Math.PI * 2);
+  ctx.fill();
+  if (fixed) {
+    warmGlow(ctx, x, y - 48, 82, 0.24 + Math.sin(time * 3) * 0.04);
+  }
+  ctx.restore();
+}
+
+function drawLastPlatformLamp(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.strokeStyle = fixed ? "#5b674f" : "#2f463f";
+  ctx.lineWidth = 8;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x, y + 138);
+  ctx.lineTo(x, y - 22);
+  ctx.stroke();
+
+  ctx.fillStyle = fixed ? "#67725a" : "#374f48";
+  roundedRect(ctx, x - 38, y - 36, 76, 44, 10);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "rgba(184, 244, 150, 0.78)" : "rgba(143, 217, 240, 0.14)";
+  ctx.beginPath();
+  ctx.arc(x - 14, y - 14, 11, 0, Math.PI * 2);
+  ctx.arc(x + 14, y - 14, 11, 0, Math.PI * 2);
+  ctx.fill();
+  if (fixed) {
+    warmGlow(ctx, x, y - 14, 98, 0.32 + Math.sin(time * 3) * 0.04);
+  }
+  ctx.restore();
+}
+
+function drawHillRoadGlow(ctx, x, groundY, fixed, time) {
+  ctx.save();
+  ctx.strokeStyle = fixed ? "rgba(184, 244, 150, 0.34)" : `rgba(172, 218, 222, ${0.1 + Math.sin(time * 2.6) * 0.02})`;
+  ctx.lineWidth = fixed ? 6 : 3;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 190, groundY + 28);
+  ctx.bezierCurveTo(x - 70, groundY - 20, x + 58, groundY - 80, x + 190, groundY - 134);
+  ctx.stroke();
+  if (fixed) {
+    ctx.fillStyle = "rgba(184, 244, 150, 0.16)";
+    ctx.beginPath();
+    ctx.ellipse(x + 110, groundY - 92, 150, 22, -0.32, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawRailCrossingBackdrop(ctx, x, groundY, fixed, time) {
+  ctx.save();
+  drawWoodedRailEdges(ctx, x, groundY, fixed, time);
+  drawLowRailFence(ctx, x - 380, groundY - 126, 260, -0.08, fixed);
+  drawLowRailFence(ctx, x + 136, groundY - 122, 286, 0.08, fixed);
+  drawCrossingWarningLamp(ctx, x - 390, groundY - 78, fixed, time);
+  drawCrossingWarningLamp(ctx, x + 384, groundY - 82, fixed, time + 0.7);
+  drawMosslineUtilitySilhouette(ctx, x - 508, groundY - 104, fixed, time);
+  drawMosslineUtilitySilhouette(ctx, x + 512, groundY - 112, fixed, time + 0.6);
+  ctx.restore();
+}
+
+function drawWoodedRailEdges(ctx, x, groundY, fixed, time) {
+  const leftTrees = [
+    { dx: -650, h: 292, lift: 56, sway: 0.2 },
+    { dx: -580, h: 250, lift: 36, sway: 0 },
+    { dx: -506, h: 220, lift: 22, sway: 0.8 },
+    { dx: -430, h: 198, lift: 12, sway: 1.2 },
+    { dx: -342, h: 172, lift: 2, sway: 1.8 },
+    { dx: -254, h: 138, lift: -8, sway: 2.4 }
+  ];
+  const rightTrees = [
+    { dx: 660, h: 300, lift: 58, sway: 0.5 },
+    { dx: 584, h: 258, lift: 40, sway: 0.4 },
+    { dx: 504, h: 230, lift: 24, sway: 1.1 },
+    { dx: 420, h: 202, lift: 12, sway: 1.7 },
+    { dx: 334, h: 176, lift: 2, sway: 2.2 },
+    { dx: 246, h: 142, lift: -8, sway: 2.8 }
+  ];
+
+  ctx.save();
+  [...leftTrees, ...rightTrees].forEach((tree) => {
+    drawRailEdgePine(ctx, x + tree.dx, groundY - tree.lift, tree.h, fixed, time + tree.sway);
+  });
+  drawRailEdgeBrush(ctx, x - 390, groundY - 28, 310, fixed, time);
+  drawRailEdgeBrush(ctx, x + 390, groundY - 28, 330, fixed, time + 0.9);
+  ctx.restore();
+}
+
+function drawRailEdgePine(ctx, x, groundY, height, fixed, time) {
+  const pineImage = sprites.world.pine;
+  if (imageReady(pineImage)) {
+    ctx.save();
+    ctx.globalAlpha = 0.74;
+    ctx.filter = fixed ? "brightness(0.6) saturate(0.85)" : "brightness(0.52) saturate(0.78)";
+    drawWorldSprite(ctx, pineImage, x + Math.sin(time * 0.7) * 1.5, groundY, height);
+    ctx.filter = "none";
+    ctx.restore();
+    return;
+  }
+
+  ctx.save();
+  ctx.translate(x, groundY);
+  ctx.fillStyle = "rgba(23, 45, 39, 0.82)";
+  ctx.beginPath();
+  ctx.moveTo(0, -height);
+  ctx.lineTo(-height * 0.22, -height * 0.2);
+  ctx.lineTo(height * 0.22, -height * 0.2);
+  ctx.closePath();
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawRailEdgeBrush(ctx, x, y, width, fixed, time) {
+  ctx.save();
+  for (let i = 0; i < 9; i += 1) {
+    const px = x - width / 2 + i * (width / 8);
+    const py = y + Math.sin(time + i) * 4;
+    ctx.fillStyle = fixed ? "rgba(54, 82, 54, 0.76)" : "rgba(26, 63, 52, 0.8)";
+    ctx.beginPath();
+    ctx.ellipse(px, py, 42 + (i % 3) * 8, 18 + (i % 2) * 5, -0.08, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "rgba(10, 26, 25, 0.28)";
+    ctx.beginPath();
+    ctx.ellipse(px + 8, py + 10, 38, 10, 0.04, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawLowRailFence(ctx, x, y, width, tilt, fixed) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(tilt);
+  ctx.strokeStyle = fixed ? "rgba(111, 122, 94, 0.62)" : "rgba(49, 68, 62, 0.7)";
+  ctx.lineWidth = 8;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(width, -12);
+  ctx.moveTo(8, 26);
+  ctx.lineTo(width - 8, 14);
+  ctx.stroke();
+
+  ctx.strokeStyle = fixed ? "rgba(177, 161, 106, 0.26)" : "rgba(143, 217, 240, 0.12)";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(18, -2);
+  ctx.lineTo(width - 16, -13);
+  ctx.stroke();
+
+  for (let post = 20; post < width; post += 70) {
+    ctx.fillStyle = fixed ? "#57634f" : "#2f463f";
+    roundedRect(ctx, post - 7, -18, 14, 62, 5);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawCrossingWarningLamp(ctx, x, y, fixed, time) {
+  const lit = fixed || Math.sin(time * 3.6) > 0.2;
+  ctx.save();
+  ctx.strokeStyle = "#263831";
+  ctx.lineWidth = 8;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x, y + 50);
+  ctx.lineTo(x, y - 70);
+  ctx.stroke();
+
+  ctx.fillStyle = "#384f45";
+  roundedRect(ctx, x - 34, y - 78, 68, 36, 8);
+  ctx.fill();
+  ctx.fillStyle = lit ? "rgba(255, 209, 118, 0.76)" : "rgba(143, 217, 240, 0.18)";
+  ctx.beginPath();
+  ctx.arc(x - 14, y - 60, 10, 0, Math.PI * 2);
+  ctx.arc(x + 14, y - 60, 10, 0, Math.PI * 2);
+  ctx.fill();
+  if (lit) {
+    warmGlow(ctx, x, y - 60, 60, fixed ? 0.2 : 0.12);
+  }
+  ctx.restore();
+}
+
+function drawMosslineUtilitySilhouette(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.strokeStyle = "rgba(25, 38, 34, 0.72)";
+  ctx.lineWidth = 10;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x, y + 88);
+  ctx.lineTo(x, y - 84);
+  ctx.moveTo(x - 52, y - 38);
+  ctx.lineTo(x + 52, y - 52);
+  ctx.stroke();
+
+  ctx.strokeStyle = fixed ? "rgba(216, 194, 126, 0.22)" : "rgba(120, 156, 158, 0.18)";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(x - 52, y - 38);
+  ctx.quadraticCurveTo(x, y - 18 + Math.sin(time) * 2, x + 52, y - 52);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawCrossingPlanks(ctx, x, groundY, fixed, time) {
+  ctx.save();
+  ctx.translate(x - 12, groundY - 42);
+  ctx.rotate(-0.06);
+  const plankColor = fixed ? "#6a6048" : "#3f5048";
+  for (let i = -2; i <= 2; i += 1) {
+    const y = i * 19;
+    ctx.fillStyle = plankColor;
+    roundedRect(ctx, -142, y - 8, 284, 14, 4);
+    ctx.fill();
+    ctx.strokeStyle = "rgba(20, 31, 29, 0.5)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(-126, y - 2);
+    ctx.lineTo(126, y - 7 + Math.sin(time + i) * 0.8);
+    ctx.stroke();
+  }
+
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  ctx.strokeStyle = fixed ? "rgba(238, 215, 151, 0.22)" : "rgba(189, 238, 230, 0.16)";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(-128, -32);
+  ctx.quadraticCurveTo(-8, -50, 118, -28);
+  ctx.stroke();
+  ctx.restore();
+
+  if (fixed) {
+    ctx.fillStyle = "rgba(216, 194, 126, 0.32)";
+    ctx.beginPath();
+    ctx.ellipse(0, 46, 154, 16, 0.02, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.restore();
+}
+
+function drawWetRailBed(ctx, x, groundY, fixed, time) {
+  if (imageReady(sprites.world.rainSlickPuddle)) {
+    drawPaintedRailCrossing(ctx, x, groundY, fixed, time);
+    return;
+  }
+
+  ctx.save();
+  const water = ctx.createRadialGradient(x, groundY - 22, 80, x, groundY - 22, 440);
+  water.addColorStop(0, fixed ? "rgba(52, 72, 60, 0.52)" : "rgba(35, 83, 91, 0.68)");
+  water.addColorStop(0.72, fixed ? "rgba(26, 45, 38, 0.5)" : "rgba(13, 47, 54, 0.58)");
+  water.addColorStop(1, "rgba(7, 20, 22, 0.08)");
+  ctx.fillStyle = water;
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 18, 430, 78, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+
+  drawCurvedTrack(ctx, x - 360, groundY - 42, x + 360, groundY - 42, fixed, time);
+
+  ctx.strokeStyle = fixed ? "rgba(216, 194, 126, 0.5)" : "rgba(143, 217, 240, 0.2)";
+  ctx.lineWidth = fixed ? 10 : 4;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 312, groundY - 28);
+  ctx.bezierCurveTo(x - 138, groundY - 80, x + 138, groundY - 78, x + 312, groundY - 28);
+  ctx.stroke();
+
+  if (!fixed) {
+    ctx.save();
+    ctx.globalCompositeOperation = "screen";
+    ctx.strokeStyle = `rgba(189, 238, 230, ${0.24 + Math.sin(time * 2.8) * 0.05})`;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.ellipse(x - 70 + Math.sin(time) * 4, groundY - 18, 226, 24, 0.02, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  ctx.restore();
+}
+
+function drawPaintedRailCrossing(ctx, x, groundY, fixed, time) {
+  ctx.save();
+
+  const shadow = ctx.createRadialGradient(x, groundY - 18, 80, x, groundY - 18, 520);
+  shadow.addColorStop(0, "rgba(8, 18, 18, 0.54)");
+  shadow.addColorStop(0.72, "rgba(8, 18, 18, 0.28)");
+  shadow.addColorStop(1, "rgba(8, 18, 18, 0)");
+  ctx.fillStyle = shadow;
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 12, 500, 72, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.globalAlpha = fixed ? 0.24 : 0.34;
+  drawWorldSprite(ctx, sprites.world.rainSlickPuddle, x - 6, groundY + 32, 160);
+  ctx.globalAlpha = 1;
+
+  drawPaintedTrackLine(ctx, x, groundY - 46, fixed, time, -1);
+  drawPaintedTrackLine(ctx, x, groundY - 12, fixed, time + 0.4, 1);
+  drawPaintedCrossingBoards(ctx, x, groundY, fixed, time);
+  drawRailSpriteGrounding(ctx, x, groundY, fixed, time);
+
+  if (!fixed) {
+    ctx.save();
+    ctx.globalCompositeOperation = "screen";
+    ctx.strokeStyle = `rgba(189, 238, 230, ${0.22 + Math.sin(time * 2.8) * 0.05})`;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.ellipse(x - 42 + Math.sin(time) * 4, groundY - 18, 230, 24, 0.02, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+  } else {
+    ctx.strokeStyle = "rgba(216, 194, 126, 0.48)";
+    ctx.lineWidth = 10;
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    ctx.moveTo(x - 238, groundY - 36);
+    ctx.bezierCurveTo(x - 112, groundY - 72, x + 112, groundY - 72, x + 238, groundY - 36);
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+function drawRailSpriteGrounding(ctx, x, groundY, fixed, time) {
+  ctx.save();
+  ctx.globalCompositeOperation = "source-over";
+
+  const mud = ctx.createLinearGradient(0, groundY - 72, 0, groundY + 36);
+  mud.addColorStop(0, "rgba(16, 34, 32, 0)");
+  mud.addColorStop(0.52, "rgba(16, 34, 32, 0.36)");
+  mud.addColorStop(1, "rgba(9, 20, 20, 0.64)");
+  ctx.fillStyle = mud;
+  ctx.beginPath();
+  ctx.ellipse(x - 20, groundY - 2, 430, 58, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+
+  const mossColor = fixed ? "rgba(62, 82, 54, 0.78)" : "rgba(34, 64, 54, 0.78)";
+  ctx.fillStyle = mossColor;
+  for (let i = 0; i < 9; i += 1) {
+    const offset = -360 + i * 90;
+    const y = groundY - 38 + Math.sin(time * 0.7 + i) * 2;
+    ctx.beginPath();
+    ctx.ellipse(x + offset, y + (i % 2) * 16, 58 - (i % 3) * 8, 14 + (i % 2) * 3, -0.08, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  ctx.strokeStyle = fixed ? "rgba(238, 215, 151, 0.16)" : "rgba(189, 238, 230, 0.12)";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(x - 370, groundY - 64);
+  ctx.bezierCurveTo(x - 180, groundY - 36, x + 152, groundY - 86, x + 360, groundY - 52);
+  ctx.stroke();
+  ctx.restore();
+
+  if (fixed) {
+    ctx.fillStyle = "rgba(216, 194, 126, 0.22)";
+    ctx.beginPath();
+    ctx.ellipse(x, groundY - 24, 260, 15, 0.02, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.restore();
+}
+
+function drawPaintedTrackLine(ctx, x, y, fixed, time, side) {
+  ctx.save();
+  ctx.lineCap = "round";
+  ctx.strokeStyle = "rgba(21, 31, 31, 0.72)";
+  ctx.lineWidth = 11;
+  ctx.beginPath();
+  ctx.moveTo(x - 420, y + side * 4);
+  ctx.bezierCurveTo(x - 230, y - 16, x + 230, y - 16, x + 420, y + side * 3);
+  ctx.stroke();
+
+  ctx.strokeStyle = fixed ? "rgba(131, 133, 106, 0.58)" : "rgba(70, 87, 84, 0.58)";
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.moveTo(x - 410, y + side * 3);
+  ctx.bezierCurveTo(x - 220, y - 12, x + 220, y - 12, x + 410, y + side * 2);
+  ctx.stroke();
+
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  ctx.strokeStyle = fixed ? "rgba(210, 194, 139, 0.18)" : `rgba(172, 218, 222, ${0.14 + Math.sin(time * 2.4) * 0.03})`;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(x - 392, y - 3);
+  ctx.bezierCurveTo(x - 180, y - 17, x + 184, y - 17, x + 392, y - 2);
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.restore();
+}
+
+function drawPaintedCrossingBoards(ctx, x, groundY, fixed, time) {
+  ctx.save();
+  ctx.translate(x - 8, groundY - 34);
+  ctx.rotate(-0.015);
+
+  const boards = [-118, -78, -38, 2, 42, 82, 122];
+  boards.forEach((offset, index) => {
+    const width = 34 + (index % 2) * 5;
+    const height = 128 - Math.abs(index - 3) * 5;
+    ctx.fillStyle = fixed ? "rgba(88, 83, 62, 0.74)" : "rgba(48, 62, 56, 0.78)";
+    roundedRect(ctx, offset - width / 2, -height / 2, width, height, 5);
+    ctx.fill();
+    ctx.strokeStyle = "rgba(13, 24, 23, 0.38)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(offset - width * 0.25, -height * 0.38);
+    ctx.lineTo(offset - width * 0.1, height * 0.38 + Math.sin(time + index) * 1);
+    ctx.stroke();
+  });
+
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  ctx.strokeStyle = fixed ? "rgba(230, 204, 141, 0.18)" : "rgba(175, 220, 222, 0.12)";
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(-130, -52);
+  ctx.quadraticCurveTo(0, -68, 130, -48);
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.restore();
+}
+
+function drawCurvedTrack(ctx, startX, startY, endX, endY, fixed, time) {
+  ctx.save();
+  const railColor = fixed ? "rgba(165, 151, 107, 0.78)" : "rgba(88, 104, 98, 0.72)";
+  const shineColor = fixed ? "rgba(238, 215, 151, 0.32)" : `rgba(189, 238, 230, ${0.3 + Math.sin(time * 3) * 0.05})`;
+
+  ctx.strokeStyle = railColor;
+  ctx.lineWidth = 6;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(startX, startY - 9);
+  ctx.bezierCurveTo(startX + 190, startY - 56, endX - 190, endY - 56, endX, endY - 9);
+  ctx.moveTo(startX, startY + 15);
+  ctx.bezierCurveTo(startX + 190, startY - 30, endX - 190, endY - 30, endX, endY + 15);
+  ctx.stroke();
+
+  ctx.globalCompositeOperation = "screen";
+  ctx.strokeStyle = shineColor;
+  ctx.lineWidth = fixed ? 2 : 3;
+  ctx.beginPath();
+  ctx.moveTo(startX + 28, startY - 13);
+  ctx.bezierCurveTo(startX + 210, startY - 48, endX - 210, endY - 48, endX - 28, endY - 13);
+  ctx.stroke();
+
+  ctx.globalCompositeOperation = "source-over";
+  ctx.strokeStyle = fixed ? "rgba(77, 65, 44, 0.5)" : "rgba(22, 35, 32, 0.62)";
+  ctx.lineWidth = 5;
+  for (let i = 0; i < 9; i += 1) {
+    const t = i / 8;
+    const px = startX + (endX - startX) * t;
+    const py = startY + 8 - Math.sin(t * Math.PI) * 42;
+    ctx.beginPath();
+    ctx.moveTo(px - 18, py - 18);
+    ctx.lineTo(px + 18, py + 18);
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+function drawSandValve(ctx, x, y, fixed, time, side) {
+  if (imageReady(sprites.world.rainSlickSandValve)) {
+    ctx.save();
+    const bob = Math.sin(time * 1.2) * (fixed ? 0.5 : 1);
+    ctx.globalAlpha = fixed ? 0.96 : 0.82;
+    drawWorldSprite(ctx, sprites.world.rainSlickSandValve, x, y + 112 + bob, 156);
+    if (fixed) {
+      ctx.fillStyle = "rgba(216, 194, 126, 0.42)";
+      ctx.beginPath();
+      ctx.ellipse(x + side * 18, y + 94, 48, 11, side * -0.08, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+    return;
+  }
+
+  ctx.save();
+  ctx.translate(x, y);
+
+  ctx.strokeStyle = fixed ? "#7b8467" : "#42564d";
+  ctx.lineWidth = 12;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(0, 46);
+  ctx.lineTo(0, -34);
+  ctx.stroke();
+
+  ctx.fillStyle = fixed ? "#68735d" : "#354b44";
+  roundedRect(ctx, -34, 30, 68, 28, 9);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "#758066" : "#40564d";
+  ctx.beginPath();
+  ctx.moveTo(-28, 28);
+  ctx.lineTo(0, -6);
+  ctx.lineTo(28, 28);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.strokeStyle = fixed ? "rgba(226, 198, 121, 0.82)" : "rgba(110, 126, 108, 0.8)";
+  ctx.lineWidth = 6;
+  ctx.beginPath();
+  ctx.arc(0, -48, 31, 0, Math.PI * 2);
+  for (let i = 0; i < 6; i += 1) {
+    const angle = (Math.PI * 2 * i) / 6 + (fixed ? 0.18 : Math.sin(time * 0.8) * 0.04);
+    ctx.moveTo(Math.cos(angle) * 9, -48 + Math.sin(angle) * 9);
+    ctx.lineTo(Math.cos(angle) * 28, -48 + Math.sin(angle) * 28);
+  }
+  ctx.stroke();
+
+  ctx.fillStyle = fixed ? "rgba(225, 199, 122, 0.56)" : "rgba(143, 217, 240, 0.12)";
+  ctx.beginPath();
+  ctx.arc(0, -48, 9 + Math.sin(time * 4) * (fixed ? 1 : 0), 0, Math.PI * 2);
+  ctx.fill();
+
+  if (fixed) {
+    ctx.fillStyle = "rgba(216, 194, 126, 0.5)";
+    ctx.beginPath();
+    ctx.ellipse(side * 32, 38, 52, 13, side * -0.08, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  ctx.restore();
+}
+
+function drawSandPipe(ctx, fromX, fromY, toX, toY, fixed, time) {
+  ctx.save();
+  ctx.strokeStyle = fixed ? "rgba(185, 154, 91, 0.64)" : "rgba(84, 101, 91, 0.62)";
+  ctx.lineWidth = fixed ? 7 : 5;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(fromX, fromY + 36);
+  ctx.quadraticCurveTo((fromX + toX) / 2, fromY + 68 + Math.sin(time * 2) * 2, toX, toY);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawRailPathCheck(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.58)" : "rgba(143, 217, 240, 0.12)";
+  ctx.beginPath();
+  ctx.arc(x, y, 13 + Math.sin(time * 4) * (fixed ? 1.2 : 0), 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.5)" : "rgba(70, 91, 84, 0.48)";
+  ctx.lineWidth = 4;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 212, y + 18);
+  ctx.bezierCurveTo(x - 96, y - 22, x + 96, y - 22, x + 212, y + 18);
+  ctx.stroke();
   ctx.restore();
 }
 
@@ -2387,6 +3480,12 @@ function drawBakeryGutter(ctx, bakery, time, powerLevel) {
   const width = bakery.awningWidth;
   const left = x - width / 2;
   const right = x + width / 2;
+  const awningY = groundY - 210;
+
+  if (imageReady(sprites.world.bakery)) {
+    drawPaintedBakeryGutter(ctx, bakery, time, powerLevel, fixed, x, groundY, left, right, awningY);
+    return;
+  }
 
   ctx.save();
   ctx.fillStyle = "#634936";
@@ -2416,7 +3515,6 @@ function drawBakeryGutter(ctx, bakery, time, powerLevel) {
   ctx.arc(x + 22, groundY - 56, 5, 0, Math.PI * 2);
   ctx.fill();
 
-  const awningY = groundY - 210;
   ctx.fillStyle = "#805548";
   roundedRect(ctx, left, awningY, width, 62, 16);
   ctx.fill();
@@ -2452,6 +3550,20 @@ function drawBakeryGutter(ctx, bakery, time, powerLevel) {
 
   drawRainBarrelShape(ctx, bakery.barrelX, groundY, fixed, time);
   warmGlow(ctx, x, groundY - 164, 170, fixed ? 0.42 : 0.2);
+  ctx.restore();
+}
+
+function drawPaintedBakeryGutter(ctx, bakery, time, powerLevel, fixed, x, groundY, left, right, awningY) {
+  ctx.save();
+
+  const height = bakery.spriteHeight ?? 500;
+  ctx.filter = "brightness(0.78) saturate(0.92)";
+  drawWorldSprite(ctx, sprites.world.bakery, x - 26, groundY + 42, height);
+  ctx.filter = "none";
+
+  const windowGlow = fixed ? 0.5 + Math.sin(time * 3) * 0.05 : 0.26 + powerLevel * 0.12;
+  warmGlow(ctx, x + 70, groundY - 182, 210, windowGlow);
+  warmGlow(ctx, x - 178, groundY - 235, 110, windowGlow * 0.72);
   ctx.restore();
 }
 

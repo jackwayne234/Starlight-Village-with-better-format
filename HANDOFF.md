@@ -84,17 +84,23 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Sparking Relay Shed became bespoke on `2026-06-22`: it now uses a painted PNG shed sprite derived from the existing workshop-shed art, with wet board, sparks, puddles, calmed/repaired power state, route checks, and a chunk note in `chunks/62-sparking-relay-shed-scene.md`.
 - Robot direction polish on `2026-06-22`: the robot now has mirrored left-facing idle/scan sprites, follows the player's travel side, and uses a short lifted behind-the-player side-swap so it no longer cuts across in front of the player.
 - Chapter repair label polish on `2026-06-22`: the top-left HUD now uses a warm V1-inspired two-line label driven by `fullGameCatalog.js`, showing chapter/region plus scene-local chapter progress like `Sparking Relay Shed - Repair 6 of 10`; see `chunks/63-chapter-repair-label.md`.
+- Rain-Slick Rails became bespoke on `2026-06-22`: it now reads as a wooded rail cut with dense flanking pines, subdued painted rails, project sprites for the puddle and sand-valve wheels, plus low fence rails, warning lamps, Mossline utility silhouettes, wet rail shine, sand pipes, a visible sanded/repaired rail path, route checks, and a chunk note in `chunks/64-rain-slick-rails-scene.md`.
+- Cross-scene tree density landed on `2026-06-22`: `src/scenes/treeDensity.js` adds deterministic extra background pines through `createScene()` so every non-opening route scene inherits the richer woods treatment without touching puzzle or route data; see `chunks/65-cross-scene-tree-density.md`.
+- Bakery Gutter bakery sprite landed on `2026-06-22`: `assets/sprites/world/bakery-painted.png` is now the main bakery landmark, the extra cottages were removed from the Bakery Gutter scene, and the old canvas bakery remains as a renderer fallback; see `chunks/66-bakery-gutter-bakery-sprite.md`.
+- Tunnel Mouth became bespoke on `2026-06-22`: it now has a wet stone tunnel portal, warning-lamp sequence, dense flanking woods, no placeholder prop clutter, safe green repaired state, route checks, and a chunk note in `chunks/67-tunnel-mouth-scene.md`.
+- Clock Signal became bespoke on `2026-06-22`: it now has a wet station clock, pulse wires, rail signal lamps, dense flanking woods, synced green repaired state, route checks, and a chunk note in `chunks/68-clock-signal-scene.md`.
+- Last Platform became bespoke on `2026-06-22`: it now has a final platform shelter, end-of-line track stop, hill-road lamp, dense flanking woods, lit/open repaired state, route checks, and a chunk note in `chunks/69-last-platform-scene.md`.
 - Local preview verification used `http://127.0.0.1:5208/` most recently because earlier preview ports were occupied or unavailable.
 
 ## Suggested Next Step
 
 Continue the one-scene-at-a-time plan without stopping for approval between scenes.
 
-Chunk 64 should continue Mossline Switchyard polish.
+Chunk 70 should continue Stormedge Rise polish.
 
-Polish `chapter-three/rain-slick-rails`:
+Polish `chapter-four/weather-vane-roof`:
 
-1. Add bespoke rain-slick rails with sand valves, wet track shine, and a clear rail path.
-2. Make completion visibly sand or dry the rails so they read usable.
-3. Preview it with `?scene=chapter-three/rain-slick-rails&preview=1`.
-4. Leave `chapter-three/tunnel-mouth` as the next route stop.
+1. Use `chapter-four/stormedge-rise` as the existing hand-built chapter landmark and start with the next placeholder scene.
+2. Add a roof/vane silhouette and wind-channel repaired state.
+3. Preview it with `?scene=chapter-four/weather-vane-roof&preview=1`.
+4. Leave `chapter-four/cliff-rope-lift` as the next route stop.

@@ -53,3 +53,9 @@ High-level list only. All details live inside each chunk file.
 | 61 | Crane Hook Yard Scene | complete |
 | 62 | Sparking Relay Shed Scene | complete |
 | 63 | Chapter Repair Label | complete |
+| 64 | Rain-Slick Rails Scene | complete |
+| 65 | Cross-Scene Tree Density | complete |
+| 66 | Bakery Gutter Bakery Sprite | complete |
+| 67 | Tunnel Mouth Scene | complete |
+| 68 | Clock Signal Scene | complete |
+| 69 | Last Platform Scene | complete |

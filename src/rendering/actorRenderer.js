@@ -64,7 +64,6 @@ function pickPlayerFrame(player, time) {
 function drawRobot(ctx, robot, time) {
   const celebrating = robot.pose === "celebrate";
   const active = robot.pose === "scan" || robot.pose === "route" || celebrating;
-  const hover = Math.sin(time * (celebrating ? 5.4 : 2.6)) * (celebrating ? 12 : 8);
   const facingLeft = robot.facing < 0;
   const image = active
     ? facingLeft ? sprites.robot.scanLeft : sprites.robot.scan
@@ -77,7 +76,7 @@ function drawRobot(ctx, robot, time) {
   }
 
   ctx.save();
-  ctx.translate(robot.x, robot.y + hover);
+  ctx.translate(robot.x, robot.y);
 
   // Glow halo behind the robot, brighter when it is working. Sized off the
   // robot so the halo stays tight as the sprite scales.
@@ -226,12 +225,11 @@ function drawLantern(ctx, time) {
 
 function drawRobotVector(ctx, robot, time) {
   const celebrating = robot.pose === "celebrate";
-  const hover = Math.sin(time * (celebrating ? 5.4 : 2.6)) * (celebrating ? 12 : 8);
   const active = robot.pose === "scan" || robot.pose === "route" || celebrating;
   const pulse = celebrating ? 0.42 : active ? 0.34 : 0.22;
 
   ctx.save();
-  ctx.translate(robot.x, robot.y + hover);
+  ctx.translate(robot.x, robot.y);
   const glow = ctx.createRadialGradient(0, 0, 12, 0, 0, active ? 110 : 70);
   glow.addColorStop(0, `rgba(143, 217, 240, ${pulse})`);
   glow.addColorStop(1, "rgba(143, 217, 240, 0)");
