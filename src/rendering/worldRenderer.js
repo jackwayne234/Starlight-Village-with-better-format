@@ -3390,6 +3390,21 @@ function drawBellRopeCorner(ctx, corner, time, powerLevel) {
   const postRight = x + 118;
 
   ctx.save();
+  if (imageReady(sprites.world.bellRopeCorner)) {
+    ctx.save();
+    ctx.filter = fixed ? "brightness(0.9) saturate(1.02)" : "brightness(0.72) saturate(0.9)";
+    drawWorldSprite(ctx, sprites.world.bellRopeCorner, x, groundY + 42, 548);
+    ctx.restore();
+
+    if (fixed) {
+      warmGlow(ctx, x, groundY - 268, 108, 0.36 + Math.sin(time * 4) * 0.05);
+      drawBellRing(ctx, x, groundY - 250, time);
+    }
+
+    ctx.restore();
+    return;
+  }
+
   ctx.strokeStyle = "#4a352a";
   ctx.lineWidth = 13;
   ctx.lineCap = "round";

@@ -59,3 +59,5 @@ High-level list only. All details live inside each chunk file.
 | 67 | Tunnel Mouth Scene | complete |
 | 68 | Clock Signal Scene | complete |
 | 69 | Last Platform Scene | complete |
+| 70 | Full Route Sprite Backlog | complete |
+| 71 | Route Sprite Production Pass | complete |

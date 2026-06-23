@@ -25,10 +25,7 @@ export function createBellRopeCornerScene() {
       { x: 1560, y: 278, scale: 1.5 },
       { x: 2050, y: 296, scale: 1.42 }
     ],
-    cottages: [
-      { x: 420, y: 536, scale: 1.9, lit: true },
-      { x: 1765, y: 532, scale: 2.02, lit: false }
-    ],
+    cottages: [],
     foliage: [
       { kind: "rainyRocksReeds", x: 780, groundY: 660, height: 92, alpha: 0.72 },
       { kind: "rainyRocksReeds", x: 1470, groundY: 662, height: 100, alpha: 0.76 }
@@ -43,10 +40,7 @@ export function createBellRopeCornerScene() {
       { x: 2050, y: 638, active: false }
     ],
     brokenBranches: [],
-    repairParts: [
-      { x: 900, y: 624, kind: "gear" },
-      { x: 1290, y: 626, kind: "coil" }
-    ],
+    repairParts: [],
     puddles: [
       { x: 380, y: 664, width: 128, height: 20 },
       { x: 1160, y: 662, width: 182, height: 22 },
@@ -67,6 +61,7 @@ export function createBellRopeCornerScene() {
       x: 1160,
       y: 540,
       radius: 245,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: bell rope snapped off the pulley.",

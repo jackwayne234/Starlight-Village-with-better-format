@@ -29,6 +29,7 @@ export const sprites = {
     waterWheel: loadImage(`${WORLD}/water-wheel-trimmed.png`),
     cottage: loadImage(`${WORLD}/cottage-trimmed.png`),
     bakery: loadImage(`${WORLD}/bakery-painted.png?v=painted-bakery`),
+    bellRopeCorner: loadImage(`${WORLD}/bell-rope-corner-painted.png?v=painted-bell-rope-corner`),
     tree: loadImage(`${WORLD}/tree-trimmed.png`),
     pine: loadImage(`${WORLD}/pine-tree-trimmed.png`),
     lamp: loadImage(`${WORLD}/lamp-trimmed.png`),
