@@ -18,14 +18,6 @@ export function createBogBridgeScene() {
     fixed: false,
     stonesRaised: false
   };
-  scene.paintedLandmark = {
-    sprite: "bogBridge",
-    state: scene.bogBridge,
-    x: 1160,
-    groundY: 674,
-    height: 500,
-    glow: { heightRatio: 0.47, radius: 170, fixedIntensity: 0.42, dimIntensity: 0.15, pulse: 0.06 }
-  };
   scene.layers = {
     trees: [
       { x: 55, y: 264, scale: 1.62 },

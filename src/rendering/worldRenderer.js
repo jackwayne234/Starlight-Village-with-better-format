@@ -4767,11 +4767,48 @@ function drawBogBridge(ctx, bridge, time, powerLevel) {
   }
   ctx.restore();
 
+  ctx.save();
+  ctx.strokeStyle = fixed ? "rgba(218, 183, 111, 0.72)" : "rgba(143, 111, 67, 0.72)";
+  ctx.lineWidth = 6;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 314, groundY - 106);
+  ctx.quadraticCurveTo(x - 92, groundY - 144, x + 314, groundY - 116);
+  ctx.stroke();
+  [-252, -126, 0, 126, 252].forEach((offset, index) => {
+    const postX = x + offset;
+    const postTop = groundY - 142 + Math.sin(index * 0.9) * 8;
+    ctx.fillStyle = fixed ? "#8d744b" : "#60482d";
+    ctx.fillRect(postX - 8, postTop, 16, 86);
+    ctx.fillStyle = "rgba(226, 204, 139, 0.34)";
+    ctx.fillRect(postX - 5, postTop + 5, 4, 72);
+  });
+  ctx.restore();
+
   offsets.forEach((offset, index) => {
     const raised = fixed ? 1 : index % 2 ? 0.45 : 0.1;
-    const stoneY = groundY - 30 - raised * 42 + Math.sin(index * 1.2) * 12;
+    const stoneY = groundY - 30 - raised * 38 + Math.sin(index * 1.2) * 10;
     drawBogStone(ctx, x + offset, stoneY, fixed, time + index);
   });
+
+  ctx.save();
+  ctx.strokeStyle = fixed ? "rgba(183, 145, 84, 0.84)" : "rgba(112, 82, 47, 0.84)";
+  ctx.lineWidth = 12;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 286, groundY - 94);
+  ctx.quadraticCurveTo(x - 72, groundY - 130, x + 286, groundY - 98);
+  ctx.stroke();
+  for (let i = 0; i < 8; i += 1) {
+    const plankX = x - 234 + i * 68;
+    ctx.strokeStyle = i % 2 ? "rgba(90, 63, 36, 0.9)" : "rgba(121, 84, 45, 0.9)";
+    ctx.lineWidth = 14;
+    ctx.beginPath();
+    ctx.moveTo(plankX - 28, groundY - 100 + Math.sin(i) * 8);
+    ctx.lineTo(plankX + 26, groundY - 110 + Math.cos(i) * 8);
+    ctx.stroke();
+  }
+  ctx.restore();
 
   if (fixed) {
     ctx.save();
@@ -4838,10 +4875,20 @@ function drawLanternLilyPool(ctx, pool, time, powerLevel) {
   }
   ctx.restore();
 
-  const lilyOffsets = [-250, -150, -52, 55, 160, 260];
+  ctx.save();
+  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.44)" : "rgba(150, 192, 153, 0.42)";
+  ctx.lineWidth = 4;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 326, groundY - 62);
+  ctx.quadraticCurveTo(x - 72, groundY - 106, x + 326, groundY - 72);
+  ctx.stroke();
+  ctx.restore();
+
+  const lilyOffsets = [-258, -156, -54, 54, 158, 262];
   lilyOffsets.forEach((offset, index) => {
-    const y = groundY - 34 + Math.sin(index * 1.7) * 18;
-    drawLanternLily(ctx, x + offset, y, fixed, time + index);
+    const y = groundY - 32 + Math.sin(index * 1.7) * 15;
+    drawLanternLily(ctx, x + offset, y, fixed, time + index, index % 2 ? 1.02 : 1.18);
   });
 
   if (fixed) {
@@ -4864,20 +4911,50 @@ function drawLanternLilyPool(ctx, pool, time, powerLevel) {
   ctx.restore();
 }
 
-function drawLanternLily(ctx, x, y, fixed, time) {
+function drawLanternLily(ctx, x, y, fixed, time, scale = 1) {
   ctx.save();
   ctx.translate(x, y);
+  ctx.scale(scale, scale);
   ctx.rotate(Math.sin(time * 1.4) * 0.04);
-  ctx.fillStyle = fixed ? "#587a55" : "#334f45";
+  ctx.fillStyle = fixed ? "#688f5b" : "#4c6d57";
   ctx.beginPath();
-  ctx.ellipse(0, 0, 44, 24, -0.16, 0, Math.PI * 2);
+  ctx.ellipse(0, 0, 48, 22, -0.12, 0, Math.PI * 2);
   ctx.fill();
-  ctx.fillStyle = fixed ? `rgba(216, 244, 157, ${0.7 + Math.sin(time * 4) * 0.08})` : "rgba(143, 217, 240, 0.18)";
+  ctx.strokeStyle = "rgba(13, 28, 24, 0.68)";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  ctx.fillStyle = "rgba(20, 43, 35, 0.42)";
   ctx.beginPath();
-  ctx.arc(8, -8, 10, 0, Math.PI * 2);
+  ctx.ellipse(10, 8, 32, 8, -0.12, 0, Math.PI * 2);
   ctx.fill();
+  ctx.strokeStyle = fixed ? "rgba(189, 228, 133, 0.82)" : "rgba(132, 174, 132, 0.68)";
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.moveTo(7, -9);
+  ctx.quadraticCurveTo(9, -34, 14, -54);
+  ctx.stroke();
+  const glowAlpha = fixed ? 0.82 + Math.sin(time * 4) * 0.08 : 0.52;
+  ctx.fillStyle = `rgba(235, 225, 145, ${glowAlpha})`;
+  ctx.beginPath();
+  ctx.ellipse(14, -64, 18, 24, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = "rgba(45, 43, 26, 0.62)";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+  ctx.fillStyle = `rgba(255, 246, 184, ${fixed ? 0.76 : 0.42})`;
+  ctx.beginPath();
+  ctx.ellipse(14, -64, 8, 15, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.strokeStyle = "rgba(83, 70, 38, 0.34)";
+  ctx.lineWidth = 2;
+  [-11, 0, 11].forEach((petal) => {
+    ctx.beginPath();
+    ctx.moveTo(14, -44);
+    ctx.quadraticCurveTo(14 + petal, -60, 14 + petal * 0.7, -82);
+    ctx.stroke();
+  });
   if (fixed) {
-    warmGlow(ctx, 8, -8, 46, 0.3 + Math.sin(time * 4) * 0.04);
+    warmGlow(ctx, 14, -64, 58, 0.34 + Math.sin(time * 4) * 0.04);
   }
   ctx.restore();
 }

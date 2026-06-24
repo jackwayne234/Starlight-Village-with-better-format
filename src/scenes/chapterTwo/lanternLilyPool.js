@@ -18,14 +18,6 @@ export function createLanternLilyPoolScene() {
     fixed: false,
     liliesLit: false
   };
-  scene.paintedLandmark = {
-    sprite: "lanternLilyPool",
-    state: scene.lanternLilyPool,
-    x: 1160,
-    groundY: 672,
-    height: 500,
-    glow: { heightRatio: 0.48, radius: 165, fixedIntensity: 0.42, dimIntensity: 0.16, pulse: 0.06 }
-  };
   scene.layers = {
     trees: [
       { x: 50, y: 264, scale: 1.62 },

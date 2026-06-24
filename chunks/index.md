@@ -66,3 +66,4 @@ High-level list only. All details live inside each chunk file.
 | 74 | Chapter Three Route Sprite Wiring | complete |
 | 75 | Chapter Four Route Sprite Wiring | complete |
 | 76 | Chapter Five Route Sprite Wiring | in progress |
+| 77 | Chapter Two Playthrough Polish | complete |
