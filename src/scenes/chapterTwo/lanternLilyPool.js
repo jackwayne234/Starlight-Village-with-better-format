@@ -27,6 +27,13 @@ export function createLanternLilyPoolScene() {
     wetlandBlend: { yOffset: -92, widthRatio: 1.04, height: 170 },
     glow: { xOffset: 20, heightRatio: 0.53, radius: 235, fixedIntensity: 0.42, dimIntensity: 0.18, pulse: 0.06 }
   };
+  scene.waterUnderlay = {
+    sprite: "lanternLilyPoolBottomWater",
+    x: 1160,
+    groundY: 788,
+    height: 315,
+    alpha: 0.94
+  };
   scene.layers = {
     trees: [
       { x: 50, y: 264, scale: 1.62 },

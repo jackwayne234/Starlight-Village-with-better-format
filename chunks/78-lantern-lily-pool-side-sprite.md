@@ -15,6 +15,7 @@ Replace the quiet canvas fallback in `chapter-two/lantern-lily-pool` with a prop
 - Wired `chapter-two/lantern-lily-pool` to use the new sprite through the shared `paintedLandmark` path.
 - Kept the existing canvas lily-pool renderer as fallback if the sprite does not load.
 - Added a wetland blend pass for the sprite so the pond sits into the path layer instead of reading like a hard cutout pasted on top.
+- Added `assets/sprites/world/lantern-lily-pool-bottom-water.png` as a bottom-water underlay so the foreground pond reaches the bottom of the playfield.
 
 ## Verification
 

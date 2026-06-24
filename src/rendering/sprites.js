@@ -39,6 +39,7 @@ export const sprites = {
     festivalSquare: loadImage(`${WORLD}/festival-square-painted.png?v=village-square-route-ch1`),
     glowfenGroveSide: loadImage(`${WORLD}/glowfen-grove-side-scene.png?v=side-scroller-glowfen-grove`),
     lanternLilyPool: loadImage(`${WORLD}/lantern-lily-pool-painted.png?v=painted-route-ch2`),
+    lanternLilyPoolBottomWater: loadImage(`${WORLD}/lantern-lily-pool-bottom-water.png?v=bottom-water-lily-pool`),
     lanternLilyPoolSide: loadImage(`${WORLD}/lantern-lily-pool-side-sprite.png?v=side-scroller-lily-pool`),
     bogBridge: loadImage(`${WORLD}/bog-bridge-painted.png?v=painted-route-ch2`),
     frogsongLock: loadImage(`${WORLD}/frogsong-lock-painted.png?v=painted-route-ch2`),
