@@ -38,6 +38,7 @@ export const sprites = {
     mayorPorch: loadImage(`${WORLD}/mayor-porch-painted.png?v=woodland-signal-route-ch1`),
     festivalSquare: loadImage(`${WORLD}/festival-square-painted.png?v=village-square-route-ch1`),
     lanternLilyPool: loadImage(`${WORLD}/lantern-lily-pool-painted.png?v=painted-route-ch2`),
+    lanternLilyPoolSide: loadImage(`${WORLD}/lantern-lily-pool-side-sprite.png?v=side-scroller-lily-pool`),
     bogBridge: loadImage(`${WORLD}/bog-bridge-painted.png?v=painted-route-ch2`),
     frogsongLock: loadImage(`${WORLD}/frogsong-lock-painted.png?v=painted-route-ch2`),
     sunkenSignpost: loadImage(`${WORLD}/sunken-signpost-painted.png?v=painted-route-ch2`),
