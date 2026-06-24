@@ -24,6 +24,7 @@ export function createLanternLilyPoolScene() {
     x: 1160,
     groundY: 812,
     height: 560,
+    wetlandBlend: { yOffset: -92, widthRatio: 1.04, height: 170 },
     glow: { xOffset: 20, heightRatio: 0.53, radius: 235, fixedIntensity: 0.42, dimIntensity: 0.18, pulse: 0.06 }
   };
   scene.layers = {

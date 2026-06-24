@@ -632,6 +632,11 @@ function drawPaintedLandmark(ctx, landmark, time, powerLevel) {
   const x = landmark.x + (landmark.xOffset ?? 0);
   const groundY = landmark.groundY + (landmark.groundYOffset ?? 0);
   const height = landmark.height ?? 500;
+  const width = height * (image.naturalWidth / image.naturalHeight);
+
+  if (landmark.wetlandBlend) {
+    drawWetlandLandmarkBlend(ctx, x, groundY, width, height, landmark.wetlandBlend, time, false);
+  }
 
   ctx.save();
   ctx.filter = fixed
@@ -639,6 +644,10 @@ function drawPaintedLandmark(ctx, landmark, time, powerLevel) {
     : landmark.dimFilter ?? "brightness(0.7) saturate(0.88)";
   drawWorldSprite(ctx, image, x, groundY, height);
   ctx.restore();
+
+  if (landmark.wetlandBlend) {
+    drawWetlandLandmarkBlend(ctx, x, groundY, width, height, landmark.wetlandBlend, time, true);
+  }
 
   if (landmark.glow) {
     const glow = landmark.glow;
@@ -653,6 +662,44 @@ function drawPaintedLandmark(ctx, landmark, time, powerLevel) {
   }
 
   return true;
+}
+
+function drawWetlandLandmarkBlend(ctx, x, groundY, width, height, blend, time, foreground) {
+  const y = groundY + (blend.yOffset ?? -72);
+  const bedWidth = width * (blend.widthRatio ?? 0.94);
+  const bedHeight = blend.height ?? height * 0.24;
+
+  ctx.save();
+  if (!foreground) {
+    const water = ctx.createRadialGradient(x, y - bedHeight * 0.2, bedHeight * 0.18, x, y, bedWidth * 0.52);
+    water.addColorStop(0, blend.innerColor ?? "rgba(20, 68, 65, 0.58)");
+    water.addColorStop(0.72, blend.midColor ?? "rgba(11, 44, 47, 0.5)");
+    water.addColorStop(1, "rgba(7, 19, 22, 0)");
+    ctx.fillStyle = water;
+    ctx.beginPath();
+    ctx.ellipse(x, y, bedWidth / 2, bedHeight / 2, -0.01, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = blend.pathWash ?? "rgba(8, 35, 38, 0.24)";
+    ctx.fillRect(x - bedWidth * 0.5, y - bedHeight * 0.18, bedWidth, bedHeight * 0.62);
+  } else {
+    ctx.globalCompositeOperation = "screen";
+    ctx.strokeStyle = blend.rippleColor ?? "rgba(173, 231, 218, 0.14)";
+    ctx.lineWidth = 2;
+    for (let i = 0; i < 8; i += 1) {
+      const rippleX = x - bedWidth * 0.42 + ((time * 28 + i * bedWidth * 0.15) % (bedWidth * 0.84));
+      ctx.beginPath();
+      ctx.ellipse(rippleX, y + Math.sin(time + i) * 8, 54, 6, 0.02, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+    ctx.globalCompositeOperation = "source-over";
+    const edge = ctx.createLinearGradient(0, y - bedHeight * 0.24, 0, y + bedHeight * 0.38);
+    edge.addColorStop(0, "rgba(9, 25, 28, 0)");
+    edge.addColorStop(0.58, blend.edgeColor ?? "rgba(9, 26, 27, 0.26)");
+    edge.addColorStop(1, "rgba(9, 26, 27, 0)");
+    ctx.fillStyle = edge;
+    ctx.fillRect(x - bedWidth * 0.5, y - bedHeight * 0.24, bedWidth, bedHeight * 0.62);
+  }
+  ctx.restore();
 }
 
 function drawChapterFiveLandmark(ctx, landmark, time, powerLevel) {
