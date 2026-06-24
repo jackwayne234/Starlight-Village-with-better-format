@@ -5,12 +5,45 @@ const { colors } = config;
 
 export function drawBackdrop(ctx, scene, time, width, height, cameraX) {
   drawSky(ctx, scene.backdrop, width, height);
+  if (drawChapterTwoWetlandScenery(ctx, scene, width, height, cameraX)) {
+    drawClouds(ctx, scene.backdrop, time, width, cameraX);
+    return;
+  }
   if (drawPaintedScenery(ctx, width, height, cameraX)) {
     drawClouds(ctx, scene.backdrop, time, width, cameraX);
     return;
   }
   drawClouds(ctx, scene.backdrop, time, width, cameraX);
   drawHills(ctx, scene.backdrop, scene.world.width, width, height, cameraX);
+}
+
+// Shared Chapter 2 wetland backdrop. It is intentionally selected from the
+// scene id so individual scene data can stay focused on local repair objects.
+function drawChapterTwoWetlandScenery(ctx, scene, width, height, cameraX) {
+  if (!scene.id?.startsWith("chapter-two/")) {
+    return false;
+  }
+
+  const scenery = sprites.chapterTwo?.backgrounds?.wetlandBackground;
+  if (!imageReady(scenery)) {
+    return false;
+  }
+
+  const scale = Math.max(height / scenery.naturalHeight, width / scenery.naturalWidth);
+  const drawWidth = scenery.naturalWidth * scale;
+  const drawHeight = scenery.naturalHeight * scale;
+  const y = height - drawHeight;
+  const parallax = 0.2;
+  const x = -((cameraX * parallax) % drawWidth);
+
+  ctx.save();
+  ctx.globalAlpha = 0.98;
+  ctx.filter = "brightness(0.9) saturate(0.95) contrast(1.05)";
+  for (let drawX = x - drawWidth; drawX < width + drawWidth; drawX += drawWidth - 1) {
+    ctx.drawImage(scenery, drawX, y, drawWidth, drawHeight);
+  }
+  ctx.restore();
+  return true;
 }
 
 // Painted misty hills/forest, drifting slowly behind the world (parallax).

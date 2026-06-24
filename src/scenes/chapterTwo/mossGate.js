@@ -14,12 +14,14 @@ export function createMossGateScene() {
   scene.backdrop = { moonX: 940, moonY: 142, cloudDrift: 1.02, hillOffset: 62, ridgeOffset: 96 };
   scene.mossGate = { x: 1160, groundY: 652, fixed: false, gateOpen: false };
   scene.paintedLandmark = {
+    source: "chapterTwoLandmarks",
     sprite: "mossGate",
     state: scene.mossGate,
     x: 1160,
-    groundY: 674,
-    height: 500,
-    glow: { heightRatio: 0.52, radius: 180, fixedIntensity: 0.44, dimIntensity: 0.14, pulse: 0.06 }
+    groundY: 754,
+    height: 430,
+    wetlandBlend: { yOffset: -58, widthRatio: 0.98, height: 134 },
+    glow: { xOffset: 0, heightRatio: 0.56, radius: 235, fixedIntensity: 0.4, dimIntensity: 0.14, pulse: 0.05 }
   };
   scene.layers = {
     trees: [
@@ -65,6 +67,7 @@ export function createMossGateScene() {
       id: "moss-gate",
       kind: "path-puzzle",
       puzzleTheme: "root-pump",
+      puzzleLayout: "ch2-moss-gate",
       x: 1160,
       y: 552,
       radius: 275,

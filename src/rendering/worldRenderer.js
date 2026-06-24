@@ -78,6 +78,8 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
   scene.layers.cottages.forEach((cottage) => drawCottage(ctx, cottage, time, powerLevel));
   if (scene.groundStyle === "festival-square") {
     drawFestivalSquareGround(ctx, scene.world.width, height, time);
+  } else if (isChapterTwoScene(scene)) {
+    drawChapterTwoWetlandGround(ctx, scene.world.width, height, time);
   } else {
     drawGround(ctx, scene.world.width, height);
     drawPath(ctx, scene.world.width, time);
@@ -316,6 +318,100 @@ function drawPath(ctx, width, time) {
   drawWetStoneSegments(ctx, width, time);
 }
 
+function isChapterTwoScene(scene) {
+  return scene.id?.startsWith("chapter-two/");
+}
+
+function drawChapterTwoWetlandGround(ctx, width, height, time) {
+  ctx.fillStyle = "#182829";
+  ctx.fillRect(0, 574, width, height - 574);
+
+  drawChapterTwoWaterBand(ctx, width, height, time);
+
+  const pathImage = sprites.chapterTwo?.paths?.boardwalkSteppingPath;
+  if (imageReady(pathImage)) {
+    const targetHeight = 250;
+    const scale = targetHeight / pathImage.naturalHeight;
+    const drawWidth = pathImage.naturalWidth * scale;
+    const y = 720 - targetHeight + 8;
+
+    ctx.save();
+    ctx.globalAlpha = 0.96;
+    ctx.filter = "brightness(0.86) saturate(0.96) contrast(1.03)";
+    for (let x = -drawWidth; x < width + drawWidth; x += drawWidth - 1) {
+      ctx.drawImage(pathImage, x, y, drawWidth, targetHeight);
+    }
+    ctx.restore();
+  } else {
+    drawChapterTwoFallbackPath(ctx, width, time);
+  }
+
+  drawChapterTwoPathContactShadow(ctx, width);
+}
+
+function drawChapterTwoWaterBand(ctx, width, height, time) {
+  const water = ctx.createLinearGradient(0, 545, 0, height);
+  water.addColorStop(0, "rgba(35, 77, 74, 0.72)");
+  water.addColorStop(0.52, "rgba(23, 55, 58, 0.86)");
+  water.addColorStop(1, "rgba(11, 26, 31, 0.98)");
+  ctx.fillStyle = water;
+  ctx.beginPath();
+  ctx.moveTo(0, 590);
+  ctx.bezierCurveTo(210, 564, 405, 604, 610, 575);
+  ctx.bezierCurveTo(820, 548, 1015, 596, 1210, 562);
+  ctx.bezierCurveTo(1435, 526, 1620, 594, 1840, 558);
+  ctx.bezierCurveTo(2035, 530, 2150, 570, width, 545);
+  ctx.lineTo(width, height);
+  ctx.lineTo(0, height);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  for (let x = 80; x < width; x += 220) {
+    const y = 604 + Math.sin(time * 0.7 + x * 0.01) * 10;
+    ctx.strokeStyle = `rgba(151, 218, 212, ${0.08 + Math.sin(time * 1.8 + x) * 0.018})`;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.ellipse(x, y, 76, 9, -0.06, 0.08, Math.PI - 0.08);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawChapterTwoFallbackPath(ctx, width, time) {
+  ctx.save();
+  ctx.fillStyle = "#5b4a34";
+  ctx.strokeStyle = "rgba(222, 190, 126, 0.4)";
+  ctx.lineWidth = 4;
+  for (let x = -80; x < width + 140; x += 118) {
+    const y = 628 + Math.sin(x * 0.011) * 14;
+    roundedRect(ctx, x, y, 126, 32, 8);
+    ctx.fill();
+    ctx.stroke();
+  }
+
+  ctx.fillStyle = "#4c5852";
+  ctx.strokeStyle = "rgba(170, 198, 184, 0.26)";
+  for (let x = 40; x < width + 140; x += 190) {
+    const y = 674 + Math.sin(time * 0.3 + x * 0.01) * 7;
+    ctx.beginPath();
+    ctx.ellipse(x, y, 62, 18, -0.08, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawChapterTwoPathContactShadow(ctx, width) {
+  const shade = ctx.createLinearGradient(0, 610, 0, 720);
+  shade.addColorStop(0, "rgba(3, 7, 8, 0)");
+  shade.addColorStop(0.68, "rgba(2, 6, 8, 0.16)");
+  shade.addColorStop(1, "rgba(0, 3, 5, 0.48)");
+  ctx.fillStyle = shade;
+  ctx.fillRect(0, 610, width, 110);
+}
+
 function drawFestivalSquareGround(ctx, width, height, time) {
   ctx.fillStyle = colors.groundDark;
   ctx.fillRect(0, 540, width, height - 540);
@@ -490,6 +586,9 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.festivalSquare) {
     drawFestivalSquare(ctx, scene.festivalSquare, time, scene.world.powerLevel);
   }
+  if (scene.wetlandApproach) {
+    drawWetlandApproach(ctx, scene.wetlandApproach, time, scene.world.powerLevel);
+  }
   if (scene.lanternLilyPool) {
     drawLanternLilyPool(ctx, scene.lanternLilyPool, time, scene.world.powerLevel);
   }
@@ -617,12 +716,24 @@ function drawWaterUnderlay(ctx, underlay) {
   return true;
 }
 
+function resolveLandmarkSprite(landmark) {
+  if (!landmark?.sprite) {
+    return null;
+  }
+
+  if (landmark.source === "chapterTwoLandmarks") {
+    return sprites.chapterTwo?.landmarks?.[landmark.sprite] ?? null;
+  }
+
+  return sprites.world[landmark.sprite] ?? sprites.chapterTwo?.landmarks?.[landmark.sprite] ?? null;
+}
+
 function drawPaintedLandmark(ctx, landmark, time, powerLevel) {
   if (!landmark) {
     return false;
   }
 
-  const image = sprites.world[landmark.sprite];
+  const image = resolveLandmarkSprite(landmark);
   if (!imageReady(image)) {
     return false;
   }
@@ -2763,7 +2874,7 @@ function drawMossGate(ctx, gate, time, powerLevel) {
   const opening = fixed ? 82 : 0;
 
   ctx.save();
-  ctx.fillStyle = "rgba(17, 44, 36, 0.62)";
+  ctx.fillStyle = "rgba(17, 44, 36, 0.74)";
   ctx.beginPath();
   ctx.ellipse(x, groundY - 24, 410, 74, -0.02, 0, Math.PI * 2);
   ctx.fill();
@@ -2773,7 +2884,7 @@ function drawMossGate(ctx, gate, time, powerLevel) {
   drawMossGateHalf(ctx, x - 78 - opening, groundY, -1, fixed, time);
   drawMossGateHalf(ctx, x + 78 + opening, groundY, 1, fixed, time + 0.7);
 
-  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.68)" : "rgba(143, 217, 240, 0.16)";
+  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.68)" : "rgba(137, 165, 150, 0.34)";
   ctx.beginPath();
   ctx.arc(x - 132 - opening, groundY - 148, 9, 0, Math.PI * 2);
   ctx.arc(x + 132 + opening, groundY - 148, 9, 0, Math.PI * 2);
@@ -2792,7 +2903,7 @@ function drawOldFenShrine(ctx, shrine, time, powerLevel) {
   const groundY = shrine.groundY;
 
   ctx.save();
-  ctx.fillStyle = "rgba(12, 35, 32, 0.58)";
+  ctx.fillStyle = "rgba(12, 35, 32, 0.72)";
   ctx.beginPath();
   ctx.ellipse(x, groundY - 20, 360, 66, -0.02, 0, Math.PI * 2);
   ctx.fill();
@@ -2835,8 +2946,8 @@ function drawGlowfenFerry(ctx, ferry, time, powerLevel) {
 
   ctx.save();
   const water = ctx.createRadialGradient(x, groundY - 22, 80, x, groundY - 22, 430);
-  water.addColorStop(0, "rgba(25, 68, 70, 0.74)");
-  water.addColorStop(0.72, "rgba(12, 42, 46, 0.58)");
+  water.addColorStop(0, "rgba(25, 68, 70, 0.82)");
+  water.addColorStop(0.72, "rgba(12, 42, 46, 0.66)");
   water.addColorStop(1, "rgba(7, 20, 22, 0.08)");
   ctx.fillStyle = water;
   ctx.beginPath();
@@ -2863,7 +2974,7 @@ function drawReedwatchBank(ctx, bank, time, powerLevel) {
   const groundY = bank.groundY;
 
   ctx.save();
-  ctx.fillStyle = "rgba(16, 43, 34, 0.62)";
+  ctx.fillStyle = "rgba(16, 43, 34, 0.74)";
   ctx.beginPath();
   ctx.ellipse(x, groundY - 20, 410, 72, -0.02, 0, Math.PI * 2);
   ctx.fill();
@@ -2873,8 +2984,8 @@ function drawReedwatchBank(ctx, bank, time, powerLevel) {
     drawReedwatchMarker(ctx, x + offset, groundY - 36 + Math.sin(index * 1.1) * 8, fixed, time + index * 0.5);
   });
 
-  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.42)" : "rgba(85, 111, 83, 0.36)";
-  ctx.lineWidth = fixed ? 5 : 4;
+  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.42)" : "rgba(112, 138, 106, 0.58)";
+  ctx.lineWidth = fixed ? 5 : 5;
   ctx.lineCap = "round";
   ctx.beginPath();
   ctx.moveTo(x - 285, groundY - 42);
@@ -4393,20 +4504,20 @@ function drawCargoCart(ctx, x, y, fixed, time) {
 function drawReedwatchMarker(ctx, x, y, fixed, time) {
   ctx.save();
   ctx.translate(x, y);
-  ctx.strokeStyle = fixed ? "#7b8465" : "#45594c";
-  ctx.lineWidth = 10;
+  ctx.strokeStyle = fixed ? "#7b8465" : "#56675d";
+  ctx.lineWidth = 12;
   ctx.lineCap = "round";
   ctx.beginPath();
   ctx.moveTo(0, 34);
   ctx.quadraticCurveTo(Math.sin(time) * 8, -38, Math.sin(time * 0.8) * 12, -104);
   ctx.stroke();
 
-  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.65)" : "rgba(143, 217, 240, 0.14)";
+  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.65)" : "rgba(137, 165, 150, 0.34)";
   ctx.beginPath();
   ctx.ellipse(Math.sin(time * 0.8) * 12, -112, 18, 28, 0.08, 0, Math.PI * 2);
   ctx.fill();
 
-  ctx.strokeStyle = fixed ? "rgba(255, 223, 156, 0.45)" : "rgba(37, 54, 49, 0.58)";
+  ctx.strokeStyle = fixed ? "rgba(255, 223, 156, 0.45)" : "rgba(28, 45, 40, 0.74)";
   ctx.lineWidth = 3;
   ctx.beginPath();
   ctx.arc(Math.sin(time * 0.8) * 12, -112, 25 + Math.sin(time * 4) * (fixed ? 2 : 0), 0, Math.PI * 2);
@@ -4419,10 +4530,13 @@ function drawReedwatchMarker(ctx, x, y, fixed, time) {
 
 function drawFerryPost(ctx, x, groundY, fixed, time) {
   ctx.save();
-  ctx.fillStyle = fixed ? "#69725d" : "#3e514b";
-  roundedRect(ctx, x - 16, groundY - 218, 32, 204, 10);
+  ctx.fillStyle = fixed ? "#69725d" : "#50645d";
+  roundedRect(ctx, x - 18, groundY - 218, 36, 204, 10);
   ctx.fill();
-  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.55)" : "rgba(143, 217, 240, 0.14)";
+  ctx.strokeStyle = "rgba(18, 31, 29, 0.58)";
+  ctx.lineWidth = 4;
+  ctx.stroke();
+  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.55)" : "rgba(137, 165, 150, 0.32)";
   ctx.beginPath();
   ctx.arc(x, groundY - 176, 16 + Math.sin(time * 3) * (fixed ? 1.5 : 0), 0, Math.PI * 2);
   ctx.fill();
@@ -4431,8 +4545,8 @@ function drawFerryPost(ctx, x, groundY, fixed, time) {
 
 function drawFerryRope(ctx, startX, startY, endX, endY, fixed, time) {
   ctx.save();
-  ctx.strokeStyle = fixed ? "rgba(226, 242, 181, 0.58)" : "rgba(86, 103, 92, 0.58)";
-  ctx.lineWidth = fixed ? 5 : 4;
+  ctx.strokeStyle = fixed ? "rgba(226, 242, 181, 0.58)" : "rgba(96, 113, 101, 0.78)";
+  ctx.lineWidth = fixed ? 5 : 5;
   ctx.lineCap = "round";
   ctx.beginPath();
   const sag = fixed ? 12 : 46 + Math.sin(time * 1.4) * 5;
@@ -4444,7 +4558,7 @@ function drawFerryRope(ctx, startX, startY, endX, endY, fixed, time) {
 
 function drawFerryDock(ctx, x, y, fixed) {
   ctx.save();
-  ctx.fillStyle = fixed ? "#5f654f" : "#3f4d46";
+  ctx.fillStyle = fixed ? "#5f654f" : "#526158";
   roundedRect(ctx, x - 78, y - 18, 156, 28, 8);
   ctx.fill();
   ctx.strokeStyle = "rgba(22, 35, 31, 0.62)";
@@ -4461,7 +4575,7 @@ function drawFerryDock(ctx, x, y, fixed) {
 function drawFerryBoat(ctx, x, y, fixed, time) {
   ctx.save();
   ctx.translate(x, y + Math.sin(time * 1.3) * 3);
-  ctx.fillStyle = fixed ? "#66705d" : "#3f554f";
+  ctx.fillStyle = fixed ? "#66705d" : "#516961";
   ctx.beginPath();
   ctx.moveTo(-112, -16);
   ctx.lineTo(112, -16);
@@ -4469,7 +4583,10 @@ function drawFerryBoat(ctx, x, y, fixed, time) {
   ctx.lineTo(-74, 28);
   ctx.closePath();
   ctx.fill();
-  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.34)" : "rgba(143, 217, 240, 0.08)";
+  ctx.strokeStyle = "rgba(18, 31, 29, 0.58)";
+  ctx.lineWidth = 4;
+  ctx.stroke();
+  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.34)" : "rgba(137, 165, 150, 0.2)";
   roundedRect(ctx, -52, -58, 104, 34, 8);
   ctx.fill();
   if (fixed) {
@@ -4550,7 +4667,7 @@ function drawMossGateHalf(ctx, x, groundY, side, fixed, time) {
   ctx.save();
   ctx.translate(x, groundY);
   ctx.rotate(side * (fixed ? 0.16 : 0.02));
-  ctx.fillStyle = fixed ? "#4d6a4a" : "#36513f";
+  ctx.fillStyle = fixed ? "#4d6a4a" : "#496552";
   roundedRect(ctx, side < 0 ? -112 : 0, -230, 112, 230, 22);
   ctx.fill();
   ctx.strokeStyle = "#26382e";
@@ -4561,7 +4678,7 @@ function drawMossGateHalf(ctx, x, groundY, side, fixed, time) {
     ctx.lineTo(side < 0 ? -12 : 100, y + Math.sin(time + y) * 3);
   }
   ctx.stroke();
-  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.28)" : "rgba(143, 217, 240, 0.08)";
+  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.28)" : "rgba(137, 165, 150, 0.18)";
   ctx.beginPath();
   ctx.arc(side < 0 ? -44 : 44, -126, 18, 0, Math.PI * 2);
   ctx.fill();
@@ -4575,8 +4692,8 @@ function drawMistPool(ctx, pool, time, powerLevel) {
 
   ctx.save();
   const water = ctx.createRadialGradient(x, groundY - 18, 80, x, groundY - 18, 390);
-  water.addColorStop(0, "rgba(28, 70, 70, 0.72)");
-  water.addColorStop(0.74, "rgba(12, 42, 44, 0.58)");
+  water.addColorStop(0, "rgba(28, 70, 70, 0.82)");
+  water.addColorStop(0.74, "rgba(12, 42, 44, 0.66)");
   water.addColorStop(1, "rgba(7, 20, 22, 0.08)");
   ctx.fillStyle = water;
   ctx.beginPath();
@@ -4609,11 +4726,11 @@ function drawMistPool(ctx, pool, time, powerLevel) {
 function drawWarmVentStone(ctx, x, y, fixed, time) {
   ctx.save();
   ctx.translate(x, y);
-  ctx.fillStyle = fixed ? "#6b735c" : "#3d5048";
+  ctx.fillStyle = fixed ? "#6b735c" : "#53665d";
   ctx.beginPath();
   ctx.ellipse(0, 0, 48, 26, -0.08, 0, Math.PI * 2);
   ctx.fill();
-  ctx.strokeStyle = fixed ? "rgba(255, 221, 152, 0.62)" : "rgba(143, 217, 240, 0.16)";
+  ctx.strokeStyle = fixed ? "rgba(255, 221, 152, 0.62)" : "rgba(137, 165, 150, 0.36)";
   ctx.lineWidth = 3;
   ctx.beginPath();
   ctx.moveTo(-24, -3);
@@ -4627,7 +4744,7 @@ function drawWarmVentStone(ctx, x, y, fixed, time) {
 
 function drawMistVeil(ctx, x, y, fixed, time) {
   ctx.save();
-  ctx.fillStyle = fixed ? "rgba(222, 235, 221, 0.08)" : "rgba(222, 235, 221, 0.24)";
+  ctx.fillStyle = fixed ? "rgba(222, 235, 221, 0.08)" : "rgba(222, 235, 221, 0.17)";
   const bands = fixed ? 3 : 7;
   for (let i = 0; i < bands; i += 1) {
     const drift = Math.sin(time * 0.7 + i) * 18;
@@ -4646,8 +4763,8 @@ function drawSunkenSignpost(ctx, marker, time, powerLevel) {
 
   ctx.save();
   const water = ctx.createRadialGradient(x, groundY - 18, 80, x, groundY - 18, 380);
-  water.addColorStop(0, "rgba(26, 69, 58, 0.7)");
-  water.addColorStop(0.74, "rgba(12, 42, 38, 0.58)");
+  water.addColorStop(0, "rgba(26, 69, 58, 0.82)");
+  water.addColorStop(0.74, "rgba(12, 42, 38, 0.66)");
   water.addColorStop(1, "rgba(7, 20, 18, 0.08)");
   ctx.fillStyle = water;
   ctx.beginPath();
@@ -4672,7 +4789,7 @@ function drawSunkenSignpost(ctx, marker, time, powerLevel) {
   ctx.lineWidth = 4;
   ctx.strokeRect(x - 76, raisedY - 34, 152, 40);
 
-  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.72)" : "rgba(143, 217, 240, 0.18)";
+  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.72)" : "rgba(137, 165, 150, 0.36)";
   ctx.beginPath();
   ctx.arc(x - 48, raisedY - 14, 8, 0, Math.PI * 2);
   ctx.arc(x, raisedY - 14, 8, 0, Math.PI * 2);
@@ -4714,8 +4831,8 @@ function drawFrogsongLock(ctx, lock, time, powerLevel) {
 
   ctx.save();
   const water = ctx.createRadialGradient(x, groundY - 18, 80, x, groundY - 18, 380);
-  water.addColorStop(0, "rgba(26, 69, 58, 0.72)");
-  water.addColorStop(0.74, "rgba(12, 42, 38, 0.58)");
+  water.addColorStop(0, "rgba(26, 69, 58, 0.82)");
+  water.addColorStop(0.74, "rgba(12, 42, 38, 0.66)");
   water.addColorStop(1, "rgba(7, 20, 18, 0.08)");
   ctx.fillStyle = water;
   ctx.beginPath();
@@ -4749,8 +4866,8 @@ function drawFrogsongLock(ctx, lock, time, powerLevel) {
 
 function drawReedGate(ctx, x, groundY, fixed, time) {
   const opening = fixed ? 54 : 0;
-  ctx.strokeStyle = "#314536";
-  ctx.lineWidth = 9;
+  ctx.strokeStyle = fixed ? "#4f6f55" : "#50695c";
+  ctx.lineWidth = 11;
   ctx.lineCap = "round";
   [-1, 1].forEach((side) => {
     const baseX = x + side * (62 + opening);
@@ -4758,10 +4875,10 @@ function drawReedGate(ctx, x, groundY, fixed, time) {
     ctx.moveTo(baseX, groundY - 10);
     ctx.quadraticCurveTo(baseX + side * 12, groundY - 118, baseX + side * 8, groundY - 210);
     ctx.stroke();
-    ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.42)" : "#314536";
+    ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.42)" : "#50695c";
   });
 
-  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.5)" : "rgba(49, 69, 54, 0.9)";
+  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.5)" : "rgba(80, 105, 92, 0.92)";
   ctx.lineWidth = 5;
   ctx.beginPath();
   ctx.moveTo(x - 132 - opening, groundY - 116);
@@ -4772,7 +4889,7 @@ function drawReedGate(ctx, x, groundY, fixed, time) {
 function drawCallStone(ctx, x, y, fixed, time) {
   ctx.save();
   ctx.translate(x, y);
-  ctx.fillStyle = fixed ? "#617457" : "#3d5047";
+  ctx.fillStyle = fixed ? "#617457" : "#53665d";
   ctx.beginPath();
   ctx.ellipse(0, 0, 38, 24, -0.1, 0, Math.PI * 2);
   ctx.fill();
@@ -4783,6 +4900,88 @@ function drawCallStone(ctx, x, y, fixed, time) {
   if (fixed) {
     warmGlow(ctx, 0, -6, 42, 0.22 + Math.sin(time * 4) * 0.04);
   }
+  ctx.restore();
+}
+
+function drawWetlandApproach(ctx, approach, time, powerLevel) {
+  const fixed = approach.fixed || approach.waymarkLit || powerLevel > 0.95;
+  const x = approach.x;
+  const groundY = approach.groundY;
+
+  ctx.save();
+  const clearing = ctx.createRadialGradient(x, groundY - 38, 90, x, groundY - 38, 430);
+  clearing.addColorStop(0, "rgba(28, 70, 64, 0.72)");
+  clearing.addColorStop(0.72, "rgba(13, 42, 39, 0.62)");
+  clearing.addColorStop(1, "rgba(7, 20, 18, 0.08)");
+  ctx.fillStyle = clearing;
+  ctx.beginPath();
+  ctx.ellipse(x, groundY - 18, 430, 84, -0.02, 0, Math.PI * 2);
+  ctx.fill();
+
+  drawWetlandApproachGatepost(ctx, x - 245, groundY, fixed, time);
+  drawWetlandApproachGatepost(ctx, x + 245, groundY, fixed, time + 0.6);
+
+  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.4)" : "rgba(104, 130, 111, 0.52)";
+  ctx.lineWidth = 7;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 245, groundY - 178);
+  ctx.quadraticCurveTo(x - 70, groundY - 210, x + 245, groundY - 176);
+  ctx.stroke();
+
+  [-150, -72, 0, 72, 150].forEach((offset, index) => {
+    const stoneY = groundY - 38 + Math.sin(index * 0.9) * 8;
+    ctx.fillStyle = fixed ? "#61705c" : "#4c5c56";
+    ctx.beginPath();
+    ctx.ellipse(x + offset, stoneY, 46, 20, -0.06, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "rgba(18, 30, 27, 0.42)";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+  });
+
+  drawWetlandWaymark(ctx, x, groundY - 58, fixed, time);
+
+  if (fixed) {
+    warmGlow(ctx, x, groundY - 156, 150, 0.24 + Math.sin(time * 3) * 0.035);
+  }
+
+  ctx.restore();
+}
+
+function drawWetlandApproachGatepost(ctx, x, groundY, fixed, time) {
+  ctx.save();
+  ctx.strokeStyle = fixed ? "#6e7c5c" : "#50665a";
+  ctx.lineWidth = 14;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x, groundY - 12);
+  ctx.quadraticCurveTo(x + Math.sin(time) * 8, groundY - 98, x + Math.sin(time * 0.8) * 12, groundY - 210);
+  ctx.stroke();
+
+  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.58)" : "rgba(137, 165, 150, 0.26)";
+  ctx.beginPath();
+  ctx.ellipse(x + Math.sin(time * 0.8) * 12, groundY - 220, 18, 28, 0.08, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+}
+
+function drawWetlandWaymark(ctx, x, y, fixed, time) {
+  ctx.save();
+  ctx.fillStyle = fixed ? "#6b735c" : "#52645b";
+  roundedRect(ctx, x - 42, y - 122, 84, 124, 14);
+  ctx.fill();
+  ctx.strokeStyle = "rgba(18, 31, 29, 0.58)";
+  ctx.lineWidth = 4;
+  ctx.stroke();
+
+  ctx.fillStyle = fixed ? `rgba(216, 244, 157, ${0.62 + Math.sin(time * 3) * 0.08})` : "rgba(137, 165, 150, 0.28)";
+  ctx.beginPath();
+  ctx.arc(x, y - 72, 18, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = fixed ? "rgba(255, 232, 166, 0.38)" : "rgba(18, 31, 29, 0.34)";
+  roundedRect(ctx, x - 58, y - 32, 116, 28, 8);
+  ctx.fill();
   ctx.restore();
 }
 

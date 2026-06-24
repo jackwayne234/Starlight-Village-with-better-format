@@ -19,12 +19,14 @@ export function createMistPoolScene() {
     mistThin: false
   };
   scene.paintedLandmark = {
-    sprite: "mistPool",
+    source: "chapterTwoLandmarks",
+    sprite: "mistVentStones",
     state: scene.mistPool,
     x: 1160,
-    groundY: 674,
-    height: 500,
-    glow: { heightRatio: 0.48, radius: 172, fixedIntensity: 0.42, dimIntensity: 0.16, pulse: 0.06 }
+    groundY: 736,
+    height: 300,
+    wetlandBlend: { yOffset: -38, widthRatio: 1.08, height: 112 },
+    glow: { xOffset: 0, heightRatio: 0.42, radius: 230, fixedIntensity: 0.36, dimIntensity: 0.11, pulse: 0.05 }
   };
   scene.layers = {
     trees: [
@@ -69,6 +71,7 @@ export function createMistPoolScene() {
       id: "mist-pool",
       kind: "path-puzzle",
       puzzleTheme: "storm-gauge",
+      puzzleLayout: "ch2-mist-pool",
       x: 1160,
       y: 552,
       radius: 275,

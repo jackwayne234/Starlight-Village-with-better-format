@@ -19,20 +19,14 @@ export function createLanternLilyPoolScene() {
     liliesLit: false
   };
   scene.paintedLandmark = {
-    sprite: "lanternLilyPoolSide",
+    source: "chapterTwoLandmarks",
+    sprite: "lanternLilyCrossing",
     state: scene.lanternLilyPool,
     x: 1160,
-    groundY: 812,
-    height: 560,
-    wetlandBlend: { yOffset: -92, widthRatio: 1.04, height: 170 },
-    glow: { xOffset: 20, heightRatio: 0.53, radius: 235, fixedIntensity: 0.42, dimIntensity: 0.18, pulse: 0.06 }
-  };
-  scene.waterUnderlay = {
-    sprite: "lanternLilyPoolBottomWater",
-    x: 1160,
-    groundY: 788,
-    height: 315,
-    alpha: 0.94
+    groundY: 736,
+    height: 360,
+    wetlandBlend: { yOffset: -48, widthRatio: 1.02, height: 132 },
+    glow: { xOffset: 18, heightRatio: 0.52, radius: 220, fixedIntensity: 0.42, dimIntensity: 0.16, pulse: 0.06 }
   };
   scene.layers = {
     trees: [
@@ -77,6 +71,7 @@ export function createLanternLilyPoolScene() {
       id: "lantern-lily-pool",
       kind: "path-puzzle",
       puzzleTheme: "glow-bridge",
+      puzzleLayout: "ch2-lantern-lily-pool",
       x: 1160,
       y: 625,
       radius: 275,

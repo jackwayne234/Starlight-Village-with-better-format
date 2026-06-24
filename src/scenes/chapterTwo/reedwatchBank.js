@@ -14,12 +14,14 @@ export function createReedwatchBankScene() {
   scene.backdrop = { moonX: 990, moonY: 126, cloudDrift: 1.12, hillOffset: 72, ridgeOffset: 108 };
   scene.reedwatchBank = { x: 1160, groundY: 654, fixed: false, markersLit: false };
   scene.paintedLandmark = {
-    sprite: "reedwatchBank",
+    source: "chapterTwoLandmarks",
+    sprite: "reedwatchMarkers",
     state: scene.reedwatchBank,
     x: 1160,
-    groundY: 674,
+    groundY: 756,
     height: 430,
-    glow: { heightRatio: 0.55, radius: 170, fixedIntensity: 0.42, dimIntensity: 0.12, pulse: 0.05 }
+    wetlandBlend: { yOffset: -56, widthRatio: 0.9, height: 132 },
+    glow: { xOffset: 8, heightRatio: 0.56, radius: 230, fixedIntensity: 0.4, dimIntensity: 0.14, pulse: 0.05 }
   };
   scene.layers = {
     trees: [
@@ -70,6 +72,7 @@ export function createReedwatchBankScene() {
       id: "reedwatch-bank",
       kind: "path-puzzle",
       puzzleTheme: "market-lanterns",
+      puzzleLayout: "ch2-reedwatch-bank",
       x: 1160,
       y: 550,
       radius: 282,

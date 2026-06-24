@@ -9,14 +9,24 @@
 
 ## Current Route
 
-The full route now has 100 scenes:
+The full route now has 101 scenes:
 
 `chapter-one/starlight-village` -> `chapter-one/bakery-gutter` -> ... -> `chapter-ten/celebration-square`
 
 The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog scenes are built by `src/scenes/plannedSceneFactory.js`. The current hand-built landmark slots in the route are:
 
 - `chapter-one/starlight-village`
+- `chapter-two/wetland-approach`
 - `chapter-two/glowfen-grove`
+- `chapter-two/lantern-lily-pool`
+- `chapter-two/bog-bridge`
+- `chapter-two/frogsong-lock`
+- `chapter-two/sunken-signpost`
+- `chapter-two/mist-pool`
+- `chapter-two/moss-gate`
+- `chapter-two/old-fen-shrine`
+- `chapter-two/glowfen-ferry`
+- `chapter-two/reedwatch-bank`
 - `chapter-three/mossline-switchyard`
 - `chapter-four/stormedge-rise`
 - `chapter-five/beacon-hill`
@@ -91,7 +101,7 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Later scene puzzles remain rotate-path repairs and need real playtesting.
 - A separate scene transition overlay exists between locations.
 - Speech/reaction bubbles are staggered so they do not all appear at once.
-- The title screen now describes the 100-repair route.
+- The title screen now describes the 101-repair route.
 - The final completion currently happens after `chapter-ten/celebration-square`.
 - Glow/mushroom plants are temporarily hidden in the renderer because the current sprite has internal white cutout fills and feels too bright for the rainy night palette. Make a replacement sprite later before turning them back on.
 
@@ -134,6 +144,16 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Chapter 2 playthrough polish started on `2026-06-24`: Glowfen Grove still passes as the hand-built side/front root-pump opener, while Lantern Lily Pool and Bog Bridge were moved off their top-down-looking painted sprites and back onto strengthened side-view renderers. Route/data checks still pass for all 100 scenes and Chapter 2 still advances into Chapter 3. See `chunks/77-chapter-two-playthrough-polish.md`.
 - Lantern Lily Pool received a new generated side-scroller sprite on `2026-06-24`: `assets/sprites/world/lantern-lily-pool-side-sprite.png` is now wired as `lanternLilyPoolSide`, replacing the too-quiet canvas fallback while avoiding the old top-down painted sprite. Preview passed at `http://127.0.0.1:5267/?scene=chapter-two/lantern-lily-pool&x=1120&preview=1&v=side-sprite`. See `chunks/78-lantern-lily-pool-side-sprite.md`.
 - Glowfen Grove was rebuilt as a full side-scroller wetland arrival scene on `2026-06-24`: `assets/sprites/world/glowfen-grove-side-scene.png` is now wired as `glowfenGroveSide`, with the older separate root-pump sprite suppressed for this repair. The pond/path reaches the foreground, the root pump is the main landmark, and previews passed on port `5268`. See `chunks/79-glowfen-grove-scene-rebuild.md`.
+- Chapter 2 side-view back-half polish landed on `2026-06-24`: Frogsong Lock through Reedwatch Bank were moved off their generated painted-landmark overrides and back onto bespoke side-view wetland landmarks, with stronger unfinished-state contrast for gates, markers, mist vents, ferry parts, and reedwatch guide posts. Route/data checks still pass for all 100 scenes, and browser previews passed on port `5280`. See `chunks/82-chapter-two-side-view-back-half-polish.md`.
+- Chapter 2 wetland sprite overhaul planning continued on `2026-06-24`: Chunk 89 is complete. The approved puzzle plan keeps the Chapter 1 rotate-path repair language, plans reusable wetland puzzle UI sprites under `assets/sprites/chapter-two/puzzles/`, and makes Chapter 2 a little harder through longer paths, extra branches/outputs, and clearer layout-reading rather than hazards, timers, punishment, or new mechanics. See `chunks/89-chapter-two-puzzle-sprite-and-difficulty-plan.md`.
+- Chapter 2 puzzle sprite production landed on `2026-06-24`: Chunk 90 is complete. The reusable wetland puzzle sprite set now lives in `assets/sprites/chapter-two/puzzles/`, with 256x256 transparent PNGs for wetland tile bases, boardwalk/reed/water conduit strokes, start/output nodes, selection frame, completion spark, and a contact sheet for review. No puzzle mechanics, scene code, renderer code, or registry wiring changed. See `chunks/90-chapter-two-puzzle-sprite-production.md`.
+- Chapter 2 sprite registry wiring landed on `2026-06-24`: Chunk 91 is complete. `src/rendering/sprites.js` now exposes `sprites.chapterTwo.backgrounds`, `paths`, `landmarks`, and `puzzles` for the new `assets/sprites/chapter-two/` files while keeping existing world sprite fallbacks intact. Import/path verification passed with 1 background, 1 path, 10 landmarks, and 9 puzzle sprites. No scene layout, renderer consumption, puzzle mechanics, or visible gameplay changed. See `chunks/91-chapter-two-sprite-registry-wiring.md`.
+- Chapter 2 shared background renderer landed on `2026-06-24`: Chunk 92 is complete. `src/rendering/backdropRenderer.js` now draws `sprites.chapterTwo.backgrounds.wetlandBackground` for `chapter-two/` scene ids before world layers, while non-Chapter-2 scenes stay on the existing painted scenery/code-hill fallback path. Renderer spy checks passed for Chapter 2 and Chapter 1 behavior, and route data still imports with 100 scenes. Local HTTP preview probing was unavailable because the managed shell could not connect to its own test server. See `chunks/92-chapter-two-shared-background-renderer.md`.
+- Chapter 2 walking path renderer landed on `2026-06-24`: Chunk 93 is complete. `src/rendering/worldRenderer.js` now routes `chapter-two/` scene ids through a shared wetland ground/path renderer that draws the registered `boardwalk-stepping-path.png` over a shallow-water band, with a canvas boardwalk/stone fallback if the sprite is unavailable. Renderer spy checks confirmed Chapter 2 uses the boardwalk path and Chapter 1 still uses the generic path tile; route data still imports with 100 scenes. See `chunks/93-chapter-two-walking-path-renderer.md`.
+- Chapter 2 transition scene landed on `2026-06-24`: Chunk 94 is complete. Added `chapter-two/wetland-approach` between Festival Square and Glowfen Grove, giving the player a short village-path-to-wetland threshold with one gentle waymark repair before the first full wetland repair. The full route is now 101 scenes, with sequential catalog numbering, progress restore support for `wetland-waymark`, and a small bespoke transition renderer that still uses the shared Chapter 2 boardwalk path. See `chunks/94-chapter-two-transition-scene.md`.
+- Chapter 2 opener and early route scene rewire landed on `2026-06-24`: Chunk 95 is complete. Glowfen Grove, Lantern Lily Pool, Bog Bridge, and Frogsong Lock now use the shared Chapter 2 wetland background/path direction with isolated `assets/sprites/chapter-two/landmarks/` foreground repair sprites through the painted-landmark renderer. Wetland Approach remains the transition scene between Festival Square and Glowfen Grove, puzzle mechanics and difficulty tuning were left for later chunks, and the route still flows onward to Sunken Signpost. Source/data checks passed; local HTTP preview probing was blocked by managed-shell `EPERM`. See `chunks/95-chapter-two-scene-rewire-opener-and-early-route.md`.
+- Chapter 2 back-half scene rewire landed on `2026-06-24`: Chunk 96 is complete. Sunken Signpost, Mist Pool, Moss Gate, Old Fen Shrine, Glowfen Ferry, and Reedwatch Bank now use isolated `assets/sprites/chapter-two/landmarks/` foreground repair sprites through the shared painted-landmark renderer. The full active Chapter 2 route now uses the shared wetland background/path plus Chapter 2 landmark sprite direction from Glowfen Grove through Reedwatch Bank, and Reedwatch Bank still routes into Mossline Switchyard. In-app browser previews passed on port `5296` for the six back-half scenes with no captured warnings or errors. Puzzle mechanics and difficulty tuning were left for Chunk 97. See `chunks/96-chapter-two-scene-rewire-back-half.md`.
+- Chapter 2 puzzle difficulty pass landed on `2026-06-24`: Chunk 97 is complete. `src/interaction/repairPuzzle.js` now supports optional per-repair layout IDs, and the ten active post-transition Chapter 2 repairs from Glowfen Grove through Reedwatch Bank use tuned wetland layouts that add longer paths, branches, more outputs, and a compact 4x3 final Reedwatch board while preserving the same rotate-path rules. Wetland Approach remains the gentle transition repair. Automated solvability checks passed for all ten tuned layouts, no tuned layout starts complete, the 101-scene route still flows into Mossline Switchyard, and an in-app browser check opened the Reedwatch 4x3 puzzle overlay with no captured warnings or errors. See `chunks/97-chapter-two-puzzle-difficulty-pass.md`.
 - Chapter 3 route sprite wiring started on `2026-06-23`: Mossline Switchyard now uses `mossline-switchyard-painted.png` through the shared `paintedLandmark` path after review, with the older hand-built switchyard renderer kept as fallback, the generic signpost hidden, and the generic repair marker removed. Local preview and asset probes passed at `http://127.0.0.1:5248/?scene=chapter-three/mossline-switchyard&preview=1`, `http://127.0.0.1:5248/?scene=chapter-three/mossline-switchyard&x=1120&preview=1`, and the painted asset URL. See `chunks/74-chapter-three-route-sprite-wiring.md`.
 - Chapter 3 route sprite wiring continued on `2026-06-23`: Cargo Cart Turntable now uses `cargo-cart-turntable-painted.png` through the shared `paintedLandmark` path after review, with the older hand-built turntable/cart renderer kept as fallback, the generated green PNG background cleaned to transparency, loose gear/coil props and conduit-coil clutter removed, and the generic repair marker hidden. Local preview and asset probes passed at `http://127.0.0.1:5249/?scene=chapter-three/cargo-cart-turntable&x=1120&preview=1` and the painted asset URL. See `chunks/74-chapter-three-route-sprite-wiring.md`.
 - Chapter 3 route sprite wiring continued on `2026-06-23`: Signal Arm Row now uses `signal-arm-row-painted.png` through the shared `paintedLandmark` path after review, with the older hand-built semaphore/rail renderer kept as fallback, the generated green PNG background cleaned to transparency, loose gear/coil/seed props and conduit-coil clutter removed, and the generic repair marker hidden. See `chunks/74-chapter-three-route-sprite-wiring.md`.
@@ -194,11 +214,11 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 
 ## Suggested Next Step
 
-The route-order sprite wiring pass now covers Chapters 1-10.
+Continue the Chapter 2 wetland overhaul sequence with Chunk 98: Chapter Two Route QA and Visual Polish.
 
 Next likely stop:
 
-1. Do a full-route visual QA pass from `chapter-one/starlight-village` through `chapter-ten/celebration-square`.
-2. Human-playtest later route puzzles, especially Chapters 5-10.
-3. Continue broader polish such as audio/weather, final-scene completion feel, and any screenshot-driven visual fixes.
-4. Keep the format rule for future scene edits: one strong side-view landmark, no random houses, no loose repair props, and no generic marker unless intentionally needed.
+1. QA the full active Chapter 2 route from Wetland Approach through Reedwatch Bank.
+2. Check visual consistency, route flow, puzzle overlay readability, and scene transitions into Mossline Switchyard.
+3. Keep fixes narrow: polish only issues found in Chapter 2 route QA.
+4. Preserve the existing repair loop and Chapter 2 difficulty tuning.

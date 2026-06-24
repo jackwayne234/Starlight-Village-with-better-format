@@ -19,12 +19,14 @@ export function createSunkenSignpostScene() {
     markerRaised: false
   };
   scene.paintedLandmark = {
-    sprite: "sunkenSignpost",
+    source: "chapterTwoLandmarks",
+    sprite: "sunkenRouteMarker",
     state: scene.sunkenSignpost,
     x: 1160,
-    groundY: 674,
-    height: 500,
-    glow: { heightRatio: 0.52, radius: 154, fixedIntensity: 0.4, dimIntensity: 0.14, pulse: 0.05 }
+    groundY: 748,
+    height: 430,
+    wetlandBlend: { yOffset: -54, widthRatio: 0.76, height: 128 },
+    glow: { xOffset: -8, heightRatio: 0.58, radius: 190, fixedIntensity: 0.38, dimIntensity: 0.13, pulse: 0.05 }
   };
   scene.layers = {
     trees: [
@@ -69,6 +71,7 @@ export function createSunkenSignpostScene() {
       id: "sunken-signpost",
       kind: "path-puzzle",
       puzzleTheme: "junction-line",
+      puzzleLayout: "ch2-sunken-signpost",
       x: 1160,
       y: 552,
       radius: 275,

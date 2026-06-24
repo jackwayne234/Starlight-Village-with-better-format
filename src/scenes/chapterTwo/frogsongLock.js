@@ -19,12 +19,14 @@ export function createFrogsongLockScene() {
     gateOpen: false
   };
   scene.paintedLandmark = {
+    source: "chapterTwoLandmarks",
     sprite: "frogsongLock",
     state: scene.frogsongLock,
     x: 1160,
-    groundY: 674,
-    height: 500,
-    glow: { heightRatio: 0.48, radius: 168, fixedIntensity: 0.42, dimIntensity: 0.16, pulse: 0.06 }
+    groundY: 748,
+    height: 420,
+    wetlandBlend: { yOffset: -56, widthRatio: 0.92, height: 132 },
+    glow: { xOffset: 0, heightRatio: 0.56, radius: 220, fixedIntensity: 0.4, dimIntensity: 0.14, pulse: 0.05 }
   };
   scene.layers = {
     trees: [
@@ -69,6 +71,7 @@ export function createFrogsongLockScene() {
       id: "frogsong-lock",
       kind: "path-puzzle",
       puzzleTheme: "root-pump",
+      puzzleLayout: "ch2-frogsong-lock",
       x: 1160,
       y: 552,
       radius: 275,

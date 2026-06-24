@@ -14,12 +14,14 @@ export function createOldFenShrineScene() {
   scene.backdrop = { moonX: 920, moonY: 132, cloudDrift: 0.95, hillOffset: 70, ridgeOffset: 104 };
   scene.oldFenShrine = { x: 1160, groundY: 650, fixed: false, bowlsAligned: false };
   scene.paintedLandmark = {
-    sprite: "oldFenShrine",
+    source: "chapterTwoLandmarks",
+    sprite: "rainBowlMarker",
     state: scene.oldFenShrine,
     x: 1160,
-    groundY: 674,
-    height: 480,
-    glow: { heightRatio: 0.52, radius: 170, fixedIntensity: 0.42, dimIntensity: 0.13, pulse: 0.06 }
+    groundY: 744,
+    height: 405,
+    wetlandBlend: { yOffset: -50, widthRatio: 0.72, height: 120 },
+    glow: { xOffset: 0, heightRatio: 0.56, radius: 185, fixedIntensity: 0.38, dimIntensity: 0.13, pulse: 0.05 }
   };
   scene.layers = {
     trees: [
@@ -68,6 +70,7 @@ export function createOldFenShrineScene() {
       id: "old-fen-shrine",
       kind: "path-puzzle",
       puzzleTheme: "beacon-signal",
+      puzzleLayout: "ch2-old-fen-shrine",
       x: 1160,
       y: 548,
       radius: 270,

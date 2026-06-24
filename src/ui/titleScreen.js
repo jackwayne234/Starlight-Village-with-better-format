@@ -101,7 +101,7 @@ function drawSubtitle(ctx, x, y) {
   ctx.textAlign = "center";
   ctx.fillStyle = "rgba(190, 224, 232, 0.92)";
   ctx.font = "600 19px system-ui, sans-serif";
-  ctx.fillText("One hundred rainy repairs across Starlight Village", x, y);
+  ctx.fillText("One hundred and one rainy repairs across Starlight Village", x, y);
 }
 
 function drawStartPrompt(ctx, x, y, time) {

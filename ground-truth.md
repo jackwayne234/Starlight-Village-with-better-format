@@ -1,5 +1,387 @@
 # stormlight village — Ground Truth
 
+## Chapter 2 Ground Truth — 25 Question Planning Pass
+
+Status: complete — 25/25 answered. Awaiting user permission before implementation.
+
+This section is the working source of truth for Chapter 2. Use these answers when planning and implementing Chapter 2 changes.
+
+### Chapter 2 Q1 — Overall Feel and Background
+
+**Question:** What should Chapter 2 mainly feel like?
+
+**Options offered:**
+1. Mysterious wetland adventure with gentle puzzle tension — recommended
+2. Darker, scarier swamp chapter
+3. Cozy exploration with very light danger
+4. Fast-paced action chapter
+
+**User answer:** Wetland background. Totally new background for this chapter that's a wetland, side-scroller, with gentle puzzle tension, and a little harder than Chapter 1.
+
+**Locked decision:** Chapter 2 should have a totally new side-scroller wetland background and identity. The tone should be mysterious/gentle puzzle tension, not scary or action-heavy. Difficulty should be a small step up from Chapter 1.
+
+### Chapter 2 Q2 — Wetland Background Contents
+
+**Question:** What should the new Chapter 2 wetland background show most clearly?
+
+**Options offered:**
+1. Deep marsh pools, reeds, mist, and glowing water plants — recommended
+2. A flooded village edge with houses half-swallowed by water
+3. A forest swamp with mostly trees and muddy paths
+4. Ancient ruins in a wetland, with stone gates and old markers
+
+**User answer:** 1.
+
+**Locked decision:** The Chapter 2 background should clearly feature deep marsh pools, reeds, mist, and glowing water plants.
+
+### Chapter 2 Q3 — Puzzle Difficulty Increase
+
+**Question:** How should Chapter 2's puzzles be harder than Chapter 1?
+
+**Options offered:**
+1. Same puzzle type, but with more tiles/steps and fewer obvious solutions — recommended
+2. Add a new puzzle type just for Chapter 2
+3. Add time pressure or hazards
+4. Keep puzzles about the same difficulty; make the world feel harder instead
+
+**User answer:** A.
+
+**Locked decision:** Chapter 2 should keep the same puzzle language as Chapter 1, but increase difficulty with more tiles/steps and fewer obvious solutions. Do not add time pressure or a totally new puzzle type for this chapter unless later answers override this.
+
+### Chapter 2 Q4 — Visual Difference from Chapter 1
+
+**Question:** How different should Chapter 2 feel from Chapter 1 visually?
+
+**Options offered:**
+1. Clearly new biome, but still the same cozy rainy game — recommended
+2. Very different, almost like entering another world
+3. Mostly the same as Chapter 1, with small wetland additions
+4. More colorful and magical than Chapter 1 by a lot
+
+**User answer:** A.
+
+**Locked decision:** Chapter 2 should read as a clearly new wetland biome while still feeling like the same cozy rainy game.
+
+### Chapter 2 Q5 — Main Visual Landmark Style
+
+**Question:** What should be the main visual landmark style for Chapter 2 scenes?
+
+**Options offered:**
+1. One strong side-view wetland landmark per scene — recommended
+2. Lots of small decorative objects everywhere
+3. Big painted background first, landmarks less important
+4. Reuse Chapter 1-style village landmarks with wetland dressing
+
+**User answer:** C.
+
+**Locked decision:** Chapter 2 should prioritize a big, cohesive painted wetland background. Scene landmarks still matter, but they should support the background and mood rather than overpowering the chapter.
+
+### Chapter 2 Q6 — Scene-to-Scene Variety
+
+**Question:** How should Chapter 2 handle scene-to-scene variety if the big wetland background comes first?
+
+**Options offered:**
+1. Same background style, with each scene changing the foreground puzzle area — recommended
+2. Each scene gets a totally different wetland background
+3. Mostly the same view every time, only the puzzle changes
+4. Background slowly changes from village edge to deeper marsh across the chapter
+
+**User answer:** A.
+
+**Locked decision:** Chapter 2 should use one cohesive wetland background style across scenes. Scene variety should mostly come from the foreground puzzle area, repair object, and local wetland details.
+
+### Chapter 2 Q7 — Foreground Puzzle Area
+
+**Question:** What should the foreground puzzle area look like most often?
+
+**Options offered:**
+1. Wooden walkways, stepping stones, reeds, and shallow water — recommended
+2. Mud paths and tree roots
+3. Old stone ruins and shrine pieces
+4. Floating platforms and magical lily pads as the main path
+
+**User answer:** A.
+
+**Locked decision:** Chapter 2 foreground puzzle areas should most often use wooden walkways, stepping stones, reeds, and shallow water.
+
+### Chapter 2 Q8 — Magic Level
+
+**Question:** How magical should the wetland feel?
+
+**Options offered:**
+1. Subtle magic: glowing plants and puzzle lights, still grounded — recommended
+2. Very magical: bright spirits, floating lights, fantasy glow everywhere
+3. Mostly natural, almost no magic except repair effects
+4. Strange and eerie magic, more unsettling than cozy
+
+**User answer:** C.
+
+**Locked decision:** Chapter 2 should feel mostly natural. Magic should be restrained and mostly appear through repair effects, puzzle feedback, and necessary gameplay readability.
+
+### Chapter 2 Q9 — Repair Job Focus
+
+**Question:** What kind of repair jobs should Chapter 2 focus on?
+
+**Options offered:**
+1. Practical wetland crossings: pumps, gates, bridges, ferries, markers — recommended
+2. Mostly nature-healing jobs like plants, water, roots, and animals
+3. Ancient shrine mechanisms and old wetland ruins
+4. Village utility repairs carried into the wetland, like wires and lanterns
+
+**User answer:** A.
+
+**Locked decision:** Chapter 2 repair jobs should focus on practical wetland crossings and navigation systems: pumps, gates, bridges, ferries, and markers.
+
+### Chapter 2 Q10 — Difficulty Signal
+
+**Question:** How should Chapter 2 communicate "a little harder than Chapter 1" to the player?
+
+**Options offered:**
+1. More complex puzzle layouts, but calm pacing and no punishment — recommended
+2. Less guidance from the robot
+3. More dangerous-looking environment
+4. Longer scenes with more walking before each repair
+
+**User answer:** A.
+
+**Locked decision:** Chapter 2 should feel harder through more complex puzzle layouts while keeping calm pacing, clear guidance, and no punishment.
+
+### Chapter 2 Q11 — Robot Role
+
+**Question:** What should the robot's role be in Chapter 2?
+
+**Options offered:**
+1. Helpful companion with short hints and gentle reactions — recommended
+2. More silent, letting the player figure things out
+3. More talkative and story-focused
+4. Slightly nervous about the wetland, adding tension through dialogue
+
+**User answer:** A.
+
+**Locked decision:** The robot should remain a helpful companion in Chapter 2, giving short hints and gentle reactions without becoming too talkative.
+
+### Chapter 2 Q12 — Story Amount
+
+**Question:** How much story should Chapter 2 add?
+
+**Options offered:**
+1. Light story through setting, repairs, and short dialogue — recommended
+2. A clear chapter plot with beginning, middle, and end
+3. Almost no story, mostly pure puzzle locations
+4. More character dialogue and emotional beats than Chapter 1
+
+**User answer:** A.
+
+**Locked decision:** Chapter 2 should use light story through setting, repair purpose, and short dialogue. It should not become dialogue-heavy or plot-heavy.
+
+### Chapter 2 Q13 — Chapter Opening
+
+**Question:** How should Chapter 2 begin?
+
+**Options offered:**
+1. Immediate arrival into the new wetland with a clear first repair — recommended
+2. A short transition scene leaving Chapter 1
+3. A dialogue moment explaining why they are entering the wetland
+4. A quiet visual reveal before any repair appears
+
+**User answer:** B.
+
+**Locked decision:** Chapter 2 should begin with a short transition scene leaving Chapter 1 before the player is fully in the wetland.
+
+### Chapter 2 Q14 — Transition Scene Feel
+
+**Question:** What should that transition scene feel like?
+
+**Options offered:**
+1. Leaving the village path and seeing the wetland open ahead — recommended
+2. Crossing a small bridge from town into the marsh
+3. Following water/light from the repaired Chapter 1 area
+4. The robot detects a problem deeper in the wetland and leads the way
+
+**User answer:** A.
+
+**Locked decision:** The Chapter 2 transition should feel like leaving the village path and seeing the wetland open ahead.
+
+### Chapter 2 Q15 — Chapter Ending
+
+**Question:** How should Chapter 2 end?
+
+**Options offered:**
+1. The wetland path is restored and opens the way to Chapter 3 — recommended
+2. A bigger final wetland puzzle with a special completion moment
+3. A story reveal about what is causing problems in later chapters
+4. Quietly, with the last repair leading straight into Chapter 3 without much ceremony
+
+**User answer:** A.
+
+**Locked decision:** Chapter 2 should end with the wetland path restored and the way opened to Chapter 3.
+
+### Chapter 2 Q16 — Polish Scope
+
+**Question:** How many Chapter 2 scenes should feel fully custom/polished in this pass?
+
+**Options offered:**
+1. All Chapter 2 scenes should be brought to the new wetland standard — recommended
+2. Only the opener, midpoint, and final scene
+3. Just the first 3 scenes for now
+4. One scene as a prototype before touching the rest
+
+**User answer:** A.
+
+**Locked decision:** All Chapter 2 scenes should be brought to the new wetland standard in this pass.
+
+### Chapter 2 Q17 — Background System
+
+**Question:** Should Chapter 2 use one shared new background image/system, or separate custom background art per scene?
+
+**Options offered:**
+1. One shared Chapter 2 wetland background system, with foreground variation — recommended
+2. Separate custom background art for every Chapter 2 scene
+3. A few shared backgrounds for early/mid/late Chapter 2
+4. Mostly code-drawn background, no big new image system
+
+**User answer:** A.
+
+**Locked decision:** Chapter 2 should use one shared wetland background system with foreground variation per scene.
+
+### Chapter 2 Q18 — Existing Painted Landmark Sprites
+
+**Question:** What should happen to the current Chapter 2 generated painted landmark sprites?
+
+**Options offered:**
+1. Use only if they fit the new side-scroller wetland direction; otherwise replace/avoid — recommended
+2. Remove them all from Chapter 2
+3. Keep them all, even if they feel different
+4. Use them as small background decorations only
+
+**User answer:** A.
+
+**Locked decision:** Existing Chapter 2 generated painted landmark sprites may be used only if they fit the new side-scroller wetland direction. Replace or avoid any that feel top-down, angled, isometric, or inconsistent with the shared wetland background system.
+
+### Chapter 2 Q19 — Core Scene Interaction Loop
+
+**Question:** How should the player know where to go in Chapter 2 without obvious arrow signs?
+
+**Options offered:**
+1. Environmental guidance: lit paths, walkways, markers, and cleared crossings — recommended
+2. Keep subtle arrow signs
+3. Use robot dialogue to tell the player each next location
+4. Make the route linear enough that no guidance is needed visually
+
+**User answer:** The player arrives at the repair area, they walk to the right, the robot detects the repair, the puzzle pops up, the player does the puzzle, they celebrate a little, the player clicks the spacebar or E and then it transitions to another scene.
+
+**Locked decision:** Chapter 2 should follow a simple repeatable scene loop: player arrives, walks right to the repair area, robot detects the repair, puzzle opens, player solves it, there is a small celebration, then Space or E advances to the next scene. Environmental route guidance can support this, but the core flow should be this repair loop.
+
+### Chapter 2 Q20 — Repair Celebration and Gameplay Boundary
+
+**Question:** How much celebration should happen after each Chapter 2 repair?
+
+**Options offered:**
+1. Small and quick: a little visual change, short reaction, then continue prompt — recommended
+2. Bigger than Chapter 1, with more animation and dialogue
+3. Almost none; immediately prepare the next scene
+4. Different celebration size depending on how important the repair is
+
+**User answer:** The same type of celebration as Chapter 1 for when they did their repairs. The only thing that needs overhauled is the biome/background picture and walkway, and landmarks to match this biome. The gameplay will be the same. The puzzles will just be a little harder.
+
+**Locked decision:** Chapter 2 should keep the same gameplay flow and same repair celebration style as Chapter 1. The overhaul should focus on the new wetland biome/background, walkway/foreground path, and landmarks matching that biome. Puzzles should be a little harder, but gameplay should otherwise stay the same.
+
+### Chapter 2 Q21 — Walkway Feel
+
+**Question:** What should the Chapter 2 walkway feel like under the player?
+
+**Options offered:**
+1. Stable wooden boardwalk mixed with stepping stones over shallow water — recommended
+2. Mostly muddy natural ground with occasional planks
+3. Narrow, broken planks that feel risky but still cozy
+4. Magical glowing lily-pad path, even though the biome stays mostly natural
+
+**User answer:** A.
+
+**Locked decision:** Chapter 2's playable walkway should feel like a stable wooden boardwalk mixed with stepping stones over shallow water.
+
+### Chapter 2 Q22 — Sprite Art Production
+
+**Question:** Should the new wetland background be generated as bitmap art, drawn in canvas code, or a mix?
+
+**Options offered:**
+1. Generate bitmap background art, then use canvas/code for foreground gameplay pieces — recommended
+2. Draw everything in canvas code
+3. Generate separate bitmap art for background and every foreground landmark
+4. Use existing assets only, no new generated art
+
+**User answer:** You should create the art. I think they are called sprites. Make a Chapter 2 sprite folder, include background sprite, walking path sprite, landmark sprites, and puzzle sprites.
+
+**Locked decision:** Chapter 2 should get newly created sprite art in its own Chapter 2 sprite folder. That folder should include a wetland background sprite, walking path sprite, landmark sprites, and puzzle sprites. The implementation should use these sprites as the basis for the Chapter 2 biome overhaul.
+
+### Chapter 2 Q23 — Sprite Folder Organization
+
+**Question:** How should the Chapter 2 sprite folder be organized?
+
+**Options offered:**
+1. By type: `backgrounds`, `paths`, `landmarks`, `puzzles` — recommended
+2. By scene: one folder per Chapter 2 scene
+3. One flat folder with all Chapter 2 sprites together
+4. Two folders only: `background` and `foreground`
+
+**User answer:** A.
+
+**Locked decision:** Organize Chapter 2 sprites by type using folders such as `backgrounds`, `paths`, `landmarks`, and `puzzles`.
+
+### Chapter 2 Q24 — First Implementation Chunk
+
+**Question:** What should be the first implementation chunk after planning?
+
+**Options offered:**
+1. Build the Chapter 2 sprite folder and generate/import the shared wetland background + path first — recommended
+2. Rework all Chapter 2 scene code first using placeholder sprites
+3. Make one complete prototype scene first, then expand
+4. Adjust puzzle difficulty first before touching visuals
+
+**User answer:** A.
+
+**Locked decision:** The first implementation chunk should build the Chapter 2 sprite folder and create/import the shared wetland background and walking path sprites before scene rewiring or puzzle-difficulty changes.
+
+### Chapter 2 Q25 — Permission Before Implementation
+
+**Question:** After the Chapter 2 planning file is complete, should I wait for your permission before making sprites/code changes?
+
+**Options offered:**
+1. Yes, summarize the ground truth and ask permission first — recommended
+2. No, start immediately from the answers
+3. Make only the sprite folders immediately, then wait
+4. Start with a small prototype scene, then ask permission before the rest
+
+**User answer:** A.
+
+**Locked decision:** After the Chapter 2 planning file is complete, summarize the ground truth and ask for permission before making sprite, code, or implementation changes.
+
+## Chapter 2 Chunk Plan
+
+Status: drafted. Implementation permission has not been granted in this section.
+
+Use these chunk files as the execution plan for the Chapter 2 wetland overhaul:
+
+| Chunk | Title | Status |
+|-------|-------|--------|
+| 83 | Chapter Two Sprite Folder Scaffold | complete |
+| 84 | Chapter Two Art Direction Spec | complete |
+| 85 | Chapter Two Shared Wetland Background Sprite | complete |
+| 86 | Chapter Two Walking Path Sprite | complete |
+| 87 | Chapter Two Landmark Sprite Plan | complete |
+| 88 | Chapter Two Landmark Sprite Production | complete |
+| 89 | Chapter Two Puzzle Sprite and Difficulty Plan | complete |
+| 90 | Chapter Two Puzzle Sprite Production | complete |
+| 91 | Chapter Two Sprite Registry Wiring | complete |
+| 92 | Chapter Two Shared Background Renderer | complete |
+| 93 | Chapter Two Walking Path Renderer | complete |
+| 94 | Chapter Two Transition Scene | complete |
+| 95 | Chapter Two Scene Rewire: Opener and Early Route | planned |
+| 96 | Chapter Two Scene Rewire: Back Half | planned |
+| 97 | Chapter Two Puzzle Difficulty Pass | planned |
+| 98 | Chapter Two Route QA and Visual Polish | planned |
+| 99 | Chapter Two Handoff and Checkpoint | planned |
+
 ## Purpose of This File
 
 A `ground-truth.md` file is the project’s source of truth. It tells the AI what the project is, what decisions have already been made, what still needs to be asked, what progress has happened, and whether the AI has permission to start working. The point is to stop the AI from guessing, restarting, forgetting context, or building before you’ve approved the direction.

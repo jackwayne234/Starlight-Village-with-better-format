@@ -203,7 +203,7 @@ function scanLine(entry) {
 }
 
 function rewardLine(entry) {
-  if (entry.number === fullGameScenes.length) return "All one hundred repairs are logged as stable.";
+  if (entry.number === fullGameScenes.length) return "All one hundred and one repairs are logged as stable.";
   return `${entry.title} is stable. That makes ${entry.number} repairs.`;
 }
 

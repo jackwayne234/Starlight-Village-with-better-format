@@ -64,6 +64,56 @@ const layouts = {
     [tile("start", 0, true), tile("tee", 2), tile("output", 0, true)],
     [tile("blank", 0, true), tile("line", 0), tile("blank", 0, true)],
     [tile("output", 2, true), tile("tee", 0), tile("output", 0, true)]
+  ],
+  "ch2-glowfen-grove": [
+    [tile("start", 0, true), tile("turn", 0), tile("blank", 0, true)],
+    [tile("blank", 0, true), tile("line", 1), tile("turn", 2)],
+    [tile("blank", 0, true), tile("turn", 3), tile("output", 0, true)]
+  ],
+  "ch2-lantern-lily-pool": [
+    [tile("start", 0, true), tile("tee", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("line", 1), tile("blank", 0, true)],
+    [tile("blank", 0, true), tile("turn", 0), tile("output", 0, true)]
+  ],
+  "ch2-bog-bridge": [
+    [tile("start", 0, true), tile("tee", 2), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("line", 0), tile("turn", 3)],
+    [tile("blank", 0, true), tile("turn", 1), tile("output", 0, true)]
+  ],
+  "ch2-frogsong-lock": [
+    [tile("start", 0, true), tile("tee", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("line", 0), tile("blank", 0, true)],
+    [tile("output", 2, true), tile("tee", 0), tile("output", 0, true)]
+  ],
+  "ch2-sunken-signpost": [
+    [tile("start", 0, true), tile("tee", 2), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("line", 0), tile("blank", 0, true)],
+    [tile("blank", 0, true), tile("turn", 1), tile("output", 0, true)]
+  ],
+  "ch2-mist-pool": [
+    [tile("start", 0, true), tile("turn", 0), tile("blank", 0, true)],
+    [tile("blank", 0, true), tile("tee", 2), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("turn", 0), tile("output", 0, true)]
+  ],
+  "ch2-moss-gate": [
+    [tile("start", 0, true), tile("tee", 2), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("line", 1), tile("blank", 0, true)],
+    [tile("output", 2, true), tile("tee", 0), tile("output", 0, true)]
+  ],
+  "ch2-old-fen-shrine": [
+    [tile("start", 0, true), tile("tee", 2), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("line", 0), tile("blank", 0, true)],
+    [tile("output", 2, true), tile("tee", 1), tile("output", 0, true)]
+  ],
+  "ch2-glowfen-ferry": [
+    [tile("start", 0, true), tile("turn", 0), tile("blank", 0, true)],
+    [tile("blank", 0, true), tile("line", 0), tile("blank", 0, true)],
+    [tile("output", 2, true), tile("tee", 1), tile("output", 0, true)]
+  ],
+  "ch2-reedwatch-bank": [
+    [tile("start", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("line", 0), tile("blank", 0, true), tile("blank", 0, true)],
+    [tile("output", 2, true), tile("tee", 0), tile("line", 1), tile("output", 0, true)]
   ]
 };
 
@@ -202,11 +252,75 @@ const themes = {
   }
 };
 
-export function createRepairPuzzle(themeId) {
-  const tiles = cloneTiles(layouts[themeId] ?? layouts["glow-bridge"]);
-  const theme = createTheme(themeId);
+const layoutThemes = {
+  "ch2-glowfen-grove": {
+    title: "Glowfen Root Channels",
+    instructions: "Rotate the root paths to carry glow through the pump without flooding the side channel.",
+    objective: "Wake the pump.",
+    successMessage: "Root channels linked. Glowfen pump is awake."
+  },
+  "ch2-lantern-lily-pool": {
+    title: "Lantern Lily Crossing",
+    instructions: "Rotate the lily paths so glow reaches both crossing markers.",
+    objective: "Light the lilies.",
+    successMessage: "Lily crossing linked. The pool path is lit."
+  },
+  "ch2-bog-bridge": {
+    title: "Bog Bridge Stones",
+    instructions: "Rotate the bridge paths to raise the main stones and carry glow to the far marker.",
+    objective: "Raise the bridge.",
+    successMessage: "Bog bridge linked. The stones hold steady."
+  },
+  "ch2-frogsong-lock": {
+    title: "Frogsong Lock",
+    instructions: "Rotate the reed paths so one shared root line reaches every call stone.",
+    objective: "Tune the stones.",
+    successMessage: "Call stones linked. The reed gate is listening."
+  },
+  "ch2-sunken-signpost": {
+    title: "Sunken Marker Line",
+    instructions: "Rotate the marker paths to lift both route lights without needing an arrow.",
+    objective: "Raise the marker.",
+    successMessage: "Route marker linked. The wetland path is clear."
+  },
+  "ch2-mist-pool": {
+    title: "Mist Vent Channels",
+    instructions: "Rotate the vent paths through the center so warm water reaches both stones.",
+    objective: "Thin the mist.",
+    successMessage: "Vent channels linked. The mist is low."
+  },
+  "ch2-moss-gate": {
+    title: "Moss Gate Roots",
+    instructions: "Rotate the root paths so the shared trunk feeds all three gate sockets.",
+    objective: "Open the gate.",
+    successMessage: "Gate roots linked. The moss gate opens."
+  },
+  "ch2-old-fen-shrine": {
+    title: "Rain Bowl Signal",
+    instructions: "Rotate the signal paths so rain reaches each bowl in the right order.",
+    objective: "Align the bowls.",
+    successMessage: "Rain bowls linked. The stones ring clear."
+  },
+  "ch2-glowfen-ferry": {
+    title: "Ferry Pulley Line",
+    instructions: "Rotate the pulley paths so the dock posts pull the ferry back together.",
+    objective: "Dock the ferry.",
+    successMessage: "Pulley line linked. The ferry is docked."
+  },
+  "ch2-reedwatch-bank": {
+    title: "Reedwatch Marker Grid",
+    instructions: "Rotate the marker paths so the guide light reaches all three reedwatch posts.",
+    objective: "Light the exit.",
+    successMessage: "Reedwatch markers linked. The road out is lit."
+  }
+};
+
+export function createRepairPuzzle(themeId, layoutId = themeId) {
+  const tiles = cloneTiles(layouts[layoutId] ?? layouts[themeId] ?? layouts["glow-bridge"]);
+  const theme = createTheme(themeId, layoutId);
   const puzzle = {
     themeId,
+    layoutId,
     title: theme.title,
     theme,
     rows: tiles.length,
@@ -220,14 +334,17 @@ export function createRepairPuzzle(themeId) {
   return puzzle;
 }
 
-function createTheme(themeId) {
+function createTheme(themeId, layoutId) {
   const theme = themes[themeId] ?? {};
+  const layoutTheme = layoutThemes[layoutId] ?? {};
   return {
     ...defaultTheme,
     ...theme,
+    ...layoutTheme,
     colors: {
       ...defaultTheme.colors,
-      ...(theme.colors ?? {})
+      ...(theme.colors ?? {}),
+      ...(layoutTheme.colors ?? {})
     }
   };
 }

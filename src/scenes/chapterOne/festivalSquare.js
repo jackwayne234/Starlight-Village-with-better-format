@@ -86,8 +86,8 @@ export function createFestivalSquareScene() {
       puzzleText: "Rotate the lantern paths to power the square.",
       rewardText: "Festival square restored. The star lantern points toward Glowfen.",
       onwardText: "The village core is shining through the rain.",
-      nextText: "Glowfen Grove is next.",
-      nextSceneId: "chapter-two/glowfen-grove",
+      nextText: "Wetland Approach is next.",
+      nextSceneId: "chapter-two/wetland-approach",
       chapterComplete: {
         title: "Chapter 1 Complete",
         subtitle: "Starlight's first lights are awake, and the first waymark toward Glowfen is lit.",
@@ -96,7 +96,7 @@ export function createFestivalSquareScene() {
           "Rural paths, awnings, bridge, and drain secured",
           "Festival Square star lantern lit toward Glowfen"
         ],
-        prompt: "Press Space to continue to Glowfen Grove"
+        prompt: "Press Space to continue to Wetland Approach"
       },
       reactions: [
         { text: "The star lantern is bright!", x: 1160, y: 310 },
@@ -105,7 +105,7 @@ export function createFestivalSquareScene() {
       dialogue: {
         scan: { speaker: "robot", text: "The square has one very important unlit star." },
         puzzle: { speaker: "player", text: "Then let's give the village a center again." },
-        reward: { speaker: "robot", text: "Village core complete. Glowfen Grove is open." },
+        reward: { speaker: "robot", text: "Village core complete. The wetland approach is open." },
         next: { speaker: "player", text: "Into the wetlands, then." }
       }
     }

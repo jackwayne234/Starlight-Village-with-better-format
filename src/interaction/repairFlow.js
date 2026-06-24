@@ -76,7 +76,7 @@ export function updateRepairFlow(scene, input, dt) {
 
 function updatePathPuzzleRepair(scene, input, target) {
   if (!target.puzzle) {
-    target.puzzle = createRepairPuzzle(target.puzzleTheme);
+    target.puzzle = createRepairPuzzle(target.puzzleTheme, target.puzzleLayout);
   }
 
   if (input.consume("ArrowUp") || input.consume("KeyW")) {
@@ -465,6 +465,19 @@ function applyRepairEffect(scene, target) {
     if (scene.observatory?.tower) scene.observatory.tower.lit = true;
     scene.layers.lamps.forEach((lamp) => {
       lamp.lit = true;
+    });
+  }
+
+  if (target.id === "wetland-waymark") {
+    if (scene.wetlandApproach) {
+      scene.wetlandApproach.fixed = true;
+      scene.wetlandApproach.waymarkLit = true;
+    }
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
     });
   }
 }

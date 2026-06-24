@@ -69,3 +69,21 @@ High-level list only. All details live inside each chunk file.
 | 77 | Chapter Two Playthrough Polish | complete |
 | 78 | Lantern Lily Pool Side Sprite | complete |
 | 79 | Glowfen Grove Scene Rebuild | complete |
+| 82 | Chapter Two Side-View Back-Half Polish | complete |
+| 83 | Chapter Two Sprite Folder Scaffold | complete |
+| 84 | Chapter Two Art Direction Spec | complete |
+| 85 | Chapter Two Shared Wetland Background Sprite | complete |
+| 86 | Chapter Two Walking Path Sprite | complete |
+| 87 | Chapter Two Landmark Sprite Plan | complete |
+| 88 | Chapter Two Landmark Sprite Production | complete |
+| 89 | Chapter Two Puzzle Sprite and Difficulty Plan | complete |
+| 90 | Chapter Two Puzzle Sprite Production | complete |
+| 91 | Chapter Two Sprite Registry Wiring | complete |
+| 92 | Chapter Two Shared Background Renderer | complete |
+| 93 | Chapter Two Walking Path Renderer | complete |
+| 94 | Chapter Two Transition Scene | complete |
+| 95 | Chapter Two Scene Rewire: Opener and Early Route | complete |
+| 96 | Chapter Two Scene Rewire: Back Half | complete |
+| 97 | Chapter Two Puzzle Difficulty Pass | complete |
+| 98 | Chapter Two Route QA and Visual Polish | planned |
+| 99 | Chapter Two Handoff and Checkpoint | planned |

@@ -105,6 +105,7 @@ import { createGlassrailCrossingScene } from "./chapterTwo/glassrailCrossing.js"
 import { createLanternMarketScene } from "./chapterTwo/lanternMarket.js";
 import { createLanternLilyPoolScene } from "./chapterTwo/lanternLilyPool.js";
 import { createOldObservatoryScene } from "./chapterTwo/oldObservatory.js";
+import { createWetlandApproachScene } from "./chapterTwo/wetlandApproach.js";
 import { createBogBridgeScene } from "./chapterTwo/bogBridge.js";
 import { createFrogsongLockScene } from "./chapterTwo/frogsongLock.js";
 import { createGlowfenFerryScene } from "./chapterTwo/glowfenFerry.js";
@@ -203,6 +204,7 @@ export const sceneIds = {
   underVillage: "chapter-nine/under-village",
   undergroundStream: "chapter-nine/underground-stream",
   weatherVaneRoof: "chapter-four/weather-vane-roof",
+  wetlandApproach: "chapter-two/wetland-approach",
   windChimePass: "chapter-four/wind-chime-pass",
   windfallenFruit: "chapter-seven/windfallen-fruit",
   buriedMurals: "chapter-nine/buried-murals",
@@ -322,6 +324,7 @@ const handBuiltSceneFactories = {
   [sceneIds.underVillage]: createUnderVillageScene,
   [sceneIds.undergroundStream]: createUndergroundStreamScene,
   [sceneIds.weatherVaneRoof]: createWeatherVaneRoofScene,
+  [sceneIds.wetlandApproach]: createWetlandApproachScene,
   [sceneIds.windChimePass]: createWindChimePassScene,
   [sceneIds.windfallenFruit]: createWindfallenFruitScene,
   "chapter-one/beacon-hill": createBeaconHillScene,

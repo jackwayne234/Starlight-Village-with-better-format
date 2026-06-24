@@ -11,6 +11,11 @@ function loadImage(src) {
 const APPRENTICE = "assets/sprites/characters/apprentice";
 const ROBOT = "assets/sprites/characters/robot";
 const WORLD = "assets/sprites/world";
+const CHAPTER_TWO = "assets/sprites/chapter-two";
+const CHAPTER_TWO_BACKGROUNDS = `${CHAPTER_TWO}/backgrounds`;
+const CHAPTER_TWO_PATHS = `${CHAPTER_TWO}/paths`;
+const CHAPTER_TWO_LANDMARKS = `${CHAPTER_TWO}/landmarks`;
+const CHAPTER_TWO_PUZZLES = `${CHAPTER_TWO}/puzzles`;
 const TITLE = "assets/title";
 
 export const sprites = {
@@ -101,6 +106,37 @@ export const sprites = {
     pathTile: loadImage(`${WORLD}/path-tile.png`),
     waterTile: loadImage(`${WORLD}/water-tile.png`),
     grassTile: loadImage(`${WORLD}/grass-tile.png`)
+  },
+  chapterTwo: {
+    backgrounds: {
+      wetlandBackground: loadImage(`${CHAPTER_TWO_BACKGROUNDS}/wetland-background.png`)
+    },
+    paths: {
+      boardwalkSteppingPath: loadImage(`${CHAPTER_TWO_PATHS}/boardwalk-stepping-path.png`)
+    },
+    landmarks: {
+      rootPump: loadImage(`${CHAPTER_TWO_LANDMARKS}/root-pump.png`),
+      lanternLilyCrossing: loadImage(`${CHAPTER_TWO_LANDMARKS}/lantern-lily-crossing.png`),
+      bogBridge: loadImage(`${CHAPTER_TWO_LANDMARKS}/bog-bridge.png`),
+      frogsongLock: loadImage(`${CHAPTER_TWO_LANDMARKS}/frogsong-lock.png`),
+      sunkenRouteMarker: loadImage(`${CHAPTER_TWO_LANDMARKS}/sunken-route-marker.png`),
+      mistVentStones: loadImage(`${CHAPTER_TWO_LANDMARKS}/mist-vent-stones.png`),
+      mossGate: loadImage(`${CHAPTER_TWO_LANDMARKS}/moss-gate.png`),
+      rainBowlMarker: loadImage(`${CHAPTER_TWO_LANDMARKS}/rain-bowl-marker.png`),
+      glowfenFerry: loadImage(`${CHAPTER_TWO_LANDMARKS}/glowfen-ferry.png`),
+      reedwatchMarkers: loadImage(`${CHAPTER_TWO_LANDMARKS}/reedwatch-markers.png`)
+    },
+    puzzles: {
+      wetlandTileBase: loadImage(`${CHAPTER_TWO_PUZZLES}/wetland-tile-base.png`),
+      wetlandTileLit: loadImage(`${CHAPTER_TWO_PUZZLES}/wetland-tile-lit.png`),
+      boardwalkConduit: loadImage(`${CHAPTER_TWO_PUZZLES}/boardwalk-conduit.png`),
+      reedChannelConduit: loadImage(`${CHAPTER_TWO_PUZZLES}/reed-channel-conduit.png`),
+      shallowWaterConduit: loadImage(`${CHAPTER_TWO_PUZZLES}/shallow-water-conduit.png`),
+      wetlandStartNode: loadImage(`${CHAPTER_TWO_PUZZLES}/wetland-start-node.png`),
+      wetlandOutputNode: loadImage(`${CHAPTER_TWO_PUZZLES}/wetland-output-node.png`),
+      wetlandSelectionFrame: loadImage(`${CHAPTER_TWO_PUZZLES}/wetland-selection-frame.png`),
+      wetlandCompletionSpark: loadImage(`${CHAPTER_TWO_PUZZLES}/wetland-completion-spark.png`)
+    }
   },
   title: {
     hero: loadImage(`${TITLE}/itch-cover.png`),

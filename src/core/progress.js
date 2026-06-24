@@ -384,6 +384,21 @@ function restoreRepairEffect(scene, repair) {
     if (scene.observatory?.lens) scene.observatory.lens.lit = true;
     if (scene.observatory?.tower) scene.observatory.tower.lit = true;
   }
+
+  if (repair.id === "wetland-waymark") {
+    scene.world.repaired = true;
+    scene.world.powerLevel = 1;
+    if (scene.wetlandApproach) {
+      scene.wetlandApproach.fixed = true;
+      scene.wetlandApproach.waymarkLit = true;
+    }
+    scene.layers.lamps.forEach((lamp) => {
+      lamp.lit = true;
+    });
+    scene.layers.glowPlants.forEach((plant) => {
+      plant.active = true;
+    });
+  }
 }
 
 function restoreFlowMessage(scene, progress) {

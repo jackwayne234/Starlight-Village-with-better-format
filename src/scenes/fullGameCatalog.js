@@ -10,6 +10,7 @@ export const fullGameScenes = [
   scene(9, "chapter-one/mayor-porch", "Woodland Signal Post", "Starlight Village Core", "Repair a woodland signal bell that tells travelers the route is safe.", "beacon-signal"),
   scene(10, "chapter-one/festival-square", "Festival Square", "Starlight Village Core", "Power the square's first star lantern and open the path outward.", "market-lanterns"),
 
+  scene(11, "chapter-two/wetland-approach", "Wetland Approach", "Glowfen Wetlands", "Raise the first wetland waymark where the village path opens into the reeds.", "beacon-signal"),
   scene(11, "chapter-two/glowfen-grove", "Glowfen Grove", "Glowfen Wetlands", "Restore the root pump so glowing water moves again.", "root-pump"),
   scene(12, "chapter-two/lantern-lily-pool", "Lantern Lily Pool", "Glowfen Wetlands", "Rotate lily pads to carry light across the water.", "glow-bridge"),
   scene(13, "chapter-two/bog-bridge", "Bog Bridge", "Glowfen Wetlands", "Raise stepping stones in a safe sequence.", "glow-bridge"),
@@ -110,6 +111,7 @@ export const fullGameScenes = [
   scene(100, "chapter-ten/celebration-square", "Celebration Square", "Festival Night", "Final celebration scene where the village feels whole.", "market-lanterns")
 ].map((entry, index, entries) => ({
   ...entry,
+  number: index + 1,
   nextSceneId: entries[index + 1]?.id ?? null
 }));
 

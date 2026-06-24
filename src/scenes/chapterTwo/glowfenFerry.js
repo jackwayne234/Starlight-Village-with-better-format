@@ -14,12 +14,14 @@ export function createGlowfenFerryScene() {
   scene.backdrop = { moonX: 970, moonY: 138, cloudDrift: 1.08, hillOffset: 66, ridgeOffset: 100 };
   scene.glowfenFerry = { x: 1180, groundY: 652, fixed: false, ferryDocked: false };
   scene.paintedLandmark = {
+    source: "chapterTwoLandmarks",
     sprite: "glowfenFerry",
     state: scene.glowfenFerry,
     x: 1180,
-    groundY: 674,
-    height: 500,
-    glow: { heightRatio: 0.5, radius: 185, fixedIntensity: 0.42, dimIntensity: 0.13, pulse: 0.06 }
+    groundY: 752,
+    height: 420,
+    wetlandBlend: { yOffset: -54, widthRatio: 1.0, height: 130 },
+    glow: { xOffset: 48, heightRatio: 0.52, radius: 235, fixedIntensity: 0.4, dimIntensity: 0.14, pulse: 0.05 }
   };
   scene.layers = {
     trees: [
@@ -68,6 +70,7 @@ export function createGlowfenFerryScene() {
       id: "glowfen-ferry",
       kind: "path-puzzle",
       puzzleTheme: "rail-signal",
+      puzzleLayout: "ch2-glowfen-ferry",
       x: 1180,
       y: 548,
       radius: 282,

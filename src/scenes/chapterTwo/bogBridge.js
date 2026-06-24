@@ -18,6 +18,16 @@ export function createBogBridgeScene() {
     fixed: false,
     stonesRaised: false
   };
+  scene.paintedLandmark = {
+    source: "chapterTwoLandmarks",
+    sprite: "bogBridge",
+    state: scene.bogBridge,
+    x: 1160,
+    groundY: 738,
+    height: 340,
+    wetlandBlend: { yOffset: -42, widthRatio: 1.04, height: 122 },
+    glow: { xOffset: -24, heightRatio: 0.46, radius: 225, fixedIntensity: 0.38, dimIntensity: 0.12, pulse: 0.05 }
+  };
   scene.layers = {
     trees: [
       { x: 55, y: 264, scale: 1.62 },
@@ -61,6 +71,7 @@ export function createBogBridgeScene() {
       id: "bog-bridge",
       kind: "path-puzzle",
       puzzleTheme: "glow-bridge",
+      puzzleLayout: "ch2-bog-bridge",
       x: 1160,
       y: 552,
       radius: 275,

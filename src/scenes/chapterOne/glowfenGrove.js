@@ -21,12 +21,14 @@ export function createGlowfenGroveScene() {
   scene.world.groveBloom = 0;
   scene.glowfenGrove = { x: 1220, groundY: 664, fixed: false, pumpAwake: false };
   scene.paintedLandmark = {
-    sprite: "glowfenGroveSide",
+    source: "chapterTwoLandmarks",
+    sprite: "rootPump",
     state: scene.glowfenGrove,
-    x: 1220,
-    groundY: 812,
-    height: 560,
-    glow: { xOffset: 150, heightRatio: 0.52, radius: 260, fixedIntensity: 0.46, dimIntensity: 0.18, pulse: 0.06 }
+    x: 1235,
+    groundY: 744,
+    height: 470,
+    wetlandBlend: { yOffset: -54, widthRatio: 0.86, height: 138 },
+    glow: { xOffset: 72, heightRatio: 0.54, radius: 230, fixedIntensity: 0.44, dimIntensity: 0.16, pulse: 0.06 }
   };
 
   scene.layers = {
@@ -65,6 +67,7 @@ export function createGlowfenGroveScene() {
       id: "root-pump",
       kind: "path-puzzle",
       puzzleTheme: "root-pump",
+      puzzleLayout: "ch2-glowfen-grove",
       x: 1350,
       y: 610,
       radius: 300,
