@@ -85,5 +85,5 @@ High-level list only. All details live inside each chunk file.
 | 95 | Chapter Two Scene Rewire: Opener and Early Route | complete |
 | 96 | Chapter Two Scene Rewire: Back Half | complete |
 | 97 | Chapter Two Puzzle Difficulty Pass | complete |
-| 98 | Chapter Two Route QA and Visual Polish | planned |
+| 98 | Chapter Two Route QA and Visual Polish | complete |
 | 99 | Chapter Two Handoff and Checkpoint | planned |

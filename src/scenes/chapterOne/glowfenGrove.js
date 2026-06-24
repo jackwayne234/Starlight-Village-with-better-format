@@ -11,6 +11,7 @@ export function createGlowfenGroveScene() {
   scene.player.x = 300;
   scene.robot.x = 412;
   scene.robot.y = 430;
+  scene.showSignpost = false;
   scene.backdrop = {
     moonX: 640,
     moonY: 150,
@@ -72,6 +73,7 @@ export function createGlowfenGroveScene() {
       y: 610,
       radius: 300,
       showSprite: false,
+      showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: grove root pump stalled.",
