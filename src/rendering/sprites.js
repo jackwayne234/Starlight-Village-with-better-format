@@ -37,6 +37,7 @@ export const sprites = {
     rainDrainCorner: loadImage(`${WORLD}/rain-drain-corner-painted.png?v=side-drain-small-route-ch1`),
     mayorPorch: loadImage(`${WORLD}/mayor-porch-painted.png?v=woodland-signal-route-ch1`),
     festivalSquare: loadImage(`${WORLD}/festival-square-painted.png?v=village-square-route-ch1`),
+    glowfenGroveSide: loadImage(`${WORLD}/glowfen-grove-side-scene.png?v=side-scroller-glowfen-grove`),
     lanternLilyPool: loadImage(`${WORLD}/lantern-lily-pool-painted.png?v=painted-route-ch2`),
     lanternLilyPoolSide: loadImage(`${WORLD}/lantern-lily-pool-side-sprite.png?v=side-scroller-lily-pool`),
     bogBridge: loadImage(`${WORLD}/bog-bridge-painted.png?v=painted-route-ch2`),

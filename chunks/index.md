@@ -68,3 +68,4 @@ High-level list only. All details live inside each chunk file.
 | 76 | Chapter Five Route Sprite Wiring | in progress |
 | 77 | Chapter Two Playthrough Polish | complete |
 | 78 | Lantern Lily Pool Side Sprite | complete |
+| 79 | Glowfen Grove Scene Rebuild | complete |

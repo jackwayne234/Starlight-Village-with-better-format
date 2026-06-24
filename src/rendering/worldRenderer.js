@@ -94,7 +94,7 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
   if (waterWheel) {
     drawWaterWheel(ctx, waterWheel, time, powerLevel);
   }
-  if (activeRepair?.id === "root-pump") {
+  if (activeRepair?.id === "root-pump" && activeRepair.showSprite !== false) {
     drawRootPump(ctx, activeRepair, time, powerLevel);
   }
   if (activeRepair && activeRepair.showMarker !== false && !["water-wheel", "root-pump", "archive-lens-array"].includes(activeRepair.id)) {

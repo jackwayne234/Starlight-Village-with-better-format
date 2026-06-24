@@ -4,13 +4,13 @@ export function createGlowfenGroveScene() {
   const scene = createBaseScene({
     id: "chapter-two/glowfen-grove",
     title: "Glowfen Grove",
-    worldWidth: 1900,
+    worldWidth: 2240,
     startMessage: ""
   });
 
-  scene.player.x = 210;
-  scene.robot.x = 325;
-  scene.robot.y = 420;
+  scene.player.x = 300;
+  scene.robot.x = 412;
+  scene.robot.y = 430;
   scene.backdrop = {
     moonX: 640,
     moonY: 150,
@@ -19,45 +19,40 @@ export function createGlowfenGroveScene() {
     ridgeOffset: -60
   };
   scene.world.groveBloom = 0;
-  scene.bridge = { x: 850, y: 604, width: 420, repaired: false };
+  scene.glowfenGrove = { x: 1220, groundY: 664, fixed: false, pumpAwake: false };
+  scene.paintedLandmark = {
+    sprite: "glowfenGroveSide",
+    state: scene.glowfenGrove,
+    x: 1220,
+    groundY: 812,
+    height: 560,
+    glow: { xOffset: 150, heightRatio: 0.52, radius: 260, fixedIntensity: 0.46, dimIntensity: 0.18, pulse: 0.06 }
+  };
 
   scene.layers = {
-    // Tall pines, grounded near the walking line and spaced through the grove.
     trees: [
       { x: 40, y: 263, scale: 1.62 },
-      { x: 190, y: 303, scale: 1.45 },
-      { x: 460, y: 273, scale: 1.58 },
-      { x: 720, y: 314, scale: 1.4 },
-      { x: 1030, y: 280, scale: 1.55 },
-      { x: 1320, y: 291, scale: 1.5 },
-      { x: 1665, y: 268, scale: 1.6 }
+      { x: 250, y: 303, scale: 1.45 },
+      { x: 560, y: 278, scale: 1.55 },
+      { x: 1710, y: 292, scale: 1.5 },
+      { x: 2040, y: 268, scale: 1.58 }
     ],
     cottages: [],
     lamps: [
-      { x: 340, y: 560, lit: true },
-      { x: 1240, y: 560, lit: false }
+      { x: 330, y: 560, lit: true },
+      { x: 1900, y: 560, lit: false }
     ],
-    // Glow plants kept to the edges of the grove, off the walking path.
     glowPlants: [
       { x: 120, y: 640, active: true },
-      { x: 1560, y: 642, active: true },
-      { x: 1760, y: 638, active: false }
+      { x: 2040, y: 638, active: false }
     ],
     foliage: [
-      { kind: "glowfenPumpOvergrowth", x: 1030, groundY: 668, height: 255 },
-      { kind: "glowfenRootChannel", x: 800, groundY: 676, height: 190, alpha: 0.9 },
-      { kind: "glowfenBridgeReeds", x: 640, groundY: 654, height: 150 },
-      { kind: "glowfenBridgeReeds", x: 1040, groundY: 654, height: 140, alpha: 0.9 },
-      { kind: "glowfenCobbleVines", x: 520, groundY: 692, height: 120, alpha: 0.82 },
-      { kind: "glowfenLeafLitter", x: 1330, groundY: 694, height: 115, alpha: 0.86 },
-      { kind: "glowfenGlowRocks", x: 1540, groundY: 654, height: 128 }
+      { kind: "glowfenLeafLitter", x: 520, groundY: 694, height: 110, alpha: 0.72 },
+      { kind: "glowfenGlowRocks", x: 1880, groundY: 654, height: 118, alpha: 0.8 }
     ],
     brokenBranches: [],
     repairParts: [],
-    puddles: [
-      { x: 300, y: 662, width: 120, height: 22 },
-      { x: 1480, y: 660, width: 126, height: 24 }
-    ],
+    puddles: [],
     mistBands: [
       { x: 180, y: 505, width: 250, speed: 7 },
       { x: 780, y: 526, width: 300, speed: 10 },
@@ -70,9 +65,10 @@ export function createGlowfenGroveScene() {
       id: "root-pump",
       kind: "path-puzzle",
       puzzleTheme: "root-pump",
-      x: 1045,
-      y: 596,
-      radius: 210,
+      x: 1350,
+      y: 610,
+      radius: 300,
+      showSprite: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: grove root pump stalled.",
