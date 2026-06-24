@@ -76,12 +76,19 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
   ctx.translate(-cameraX, 0);
   scene.layers.trees.forEach((tree) => drawTree(ctx, tree, time));
   scene.layers.cottages.forEach((cottage) => drawCottage(ctx, cottage, time, powerLevel));
-  drawGround(ctx, scene.world.width, height);
-  drawPath(ctx, scene.world.width, time);
+  if (scene.groundStyle === "festival-square") {
+    drawFestivalSquareGround(ctx, scene.world.width, height, time);
+  } else {
+    drawGround(ctx, scene.world.width, height);
+    drawPath(ctx, scene.world.width, time);
+  }
   if (waterWheel) {
     drawStream(ctx, time);
   }
   drawMist(ctx, scene.layers.mistBands, time, scene.world.width);
+  if (scene.foliageLayer === "behind-landmark") {
+    scene.layers.foliage?.forEach((foliage) => drawFoliageSprite(ctx, foliage, time));
+  }
   drawSceneLandmarks(ctx, scene, time);
   drawOnwardGlow(ctx, scene, time);
   if (waterWheel) {
@@ -101,7 +108,9 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
   // Temporarily hidden until the mushroom/glow-plant art is replaced.
   // The current sprite has internal white cutout fills that fight the night scene.
   scene.layers.repairParts.forEach((part) => drawRepairPart(ctx, part, time));
-  scene.layers.foliage?.forEach((foliage) => drawFoliageSprite(ctx, foliage, time));
+  if (scene.foliageLayer !== "behind-landmark") {
+    scene.layers.foliage?.forEach((foliage) => drawFoliageSprite(ctx, foliage, time));
+  }
   ctx.restore();
 }
 
@@ -305,6 +314,52 @@ function drawPath(ctx, width, time) {
   ctx.stroke();
 
   drawWetStoneSegments(ctx, width, time);
+}
+
+function drawFestivalSquareGround(ctx, width, height, time) {
+  ctx.fillStyle = colors.groundDark;
+  ctx.fillRect(0, 540, width, height - 540);
+
+  const pattern = texturePattern(ctx, sprites.world.pathTile, 205);
+  ctx.beginPath();
+  ctx.moveTo(0, 564);
+  ctx.bezierCurveTo(230, 544, 430, 568, 650, 550);
+  ctx.bezierCurveTo(880, 530, 1055, 552, 1230, 532);
+  ctx.bezierCurveTo(1450, 508, 1680, 560, 1905, 538);
+  ctx.bezierCurveTo(2070, 522, 2170, 540, width, 526);
+  ctx.lineTo(width, height);
+  ctx.lineTo(0, height);
+  ctx.closePath();
+
+  if (pattern) {
+    ctx.fillStyle = pattern;
+    ctx.fill();
+  } else {
+    const gradient = ctx.createLinearGradient(0, 520, 0, height);
+    gradient.addColorStop(0, "#555b52");
+    gradient.addColorStop(0.58, "#3f4945");
+    gradient.addColorStop(1, "#202b2d");
+    ctx.fillStyle = gradient;
+    ctx.fill();
+  }
+
+  const wet = ctx.createLinearGradient(0, 520, 0, height);
+  wet.addColorStop(0, "rgba(6, 10, 14, 0.08)");
+  wet.addColorStop(0.62, "rgba(6, 10, 14, 0.24)");
+  wet.addColorStop(1, "rgba(2, 5, 8, 0.5)");
+  ctx.fillStyle = wet;
+  ctx.fill();
+
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  ctx.strokeStyle = `rgba(255, 222, 145, ${0.08 + Math.sin(time * 2.1) * 0.018})`;
+  ctx.lineWidth = 2;
+  for (let x = 120; x < width; x += 210) {
+    ctx.beginPath();
+    ctx.ellipse(x, 650 + Math.sin(x * 0.01) * 18, 58, 8, -0.08, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+  ctx.restore();
 }
 
 function drawWetStoneSegments(ctx, width, time) {

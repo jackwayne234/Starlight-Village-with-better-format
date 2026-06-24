@@ -389,15 +389,15 @@ function restoreRepairEffect(scene, repair) {
 function restoreFlowMessage(scene, progress) {
   const allComplete = scene.repairs.length > 0 && scene.repairs.every((repair) => repair.complete);
   if (allComplete) {
-    if (scene.repairTarget?.nextSceneId) {
-      scene.nextSceneId = scene.repairTarget.nextSceneId;
-    }
-
     if (progress.chapterComplete || scene.repairTarget?.chapterComplete) {
       scene.chapterComplete = scene.repairTarget.chapterComplete;
       scene.flow.mode = "chapter-complete";
       scene.flow.message = scene.repairTarget.nextText;
       return;
+    }
+
+    if (scene.repairTarget?.nextSceneId) {
+      scene.nextSceneId = scene.repairTarget.nextSceneId;
     }
 
     scene.flow.message = "All repairs in this slice are stable.";

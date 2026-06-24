@@ -18,12 +18,14 @@ export function createFestivalSquareScene() {
     fixed: false,
     starLit: false
   };
+  scene.groundStyle = "festival-square";
+  scene.foliageLayer = "behind-landmark";
   scene.paintedLandmark = {
     sprite: "festivalSquare",
     state: scene.festivalSquare,
     x: 1160,
-    groundY: 668,
-    height: 560,
+    groundY: 724,
+    height: 700,
     glow: { heightRatio: 0.56, radius: 180, fixedIntensity: 0.5, dimIntensity: 0.18, pulse: 0.07 }
   };
   scene.layers = {
@@ -35,8 +37,16 @@ export function createFestivalSquareScene() {
     ],
     cottages: [],
     foliage: [
-      { kind: "glowfenLeafLitter", x: 735, groundY: 682, height: 96, alpha: 0.74 },
-      { kind: "rainyRocksReeds", x: 1555, groundY: 662, height: 100, alpha: 0.76 }
+      { kind: "rainyRocksReeds", x: 140, groundY: 616, height: 112, alpha: 0.86 },
+      { kind: "glowfenLeafLitter", x: 360, groundY: 618, height: 104, alpha: 0.8 },
+      { kind: "rainyRocksReeds", x: 590, groundY: 608, height: 116, alpha: 0.86 },
+      { kind: "glowfenLeafLitter", x: 820, groundY: 596, height: 108, alpha: 0.82 },
+      { kind: "rainyRocksReeds", x: 1060, groundY: 586, height: 120, alpha: 0.88 },
+      { kind: "glowfenLeafLitter", x: 1300, groundY: 586, height: 108, alpha: 0.82 },
+      { kind: "rainyRocksReeds", x: 1540, groundY: 594, height: 118, alpha: 0.86 },
+      { kind: "glowfenLeafLitter", x: 1770, groundY: 604, height: 108, alpha: 0.82 },
+      { kind: "rainyRocksReeds", x: 2010, groundY: 598, height: 116, alpha: 0.86 },
+      { kind: "glowfenLeafLitter", x: 2220, groundY: 592, height: 100, alpha: 0.78 }
     ],
     lamps: [
       { x: 250, y: 560, lit: true },
@@ -67,17 +77,27 @@ export function createFestivalSquareScene() {
       kind: "path-puzzle",
       puzzleTheme: "market-lanterns",
       x: 1160,
-      y: 545,
+      y: 460,
       radius: 275,
       showMarker: false,
       complete: false,
       progress: 0,
       scanText: "Robot scan: festival square star lantern is dark.",
       puzzleText: "Rotate the lantern paths to power the square.",
-      rewardText: "Festival square restored. The star lantern opens the road to Glowfen.",
+      rewardText: "Festival square restored. The star lantern points toward Glowfen.",
       onwardText: "The village core is shining through the rain.",
       nextText: "Glowfen Grove is next.",
       nextSceneId: "chapter-two/glowfen-grove",
+      chapterComplete: {
+        title: "Chapter 1 Complete",
+        subtitle: "Starlight's first lights are awake, and the first waymark toward Glowfen is lit.",
+        checklist: [
+          "Water wheel and workshop lift restored",
+          "Rural paths, awnings, bridge, and drain secured",
+          "Festival Square star lantern lit toward Glowfen"
+        ],
+        prompt: "Press Space to continue to Glowfen Grove"
+      },
       reactions: [
         { text: "The star lantern is bright!", x: 1160, y: 310 },
         { text: "Village core complete.", x: "robot", y: "robotTop" }

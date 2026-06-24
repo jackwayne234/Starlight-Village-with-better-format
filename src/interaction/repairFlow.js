@@ -14,6 +14,13 @@ export function updateRepairFlow(scene, input, dt) {
   }
 
   if (flow.mode === "chapter-complete") {
+    if (consumeRepairInput(input) && scene.repairTarget?.nextSceneId) {
+      scene.chapterComplete = null;
+      scene.nextSceneId = scene.repairTarget.nextSceneId;
+      scene.flow.message = scene.repairTarget.nextText;
+      scene.progressDirty = true;
+      showDialogue(scene, scene.repairTarget.dialogue?.next);
+    }
     return;
   }
 
@@ -466,20 +473,20 @@ function advanceRepairTarget(scene) {
   const nextIndex = scene.repairIndex + 1;
 
   if (nextIndex >= scene.repairs.length) {
-    if (scene.repairTarget.nextSceneId) {
-      scene.nextSceneId = scene.repairTarget.nextSceneId;
-      scene.flow.message = scene.repairTarget.nextText;
-      scene.progressDirty = true;
-      showDialogue(scene, scene.repairTarget.dialogue?.next);
-      return;
-    }
-
     if (scene.repairTarget.chapterComplete) {
       scene.chapterComplete = scene.repairTarget.chapterComplete;
       scene.flow.mode = "chapter-complete";
       scene.flow.message = scene.repairTarget.nextText;
       scene.progressDirty = true;
       showDialogue(scene, scene.repairTarget.dialogue?.next, 3.2);
+      return;
+    }
+
+    if (scene.repairTarget.nextSceneId) {
+      scene.nextSceneId = scene.repairTarget.nextSceneId;
+      scene.flow.message = scene.repairTarget.nextText;
+      scene.progressDirty = true;
+      showDialogue(scene, scene.repairTarget.dialogue?.next);
       return;
     }
 
