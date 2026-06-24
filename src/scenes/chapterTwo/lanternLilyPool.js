@@ -22,9 +22,9 @@ export function createLanternLilyPoolScene() {
     sprite: "lanternLilyPoolSide",
     state: scene.lanternLilyPool,
     x: 1160,
-    groundY: 674,
-    height: 390,
-    glow: { xOffset: 20, heightRatio: 0.58, radius: 190, fixedIntensity: 0.42, dimIntensity: 0.18, pulse: 0.06 }
+    groundY: 812,
+    height: 560,
+    glow: { xOffset: 20, heightRatio: 0.53, radius: 235, fixedIntensity: 0.42, dimIntensity: 0.18, pulse: 0.06 }
   };
   scene.layers = {
     trees: [
@@ -70,7 +70,7 @@ export function createLanternLilyPoolScene() {
       kind: "path-puzzle",
       puzzleTheme: "glow-bridge",
       x: 1160,
-      y: 552,
+      y: 625,
       radius: 275,
       showMarker: false,
       complete: false,
