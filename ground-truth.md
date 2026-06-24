@@ -2,7 +2,7 @@
 
 ## Chapter 2 Ground Truth — 25 Question Planning Pass
 
-Status: complete — 25/25 answered. Awaiting user permission before implementation.
+Status: complete — 25/25 answered. Chapter 2 wetland overhaul completed through Chunk 99 checkpoint documentation.
 
 This section is the working source of truth for Chapter 2. Use these answers when planning and implementing Chapter 2 changes.
 
@@ -358,7 +358,7 @@ This section is the working source of truth for Chapter 2. Use these answers whe
 
 ## Chapter 2 Chunk Plan
 
-Status: drafted. Implementation permission has not been granted in this section.
+Status: complete through Chunk 99 checkpoint documentation.
 
 Use these chunk files as the execution plan for the Chapter 2 wetland overhaul:
 
@@ -376,11 +376,11 @@ Use these chunk files as the execution plan for the Chapter 2 wetland overhaul:
 | 92 | Chapter Two Shared Background Renderer | complete |
 | 93 | Chapter Two Walking Path Renderer | complete |
 | 94 | Chapter Two Transition Scene | complete |
-| 95 | Chapter Two Scene Rewire: Opener and Early Route | planned |
-| 96 | Chapter Two Scene Rewire: Back Half | planned |
-| 97 | Chapter Two Puzzle Difficulty Pass | planned |
-| 98 | Chapter Two Route QA and Visual Polish | planned |
-| 99 | Chapter Two Handoff and Checkpoint | planned |
+| 95 | Chapter Two Scene Rewire: Opener and Early Route | complete |
+| 96 | Chapter Two Scene Rewire: Back Half | complete |
+| 97 | Chapter Two Puzzle Difficulty Pass | complete |
+| 98 | Chapter Two Route QA and Visual Polish | complete |
+| 99 | Chapter Two Handoff and Checkpoint | complete |
 
 ## Purpose of This File
 
