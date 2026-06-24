@@ -18,12 +18,19 @@ export function createRainDrainCornerScene() {
     fixed: false,
     waterHigh: true
   };
+  scene.waterUnderlay = {
+    sprite: "streamWaterSide",
+    x: 1160,
+    groundY: 748,
+    height: 190,
+    alpha: 0.56
+  };
   scene.paintedLandmark = {
     sprite: "rainDrainCorner",
     state: scene.rainDrainCorner,
     x: 1160,
-    groundY: 674,
-    height: 500,
+    groundY: 684,
+    height: 180,
     glow: { heightRatio: 0.42, radius: 145, fixedIntensity: 0.38, dimIntensity: 0.14 }
   };
   scene.layers = {
@@ -66,7 +73,7 @@ export function createRainDrainCornerScene() {
       kind: "path-puzzle",
       puzzleTheme: "water-routing",
       x: 1160,
-      y: 545,
+      y: 610,
       radius: 265,
       showMarker: false,
       complete: false,
@@ -75,7 +82,7 @@ export function createRainDrainCornerScene() {
       puzzleText: "Rotate the runoff channels to clear the drain.",
       rewardText: "Rain drain cleared. The corner water drops back into the grate.",
       onwardText: "The lane is draining again.",
-      nextText: "Mayor's Porch is next.",
+      nextText: "Woodland Signal Post is next.",
       nextSceneId: "chapter-one/mayor-porch",
       reactions: [
         { text: "The puddle is shrinking!", x: 1160, y: 320 },
@@ -85,7 +92,7 @@ export function createRainDrainCornerScene() {
         scan: { speaker: "robot", text: "The drain is trying to become a pond." },
         puzzle: { speaker: "player", text: "Clear the channels and give the water somewhere to go." },
         reward: { speaker: "robot", text: "Drain flow restored. Pond cancelled." },
-        next: { speaker: "player", text: "Let's check the mayor's porch." }
+        next: { speaker: "player", text: "Let's check the woodland signal." }
       }
     }
   ];

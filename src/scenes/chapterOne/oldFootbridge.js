@@ -18,12 +18,19 @@ export function createOldFootbridgeScene() {
     fixed: false,
     width: 560
   };
+  scene.waterUnderlay = {
+    sprite: "streamWaterSide",
+    x: 1160,
+    groundY: 742,
+    height: 178,
+    alpha: 0.5
+  };
   scene.paintedLandmark = {
     sprite: "oldFootbridge",
     state: scene.oldFootbridge,
     x: 1160,
-    groundY: 672,
-    height: 470,
+    groundY: 742,
+    height: 404,
     glow: { heightRatio: 0.38, radius: 150, fixedIntensity: 0.38, dimIntensity: 0.14 }
   };
   scene.layers = {
@@ -68,7 +75,7 @@ export function createOldFootbridgeScene() {
       kind: "path-puzzle",
       puzzleTheme: "glow-bridge",
       x: 1160,
-      y: 545,
+      y: 585,
       radius: 275,
       showMarker: false,
       complete: false,

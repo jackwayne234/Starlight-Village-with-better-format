@@ -402,6 +402,8 @@ function drawPuddle(ctx, puddle, time) {
 }
 
 function drawSceneLandmarks(ctx, scene, time) {
+  drawWaterUnderlay(ctx, scene.waterUnderlay);
+
   if (drawPaintedLandmark(ctx, scene.paintedLandmark, time, scene.world.powerLevel)) {
     return;
   }
@@ -541,6 +543,23 @@ function drawSceneLandmarks(ctx, scene, time) {
   if (scene.observatory) {
     drawObservatory(ctx, scene.observatory, time, scene.world.powerLevel);
   }
+}
+
+function drawWaterUnderlay(ctx, underlay) {
+  if (!underlay) {
+    return false;
+  }
+
+  const image = sprites.world[underlay.sprite];
+  if (!imageReady(image)) {
+    return false;
+  }
+
+  ctx.save();
+  ctx.globalAlpha = underlay.alpha ?? 1;
+  drawWorldSprite(ctx, image, underlay.x, underlay.groundY, underlay.height ?? 160);
+  ctx.restore();
+  return true;
 }
 
 function drawPaintedLandmark(ctx, landmark, time, powerLevel) {

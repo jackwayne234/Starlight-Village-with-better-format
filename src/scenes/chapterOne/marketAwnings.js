@@ -3,7 +3,7 @@ import { createBaseScene } from "../baseScene.js";
 export function createMarketAwningsScene() {
   const scene = createBaseScene({
     id: "chapter-one/market-awnings",
-    title: "Market Awnings",
+    title: "Rural Awning Shelter",
     worldWidth: 2240,
     startMessage: ""
   });
@@ -76,18 +76,18 @@ export function createMarketAwningsScene() {
       showMarker: false,
       complete: false,
       progress: 0,
-      scanText: "Robot scan: market awnings are dumping rain into the stalls.",
-      puzzleText: "Rotate the runoff paths to drain the awnings into barrels.",
-      rewardText: "Market awnings restored. Rain slides neatly away from the stalls.",
-      onwardText: "The market can open without soggy baskets.",
+      scanText: "Robot scan: rural awnings are dumping rain into the supply baskets.",
+      puzzleText: "Rotate the runoff paths to drain the shelter awnings into barrels.",
+      rewardText: "Awning shelter restored. Rain slides neatly away from the supplies.",
+      onwardText: "The supply shelter can stay dry through the storm.",
       nextText: "Old Footbridge is next.",
       nextSceneId: "chapter-one/old-footbridge",
       reactions: [
-        { text: "The stalls are dry!", x: 1160, y: 318 },
+        { text: "The supplies are dry!", x: 1160, y: 318 },
         { text: "Runoff behaving politely.", x: "robot", y: "robotTop" }
       ],
       dialogue: {
-        scan: { speaker: "robot", text: "Current forecast: wet apples, wetter bread." },
+        scan: { speaker: "robot", text: "Current forecast: wet baskets, wetter blankets." },
         puzzle: { speaker: "player", text: "Tilt the cloth toward the barrels." },
         reward: { speaker: "robot", text: "Runoff behaving politely." },
         next: { speaker: "player", text: "Let's check the old footbridge." }

@@ -80,7 +80,7 @@ export function createSchoolhouseLanternsScene() {
       puzzleText: "Rotate the lantern paths to connect all three posts.",
       rewardText: "Schoolhouse lanterns restored. Warm light gathers along the steps.",
       onwardText: "The schoolhouse path is bright again.",
-      nextText: "Market Awnings are next.",
+      nextText: "Rural Awning Shelter is next.",
       nextSceneId: "chapter-one/market-awnings",
       reactions: [
         { text: "All three lanterns lit!", x: 1160, y: 320 },
@@ -90,7 +90,7 @@ export function createSchoolhouseLanternsScene() {
         scan: { speaker: "robot", text: "Three lanterns, zero glow. Suspiciously educational." },
         puzzle: { speaker: "player", text: "One path for all three lights." },
         reward: { speaker: "robot", text: "Classroom glow restored." },
-        next: { speaker: "player", text: "Let's dry out the market awnings." }
+        next: { speaker: "player", text: "Let's dry out the supply awnings." }
       }
     }
   ];

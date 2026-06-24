@@ -3,7 +3,7 @@ import { createBaseScene } from "../baseScene.js";
 export function createMayorPorchScene() {
   const scene = createBaseScene({
     id: "chapter-one/mayor-porch",
-    title: "Mayor's Porch",
+    title: "Woodland Signal Post",
     worldWidth: 2200,
     startMessage: ""
   });
@@ -22,8 +22,8 @@ export function createMayorPorchScene() {
     sprite: "mayorPorch",
     state: scene.mayorPorch,
     x: 1160,
-    groundY: 666,
-    height: 540,
+    groundY: 674,
+    height: 430,
     glow: { heightRatio: 0.52, radius: 150, fixedIntensity: 0.42, dimIntensity: 0.15 }
   };
   scene.layers = {
@@ -72,18 +72,18 @@ export function createMayorPorchScene() {
       showMarker: false,
       complete: false,
       progress: 0,
-      scanText: "Robot scan: mayor's porch signal chime is silent.",
-      puzzleText: "Rotate the signal paths to wake the porch chime.",
-      rewardText: "Mayor's porch restored. The safe-route chime rings down the lane.",
-      onwardText: "Neighbors can hear the all-clear again.",
+      scanText: "Robot scan: woodland signal bell is silent.",
+      puzzleText: "Rotate the signal paths to wake the trail bell.",
+      rewardText: "Woodland signal restored. The safe-route bell rings down the lane.",
+      onwardText: "Travelers can hear the all-clear again.",
       nextText: "Festival Square is next.",
       nextSceneId: "chapter-one/festival-square",
       reactions: [
-        { text: "The porch chime rang!", x: 1160, y: 318 },
+        { text: "The trail bell rang!", x: 1160, y: 318 },
         { text: "Safe-route signal restored.", x: "robot", y: "robotTop" }
       ],
       dialogue: {
-        scan: { speaker: "robot", text: "This porch chime is doing a very quiet impression of a porch chime." },
+        scan: { speaker: "robot", text: "This trail bell is doing a very quiet impression of a bell." },
         puzzle: { speaker: "player", text: "Give it a bright path to ring through." },
         reward: { speaker: "robot", text: "Safe-route signal restored." },
         next: { speaker: "player", text: "Festival Square is just ahead." }

@@ -4,10 +4,10 @@ export const fullGameScenes = [
   scene(3, "chapter-one/bell-rope-corner", "Bell Rope Corner", "Starlight Village Core", "Re-thread a snapped bell rope through pulleys to ring a safe-clear signal.", "junction-line"),
   scene(4, "chapter-one/workshop-lift", "Workshop Lift", "Starlight Village Core", "Balance a small crank lift so repair parts can reach the roof shelf.", "rail-signal"),
   scene(5, "chapter-one/schoolhouse-lanterns", "Schoolhouse Lanterns", "Starlight Village Core", "Connect three damp lantern posts in the right order.", "market-lanterns"),
-  scene(6, "chapter-one/market-awnings", "Market Awnings", "Starlight Village Core", "Set cloth awnings to shed rain into barrels instead of stalls.", "water-routing"),
+  scene(6, "chapter-one/market-awnings", "Rural Awning Shelter", "Starlight Village Core", "Set woodland supply awnings to shed rain into barrels instead of baskets.", "water-routing"),
   scene(7, "chapter-one/old-footbridge", "Old Footbridge", "Starlight Village Core", "Lock bridge planks into place across a swollen stream.", "glow-bridge"),
   scene(8, "chapter-one/rain-drain-corner", "Rain Drain Corner", "Starlight Village Core", "Clear a clogged drain maze before the lane floods.", "water-routing"),
-  scene(9, "chapter-one/mayor-porch", "Mayor's Porch", "Starlight Village Core", "Repair a porch signal chime that tells neighbors the route is safe.", "beacon-signal"),
+  scene(9, "chapter-one/mayor-porch", "Woodland Signal Post", "Starlight Village Core", "Repair a woodland signal bell that tells travelers the route is safe.", "beacon-signal"),
   scene(10, "chapter-one/festival-square", "Festival Square", "Starlight Village Core", "Power the square's first star lantern and open the path outward.", "market-lanterns"),
 
   scene(11, "chapter-two/glowfen-grove", "Glowfen Grove", "Glowfen Wetlands", "Restore the root pump so glowing water moves again.", "root-pump"),
