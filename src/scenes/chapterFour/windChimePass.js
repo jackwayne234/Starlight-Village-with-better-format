@@ -19,6 +19,7 @@ export function createWindChimePassScene() {
     chimesCalm: false
   };
   scene.paintedLandmark = {
+    source: "chapterFourLandmarks",
     sprite: "windChimePass",
     state: scene.windChimePass,
     x: 1120,
@@ -69,6 +70,7 @@ export function createWindChimePassScene() {
       id: "wind-chime-pass",
       kind: "path-puzzle",
       puzzleTheme: "beacon-signal",
+      puzzleLayout: "ch4-wind-chime-pass",
       x: 1120,
       y: 520,
       radius: 252,

@@ -1,8 +1,8 @@
 import { updateCamera } from "./camera.js";
 import { updatePlayer } from "../entities/player.js";
 import { updateRobot } from "../entities/robot.js";
-import { updateRepairFlow } from "../interaction/repairFlow.js?v=mossline-first-pass";
-import { renderScene } from "../rendering/renderPipeline.js?v=mossline-first-pass";
+import { updateRepairFlow } from "../interaction/repairFlow.js?v=stormedge-sprite-pass";
+import { renderScene } from "../rendering/renderPipeline.js?v=stormedge-sprite-pass";
 import { drawTitleScreen } from "../ui/titleScreen.js?v=browser-route-smoke-2";
 import { sfx } from "../audio/gameAudio.js";
 

@@ -18,6 +18,17 @@ export function createCrackedStairScene() {
     fixed: false,
     bracesLocked: false
   };
+  scene.paintedLandmark = {
+    source: "chapterFourLandmarks",
+    sprite: "crackedStair",
+    state: scene.crackedStair,
+    x: 1120,
+    groundY: 668,
+    height: 430,
+    glow: { heightRatio: 0.42, radius: 220, fixedIntensity: 0.34, dimIntensity: 0.1, pulse: 0.05 },
+    dimFilter: "brightness(0.72) saturate(0.88)",
+    fixedFilter: "brightness(0.94) saturate(1.04)"
+  };
   scene.layers = {
     trees: [
       { x: 72, y: 286, scale: 1.56 },
@@ -61,6 +72,7 @@ export function createCrackedStairScene() {
       id: "cracked-stair",
       kind: "path-puzzle",
       puzzleTheme: "junction-line",
+      puzzleLayout: "ch4-cracked-stair",
       x: 1120,
       y: 514,
       radius: 252,

@@ -1,5 +1,5 @@
 import { config } from "../core/config.js";
-import { sprites, imageReady } from "./sprites.js?v=last-platform-sprite";
+import { sprites, imageReady } from "./sprites.js?v=stormedge-sprite-pass";
 
 const { colors } = config;
 
@@ -78,6 +78,8 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
   scene.layers.cottages.forEach((cottage) => drawCottage(ctx, cottage, time, powerLevel));
   if (scene.groundStyle === "festival-square") {
     drawFestivalSquareGround(ctx, scene.world.width, height, time);
+  } else if (isChapterFourScene(scene)) {
+    drawChapterFourStormedgeGround(ctx, scene.world.width, height, time);
   } else if (isChapterTwoScene(scene)) {
     drawChapterTwoWetlandGround(ctx, scene.world.width, height, time);
   } else {
@@ -320,6 +322,101 @@ function drawPath(ctx, width, time) {
 
 function isChapterTwoScene(scene) {
   return scene.id?.startsWith("chapter-two/");
+}
+
+function isChapterFourScene(scene) {
+  return scene.id?.startsWith("chapter-four/");
+}
+
+function drawChapterFourStormedgeGround(ctx, width, height, time) {
+  ctx.fillStyle = "#1f2c2a";
+  ctx.fillRect(0, 574, width, height - 574);
+
+  const cliff = ctx.createLinearGradient(0, 530, 0, height);
+  cliff.addColorStop(0, "rgba(43, 67, 61, 0.88)");
+  cliff.addColorStop(0.48, "rgba(34, 49, 44, 0.96)");
+  cliff.addColorStop(1, "rgba(12, 18, 20, 1)");
+  ctx.fillStyle = cliff;
+  ctx.beginPath();
+  ctx.moveTo(0, 588);
+  ctx.bezierCurveTo(210, 556, 395, 612, 604, 572);
+  ctx.bezierCurveTo(820, 530, 1012, 594, 1220, 552);
+  ctx.bezierCurveTo(1436, 512, 1610, 586, 1840, 540);
+  ctx.bezierCurveTo(2050, 500, 2170, 552, width, 520);
+  ctx.lineTo(width, height);
+  ctx.lineTo(0, height);
+  ctx.closePath();
+  ctx.fill();
+
+  const pathImage = sprites.chapterFour?.paths?.ridgeStonePath;
+  if (imageReady(pathImage)) {
+    const targetHeight = 250;
+    const scale = targetHeight / pathImage.naturalHeight;
+    const drawWidth = pathImage.naturalWidth * scale;
+    const y = 720 - targetHeight + 12;
+
+    ctx.save();
+    ctx.globalAlpha = 0.96;
+    ctx.filter = "brightness(0.88) saturate(0.9) contrast(1.04)";
+    for (let x = -drawWidth; x < width + drawWidth; x += drawWidth - 1) {
+      ctx.drawImage(pathImage, x, y, drawWidth, targetHeight);
+    }
+    ctx.restore();
+  } else {
+    drawChapterFourFallbackPath(ctx, width, time);
+  }
+
+  drawChapterFourWindLines(ctx, width, time);
+  drawChapterFourPathContactShadow(ctx, width);
+}
+
+function drawChapterFourFallbackPath(ctx, width, time) {
+  ctx.save();
+  ctx.fillStyle = "#575d50";
+  ctx.beginPath();
+  ctx.moveTo(0, 668);
+  ctx.bezierCurveTo(220, 622, 390, 654, 574, 628);
+  ctx.bezierCurveTo(750, 606, 910, 632, 1078, 594);
+  ctx.bezierCurveTo(1260, 556, 1450, 628, 1640, 586);
+  ctx.bezierCurveTo(1840, 544, 2040, 592, width, 554);
+  ctx.lineTo(width, 720);
+  ctx.lineTo(0, 720);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.strokeStyle = "rgba(207, 211, 174, 0.22)";
+  ctx.lineWidth = 2;
+  for (let x = 84; x < width; x += 150) {
+    const y = 648 + Math.sin(time * 0.4 + x * 0.018) * 17;
+    ctx.beginPath();
+    ctx.ellipse(x, y, 58, 13, -0.1, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawChapterFourWindLines(ctx, width, time) {
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  ctx.strokeStyle = "rgba(194, 218, 211, 0.14)";
+  ctx.lineWidth = 2;
+  for (let x = -120; x < width + 180; x += 220) {
+    const y = 520 + Math.sin(time * 0.8 + x * 0.01) * 22;
+    ctx.beginPath();
+    ctx.moveTo(x + Math.sin(time + x) * 18, y);
+    ctx.bezierCurveTo(x + 70, y - 18, x + 126, y + 12, x + 190, y - 8);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function drawChapterFourPathContactShadow(ctx, width) {
+  const shade = ctx.createLinearGradient(0, 600, 0, 720);
+  shade.addColorStop(0, "rgba(4, 8, 9, 0)");
+  shade.addColorStop(0.66, "rgba(3, 7, 8, 0.18)");
+  shade.addColorStop(1, "rgba(0, 3, 5, 0.52)");
+  ctx.fillStyle = shade;
+  ctx.fillRect(0, 600, width, 120);
 }
 
 function drawChapterTwoWetlandGround(ctx, width, height, time) {
@@ -727,6 +824,10 @@ function resolveLandmarkSprite(landmark) {
 
   if (landmark.source === "chapterThreeLandmarks") {
     return sprites.chapterThree?.landmarks?.[landmark.sprite] ?? null;
+  }
+
+  if (landmark.source === "chapterFourLandmarks") {
+    return sprites.chapterFour?.landmarks?.[landmark.sprite] ?? null;
   }
 
   return sprites.world[landmark.sprite] ?? sprites.chapterTwo?.landmarks?.[landmark.sprite] ?? null;

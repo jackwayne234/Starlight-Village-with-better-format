@@ -20,6 +20,12 @@ const CHAPTER_THREE = "assets/sprites/chapter-three";
 const CHAPTER_THREE_BACKGROUNDS = `${CHAPTER_THREE}/backgrounds`;
 const CHAPTER_THREE_TRANSITIONS = `${CHAPTER_THREE}/transitions`;
 const CHAPTER_THREE_LANDMARKS = `${CHAPTER_THREE}/landmarks`;
+const CHAPTER_FOUR = "assets/sprites/chapter-four";
+const CHAPTER_FOUR_BACKGROUNDS = `${CHAPTER_FOUR}/backgrounds`;
+const CHAPTER_FOUR_PATHS = `${CHAPTER_FOUR}/paths`;
+const CHAPTER_FOUR_TRANSITIONS = `${CHAPTER_FOUR}/transitions`;
+const CHAPTER_FOUR_LANDMARKS = `${CHAPTER_FOUR}/landmarks`;
+const CHAPTER_FOUR_PUZZLES = `${CHAPTER_FOUR}/puzzles`;
 const TITLE = "assets/title";
 
 export const sprites = {
@@ -157,6 +163,38 @@ export const sprites = {
     },
     transitions: {
       glowfenToMossline: loadImage(`${CHAPTER_THREE_TRANSITIONS}/glowfen-to-mossline.png?v=glowfen-to-mossline-transition`)
+    }
+  },
+  chapterFour: {
+    backgrounds: {
+      stormedgeBackground: loadImage(`${CHAPTER_FOUR_BACKGROUNDS}/stormedge-background.png?v=stormedge-shared-background`)
+    },
+    paths: {
+      ridgeStonePath: loadImage(`${CHAPTER_FOUR_PATHS}/ridge-stone-path.png?v=stormedge-ridge-path`)
+    },
+    landmarks: {
+      stormGauge: loadImage(`${CHAPTER_FOUR_LANDMARKS}/storm-gauge.png?v=stormedge-landmarks`),
+      weatherVaneRoof: loadImage(`${CHAPTER_FOUR_LANDMARKS}/weather-vane-roof.png?v=stormedge-landmarks`),
+      cliffRopeLift: loadImage(`${CHAPTER_FOUR_LANDMARKS}/cliff-rope-lift.png?v=stormedge-landmarks`),
+      windChimePass: loadImage(`${CHAPTER_FOUR_LANDMARKS}/wind-chime-pass.png?v=stormedge-landmarks`),
+      lightningRodField: loadImage(`${CHAPTER_FOUR_LANDMARKS}/lightning-rod-field.png?v=stormedge-landmarks`),
+      lookoutPost: loadImage(`${CHAPTER_FOUR_LANDMARKS}/lookout-post.png?v=stormedge-landmarks`),
+      crackedStair: loadImage(`${CHAPTER_FOUR_LANDMARKS}/cracked-stair.png?v=stormedge-landmarks`),
+      cloudHarvester: loadImage(`${CHAPTER_FOUR_LANDMARKS}/cloud-harvester.png?v=stormedge-landmarks`),
+      summitPath: loadImage(`${CHAPTER_FOUR_LANDMARKS}/summit-path.png?v=stormedge-landmarks`),
+      beaconApproach: loadImage(`${CHAPTER_FOUR_LANDMARKS}/beacon-approach.png?v=stormedge-landmarks`)
+    },
+    transitions: {
+      mosslineToStormedge: loadImage(`${CHAPTER_FOUR_TRANSITIONS}/mossline-to-stormedge.png?v=mossline-to-stormedge-transition`)
+    },
+    puzzles: {
+      stormedgeTileBase: loadImage(`${CHAPTER_FOUR_PUZZLES}/stormedge-tile-base.png?v=stormedge-puzzle-sprites`),
+      stormedgeTileLit: loadImage(`${CHAPTER_FOUR_PUZZLES}/stormedge-tile-lit.png?v=stormedge-puzzle-sprites`),
+      brassWindChannel: loadImage(`${CHAPTER_FOUR_PUZZLES}/brass-wind-channel.png?v=stormedge-puzzle-sprites`),
+      stormedgeStartNode: loadImage(`${CHAPTER_FOUR_PUZZLES}/stormedge-start-node.png?v=stormedge-puzzle-sprites`),
+      stormedgeOutputNode: loadImage(`${CHAPTER_FOUR_PUZZLES}/stormedge-output-node.png?v=stormedge-puzzle-sprites`),
+      stormedgeSelectionFrame: loadImage(`${CHAPTER_FOUR_PUZZLES}/stormedge-selection-frame.png?v=stormedge-puzzle-sprites`),
+      stormedgeCompletionSpark: loadImage(`${CHAPTER_FOUR_PUZZLES}/stormedge-completion-spark.png?v=stormedge-puzzle-sprites`)
     }
   },
   title: {

@@ -18,6 +18,17 @@ export function createCloudHarvesterScene() {
     fixed: false,
     condenserTuned: false
   };
+  scene.paintedLandmark = {
+    source: "chapterFourLandmarks",
+    sprite: "cloudHarvester",
+    state: scene.cloudHarvester,
+    x: 1120,
+    groundY: 668,
+    height: 432,
+    glow: { heightRatio: 0.42, radius: 230, fixedIntensity: 0.34, dimIntensity: 0.1, pulse: 0.05 },
+    dimFilter: "brightness(0.72) saturate(0.88)",
+    fixedFilter: "brightness(0.94) saturate(1.04)"
+  };
   scene.layers = {
     trees: [
       { x: 76, y: 286, scale: 1.56 },
@@ -61,6 +72,7 @@ export function createCloudHarvesterScene() {
       id: "cloud-harvester",
       kind: "path-puzzle",
       puzzleTheme: "water-routing",
+      puzzleLayout: "ch4-cloud-harvester",
       x: 1120,
       y: 508,
       radius: 260,

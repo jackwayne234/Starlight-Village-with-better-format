@@ -19,6 +19,7 @@ export function createLightningRodFieldScene() {
     rodsGrounded: false
   };
   scene.paintedLandmark = {
+    source: "chapterFourLandmarks",
     sprite: "lightningRodField",
     state: scene.lightningRodField,
     x: 1120,
@@ -69,6 +70,7 @@ export function createLightningRodFieldScene() {
       id: "lightning-rod-field",
       kind: "path-puzzle",
       puzzleTheme: "storm-gauge",
+      puzzleLayout: "ch4-lightning-rod-field",
       x: 1120,
       y: 510,
       radius: 260,

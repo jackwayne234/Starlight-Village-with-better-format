@@ -1,4 +1,4 @@
-import { createRepairPuzzle, movePuzzleSelection, rotateSelectedTile } from "./repairPuzzle.js?v=mossline-first-pass";
+import { createRepairPuzzle, movePuzzleSelection, rotateSelectedTile } from "./repairPuzzle.js?v=stormedge-sprite-pass";
 import { sfx } from "../audio/gameAudio.js";
 
 export function updateRepairFlow(scene, input, dt) {
@@ -26,6 +26,14 @@ export function updateRepairFlow(scene, input, dt) {
 
   if (flow.mode === "chapter-complete") {
     if (consumeRepairInput(input) && scene.repairTarget?.nextSceneId) {
+      if (scene.repairTarget.transitionPage) {
+        scene.visualTransition = scene.repairTarget.transitionPage;
+        scene.chapterComplete = null;
+        scene.flow.mode = "visual-transition";
+        scene.flow.message = scene.repairTarget.nextText;
+        scene.progressDirty = true;
+        return;
+      }
       scene.chapterComplete = null;
       scene.nextSceneId = scene.repairTarget.nextSceneId;
       scene.flow.message = scene.repairTarget.nextText;
@@ -469,6 +477,51 @@ function applyRepairEffect(scene, target) {
     scene.layers.glowPlants.forEach((plant) => {
       plant.active = true;
     });
+  }
+
+  if (target.id === "weather-vane-roof" && scene.weatherVaneRoof) {
+    scene.weatherVaneRoof.fixed = true;
+    scene.weatherVaneRoof.vaneAligned = true;
+  }
+
+  if (target.id === "cliff-rope-lift" && scene.cliffRopeLift) {
+    scene.cliffRopeLift.fixed = true;
+    scene.cliffRopeLift.basketRaised = true;
+  }
+
+  if (target.id === "wind-chime-pass" && scene.windChimePass) {
+    scene.windChimePass.fixed = true;
+    scene.windChimePass.chimesCalm = true;
+  }
+
+  if (target.id === "lightning-rod-field" && scene.lightningRodField) {
+    scene.lightningRodField.fixed = true;
+    scene.lightningRodField.rodsGrounded = true;
+  }
+
+  if (target.id === "lookout-post" && scene.lookoutPost) {
+    scene.lookoutPost.fixed = true;
+    scene.lookoutPost.scopeAligned = true;
+  }
+
+  if (target.id === "cracked-stair" && scene.crackedStair) {
+    scene.crackedStair.fixed = true;
+    scene.crackedStair.bracesLocked = true;
+  }
+
+  if (target.id === "cloud-harvester" && scene.cloudHarvester) {
+    scene.cloudHarvester.fixed = true;
+    scene.cloudHarvester.condenserTuned = true;
+  }
+
+  if (target.id === "summit-path" && scene.summitPath) {
+    scene.summitPath.fixed = true;
+    scene.summitPath.markersLit = true;
+  }
+
+  if (target.id === "beacon-approach" && scene.beaconApproach) {
+    scene.beaconApproach.fixed = true;
+    scene.beaconApproach.gateOpen = true;
   }
 
   if (target.id === "archive-lens-array") {

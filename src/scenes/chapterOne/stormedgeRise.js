@@ -18,6 +18,17 @@ export function createStormedgeRiseScene() {
       { x: 1440, y: 530, lean: 0.14 }
     ]
   };
+  scene.paintedLandmark = {
+    source: "chapterFourLandmarks",
+    sprite: "stormGauge",
+    state: scene.ridge.gauge,
+    x: 1115,
+    groundY: 668,
+    height: 430,
+    glow: { heightRatio: 0.44, radius: 220, fixedIntensity: 0.38, dimIntensity: 0.12, pulse: 0.06 },
+    dimFilter: "brightness(0.72) saturate(0.88)",
+    fixedFilter: "brightness(0.94) saturate(1.04)"
+  };
   scene.layers = {
     trees: [
       { x: 95, y: 291, scale: 1.5 },
@@ -55,6 +66,7 @@ export function createStormedgeRiseScene() {
       id: "storm-gauge",
       kind: "path-puzzle",
       puzzleTheme: "storm-gauge",
+      puzzleLayout: "ch4-stormedge-rise",
       x: 1115,
       y: 508,
       radius: 230,

@@ -95,6 +95,12 @@ export function createLastPlatformScene() {
       onwardText: "The hill road is lit.",
       nextText: "Stormedge Rise waits beyond the rain.",
       nextSceneId: "chapter-four/stormedge-rise",
+      transitionPage: {
+        sprite: "mosslineToStormedge",
+        nextSceneId: "chapter-four/stormedge-rise",
+        nextText: "Climbing into Stormedge Rise.",
+        prompt: "Press Space, Enter, or E to step onto the storm ridge"
+      },
       chapterComplete: {
         title: "Mossline Restored",
         subtitle: "All Mossline signals are restored, and the road toward the storm ridge is open.",

@@ -19,6 +19,7 @@ export function createBeaconApproachScene() {
     gateOpen: false
   };
   scene.paintedLandmark = {
+    source: "chapterFourLandmarks",
     sprite: "beaconApproach",
     state: scene.beaconApproach,
     x: 1120,
@@ -69,6 +70,7 @@ export function createBeaconApproachScene() {
       id: "beacon-approach",
       kind: "path-puzzle",
       puzzleTheme: "beacon-signal",
+      puzzleLayout: "ch4-beacon-approach",
       x: 1120,
       y: 512,
       radius: 264,
@@ -81,6 +83,16 @@ export function createBeaconApproachScene() {
       onwardText: "The beacon gate is open.",
       nextText: "Beacon Hill waits beyond the gate.",
       nextSceneId: "chapter-five/beacon-hill",
+      chapterComplete: {
+        title: "Stormedge Rise Restored",
+        subtitle: "The storm-ridge path is safe, the weather systems are restored, and Beacon Hill is reachable.",
+        checklist: [
+          "Ridge safety systems steadied",
+          "Weather machinery restored",
+          "Final beacon gate opened"
+        ],
+        prompt: "Press Space, Enter, or E to continue"
+      },
       reactions: [
         { text: "The gate is open!", x: 1120, y: 292 },
         { text: "Beacon route confirmed.", x: "robot", y: "robotTop" }

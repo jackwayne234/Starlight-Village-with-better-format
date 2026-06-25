@@ -18,6 +18,17 @@ export function createCliffRopeLiftScene() {
     fixed: false,
     basketRaised: false
   };
+  scene.paintedLandmark = {
+    source: "chapterFourLandmarks",
+    sprite: "cliffRopeLift",
+    state: scene.cliffRopeLift,
+    x: 1120,
+    groundY: 668,
+    height: 444,
+    glow: { heightRatio: 0.44, radius: 230, fixedIntensity: 0.36, dimIntensity: 0.1, pulse: 0.06 },
+    dimFilter: "brightness(0.72) saturate(0.88)",
+    fixedFilter: "brightness(0.94) saturate(1.04)"
+  };
   scene.layers = {
     trees: [
       { x: 70, y: 292, scale: 1.54 },
@@ -61,6 +72,7 @@ export function createCliffRopeLiftScene() {
       id: "cliff-rope-lift",
       kind: "path-puzzle",
       puzzleTheme: "storm-gauge",
+      puzzleLayout: "ch4-cliff-rope-lift",
       x: 1120,
       y: 512,
       radius: 252,

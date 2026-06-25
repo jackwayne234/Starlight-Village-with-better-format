@@ -18,6 +18,17 @@ export function createSummitPathScene() {
     fixed: false,
     markersLit: false
   };
+  scene.paintedLandmark = {
+    source: "chapterFourLandmarks",
+    sprite: "summitPath",
+    state: scene.summitPath,
+    x: 1120,
+    groundY: 668,
+    height: 430,
+    glow: { heightRatio: 0.38, radius: 230, fixedIntensity: 0.36, dimIntensity: 0.1, pulse: 0.06 },
+    dimFilter: "brightness(0.72) saturate(0.88)",
+    fixedFilter: "brightness(0.94) saturate(1.04)"
+  };
   scene.layers = {
     trees: [
       { x: 70, y: 284, scale: 1.56 },
@@ -61,6 +72,7 @@ export function createSummitPathScene() {
       id: "summit-path",
       kind: "path-puzzle",
       puzzleTheme: "storm-gauge",
+      puzzleLayout: "ch4-summit-path",
       x: 1120,
       y: 508,
       radius: 260,

@@ -8,6 +8,9 @@ export function drawBackdrop(ctx, scene, time, width, height, cameraX) {
   if (drawChapterThreeMosslineScenery(ctx, scene, width, height, cameraX)) {
     return;
   }
+  if (drawChapterFourStormedgeScenery(ctx, scene, width, height, cameraX)) {
+    return;
+  }
   if (drawChapterTwoWetlandScenery(ctx, scene, width, height, cameraX)) {
     drawClouds(ctx, scene.backdrop, time, width, cameraX);
     return;
@@ -41,6 +44,32 @@ function drawChapterThreeMosslineScenery(ctx, scene, width, height, cameraX) {
   ctx.save();
   ctx.globalAlpha = 0.98;
   ctx.filter = "brightness(0.82) saturate(0.92) contrast(1.08)";
+  ctx.drawImage(scenery, x, y, drawWidth, drawHeight);
+  ctx.restore();
+  return true;
+}
+
+function drawChapterFourStormedgeScenery(ctx, scene, width, height, cameraX) {
+  if (!scene.id?.startsWith("chapter-four/")) {
+    return false;
+  }
+
+  const scenery = sprites.chapterFour?.backgrounds?.stormedgeBackground;
+  if (!imageReady(scenery)) {
+    return false;
+  }
+
+  const scale = Math.max(height / scenery.naturalHeight, (width + 420) / scenery.naturalWidth);
+  const drawWidth = scenery.naturalWidth * scale;
+  const drawHeight = scenery.naturalHeight * scale;
+  const y = height - drawHeight;
+  const panRange = Math.max(0, drawWidth - width);
+  const cameraRange = Math.max(1, (scene.world?.width ?? width) - width);
+  const x = -Math.min(panRange, (cameraX / cameraRange) * panRange);
+
+  ctx.save();
+  ctx.globalAlpha = 0.98;
+  ctx.filter = "brightness(0.86) saturate(0.94) contrast(1.06)";
   ctx.drawImage(scenery, x, y, drawWidth, drawHeight);
   ctx.restore();
   return true;

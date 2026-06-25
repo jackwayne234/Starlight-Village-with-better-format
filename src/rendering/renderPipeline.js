@@ -1,10 +1,10 @@
 import { config } from "../core/config.js";
 import { drawActors } from "./actorRenderer.js?v=robot-scan-restored";
-import { drawBackdrop } from "./backdropRenderer.js";
+import { drawBackdrop } from "./backdropRenderer.js?v=stormedge-sprite-pass";
 import { drawWeather } from "./weatherRenderer.js?v=no-bottom-ovals";
-import { drawWorld } from "./worldRenderer.js?v=last-platform-sprite";
-import { imageReady, sprites } from "./sprites.js?v=last-platform-sprite";
-import { drawHud } from "../ui/hud.js?v=mossline-first-pass";
+import { drawWorld } from "./worldRenderer.js?v=stormedge-sprite-pass";
+import { imageReady, sprites } from "./sprites.js?v=stormedge-sprite-pass";
+import { drawHud } from "../ui/hud.js?v=stormedge-sprite-pass";
 
 export function renderScene(ctx, scene, time, transition = null, options = {}) {
   const { hud = true } = options;
@@ -31,7 +31,7 @@ function drawVisualTransitionPage(ctx, scene, time, width, height) {
     return false;
   }
 
-  const image = sprites.chapterThree?.transitions?.[page.sprite];
+  const image = sprites.chapterThree?.transitions?.[page.sprite] ?? sprites.chapterFour?.transitions?.[page.sprite];
   if (!imageReady(image)) {
     return false;
   }

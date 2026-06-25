@@ -471,6 +471,7 @@ function drawPuzzleSideStatus(ctx, puzzle, x, y, colors) {
 function drawPuzzleSuccess(ctx, puzzle, x, y, colors) {
   const message = puzzle.theme?.successMessage ?? "Repair complete.";
   const wetlandSprites = getWetlandPuzzleSprites(puzzle);
+  const stormedgeSprites = getStormedgePuzzleSprites(puzzle);
   const mosslinePuzzle = isMosslinePuzzle(puzzle);
 
   ctx.fillStyle = colors.glow ?? "rgba(255, 224, 138, 0.92)";
@@ -479,6 +480,9 @@ function drawPuzzleSuccess(ctx, puzzle, x, y, colors) {
   if (wetlandSprites?.completionSpark) {
     drawImageCover(ctx, wetlandSprites.completionSpark, x - 214, y - 33, 66, 66);
     drawImageCover(ctx, wetlandSprites.completionSpark, x + 148, y - 33, 66, 66);
+  } else if (stormedgeSprites?.completionSpark) {
+    drawImageCover(ctx, stormedgeSprites.completionSpark, x - 214, y - 33, 66, 66);
+    drawImageCover(ctx, stormedgeSprites.completionSpark, x + 148, y - 33, 66, 66);
   } else if (mosslinePuzzle) {
     drawMosslineSignalSpark(ctx, x - 184, y, colors);
     drawMosslineSignalSpark(ctx, x + 184, y, colors);
@@ -539,6 +543,11 @@ function drawPuzzleTile(ctx, puzzle, tile, x, y, size, selected, lit, colors) {
   const wetlandSprites = getWetlandPuzzleSprites(puzzle);
   if (wetlandSprites) {
     drawWetlandPuzzleTile(ctx, tile, x, y, size, selected, lit, colors, wetlandSprites);
+    return;
+  }
+  const stormedgeSprites = getStormedgePuzzleSprites(puzzle);
+  if (stormedgeSprites) {
+    drawStormedgePuzzleTile(ctx, tile, x, y, size, selected, lit, colors, stormedgeSprites);
     return;
   }
   if (isMosslinePuzzle(puzzle)) {
@@ -808,6 +817,94 @@ function getWetlandPuzzleSprites(puzzle) {
     completionSpark: puzzleSprites.wetlandCompletionSpark,
     conduit
   };
+}
+
+function getStormedgePuzzleSprites(puzzle) {
+  if (!puzzle.layoutId?.startsWith("ch4-")) {
+    return null;
+  }
+
+  const puzzleSprites = sprites.chapterFour?.puzzles;
+  if (!puzzleSprites) {
+    return null;
+  }
+
+  const required = [
+    puzzleSprites.stormedgeTileBase,
+    puzzleSprites.stormedgeTileLit,
+    puzzleSprites.stormedgeSelectionFrame,
+    puzzleSprites.stormedgeStartNode,
+    puzzleSprites.stormedgeOutputNode,
+    puzzleSprites.stormedgeCompletionSpark,
+    puzzleSprites.brassWindChannel
+  ];
+  if (!required.every(imageReady)) {
+    return null;
+  }
+
+  return {
+    tileBase: puzzleSprites.stormedgeTileBase,
+    tileLit: puzzleSprites.stormedgeTileLit,
+    selectionFrame: puzzleSprites.stormedgeSelectionFrame,
+    startNode: puzzleSprites.stormedgeStartNode,
+    outputNode: puzzleSprites.stormedgeOutputNode,
+    completionSpark: puzzleSprites.stormedgeCompletionSpark,
+    conduit: puzzleSprites.brassWindChannel
+  };
+}
+
+function drawStormedgePuzzleTile(ctx, tile, x, y, size, selected, lit, colors, stormedgeSprites) {
+  drawImageCover(ctx, lit ? stormedgeSprites.tileLit : stormedgeSprites.tileBase, x, y, size, size);
+
+  if (selected) {
+    ctx.save();
+    ctx.globalAlpha = 0.42;
+    drawImageCover(ctx, stormedgeSprites.selectionFrame, x - 5, y - 5, size + 10, size + 10);
+    ctx.restore();
+  } else {
+    ctx.strokeStyle = "rgba(197, 222, 218, 0.18)";
+    ctx.lineWidth = 2;
+    roundedRect(ctx, x + 2, y + 2, size - 4, size - 4, 9);
+    ctx.stroke();
+  }
+
+  if (tile.type === "blank") {
+    ctx.save();
+    ctx.fillStyle = "rgba(218, 232, 224, 0.12)";
+    ctx.beginPath();
+    ctx.arc(x + size / 2, y + size / 2, size * 0.08, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    return;
+  }
+
+  const centerX = x + size / 2;
+  const centerY = y + size / 2;
+  const exits = getTileVisualExits(tile);
+  exits.forEach((direction) => {
+    drawWetlandConduitSegment(ctx, stormedgeSprites.conduit, centerX, centerY, size, direction, lit);
+  });
+
+  const nodeImage = tile.type === "start"
+    ? stormedgeSprites.startNode
+    : tile.type === "output"
+      ? stormedgeSprites.outputNode
+      : null;
+  if (nodeImage) {
+    const nodeX = centerX + (tile.type === "start" ? -size * 0.34 : size * 0.34);
+    drawImageCover(ctx, nodeImage, nodeX - size * 0.18, centerY - size * 0.18, size * 0.36, size * 0.36);
+  } else {
+    ctx.save();
+    ctx.fillStyle = lit ? colors.conduitLit ?? "rgba(255, 232, 166, 0.95)" : colors.node ?? "rgba(216, 170, 87, 0.82)";
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, size * 0.14, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "rgba(21, 33, 38, 0.68)";
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, size * 0.055, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
 }
 
 function getWetlandConduitSprite(layoutId, puzzleSprites) {

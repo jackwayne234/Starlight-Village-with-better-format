@@ -1321,3 +1321,359 @@ planning questions.
 **User answer:** A.
 
 **Locked decision:** The next work chunk should be to create a Mossline implementation plan/chunk list from these 25 answers. Do not jump straight into sprite generation, transition-page implementation, or puzzle tuning before turning this ground truth into a clear build plan.
+
+## Chapter 4 Ground Truth — 25 Question Planning Pass
+
+Status: complete — 25/25 answered. This section is the working source of truth for Chapter 4 / Stormedge Rise.
+
+Use these answers when planning and implementing Chapter 4 changes.
+
+### Chapter 4 Q1 — Overall Feel
+
+**Question:** What should Chapter 4 / Stormedge Rise mainly feel like?
+
+**Options offered:**
+1. Windy storm-ridge climb with cozy repair tension — recommended
+2. Dark, dangerous mountain storm chapter
+3. Calm highland chapter with only light weather
+4. Fast action climb with hazards and urgent pacing
+
+**User answer:** 1, with the added requirement that Chapter 4 needs a new background used throughout the entire chapter.
+
+**Locked decision:** Chapter 4 should feel like a windy storm-ridge climb with cozy repair tension. It also needs a new shared Chapter 4 background used throughout the entire chapter, so Stormedge Rise has a cohesive chapter identity rather than unrelated per-scene backdrops.
+
+### Chapter 4 Q2 — Shared Background Contents
+
+**Question:** What should the new shared Chapter 4 background show most clearly?
+
+**Options offered:**
+1. A rainy ridge path with cliffs, wind-bent grass, distant storm clouds, and the beacon hill ahead — recommended
+2. A steep rocky mountain face with lightning and dark clouds
+3. A high village rooftop district with chimneys, vanes, and rain gutters
+4. A wide open meadow above the storm with soft clouds and gentle rain
+
+**User answer:** 1.
+
+**Locked decision:** The Chapter 4 shared background should clearly show a rainy ridge path with cliffs, wind-bent grass, distant storm clouds, and Beacon Hill ahead. It should support a side-scrolling storm-ridge climb across the full chapter.
+
+### Chapter 4 Q3 — Visual Difference From Mossline
+
+**Question:** How different should Chapter 4 feel from Chapter 3 / Mossline?
+
+**Options offered:**
+1. Clearly higher, windier, and more open, while still rainy and cozy — recommended
+2. Extremely different, almost like a harsh mountain survival chapter
+3. Mostly the same as Mossline, but with more cliff props
+4. Brighter and calmer than Mossline, with much less storm mood
+
+**User answer:** 1.
+
+**Locked decision:** Chapter 4 should feel clearly higher, windier, and more open than Mossline while still belonging to the same rainy, cozy game. The chapter should move away from Mossline's enclosed rail-yard feeling without becoming harsh, bleak, or survival-focused.
+
+### Chapter 4 Q4 — Scene-to-Scene Variety
+
+**Question:** If Chapter 4 uses one shared storm-ridge background, how should each scene feel different?
+
+**Options offered:**
+1. Keep the shared background, but change the foreground repair landmark and local ridge details each scene — recommended
+2. Use a different custom background for every Chapter 4 scene
+3. Mostly keep every scene visually similar, only changing puzzle text
+4. Slowly make the shared background darker and stormier every scene
+
+**User answer:** 1.
+
+**Locked decision:** Chapter 4 should use one shared storm-ridge background, with scene-to-scene variety coming from the foreground repair landmark and local ridge details. Do not plan separate full backgrounds for each Chapter 4 scene.
+
+### Chapter 4 Q5 — Main Landmark Style
+
+**Question:** What should the main visual landmark style be for Chapter 4 scenes?
+
+**Options offered:**
+1. One strong side-view storm-ridge landmark per scene — recommended
+2. Lots of small wind and cliff props scattered everywhere
+3. Big dramatic weather effects first, landmarks less important
+4. Mostly reuse existing Chapter 4 canvas landmarks with small cleanup only
+
+**User answer:** 1.
+
+**Locked decision:** Chapter 4 scenes should use one strong side-view storm-ridge landmark per scene. Avoid cluttering scenes with many small wind/cliff props, avoid making weather effects replace readable landmarks, and do not default to keeping existing canvas landmarks when a stronger side-view landmark is needed.
+
+### Chapter 4 Q6 — Weather Intensity
+
+**Question:** How intense should the weather feel in Stormedge Rise?
+
+**Options offered:**
+1. Strong wind and steady rain, but readable and cozy — recommended
+2. Heavy lightning storm with frequent dramatic flashes
+3. Light rain and gentle breeze, mostly calm
+4. Thick fog and rain that make the ridge feel hard to see
+
+**User answer:** 1.
+
+**Locked decision:** Stormedge Rise should have strong wind and steady rain while staying readable and cozy. Weather should sell the ridge-climb mood without hiding landmarks, puzzle objects, paths, the player, or the robot.
+
+### Chapter 4 Q7 — Magic Level
+
+**Question:** How magical should Chapter 4 feel?
+
+**Options offered:**
+1. Mostly grounded weather machinery, with subtle repair glow and beacon hints — recommended
+2. Very magical, with floating storm spirits and glowing clouds
+3. Almost no magic, only realistic wind and rain machines
+4. Strange and eerie magic, making the ridge feel unsettling
+
+**User answer:** 1.
+
+**Locked decision:** Chapter 4 should feel mostly grounded around weather machinery, ridge equipment, and practical repairs. Magic should stay subtle through repair glow, beacon hints, and gameplay feedback rather than floating spirits, eerie effects, or oversized fantasy spectacle.
+
+### Chapter 4 Q8 — Repair Job Focus
+
+**Question:** What kind of repair jobs should Chapter 4 focus on?
+
+**Options offered:**
+1. Weather and ridge safety systems: gauges, vanes, lifts, rods, markers, and gates — recommended
+2. Mostly broken houses and village utility repairs
+3. Nature-healing jobs like plants, roots, and animals
+4. Ancient magical storm shrines and ruins as the main focus
+
+**User answer:** 1.
+
+**Locked decision:** Chapter 4 repair jobs should focus on weather and ridge safety systems: storm gauges, weather vanes, rope lifts, wind chimes, lightning rods, lookout equipment, stair braces, cloud/rain machinery, path markers, and beacon gates. Avoid shifting the chapter toward house repairs, nature healing, or ancient magical ruins as the main identity.
+
+### Chapter 4 Q9 — Puzzle Difficulty Compared To Mossline
+
+**Question:** How should Chapter 4's puzzles compare to Chapter 3 / Mossline?
+
+**Options offered:**
+1. A small step harder than Mossline, still calm and non-punishing — recommended
+2. About the same difficulty as Mossline
+3. Much harder, with larger boards and trickier solutions
+4. Easier than Mossline so the climb feels more relaxed
+
+**User answer:** 1.
+
+**Locked decision:** Chapter 4 puzzles should be a small step harder than Mossline while staying calm, readable, and non-punishing. Difficulty should increase gently and should not turn Stormedge Rise into a harsh challenge spike.
+
+### Chapter 4 Q10 — How Puzzles Get Harder
+
+**Question:** How should Stormedge puzzles get a little harder?
+
+**Options offered:**
+1. More branching paths, more outputs, and wind-themed detours while keeping boards readable — recommended
+2. Much larger boards with many more tiles
+3. Add timers or wind hazards that punish slow solving
+4. Hide information so players have to guess more often
+
+**User answer:** 1.
+
+**Locked decision:** Stormedge puzzles should get a little harder through more branching paths, more outputs, and wind-themed detours while keeping boards readable. Avoid much larger boards, timers, punishment, hazards, or hidden-information guessing as the main difficulty tools.
+
+### Chapter 4 Q11 — Puzzle Type
+
+**Question:** Should Chapter 4 keep the same rotate-path puzzle type?
+
+**Options offered:**
+1. Yes, keep rotate-path puzzles and make them feel storm/ridge themed through visuals, text, and layouts — recommended
+2. Add a new wind-specific puzzle type for Chapter 4
+3. Mix rotate-path puzzles with a few brand-new puzzle types
+4. Replace rotate-path puzzles entirely for this chapter
+
+**User answer:** 1.
+
+**Locked decision:** Chapter 4 should keep the same rotate-path puzzle type and make it feel storm/ridge themed through visuals, instructions, repair context, and tuned layouts. Do not introduce a new wind-specific puzzle type or replace the existing puzzle language for this chapter.
+
+### Chapter 4 Q12 — Puzzle Visual Skin
+
+**Question:** What should Chapter 4 puzzle panels look like?
+
+**Options offered:**
+1. Wind channels and brass weather-instrument paths over storm-blue metal tiles — recommended
+2. Plain Mossline-style rail/signal panels reused from Chapter 3
+3. Wetland boardwalk/water tiles reused from Chapter 2
+4. Bright magical cloud tiles with lots of glow and sparkles
+
+**User answer:** 1.
+
+**Locked decision:** Chapter 4 puzzle panels should use wind channels and brass weather-instrument paths over storm-blue metal tiles. The puzzle skin should feel like practical storm/ridge equipment, not reused Mossline rails, reused wetland boardwalks, or bright magical cloud tiles.
+
+### Chapter 4 Q13 — Chapter Opening
+
+**Question:** How should Chapter 4 begin after Mossline?
+
+**Options offered:**
+1. A mostly visual transition page from the last rail platform onto the storm ridge, then the first Stormedge repair — recommended
+2. Start immediately at Stormedge Rise with no transition image
+3. Add a playable threshold scene before Stormedge Rise
+4. Use a text-only chapter title card before Stormedge Rise
+
+**User answer:** 1, with the added requirement that the transition-to-new-chapter image includes the boy and the robot.
+
+**Locked decision:** Chapter 4 should begin with a mostly visual transition page from the last Mossline rail platform onto the storm ridge, then continue into the first Stormedge repair. The transition image must include the boy and the robot so the chapter handoff feels like a pictured journey, not just a title card or text prompt.
+
+### Chapter 4 Q14 — Transition Image Contents
+
+**Question:** What should the Chapter 3-to-4 transition image show most clearly?
+
+**Options offered:**
+1. The Mossline rails ending as the boy and robot step onto a windy ridge path with Beacon Hill visible ahead — recommended
+2. A close-up of the storm gauge before the first repair
+3. A dramatic lightning strike over the whole mountain
+4. The boy and robot already standing at Beacon Hill's gate
+
+**User answer:** 1.
+
+**Locked decision:** The Chapter 3-to-4 transition image should show the Mossline rails ending as the boy and robot step onto a windy ridge path with Beacon Hill visible ahead. The image should clearly bridge the rail-yard chapter into the storm-ridge chapter without jumping all the way to Beacon Hill's gate.
+
+### Chapter 4 Q15 — Chapter Ending
+
+**Question:** How should Chapter 4 end?
+
+**Options offered:**
+1. Beacon Approach opens the final ridge gate toward Beacon Hill, followed by a brief completion summary — recommended
+2. Quietly continue straight into Beacon Hill with no summary
+3. End with a dramatic storm clearing over the whole village
+4. End with a cliffhanger that delays reaching Beacon Hill later
+
+**User answer:** 1.
+
+**Locked decision:** Chapter 4 should end when Beacon Approach opens the final ridge gate toward Beacon Hill, followed by a brief completion summary. The ending should confirm the ridge route is restored and then send the player onward into Chapter 5 / Beacon Hill.
+
+### Chapter 4 Q16 — Completion Summary Focus
+
+**Question:** What should the Chapter 4 completion summary emphasize?
+
+**Options offered:**
+1. The storm-ridge path is safe, the weather systems are restored, and Beacon Hill is reachable — recommended
+2. The storm is completely gone forever
+3. The robot has discovered a major mystery behind the storm
+4. The village below is fully saved already before Beacon Hill begins
+
+**User answer:** 1.
+
+**Locked decision:** The Chapter 4 completion summary should emphasize that the storm-ridge path is safe, the weather systems are restored, and Beacon Hill is reachable. Do not imply the storm is gone forever, reveal a major new mystery, or claim the whole village is already saved before Chapter 5 begins.
+
+### Chapter 4 Q17 — Robot Role
+
+**Question:** What should the robot's role be in Stormedge Rise?
+
+**Options offered:**
+1. Helpful companion with short wind/weather repair hints and gentle reactions — recommended
+2. Nervous companion who constantly worries about the storm
+3. Mostly silent, letting the ridge feel lonely
+4. Very technical weather expert with longer explanations
+
+**User answer:** 1.
+
+**Locked decision:** The robot should remain a helpful companion in Stormedge Rise, giving short wind/weather repair hints and gentle reactions. Avoid making the robot constantly worried, mostly silent, or overly technical.
+
+### Chapter 4 Q18 — Story Amount
+
+**Question:** How much story should Chapter 4 add?
+
+**Options offered:**
+1. Light story through setting, repairs, short dialogue, and the visible approach to Beacon Hill — recommended
+2. A full chapter plot with a major twist
+3. Almost no story, mostly pure puzzle locations
+4. More dialogue-heavy character scenes than earlier chapters
+
+**User answer:** 1.
+
+**Locked decision:** Chapter 4 should add light story through setting, repair purpose, short dialogue, and the visible approach to Beacon Hill. It should not become plot-heavy, twist-driven, dialogue-heavy, or storyless.
+
+### Chapter 4 Q19 — Existing Art Policy
+
+**Question:** How should we handle existing Chapter 4 art already in the game?
+
+**Options offered:**
+1. Use it as reference, but replace or upgrade as needed to match the new shared Stormedge background direction — recommended
+2. Keep as much existing Chapter 4 art as possible
+3. Replace all existing Chapter 4 art no matter what
+4. Only make the shared background; leave scene landmarks alone for now
+
+**User answer:** 1.
+
+**Locked decision:** Existing Chapter 4 art should be used as reference, but it can be replaced or upgraded as needed to match the new shared Stormedge background direction. Do not preserve old art merely because it exists, and do not replace everything blindly if something already fits the new side-view storm-ridge chapter identity.
+
+### Chapter 4 Q20 — Asset Priority
+
+**Question:** What Chapter 4 sprites/assets should we prioritize first?
+
+**Options offered:**
+1. Shared background, transition image, foreground landmarks, then puzzle/UI polish — recommended
+2. Foreground landmarks first, then background later
+3. Puzzle/UI sprites first, then world art
+4. Transition image first, then decide the rest afterward
+
+**User answer:** 1.
+
+**Locked decision:** Chapter 4 asset work should prioritize the shared background first, then the Chapter 3-to-Chapter 4 transition image, then foreground repair landmarks, then puzzle/UI polish. This order should guide the implementation chunk plan.
+
+### Chapter 4 Q21 — Foreground Path
+
+**Question:** What should the playable foreground path usually look like in Chapter 4?
+
+**Options offered:**
+1. Narrow ridge trail with wet stones, grass tufts, rope posts, and safe ledges — recommended
+2. Wooden boardwalks like Chapter 2
+3. Rail tracks like Chapter 3
+4. Mostly rooftops and ladders above the village
+
+**User answer:** 1.
+
+**Locked decision:** Chapter 4's playable foreground path should usually read as a narrow ridge trail with wet stones, grass tufts, rope posts, and safe ledges. Do not reuse Chapter 2 boardwalk language, Chapter 3 rail tracks, or a rooftop/ladders identity as the main Chapter 4 path style.
+
+### Chapter 4 Q22 — Beacon Hill Visibility
+
+**Question:** How visible should Beacon Hill be during Chapter 4?
+
+**Options offered:**
+1. Visible in the distance as a steady destination, becoming the route's pull forward — recommended
+2. Hidden until the final scene for surprise
+3. Huge and dominant in every scene
+4. Only mentioned in dialogue, not shown in the background
+
+**User answer:** 1.
+
+**Locked decision:** Beacon Hill should be visible in the distance during Chapter 4 as a steady destination and the route's pull forward. It should guide the climb without becoming oversized or hidden until the final scene.
+
+### Chapter 4 Q23 — First Build Pass Out Of Scope
+
+**Question:** What should be out of scope for the first Stormedge build pass?
+
+**Options offered:**
+1. Audio, heavy story rewrites, new puzzle types, and Chapter 5/Beacon Hill changes — recommended
+2. Only audio is out of scope
+3. Nothing; fully polish every Chapter 4 detail at once
+4. Only Chapter 5 changes are out of scope
+
+**User answer:** 1.
+
+**Locked decision:** The first Stormedge build pass should exclude audio, heavy story rewrites, new puzzle types, and Chapter 5 / Beacon Hill changes. Keep the pass focused on Chapter 4's shared background direction, transition page, foreground landmarks, puzzle tuning/skin as needed, completion summary, route flow, and documentation.
+
+### Chapter 4 Q24 — First Pass Done Enough
+
+**Question:** What counts as "done enough" for the first Stormedge pass?
+
+**Options offered:**
+1. Shared background works, transition page exists, all scenes fit the new art direction, puzzles are a bit harder, route flow is verified, and sprites are side-view — recommended
+2. Only the shared background and transition page are done
+3. Everything is final-polished, including audio and dialogue
+4. All sprites are generated, even if not wired into gameplay yet
+
+**User answer:** 1.
+
+**Locked decision:** The first Stormedge pass is done enough when the shared background works, the Chapter 3-to-Chapter 4 transition page exists, all Chapter 4 scenes fit the new art direction, puzzles are a bit harder, route flow is verified, and all sprites follow the side-scrolling point of view. Avoid bird's-eye, top-down, angled, or isometric sprite views for this chapter's playable art direction.
+
+### Chapter 4 Q25 — Next Work Chunk
+
+**Question:** After this planning pass, what should the next work chunk be?
+
+**Options offered:**
+1. Create a Stormedge implementation plan/chunk list from these 25 answers — recommended
+2. Start generating the shared Chapter 4 background immediately
+3. Start building the Chapter 3-to-Chapter 4 transition page immediately
+4. Start tuning Chapter 4 puzzles immediately
+
+**User answer:** 1.
+
+**Locked decision:** The next work chunk should be to create a Stormedge implementation plan/chunk list from these 25 answers. Do not jump straight into shared background generation, transition-page implementation, or puzzle tuning before turning this ground truth into a clear build plan.

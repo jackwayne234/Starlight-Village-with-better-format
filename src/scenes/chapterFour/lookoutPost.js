@@ -18,6 +18,17 @@ export function createLookoutPostScene() {
     fixed: false,
     scopeAligned: false
   };
+  scene.paintedLandmark = {
+    source: "chapterFourLandmarks",
+    sprite: "lookoutPost",
+    state: scene.lookoutPost,
+    x: 1120,
+    groundY: 668,
+    height: 430,
+    glow: { heightRatio: 0.4, radius: 220, fixedIntensity: 0.34, dimIntensity: 0.1, pulse: 0.05 },
+    dimFilter: "brightness(0.72) saturate(0.88)",
+    fixedFilter: "brightness(0.94) saturate(1.04)"
+  };
   scene.layers = {
     trees: [
       { x: 80, y: 286, scale: 1.54 },
@@ -61,6 +72,7 @@ export function createLookoutPostScene() {
       id: "lookout-post",
       kind: "path-puzzle",
       puzzleTheme: "archive-lens",
+      puzzleLayout: "ch4-lookout-post",
       x: 1120,
       y: 500,
       radius: 252,

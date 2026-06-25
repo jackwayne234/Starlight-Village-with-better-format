@@ -168,6 +168,61 @@ const layouts = {
     [tile("blank", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
     [tile("output", 2, true), tile("tee", 0), tile("blank", 0, true), tile("blank", 0, true)],
     [tile("blank", 0, true), tile("turn", 2), tile("line", 1), tile("output", 0, true)]
+  ],
+  "ch4-stormedge-rise": [
+    [tile("start", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("tee", 1), tile("turn", 2), tile("blank", 0, true)],
+    [tile("output", 2, true), tile("turn", 0), tile("tee", 1), tile("output", 0, true)]
+  ],
+  "ch4-weather-vane-roof": [
+    [tile("start", 0, true), tile("tee", 1), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("line", 0), tile("blank", 0, true), tile("blank", 0, true)],
+    [tile("output", 2, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)]
+  ],
+  "ch4-cliff-rope-lift": [
+    [tile("start", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("turn", 1), tile("tee", 2), tile("output", 0, true)],
+    [tile("output", 2, true), tile("line", 1), tile("tee", 1), tile("output", 0, true)]
+  ],
+  "ch4-wind-chime-pass": [
+    [tile("start", 0, true), tile("tee", 1), tile("line", 1), tile("output", 0, true)],
+    [tile("output", 2, true), tile("tee", 2), tile("turn", 2), tile("blank", 0, true)],
+    [tile("blank", 0, true), tile("turn", 2), tile("tee", 1), tile("output", 0, true)]
+  ],
+  "ch4-lightning-rod-field": [
+    [tile("start", 0, true), tile("tee", 1), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("line", 0), tile("blank", 0, true), tile("blank", 0, true)],
+    [tile("output", 2, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)]
+  ],
+  "ch4-lookout-post": [
+    [tile("start", 0, true), tile("tee", 1), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("turn", 2), tile("tee", 1), tile("output", 0, true)],
+    [tile("output", 2, true), tile("line", 1), tile("turn", 1), tile("blank", 0, true)]
+  ],
+  "ch4-cracked-stair": [
+    [tile("start", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
+    [tile("output", 2, true), tile("tee", 0), tile("blank", 0, true), tile("blank", 0, true)],
+    [tile("blank", 0, true), tile("turn", 2), tile("line", 1), tile("output", 0, true)]
+  ],
+  "ch4-cloud-harvester": [
+    [tile("start", 0, true), tile("tee", 1), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("turn", 1), tile("line", 1), tile("output", 0, true)]
+  ],
+  "ch4-summit-path": [
+    [tile("start", 0, true), tile("tee", 1), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
+    [tile("output", 2, true), tile("tee", 0), tile("blank", 0, true), tile("blank", 0, true)],
+    [tile("blank", 0, true), tile("turn", 2), tile("line", 1), tile("output", 0, true)]
+  ],
+  "ch4-beacon-approach": [
+    [tile("start", 0, true), tile("tee", 1), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("turn", 1), tile("line", 1), tile("output", 0, true)]
   ]
 };
 
@@ -373,6 +428,66 @@ const layoutThemes = {
     objective: "Light the exit.",
     successMessage: "Reedwatch markers linked. The road out is lit."
   },
+  "ch4-stormedge-rise": stormedgeTheme(
+    "Storm Gauge Wind Channels",
+    "Rotate the brass wind channels so every gauge needle receives steady storm pressure.",
+    "Steady the gauge.",
+    "Gauge channels linked. Storm readings hold steady."
+  ),
+  "ch4-weather-vane-roof": stormedgeTheme(
+    "Weather Vane Channel",
+    "Rotate the wind channels so the roof vane sends gusts into every safe output.",
+    "Align the vane.",
+    "Vane channels linked. Wind moves cleanly."
+  ),
+  "ch4-cliff-rope-lift": stormedgeTheme(
+    "Cliff Lift Pulley Line",
+    "Rotate the brass paths so the lift ropes share pressure through each pulley output.",
+    "Balance the lift.",
+    "Pulley channels linked. The basket is steady."
+  ),
+  "ch4-wind-chime-pass": stormedgeTheme(
+    "Wind Chime Sequence",
+    "Rotate the wind channels so gusts reach the chimes in a calm route order.",
+    "Calm the pass.",
+    "Chime channels linked. The gust pattern is clear."
+  ),
+  "ch4-lightning-rod-field": stormedgeTheme(
+    "Lightning Ground Path",
+    "Rotate the brass grounding paths so each rod shares one safe charge route.",
+    "Ground the rods.",
+    "Ground paths linked. The rods are safe."
+  ),
+  "ch4-lookout-post": stormedgeTheme(
+    "Lookout Scope Line",
+    "Rotate the instrument paths so the scope catches the beacon line through the rain.",
+    "Align the scope.",
+    "Scope channels linked. The beacon is visible."
+  ),
+  "ch4-cracked-stair": stormedgeTheme(
+    "Ridge Stair Brace",
+    "Rotate the brace channels so each stair lock receives steady ridge pressure.",
+    "Brace the stair.",
+    "Brace channels linked. The steps hold."
+  ),
+  "ch4-cloud-harvester": stormedgeTheme(
+    "Cloud Harvester Condenser",
+    "Rotate the condenser channels so clean rain reaches every ridge basin.",
+    "Tune the harvester.",
+    "Condenser channels linked. Clean water gathers safely."
+  ),
+  "ch4-summit-path": stormedgeTheme(
+    "Summit Marker Chain",
+    "Rotate the marker channels so each high mist lamp catches the route signal.",
+    "Mark the summit.",
+    "Marker channels linked. The summit path is visible."
+  ),
+  "ch4-beacon-approach": stormedgeTheme(
+    "Beacon Gate Signal",
+    "Rotate the final wind channels so the beacon gate receives every route signal.",
+    "Open the gate.",
+    "Beacon channels linked. The ridge gate opens."
+  ),
   "ch3-mossline-switchyard": {
     title: "Mossline Junction Panel",
     instructions: "Rotate the rail paths to carry signal current through the switchyard junction.",
@@ -434,6 +549,27 @@ const layoutThemes = {
     successMessage: "Platform lamp linked. The road down is open."
   }
 };
+
+function stormedgeTheme(title, instructions, objective, successMessage) {
+  return {
+    title,
+    instructions,
+    objective,
+    successMessage,
+    colors: {
+      panel: "#425a63",
+      panelDark: "#1f3038",
+      boardInset: "#253f49",
+      tile: "#273c48",
+      tileLit: "#3b6870",
+      conduit: "#b78442",
+      conduitLit: "#ffe08a",
+      node: "#d2aa61",
+      glow: "#ffe08a",
+      accent: "#8edfe0"
+    }
+  };
+}
 
 export function createRepairPuzzle(themeId, layoutId = themeId) {
   const tiles = cloneTiles(layouts[layoutId] ?? layouts[themeId] ?? layouts["glow-bridge"]);

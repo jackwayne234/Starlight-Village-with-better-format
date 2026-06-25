@@ -1,7 +1,7 @@
-import { createGame } from "./core/game.js?v=mossline-first-pass";
+import { createGame } from "./core/game.js?v=stormedge-sprite-pass";
 import { createInput } from "./core/input.js";
 import { clearProgress, saveProgress } from "./core/progress.js";
-import { createInitialScene, createScene } from "./scenes/sceneRegistry.js?v=last-platform-sprite";
+import { createInitialScene, createScene } from "./scenes/sceneRegistry.js?v=stormedge-sprite-pass";
 import { primeAudio, unlockAudio } from "./audio/gameAudio.js";
 
 const canvas = document.querySelector("#game");
@@ -34,6 +34,16 @@ if (transitionPreview === "glowfen-to-mossline") {
   firstScene.flow.mode = "visual-transition";
   firstScene.flow.message = "Mossline Switchyard is next.";
 }
+if (transitionPreview === "mossline-to-stormedge") {
+  firstScene.visualTransition = {
+    sprite: "mosslineToStormedge",
+    nextSceneId: "chapter-four/stormedge-rise",
+    nextText: "Climbing into Stormedge Rise.",
+    prompt: "Press Space, Enter, or E to step onto the storm ridge"
+  };
+  firstScene.flow.mode = "visual-transition";
+  firstScene.flow.message = "Stormedge Rise waits beyond the rain.";
+}
 if (completionPreview === "chapter-three" && firstScene.repairTarget) {
   firstScene.chapterComplete = {
     title: "Mossline Restored",
@@ -48,6 +58,21 @@ if (completionPreview === "chapter-three" && firstScene.repairTarget) {
   firstScene.repairTarget.nextSceneId = "chapter-four/stormedge-rise";
   firstScene.flow.mode = "chapter-complete";
   firstScene.flow.message = "Stormedge Rise waits beyond the rain.";
+}
+if (completionPreview === "chapter-four" && firstScene.repairTarget) {
+  firstScene.chapterComplete = {
+    title: "Stormedge Rise Restored",
+    subtitle: "The storm-ridge path is safe, the weather systems are restored, and Beacon Hill is reachable.",
+    checklist: [
+      "Ridge safety systems steadied",
+      "Weather machinery restored",
+      "Final beacon gate opened"
+    ],
+    prompt: "Press Space, Enter, or E to continue"
+  };
+  firstScene.repairTarget.nextSceneId = "chapter-five/beacon-hill";
+  firstScene.flow.mode = "chapter-complete";
+  firstScene.flow.message = "Beacon Hill waits beyond the gate.";
 }
 const game = createGame({
   canvas,

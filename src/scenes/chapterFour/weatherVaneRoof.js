@@ -18,6 +18,17 @@ export function createWeatherVaneRoofScene() {
     fixed: false,
     vaneAligned: false
   };
+  scene.paintedLandmark = {
+    source: "chapterFourLandmarks",
+    sprite: "weatherVaneRoof",
+    state: scene.weatherVaneRoof,
+    x: 1120,
+    groundY: 668,
+    height: 438,
+    glow: { heightRatio: 0.38, radius: 220, fixedIntensity: 0.36, dimIntensity: 0.1, pulse: 0.06 },
+    dimFilter: "brightness(0.72) saturate(0.88)",
+    fixedFilter: "brightness(0.94) saturate(1.04)"
+  };
   scene.layers = {
     trees: [
       { x: 80, y: 286, scale: 1.52 },
@@ -60,6 +71,7 @@ export function createWeatherVaneRoofScene() {
       id: "weather-vane-roof",
       kind: "path-puzzle",
       puzzleTheme: "storm-gauge",
+      puzzleLayout: "ch4-weather-vane-roof",
       x: 1120,
       y: 520,
       radius: 250,

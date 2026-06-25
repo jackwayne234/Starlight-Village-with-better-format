@@ -106,3 +106,12 @@ High-level list only. All details live inside each chunk file.
 | 116 | Tunnel Mouth Side Sprite Fix | complete |
 | 117 | Clock Signal Side Sprite Fix | complete |
 | 118 | Last Platform Side Sprite Fix | complete |
+| 119 | Stormedge Rise Implementation Plan | complete |
+| 120 | Stormedge Shared Background Sprite Pack | complete |
+| 121 | Stormedge Shared Background and Ridge Path Renderer | complete |
+| 122 | Chapter 3 to Chapter 4 Transition Page | complete |
+| 123 | Stormedge Foreground Landmark Audit and Asset Plan | complete |
+| 124 | Stormedge Foreground Landmark Sprite Production | complete |
+| 125 | Stormedge Scene Rewire and Repaired-State Pass | complete |
+| 126 | Stormedge Puzzle Skin and Difficulty Tuning | complete |
+| 127 | Stormedge Completion Summary and First-Pass Route QA | complete |

@@ -224,19 +224,23 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Clock Signal became bespoke on `2026-06-22`: it now has a wet station clock, pulse wires, rail signal lamps, dense flanking woods, synced green repaired state, route checks, and a chunk note in `chunks/68-clock-signal-scene.md`.
 - Last Platform became bespoke on `2026-06-22`: it now has a final platform shelter, end-of-line track stop, hill-road lamp, dense flanking woods, lit/open repaired state, route checks, and a chunk note in `chunks/69-last-platform-scene.md`.
 - Chapter 3 playtest sprite fixes continued on `2026-06-25`: Last Platform now uses `assets/sprites/chapter-three/landmarks/last-platform-side.png`, wired through `sprites.chapterThree.landmarks.lastPlatformSide` and `scene.paintedLandmark`, while preserving the `ch3-last-platform` puzzle layout and chapter-complete summary. See `chunks/118-last-platform-side-sprite-fix.md`.
-- Local preview verification used `http://127.0.0.1:5240/` most recently because earlier preview ports were occupied or unavailable.
+- Chapter 4 Stormedge planning landed on `2026-06-25`: `ground-truth.md` now contains a complete 25-answer Chapter 4 source of truth, and `chunks/119-stormedge-rise-implementation-plan.md` turns those answers into the next build sequence: shared Stormedge background sprite pack, shared background/ridge-path renderer, mostly visual Chapter 3-to-4 transition page with the boy and robot, ten-scene foreground landmark audit, landmark sprite production, scene rewire/repaired-state pass, storm/ridge puzzle skin and difficulty tuning, and completion summary/route QA. This was docs-only; no sprites, code, gameplay, QA, or visual changes were made.
+- Chapter 4 Stormedge first implementation pass landed on `2026-06-25`: Chunks 120-127 are complete. New assets live under `assets/sprites/chapter-four/`: shared Stormedge background, ridge path, Mossline-to-Stormedge transition image, ten transparent foreground landmark sprites plus source files, and Stormedge puzzle panel sprites. All ten Chapter 4 scenes now use the shared Stormedge background/path and one sprite-backed side-view landmark through `source: "chapterFourLandmarks"`. Last Platform now shows its Chapter 3 summary, then the visual Stormedge transition page, then Stormedge Rise. Beacon Approach now shows the Stormedge completion summary before continuing to Beacon Hill. The ten `ch4-*` puzzle layouts are solvable, start incomplete, and render with storm-blue/brass sprite-backed puzzle art.
+- Local preview verification used `http://127.0.0.1:5304/` most recently for Chapter 4 scene, transition, completion, and puzzle-overlay checks.
 
 ## Suggested Next Step
 
-Chapter 2's bounded user-playtest chunk is complete. Do not redo the Chapter 2
-handoff checkpoint or the Chapter 2 user-playtest pass unless the user asks for
-another pass.
+Chapter 4's first Stormedge implementation pass is complete through Chunk 127.
+Do not redo the shared background, transition image, landmark sprite, puzzle
+skin, or completion-summary pass unless the user asks for a revision.
 
 Next likely stop:
 
-1. Start a new, explicitly scoped chunk for the next requested area.
-2. If the user wants more Chapter 2 work, keep it narrow: audio/weather/dialogue
-   feel polish or another specific user-reported issue from playtesting.
-3. Mossline's first implementation pass is complete through Chunk 111. The next
-   useful Mossline step is human playtesting, followed by narrow feel polish if
-   needed: dialogue, weather mood, audio, or scene-specific visual fixes.
+1. Do a human-feel playtest from Last Platform through Beacon Hill, checking
+   whether the new Stormedge sprites feel too tree-obscured, too sparse, or need
+   stronger local ridge variation.
+2. If the user wants implementation next, proceed to a narrow Chapter 4 polish
+   chunk based on that playtest: landmark scale/placement, ridge foreground
+   detail, dialogue microcopy, or puzzle feel.
+3. Keep Chapter 5 / Beacon Hill changes out of Stormedge polish unless the user
+   explicitly expands scope.
