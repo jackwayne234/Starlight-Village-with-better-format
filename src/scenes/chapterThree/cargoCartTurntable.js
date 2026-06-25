@@ -14,12 +14,22 @@ export function createCargoCartTurntableScene() {
   scene.backdrop = { moonX: 965, moonY: 142, cloudDrift: 1.0, hillOffset: 48, ridgeOffset: 72 };
   scene.cargoCartTurntable = { x: 1160, groundY: 654, fixed: false, cartMoved: false };
   scene.paintedLandmark = {
-    sprite: "cargoCartTurntable",
+    source: "chapterThreeLandmarks",
+    sprite: "cargoCartTurntableSide",
     state: scene.cargoCartTurntable,
     x: 1160,
-    groundY: 674,
-    height: 370,
-    glow: { heightRatio: 0.5, radius: 210, fixedIntensity: 0.34, dimIntensity: 0.1, pulse: 0.04 }
+    groundY: 690,
+    height: 390,
+    dimFilter: "brightness(0.76) saturate(0.9)",
+    fixedFilter: "brightness(0.92) saturate(1.04)",
+    glow: {
+      xOffset: 24,
+      heightRatio: 0.42,
+      radius: 150,
+      dimIntensity: 0.08,
+      fixedIntensity: 0.3,
+      pulse: 0.04
+    }
   };
   scene.layers = {
     trees: [
@@ -66,6 +76,7 @@ export function createCargoCartTurntableScene() {
       id: "cargo-cart-turntable",
       kind: "path-puzzle",
       puzzleTheme: "rail-signal",
+      puzzleLayout: "ch3-cargo-cart-turntable",
       x: 1160,
       y: 548,
       radius: 285,

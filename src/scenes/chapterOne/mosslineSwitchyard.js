@@ -78,6 +78,7 @@ export function createMosslineSwitchyardScene() {
       id: "switchyard-junction",
       kind: "path-puzzle",
       puzzleTheme: "junction-line",
+      puzzleLayout: "ch3-mossline-switchyard",
       x: 1165,
       y: 520,
       radius: 230,

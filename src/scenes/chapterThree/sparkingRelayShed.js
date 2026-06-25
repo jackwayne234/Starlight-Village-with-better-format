@@ -58,6 +58,7 @@ export function createSparkingRelayShedScene() {
       id: "sparking-relay-shed",
       kind: "path-puzzle",
       puzzleTheme: "storm-gauge",
+      puzzleLayout: "ch3-sparking-relay-shed",
       x: 1160,
       y: 536,
       radius: 292,

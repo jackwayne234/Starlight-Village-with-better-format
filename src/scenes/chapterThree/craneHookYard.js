@@ -13,6 +13,24 @@ export function createCraneHookYardScene() {
   scene.showSignpost = false;
   scene.backdrop = { moonX: 960, moonY: 138, cloudDrift: 1.06, hillOffset: 52, ridgeOffset: 78 };
   scene.craneHookYard = { x: 1160, groundY: 654, fixed: false, beamLifted: false };
+  scene.paintedLandmark = {
+    source: "chapterThreeLandmarks",
+    sprite: "craneHookYardSide",
+    state: scene.craneHookYard,
+    x: 1160,
+    groundY: 700,
+    height: 470,
+    dimFilter: "brightness(0.76) saturate(0.9)",
+    fixedFilter: "brightness(0.94) saturate(1.04)",
+    glow: {
+      xOffset: 28,
+      heightRatio: 0.52,
+      radius: 190,
+      dimIntensity: 0.08,
+      fixedIntensity: 0.32,
+      pulse: 0.04
+    }
+  };
   scene.layers = {
     trees: [
       { x: 65, y: 282, scale: 1.54 },
@@ -58,6 +76,7 @@ export function createCraneHookYardScene() {
       id: "crane-hook-yard",
       kind: "path-puzzle",
       puzzleTheme: "rail-signal",
+      puzzleLayout: "ch3-crane-hook-yard",
       x: 1160,
       y: 532,
       radius: 292,

@@ -18,6 +18,24 @@ export function createClockSignalScene() {
     fixed: false,
     clockSynced: false
   };
+  scene.paintedLandmark = {
+    source: "chapterThreeLandmarks",
+    sprite: "clockSignalSide",
+    state: scene.clockSignal,
+    x: 1160,
+    groundY: 704,
+    height: 470,
+    dimFilter: "brightness(0.76) saturate(0.9)",
+    fixedFilter: "brightness(0.96) saturate(1.05)",
+    glow: {
+      xOffset: 0,
+      heightRatio: 0.56,
+      radius: 190,
+      dimIntensity: 0.08,
+      fixedIntensity: 0.32,
+      pulse: 0.04
+    }
+  };
   scene.layers = {
     trees: [
       { x: 78, y: 286, scale: 1.52 },
@@ -64,6 +82,7 @@ export function createClockSignalScene() {
       id: "clock-signal",
       kind: "path-puzzle",
       puzzleTheme: "rail-signal",
+      puzzleLayout: "ch3-clock-signal",
       x: 1160,
       y: 528,
       radius: 286,

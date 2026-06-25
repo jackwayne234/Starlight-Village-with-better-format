@@ -1,8 +1,8 @@
 import { updateCamera } from "./camera.js";
 import { updatePlayer } from "../entities/player.js";
 import { updateRobot } from "../entities/robot.js";
-import { updateRepairFlow } from "../interaction/repairFlow.js?v=comment-bubble-softening";
-import { renderScene } from "../rendering/renderPipeline.js?v=chapter-repair-label";
+import { updateRepairFlow } from "../interaction/repairFlow.js?v=mossline-first-pass";
+import { renderScene } from "../rendering/renderPipeline.js?v=mossline-first-pass";
 import { drawTitleScreen } from "../ui/titleScreen.js?v=browser-route-smoke-2";
 import { sfx } from "../audio/gameAudio.js";
 
@@ -63,8 +63,10 @@ export function createGame({ canvas, ctx, input, firstScene, autoStart = false, 
         transition = null;
       }
     } else {
-      updatePlayer(scene, input, dt);
-      updateRobot(scene, dt);
+      if (!isBlockingOverlay(scene)) {
+        updatePlayer(scene, input, dt);
+        updateRobot(scene, dt);
+      }
       updateRepairFlow(scene, input, dt);
       if (scene.nextSceneId && createScene) {
         const nextScene = createScene(scene.nextSceneId);
@@ -117,6 +119,10 @@ export function createGame({ canvas, ctx, input, firstScene, autoStart = false, 
       transition = null;
     }
   };
+}
+
+function isBlockingOverlay(scene) {
+  return scene.flow.mode === "visual-transition" || scene.flow.mode === "chapter-complete";
 }
 
 function getTransitionState(transition) {

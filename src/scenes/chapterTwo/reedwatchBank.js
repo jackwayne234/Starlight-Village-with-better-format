@@ -85,6 +85,12 @@ export function createReedwatchBankScene() {
       onwardText: "The reed markers are lit.",
       nextText: "Mossline Switchyard is next.",
       nextSceneId: "chapter-three/mossline-switchyard",
+      transitionPage: {
+        sprite: "glowfenToMossline",
+        nextSceneId: "chapter-three/mossline-switchyard",
+        nextText: "Mossline Switchyard is next.",
+        prompt: "Press Space, Enter, or E to enter Mossline"
+      },
       reactions: [
         { text: "The bank path is lit!", x: 1160, y: 318 },
         { text: "Wetland exit confirmed.", x: "robot", y: "robotTop" }

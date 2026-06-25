@@ -13,6 +13,24 @@ export function createRainSlickRailsScene() {
   scene.showSignpost = false;
   scene.backdrop = { moonX: 948, moonY: 142, cloudDrift: 1.02, hillOffset: 52, ridgeOffset: 78 };
   scene.rainSlickRails = { x: 1160, groundY: 654, fixed: false, railsSanded: false };
+  scene.paintedLandmark = {
+    source: "chapterThreeLandmarks",
+    sprite: "rainSlickRailsSide",
+    state: scene.rainSlickRails,
+    x: 1160,
+    groundY: 704,
+    height: 360,
+    dimFilter: "brightness(0.78) saturate(0.9)",
+    fixedFilter: "brightness(0.96) saturate(1.05)",
+    glow: {
+      xOffset: 0,
+      heightRatio: 0.36,
+      radius: 210,
+      dimIntensity: 0.08,
+      fixedIntensity: 0.3,
+      pulse: 0.04
+    }
+  };
   scene.layers = {
     trees: [
       { x: 70, y: 282, scale: 1.54 },
@@ -58,6 +76,7 @@ export function createRainSlickRailsScene() {
       id: "rain-slick-rails",
       kind: "path-puzzle",
       puzzleTheme: "water-routing",
+      puzzleLayout: "ch3-rain-slick-rails",
       x: 1160,
       y: 540,
       radius: 292,

@@ -18,6 +18,24 @@ export function createTunnelMouthScene() {
     fixed: false,
     warningLampsSafe: false
   };
+  scene.paintedLandmark = {
+    source: "chapterThreeLandmarks",
+    sprite: "tunnelMouthSide",
+    state: scene.tunnelMouth,
+    x: 1165,
+    groundY: 704,
+    height: 500,
+    dimFilter: "brightness(0.74) saturate(0.9)",
+    fixedFilter: "brightness(0.94) saturate(1.04)",
+    glow: {
+      xOffset: 0,
+      heightRatio: 0.54,
+      radius: 230,
+      dimIntensity: 0.08,
+      fixedIntensity: 0.32,
+      pulse: 0.04
+    }
+  };
   scene.layers = {
     trees: [
       { x: 62, y: 282, scale: 1.58 },
@@ -64,6 +82,7 @@ export function createTunnelMouthScene() {
       id: "tunnel-mouth",
       kind: "path-puzzle",
       puzzleTheme: "archive-lens",
+      puzzleLayout: "ch3-tunnel-mouth",
       x: 1165,
       y: 528,
       radius: 292,

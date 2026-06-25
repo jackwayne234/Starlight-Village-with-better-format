@@ -1,4 +1,4 @@
-import { createRepairPuzzle, movePuzzleSelection, rotateSelectedTile } from "./repairPuzzle.js";
+import { createRepairPuzzle, movePuzzleSelection, rotateSelectedTile } from "./repairPuzzle.js?v=mossline-first-pass";
 import { sfx } from "../audio/gameAudio.js";
 
 export function updateRepairFlow(scene, input, dt) {
@@ -10,6 +10,17 @@ export function updateRepairFlow(scene, input, dt) {
   updateReactionBubbles(scene, dt);
 
   if (!target) {
+    return;
+  }
+
+  if (flow.mode === "visual-transition") {
+    if (consumeRepairInput(input) && scene.visualTransition?.nextSceneId) {
+      scene.nextSceneId = scene.visualTransition.nextSceneId;
+      scene.flow.message = scene.visualTransition.nextText ?? "";
+      scene.visualTransition = null;
+      scene.progressDirty = true;
+      showDialogue(scene, target.dialogue?.next);
+    }
     return;
   }
 
@@ -486,6 +497,14 @@ function advanceRepairTarget(scene) {
   const nextIndex = scene.repairIndex + 1;
 
   if (nextIndex >= scene.repairs.length) {
+    if (scene.repairTarget.transitionPage) {
+      scene.visualTransition = scene.repairTarget.transitionPage;
+      scene.flow.mode = "visual-transition";
+      scene.flow.message = scene.repairTarget.nextText;
+      scene.progressDirty = true;
+      return;
+    }
+
     if (scene.repairTarget.chapterComplete) {
       scene.chapterComplete = scene.repairTarget.chapterComplete;
       scene.flow.mode = "chapter-complete";

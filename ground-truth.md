@@ -2,7 +2,7 @@
 
 ## Chapter 2 Ground Truth — 25 Question Planning Pass
 
-Status: complete — 25/25 answered. Chapter 2 wetland overhaul completed through Chunk 99 checkpoint documentation.
+Status: complete — 25/25 answered. Chapter 2 wetland overhaul completed through Chunk 101 early puzzle sprite skin fix.
 
 This section is the working source of truth for Chapter 2. Use these answers when planning and implementing Chapter 2 changes.
 
@@ -358,7 +358,7 @@ This section is the working source of truth for Chapter 2. Use these answers whe
 
 ## Chapter 2 Chunk Plan
 
-Status: complete through Chunk 99 checkpoint documentation.
+Status: complete through Chunk 101 early puzzle sprite skin fix.
 
 Use these chunk files as the execution plan for the Chapter 2 wetland overhaul:
 
@@ -381,6 +381,8 @@ Use these chunk files as the execution plan for the Chapter 2 wetland overhaul:
 | 97 | Chapter Two Puzzle Difficulty Pass | complete |
 | 98 | Chapter Two Route QA and Visual Polish | complete |
 | 99 | Chapter Two Handoff and Checkpoint | complete |
+| 100 | Chapter Two User Playtest | complete |
+| 101 | Chapter Two Early Puzzle Sprite Skin Fix | complete |
 
 ## Purpose of This File
 
@@ -959,3 +961,363 @@ _Not granted yet. The AI should ask: “Do I have your permission to start worki
   `update1/turnover-2026-06-21-art-pass.md`; checklist in `update1/progress.md`.
 - Next session: re-check scenes 2–6 for cottage/tree overlaps, then pacing,
   puzzle ramp, weather, ending screen, dialogue.
+
+## Chapter 3 Ground Truth — 25 Question Planning Pass
+
+Status: complete — 25/25 answered. Mossline's first implementation pass is complete through Chunk 111.
+
+This section is the working source of truth for Chapter 3, currently called
+Mossline Switchyard in the route. Use these answers when planning and
+implementing Chapter 3 changes.
+
+Answers should be added one at a time as the user chooses between the 25
+planning questions.
+
+### Chapter 3 Q1 — Official Chapter Name
+
+**Question:** What should the official Chapter 3 name be?
+
+**Options offered:**
+1. Mossline Switchyard — recommended
+2. Mossline Woods
+3. Mossland Rails
+
+**User answer:** A.
+
+**Locked decision:** Chapter 3's official name is **Mossline Switchyard**. Keep the current route name and treat the chapter as a rail-signal district rather than renaming it to Mossland or making it primarily forest-focused.
+
+### Chapter 3 Q2 — Overall Feel
+
+**Question:** What should Mossline Switchyard mainly feel like?
+
+**Options offered:**
+1. Rainy rail-yard mystery with cozy repair tension — recommended
+2. Dark industrial danger, with sparks and broken machinery everywhere
+3. Quiet mossy forest path with only a little rail equipment
+4. Fast mechanical chapter with lots of moving parts and urgency
+
+**User answer:** A.
+
+**Locked decision:** Mossline Switchyard should feel like a rainy rail-yard mystery with cozy repair tension. It can have broken rail equipment and signal machinery, but the chapter should stay mysterious, repair-focused, and cozy rather than dark, dangerous, or fast-paced.
+
+### Chapter 3 Q3 — Main Visual Identity
+
+**Question:** What should be the main visual identity of Mossline Switchyard?
+
+**Options offered:**
+1. Wet rails, signal posts, old utility poles, moss, and puddles — recommended
+2. Mostly train cars, crates, platforms, and station buildings
+3. Mostly forest, with rails barely visible under roots
+4. Big machines and factory-like metal structures everywhere
+
+**User answer:** A, with the added requirement that Chapter 3 should have a shared background used across the entire chapter.
+
+**Locked decision:** Mossline Switchyard should visually center wet rails, signal posts, old utility poles, moss, and puddles. Chapter 3 should also get its own shared chapter background that is used across the full Mossline chapter, so the chapter has a cohesive identity rather than a different background for every scene.
+
+### Chapter 3 Q4 — Shared Background Contents
+
+**Question:** What should the shared Mossline chapter background show most clearly?
+
+**Options offered:**
+1. A rainy side-view rail line curving through mossy woods, with utility poles and signal lights — recommended
+2. A small abandoned station platform with rails in front
+3. A dense forest where the rails are almost hidden
+4. A big open rail yard with many tracks, carts, and machinery
+
+**User answer:** 1, with the added note that sprites will need to be made for all this.
+
+**Locked decision:** Chapter 3's shared background should show a rainy side-view rail line curving through mossy woods, with utility poles and signal lights. The chapter work should include making the needed sprites for this background and its related visual pieces instead of relying only on placeholder canvas shapes.
+
+### Chapter 3 Q5 — Scene-to-Scene Variety
+
+**Question:** How should scene-to-scene variety work if Mossline uses one shared background?
+
+**Options offered:**
+1. Same shared background, with each scene changing the foreground repair landmark and rail/signal details — recommended
+2. Same background and mostly the same foreground, so the chapter feels very consistent
+3. Different background variants for each scene
+4. Background slowly changes from forest rail line to open rail yard across the chapter
+
+**User answer:** A.
+
+**Locked decision:** Mossline Switchyard should use one shared chapter background, while each scene gets variety from its foreground repair landmark, local rail/signal details, and repaired-state effects. Do not make ten unrelated backgrounds for Chapter 3.
+
+### Chapter 3 Q6 — Foreground Repair Landmarks
+
+**Question:** What should the foreground repair landmarks be like?
+
+**Options offered:**
+1. One strong side-view rail/signal landmark per scene — recommended
+2. Lots of small rail props scattered around each scene
+3. Mostly big background machinery, with smaller repair points
+4. Reuse old Chapter 3 scene art as much as possible without new landmark sprites
+
+**User answer:** A.
+
+**Locked decision:** Each Mossline scene should have one strong side-view rail/signal foreground repair landmark. Avoid cluttering scenes with many small loose rail props, and do not rely on old placeholder art when a new landmark sprite is needed.
+
+### Chapter 3 Q7 — Industrial Level
+
+**Question:** How industrial should Mossline feel?
+
+**Options offered:**
+1. Old rail infrastructure reclaimed by moss and rain — recommended
+2. Very industrial, with heavy metal, sparks, and machinery
+3. Mostly natural, with only tiny signs of rail infrastructure
+4. Cute miniature train-set feeling, more playful than mysterious
+
+**User answer:** A.
+
+**Locked decision:** Mossline should feel like old rail infrastructure reclaimed by moss and rain. It should not become a heavy industrial zone, a mostly natural forest chapter, or a cute toy-train chapter.
+
+### Chapter 3 Q8 — Puzzle Difficulty
+
+**Question:** How should Mossline's puzzle difficulty compare to Chapter 2?
+
+**Options offered:**
+1. A small step harder than Chapter 2, still calm and readable — recommended
+2. About the same as Chapter 2
+3. Much harder, like the first real challenge chapter
+4. Easier than Chapter 2, focused more on atmosphere than puzzles
+
+**User answer:** A.
+
+**Locked decision:** Mossline puzzles should be a small step harder than Chapter 2 while staying calm, readable, and non-punishing. Difficulty should increase through puzzle design, not through stress, danger, or unclear instructions.
+
+### Chapter 3 Q9 — Difficulty Method
+
+**Question:** How should Mossline puzzles get harder?
+
+**Options offered:**
+1. More branching paths, more outputs, and less obvious rotations — recommended
+2. Larger boards with many more tiles
+3. Add moving/timed rail signals
+4. Add mistakes or hazards that punish the player
+
+**User answer:** A.
+
+**Locked decision:** Mossline puzzles should get harder through more branching paths, more outputs, and less obvious rotations. Avoid relying on much larger boards, timers, moving signals, hazards, or punishment.
+
+### Chapter 3 Q10 — Puzzle Type
+
+**Question:** Should Mossline keep the same rotate-path puzzle type?
+
+**Options offered:**
+1. Yes, keep rotate-path puzzles and make them feel rail/signal themed — recommended
+2. Mostly yes, but add one new mechanic near the end
+3. No, introduce a new rail-switch puzzle type
+4. Mix several puzzle types across the chapter
+
+**User answer:** A.
+
+**Locked decision:** Mossline should keep the same rotate-path puzzle type and make it feel rail/signal themed through visuals, text, layouts, and repair context. Do not introduce a new puzzle type for Chapter 3.
+
+### Chapter 3 Q11 — Repair Job Focus
+
+**Question:** What should the repair jobs focus on?
+
+**Options offered:**
+1. Rail signals, switch boxes, turntables, relays, lamps, and blocked rails — recommended
+2. Mostly moving train carts and cargo around
+3. Mostly restoring forest paths around the rails
+4. Mostly electrical machines, sparks, and power boxes
+
+**User answer:** A.
+
+**Locked decision:** Mossline repair jobs should focus on rail signals, switch boxes, turntables, relays, lamps, and blocked rails. The chapter can include carts and electrical details, but those should support the rail/signal repair identity rather than becoming the whole chapter.
+
+### Chapter 3 Q12 — Story Amount
+
+**Question:** How much story should Mossline add?
+
+**Options offered:**
+1. Light story through setting, repairs, and short dialogue — recommended
+2. A clear chapter plot about why the switchyard failed
+3. Almost no story, mostly puzzles
+4. More character/emotional dialogue than Chapter 2
+
+**User answer:** A.
+
+**Locked decision:** Mossline should add light story through setting, repair purpose, and short dialogue. It should not become plot-heavy or dialogue-heavy, and it should not require a full explanation of why the switchyard failed.
+
+### Chapter 3 Q13 — Robot Role
+
+**Question:** What should the robot's role be in Mossline?
+
+**Options offered:**
+1. Helpful companion with short rail/signal hints and gentle reactions — recommended
+2. More worried because the switchyard feels dangerous
+3. More technical, explaining rail machinery in detail
+4. Mostly quiet so the environment speaks for itself
+
+**User answer:** A.
+
+**Locked decision:** The robot should remain a helpful companion in Mossline, giving short rail/signal hints and gentle reactions. Avoid making the robot too worried, too technical, or mostly silent.
+
+### Chapter 3 Q14 — Chapter Opening
+
+**Question:** How should Chapter 3 begin after Reedwatch Bank?
+
+**Options offered:**
+1. Arrive at the first rail junction where wetland gives way to mossy rails — recommended
+2. Start at an abandoned platform with a clear station-like feel
+3. Start deep inside the switchyard with lots of rail equipment already visible
+4. Start with a quiet forest path before the rails appear later
+
+**User answer:** A, with the added requirement that there should be a good transition page.
+
+**Locked decision:** Chapter 3 should begin by arriving at the first rail junction where the wetland gives way to mossy rails. The handoff from Reedwatch Bank should include a good transition page/scene so the move from Chapter 2 wetlands into Mossline feels intentional rather than abrupt.
+
+### Chapter 3 Q15 — Transition Page Image
+
+**Question:** What should the Chapter 2 to Chapter 3 transition page show?
+
+**Options offered:**
+1. The wetland boardwalk ending beside the first moss-covered rail line and signal light — recommended
+2. A wide title-card style reveal: "Chapter 3: Mossline Switchyard" over the new background
+3. A short playable threshold repair before the first real Mossline scene
+4. The robot detecting rail signals in the distance while the player walks out of the reeds
+
+**User answer:** A, with the added requirement that the boy and robot should also be in the picture.
+
+**Locked decision:** The Chapter 2 to Chapter 3 transition page should show the wetland boardwalk ending beside the first moss-covered rail line and signal light, with the boy and robot visible in the picture. This should feel like a visual handoff from wetland to Mossline, not only a text/title card.
+
+### Chapter 3 Q16 — Transition Page Interactivity
+
+**Question:** Should that transition page be playable or just a visual chapter transition?
+
+**Options offered:**
+1. Mostly visual transition page, then continue into the first Mossline repair — recommended
+2. Playable short walking scene with no repair
+3. Playable short scene with a small threshold repair
+4. Full first scene of Chapter 3, no separate transition page
+
+**User answer:** A.
+
+**Locked decision:** The Chapter 2 to Chapter 3 transition page should be mostly visual, then continue into the first real Mossline repair. Do not add an extra threshold repair or full playable scene unless later planning changes this.
+
+### Chapter 3 Q17 — Chapter Ending
+
+**Question:** How should Mossline end?
+
+**Options offered:**
+1. The last platform light opens the road toward Chapter 4's storm ridge — recommended
+2. A repaired train/cart rolls forward and clears the exit
+3. The signal network lights up across the whole switchyard
+4. Quietly, with the final repair leading straight to Chapter 4 without much ceremony
+
+**User answer:** A, with a completion summary. The transition page into Chapter 4 will be the beginning of Chapter 4, handled later.
+
+**Locked decision:** Mossline should end with the last platform light opening the road toward Chapter 4's storm ridge, followed by a completion summary. Do not build the Chapter 4 transition page as part of this Chapter 3 plan; that belongs to later Chapter 4 work.
+
+### Chapter 3 Q18 — Completion Summary Focus
+
+**Question:** What should the Chapter 3 completion summary emphasize?
+
+**Options offered:**
+1. All Mossline signals are restored and the storm ridge road is open — recommended
+2. The player mastered harder rail puzzles
+3. The switchyard is safe for carts/trains again
+4. The village lights now reach farther into the storm path
+
+**User answer:** A.
+
+**Locked decision:** The Chapter 3 completion summary should emphasize that all Mossline signals are restored and the road to the storm ridge is open. Keep the payoff focused on route restoration and the path forward.
+
+### Chapter 3 Q19 — Color and Mood Palette
+
+**Question:** What should the Mossline color/mood palette be?
+
+**Options offered:**
+1. Deep rainy greens, wet steel blues, warm amber signal lights — recommended
+2. Dark grays and harsh electric sparks
+3. Bright green moss and colorful train-yard lights
+4. Mostly brown wood, rust, and muted tan rails
+
+**User answer:** A.
+
+**Locked decision:** Mossline should use deep rainy greens, wet steel blues, and warm amber signal lights. Avoid harsh industrial gray/spark dominance, overly bright train-yard colors, or a mostly brown/rust palette.
+
+### Chapter 3 Q20 — Weather and Atmosphere
+
+**Question:** How much weather should Mossline have?
+
+**Options offered:**
+1. Steady rain, mist, puddle shine, and occasional signal glows — recommended
+2. Heavier storm effects than Chapter 2
+3. Lighter rain so rail details are easier to see
+4. Mostly fog, with rain barely visible
+
+**User answer:** A.
+
+**Locked decision:** Mossline should have steady rain, mist, puddle shine, and occasional signal glows. Weather should support the rail-yard mystery and cozy repair tension without becoming so heavy that it hides gameplay details.
+
+### Chapter 3 Q21 — Sprite and Asset Priority
+
+**Question:** What sprites/assets should we prioritize first?
+
+**Options offered:**
+1. Shared background, transition image, foreground landmarks, then puzzle/UI polish — recommended
+2. Foreground landmarks first, then background later
+3. Puzzle/UI sprites first, then world art
+4. Transition image first, then decide the rest afterward
+
+**User answer:** A.
+
+**Locked decision:** Chapter 3 asset work should prioritize the shared background first, then the Chapter 2-to-Chapter 3 transition image, then foreground repair landmarks, then puzzle/UI polish. This order should guide chunk planning.
+
+### Chapter 3 Q22 — Existing Art Policy
+
+**Question:** How should we handle existing Chapter 3 art already in the game?
+
+**Options offered:**
+1. Use it as reference, but replace/upgrade as needed to match the new shared background direction — recommended
+2. Keep as much existing art as possible
+3. Replace all existing Chapter 3 art no matter what
+4. Only make the shared background; leave scene landmarks alone for now
+
+**User answer:** A.
+
+**Locked decision:** Existing Chapter 3 art should be used as reference, but it can be replaced or upgraded as needed to match the new shared Mossline background direction. Do not preserve old art merely because it exists, and do not replace everything blindly if something already fits.
+
+### Chapter 3 Q23 — First Build Pass Out of Scope
+
+**Question:** What should be out of scope for the first Mossline build pass?
+
+**Options offered:**
+1. Audio, heavy story rewrites, new puzzle types, and Chapter 4 transition work — recommended
+2. Only audio is out of scope
+3. Nothing; do the full chapter polish all at once
+4. Only Chapter 4 transition work is out of scope
+
+**User answer:** A.
+
+**Locked decision:** The first Mossline build pass should exclude audio, heavy story rewrites, new puzzle types, and Chapter 4 transition work. Keep the pass focused on the shared background direction, transition page, foreground landmarks, puzzle tuning/skin as needed, and chapter flow.
+
+### Chapter 3 Q24 — First Pass Done Enough
+
+**Question:** What counts as "done enough" for the first Mossline pass?
+
+**Options offered:**
+1. Shared background works, transition page exists, all scenes fit the new art direction, puzzles are a bit harder, and route flow is verified — recommended
+2. Only the shared background and transition page are done
+3. Everything is final-polished, including audio and dialogue
+4. All sprites are generated, even if not wired into gameplay yet
+
+**User answer:** A, with the added requirement that all sprites must follow the side-scrolling point of view instead of bird's-eye points of view.
+
+**Locked decision:** The first Mossline pass is done enough when the shared background works, the transition page exists, all scenes fit the new art direction, puzzles are a bit harder, route flow is verified, and all Mossline sprites follow the side-scrolling point of view. Avoid bird's-eye, top-down, angled, or isometric sprite views for this chapter's playable art direction.
+
+### Chapter 3 Q25 — Next Work Chunk
+
+**Question:** After this planning pass, what should the next work chunk be?
+
+**Options offered:**
+1. Create a Mossline implementation plan/chunk list from these 25 answers — recommended
+2. Start generating the shared Mossline background immediately
+3. Start building the Chapter 2 to Chapter 3 transition page immediately
+4. Start tuning Chapter 3 puzzles immediately
+
+**User answer:** A.
+
+**Locked decision:** The next work chunk should be to create a Mossline implementation plan/chunk list from these 25 answers. Do not jump straight into sprite generation, transition-page implementation, or puzzle tuning before turning this ground truth into a clear build plan.

@@ -18,6 +18,24 @@ export function createLastPlatformScene() {
     fixed: false,
     platformLit: false
   };
+  scene.paintedLandmark = {
+    source: "chapterThreeLandmarks",
+    sprite: "lastPlatformSide",
+    state: scene.lastPlatform,
+    x: 1160,
+    groundY: 674,
+    height: 478,
+    dimFilter: "brightness(0.76) saturate(0.9)",
+    fixedFilter: "brightness(1.04) saturate(1.08)",
+    glow: {
+      xOffset: 190,
+      yOffset: -282,
+      radius: 210,
+      dimIntensity: 0.08,
+      fixedIntensity: 0.3,
+      pulse: 0.04
+    }
+  };
   scene.layers = {
     trees: [
       { x: 70, y: 286, scale: 1.5 },
@@ -64,6 +82,7 @@ export function createLastPlatformScene() {
       id: "last-platform",
       kind: "path-puzzle",
       puzzleTheme: "market-lanterns",
+      puzzleLayout: "ch3-last-platform",
       x: 1160,
       y: 528,
       radius: 286,
@@ -76,6 +95,16 @@ export function createLastPlatformScene() {
       onwardText: "The hill road is lit.",
       nextText: "Stormedge Rise waits beyond the rain.",
       nextSceneId: "chapter-four/stormedge-rise",
+      chapterComplete: {
+        title: "Mossline Restored",
+        subtitle: "All Mossline signals are restored, and the road toward the storm ridge is open.",
+        checklist: [
+          "Junction current steadied",
+          "Rail signals and relays restored",
+          "Last Platform lamp opened the hill road"
+        ],
+        prompt: "Press Space, Enter, or E to continue"
+      },
       reactions: [
         { text: "Road lamp is open!", x: 1160, y: 292 },
         { text: "Mossline route complete.", x: "robot", y: "robotTop" }

@@ -92,20 +92,20 @@ import {
   createStarMapScene,
   createTownClockScene
 } from "./chapterTen/routeScenes.js";
-import { createCargoCartTurntableScene } from "./chapterThree/cargoCartTurntable.js";
-import { createConductorBoothScene } from "./chapterThree/conductorBooth.js";
-import { createCraneHookYardScene } from "./chapterThree/craneHookYard.js";
-import { createClockSignalScene } from "./chapterThree/clockSignal.js";
-import { createRainSlickRailsScene } from "./chapterThree/rainSlickRails.js";
-import { createLastPlatformScene } from "./chapterThree/lastPlatform.js";
+import { createCargoCartTurntableScene } from "./chapterThree/cargoCartTurntable.js?v=side-turntable-sprite";
+import { createConductorBoothScene } from "./chapterThree/conductorBooth.js?v=conductor-booth-sprite";
+import { createCraneHookYardScene } from "./chapterThree/craneHookYard.js?v=crane-hook-yard-sprite";
+import { createClockSignalScene } from "./chapterThree/clockSignal.js?v=clock-signal-sprite";
+import { createRainSlickRailsScene } from "./chapterThree/rainSlickRails.js?v=rain-slick-rails-sprite";
+import { createLastPlatformScene } from "./chapterThree/lastPlatform.js?v=last-platform-sprite";
 import { createSignalArmRowScene } from "./chapterThree/signalArmRow.js";
 import { createSparkingRelayShedScene } from "./chapterThree/sparkingRelayShed.js";
-import { createTunnelMouthScene } from "./chapterThree/tunnelMouth.js";
+import { createTunnelMouthScene } from "./chapterThree/tunnelMouth.js?v=tunnel-mouth-sprite";
 import { createGlassrailCrossingScene } from "./chapterTwo/glassrailCrossing.js";
 import { createLanternMarketScene } from "./chapterTwo/lanternMarket.js";
 import { createLanternLilyPoolScene } from "./chapterTwo/lanternLilyPool.js";
 import { createOldObservatoryScene } from "./chapterTwo/oldObservatory.js";
-import { createWetlandApproachScene } from "./chapterTwo/wetlandApproach.js";
+import { createWetlandApproachScene } from "./chapterTwo/wetlandApproach.js?v=chapter-two-puzzle-sprites";
 import { createBogBridgeScene } from "./chapterTwo/bogBridge.js";
 import { createFrogsongLockScene } from "./chapterTwo/frogsongLock.js";
 import { createGlowfenFerryScene } from "./chapterTwo/glowfenFerry.js";

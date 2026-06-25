@@ -2,8 +2,9 @@ import { config } from "../core/config.js";
 import { drawActors } from "./actorRenderer.js?v=robot-scan-restored";
 import { drawBackdrop } from "./backdropRenderer.js";
 import { drawWeather } from "./weatherRenderer.js?v=no-bottom-ovals";
-import { drawWorld } from "./worldRenderer.js?v=large-painted-relay-shed";
-import { drawHud } from "../ui/hud.js?v=chapter-repair-label";
+import { drawWorld } from "./worldRenderer.js?v=last-platform-sprite";
+import { imageReady, sprites } from "./sprites.js?v=last-platform-sprite";
+import { drawHud } from "../ui/hud.js?v=mossline-first-pass";
 
 export function renderScene(ctx, scene, time, transition = null, options = {}) {
   const { hud = true } = options;
@@ -15,10 +16,53 @@ export function renderScene(ctx, scene, time, transition = null, options = {}) {
   drawWorld(ctx, scene, time, width, height, cameraX);
   drawActors(ctx, scene, time, cameraX);
   drawWeather(ctx, scene, time, width, height);
+  if (scene.flow.mode === "visual-transition" && drawVisualTransitionPage(ctx, scene, time, width, height)) {
+    return;
+  }
   if (hud) {
     drawHud(ctx, scene, width, height);
   }
   drawTransition(ctx, transition, width, height);
+}
+
+function drawVisualTransitionPage(ctx, scene, time, width, height) {
+  const page = scene.visualTransition;
+  if (!page) {
+    return false;
+  }
+
+  const image = sprites.chapterThree?.transitions?.[page.sprite];
+  if (!imageReady(image)) {
+    return false;
+  }
+
+  drawImageCover(ctx, image, 0, 0, width, height);
+
+  const pulse = 0.72 + Math.sin(time * 2.4) * 0.08;
+  ctx.save();
+  ctx.fillStyle = "rgba(5, 14, 16, 0.32)";
+  ctx.fillRect(0, 0, width, height);
+  ctx.fillStyle = "rgba(8, 15, 17, 0.66)";
+  roundedRect(ctx, width / 2 - 250, height - 96, 500, 50, 8);
+  ctx.fill();
+  ctx.strokeStyle = "rgba(255, 216, 135, 0.32)";
+  ctx.lineWidth = 1;
+  ctx.stroke();
+  ctx.fillStyle = `rgba(255, 232, 166, ${pulse})`;
+  ctx.font = "700 15px system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.fillText(page.prompt ?? "Press Space, Enter, or E to continue", width / 2, height - 66);
+  ctx.restore();
+  return true;
+}
+
+function drawImageCover(ctx, image, x, y, width, height) {
+  const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight);
+  const drawWidth = image.naturalWidth * scale;
+  const drawHeight = image.naturalHeight * scale;
+  const drawX = x + (width - drawWidth) / 2;
+  const drawY = y + (height - drawHeight) / 2;
+  ctx.drawImage(image, drawX, drawY, drawWidth, drawHeight);
 }
 
 function drawTransition(ctx, transition, width, height) {

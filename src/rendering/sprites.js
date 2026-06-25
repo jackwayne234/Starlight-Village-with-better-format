@@ -16,6 +16,10 @@ const CHAPTER_TWO_BACKGROUNDS = `${CHAPTER_TWO}/backgrounds`;
 const CHAPTER_TWO_PATHS = `${CHAPTER_TWO}/paths`;
 const CHAPTER_TWO_LANDMARKS = `${CHAPTER_TWO}/landmarks`;
 const CHAPTER_TWO_PUZZLES = `${CHAPTER_TWO}/puzzles`;
+const CHAPTER_THREE = "assets/sprites/chapter-three";
+const CHAPTER_THREE_BACKGROUNDS = `${CHAPTER_THREE}/backgrounds`;
+const CHAPTER_THREE_TRANSITIONS = `${CHAPTER_THREE}/transitions`;
+const CHAPTER_THREE_LANDMARKS = `${CHAPTER_THREE}/landmarks`;
 const TITLE = "assets/title";
 
 export const sprites = {
@@ -136,6 +140,23 @@ export const sprites = {
       wetlandOutputNode: loadImage(`${CHAPTER_TWO_PUZZLES}/wetland-output-node.png`),
       wetlandSelectionFrame: loadImage(`${CHAPTER_TWO_PUZZLES}/wetland-selection-frame.png`),
       wetlandCompletionSpark: loadImage(`${CHAPTER_TWO_PUZZLES}/wetland-completion-spark.png`)
+    }
+  },
+  chapterThree: {
+    backgrounds: {
+      mosslineBackground: loadImage(`${CHAPTER_THREE_BACKGROUNDS}/mossline-background.png?v=mossline-shared-background`)
+    },
+    landmarks: {
+      cargoCartTurntableSide: loadImage(`${CHAPTER_THREE_LANDMARKS}/cargo-cart-turntable-side.png?v=side-turntable-sprite`),
+      conductorBoothSide: loadImage(`${CHAPTER_THREE_LANDMARKS}/conductor-booth-side.png?v=conductor-booth-sprite`),
+      craneHookYardSide: loadImage(`${CHAPTER_THREE_LANDMARKS}/crane-hook-yard-side.png?v=crane-hook-yard-sprite`),
+      rainSlickRailsSide: loadImage(`${CHAPTER_THREE_LANDMARKS}/rain-slick-rails-side.png?v=rain-slick-rails-sprite`),
+      tunnelMouthSide: loadImage(`${CHAPTER_THREE_LANDMARKS}/tunnel-mouth-side.png?v=tunnel-mouth-sprite`),
+      clockSignalSide: loadImage(`${CHAPTER_THREE_LANDMARKS}/clock-signal-side.png?v=clock-signal-sprite`),
+      lastPlatformSide: loadImage(`${CHAPTER_THREE_LANDMARKS}/last-platform-side.png?v=last-platform-sprite`)
+    },
+    transitions: {
+      glowfenToMossline: loadImage(`${CHAPTER_THREE_TRANSITIONS}/glowfen-to-mossline.png?v=glowfen-to-mossline-transition`)
     }
   },
   title: {

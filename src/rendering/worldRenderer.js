@@ -1,5 +1,5 @@
 import { config } from "../core/config.js";
-import { sprites, imageReady } from "./sprites.js?v=painted-relay-shed";
+import { sprites, imageReady } from "./sprites.js?v=last-platform-sprite";
 
 const { colors } = config;
 
@@ -723,6 +723,10 @@ function resolveLandmarkSprite(landmark) {
 
   if (landmark.source === "chapterTwoLandmarks") {
     return sprites.chapterTwo?.landmarks?.[landmark.sprite] ?? null;
+  }
+
+  if (landmark.source === "chapterThreeLandmarks") {
+    return sprites.chapterThree?.landmarks?.[landmark.sprite] ?? null;
   }
 
   return sprites.world[landmark.sprite] ?? sprites.chapterTwo?.landmarks?.[landmark.sprite] ?? null;
@@ -3003,42 +3007,55 @@ function drawCargoCartTurntable(ctx, turntable, time, powerLevel) {
   const fixed = turntable.fixed || turntable.cartMoved || powerLevel > 0.95;
   const x = turntable.x;
   const groundY = turntable.groundY;
-  const cartShift = fixed ? 168 : 0;
+  const cartShift = fixed ? 250 : 118;
+  const deckY = groundY - 86;
 
   ctx.save();
-  ctx.fillStyle = "rgba(18, 35, 34, 0.66)";
+  ctx.fillStyle = "rgba(8, 18, 18, 0.36)";
   ctx.beginPath();
-  ctx.ellipse(x, groundY - 20, 440, 72, -0.02, 0, Math.PI * 2);
+  ctx.ellipse(x, groundY - 20, 390, 34, 0, 0, Math.PI * 2);
   ctx.fill();
 
-  drawSwitchyardRail(ctx, x - 390, groundY - 42, x + 390, groundY - 42, fixed);
-  drawSwitchyardRail(ctx, x - 260, groundY - 116, x + 260, groundY + 24, fixed);
+  drawSwitchyardRail(ctx, x - 430, deckY - 4, x + 430, deckY - 4, fixed);
 
-  ctx.fillStyle = fixed ? "#5f6858" : "#3e4f49";
-  ctx.beginPath();
-  ctx.ellipse(x, groundY - 48, 142, 52, 0, 0, Math.PI * 2);
+  ctx.fillStyle = fixed ? "#62705e" : "#435750";
+  roundedRect(ctx, x - 230, deckY - 20, 460, 42, 8);
   ctx.fill();
-  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.42)" : "rgba(143, 217, 240, 0.12)";
-  ctx.lineWidth = 7;
-  ctx.beginPath();
-  ctx.arc(x, groundY - 48, 116, 0, Math.PI * 2);
+  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.36)" : "rgba(143, 217, 240, 0.14)";
+  ctx.lineWidth = 3;
   ctx.stroke();
 
-  ctx.save();
-  ctx.translate(x, groundY - 48);
-  ctx.rotate(fixed ? 0 : -0.42);
-  ctx.strokeStyle = fixed ? "rgba(226, 242, 181, 0.5)" : "rgba(71, 88, 82, 0.72)";
-  ctx.lineWidth = 9;
-  ctx.beginPath();
-  ctx.moveTo(-116, 0);
-  ctx.lineTo(116, 0);
-  ctx.stroke();
-  ctx.restore();
+  ctx.fillStyle = "rgba(22, 33, 31, 0.72)";
+  [-174, -116, -58, 0, 58, 116, 174].forEach((offset) => {
+    roundedRect(ctx, x + offset - 16, deckY - 25, 32, 50, 4);
+    ctx.fill();
+  });
 
-  drawCargoCart(ctx, x + cartShift, groundY - 118, fixed, time);
+  ctx.strokeStyle = fixed ? "rgba(218, 230, 184, 0.64)" : "rgba(92, 113, 105, 0.84)";
+  ctx.lineWidth = 6;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  ctx.moveTo(x - 214, deckY - 5);
+  ctx.lineTo(x + 214, deckY - 5);
+  ctx.moveTo(x - 214, deckY + 9);
+  ctx.lineTo(x + 214, deckY + 9);
+  ctx.stroke();
+
+  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.32)" : "rgba(143, 217, 240, 0.18)";
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.moveTo(x, deckY + 22);
+  ctx.lineTo(x, groundY - 24);
+  ctx.stroke();
+  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.38)" : "rgba(18, 32, 31, 0.82)";
+  ctx.beginPath();
+  ctx.arc(x, groundY - 18, 20, 0, Math.PI * 2);
+  ctx.fill();
+
+  drawCargoCart(ctx, x + cartShift, deckY - 62, fixed, time);
 
   if (fixed) {
-    warmGlow(ctx, x, groundY - 82, 230, 0.26 + Math.sin(time * 3) * 0.04);
+    warmGlow(ctx, x + 90, deckY - 40, 230, 0.26 + Math.sin(time * 3) * 0.04);
   }
 
   ctx.restore();
@@ -4487,16 +4504,34 @@ function drawSwitchyardRail(ctx, startX, startY, endX, endY, fixed) {
 function drawCargoCart(ctx, x, y, fixed, time) {
   ctx.save();
   ctx.translate(x, y + Math.sin(time * 1.1) * (fixed ? 1 : 2));
-  ctx.fillStyle = fixed ? "#68715d" : "#44534b";
-  roundedRect(ctx, -76, -42, 152, 74, 10);
+  ctx.fillStyle = fixed ? "#69735f" : "#3f5149";
+  roundedRect(ctx, -82, -44, 164, 76, 8);
   ctx.fill();
-  ctx.fillStyle = "rgba(25, 38, 34, 0.7)";
+  ctx.strokeStyle = "rgba(18, 28, 26, 0.72)";
+  ctx.lineWidth = 4;
+  ctx.stroke();
+  ctx.strokeStyle = fixed ? "rgba(214, 225, 176, 0.26)" : "rgba(136, 164, 151, 0.22)";
+  ctx.lineWidth = 3;
+  [-42, 0, 42].forEach((offset) => {
+    ctx.beginPath();
+    ctx.moveTo(offset, -38);
+    ctx.lineTo(offset, 28);
+    ctx.stroke();
+  });
   ctx.beginPath();
-  ctx.arc(-46, 38, 14, 0, Math.PI * 2);
-  ctx.arc(46, 38, 14, 0, Math.PI * 2);
+  ctx.moveTo(-72, -12);
+  ctx.lineTo(72, -12);
+  ctx.stroke();
+  ctx.fillStyle = "rgba(15, 24, 23, 0.86)";
+  ctx.beginPath();
+  ctx.arc(-50, 39, 16, 0, Math.PI * 2);
+  ctx.arc(50, 39, 16, 0, Math.PI * 2);
   ctx.fill();
-  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.28)" : "rgba(143, 217, 240, 0.08)";
-  roundedRect(ctx, -46, -70, 92, 25, 6);
+  ctx.strokeStyle = fixed ? "rgba(216, 244, 157, 0.42)" : "rgba(126, 154, 145, 0.36)";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  ctx.fillStyle = fixed ? "rgba(216, 244, 157, 0.22)" : "rgba(107, 132, 122, 0.14)";
+  roundedRect(ctx, -54, -72, 108, 24, 6);
   ctx.fill();
   ctx.restore();
 }

@@ -1,7 +1,7 @@
-import { createGame } from "./core/game.js?v=chapter-repair-label";
+import { createGame } from "./core/game.js?v=mossline-first-pass";
 import { createInput } from "./core/input.js";
 import { clearProgress, saveProgress } from "./core/progress.js";
-import { createInitialScene, createScene } from "./scenes/sceneRegistry.js?v=route-100-spine";
+import { createInitialScene, createScene } from "./scenes/sceneRegistry.js?v=last-platform-sprite";
 import { primeAudio, unlockAudio } from "./audio/gameAudio.js";
 
 const canvas = document.querySelector("#game");
@@ -11,6 +11,8 @@ clearProgress();
 const playtestParams = new URLSearchParams(window.location.search);
 const playtestSceneId = playtestParams.get("scene");
 const previewMode = playtestParams.get("preview") === "1";
+const transitionPreview = playtestParams.get("transition");
+const completionPreview = playtestParams.get("complete");
 const firstScene = playtestSceneId ? createScene(playtestSceneId) : createInitialScene();
 const playtestX = Number(playtestParams.get("x"));
 if (playtestSceneId && Number.isFinite(playtestX)) {
@@ -22,12 +24,37 @@ if (previewMode) {
   firstScene.repairTarget = null;
   firstScene.flow.message = "";
 }
+if (transitionPreview === "glowfen-to-mossline") {
+  firstScene.visualTransition = {
+    sprite: "glowfenToMossline",
+    nextSceneId: "chapter-three/mossline-switchyard",
+    nextText: "Mossline Switchyard is next.",
+    prompt: "Press Space, Enter, or E to enter Mossline"
+  };
+  firstScene.flow.mode = "visual-transition";
+  firstScene.flow.message = "Mossline Switchyard is next.";
+}
+if (completionPreview === "chapter-three" && firstScene.repairTarget) {
+  firstScene.chapterComplete = {
+    title: "Mossline Restored",
+    subtitle: "All Mossline signals are restored, and the road toward the storm ridge is open.",
+    checklist: [
+      "Junction current steadied",
+      "Rail signals and relays restored",
+      "Last Platform lamp opened the hill road"
+    ],
+    prompt: "Press Space, Enter, or E to continue"
+  };
+  firstScene.repairTarget.nextSceneId = "chapter-four/stormedge-rise";
+  firstScene.flow.mode = "chapter-complete";
+  firstScene.flow.message = "Stormedge Rise waits beyond the rain.";
+}
 const game = createGame({
   canvas,
   ctx,
   input,
   firstScene,
-  autoStart: previewMode,
+  autoStart: previewMode || Boolean(transitionPreview) || Boolean(completionPreview),
   persistProgress: saveProgress,
   createScene
 });

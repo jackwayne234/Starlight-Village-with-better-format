@@ -65,7 +65,7 @@ High-level list only. All details live inside each chunk file.
 | 73 | Chapter Two Route Sprite Wiring | complete |
 | 74 | Chapter Three Route Sprite Wiring | complete |
 | 75 | Chapter Four Route Sprite Wiring | complete |
-| 76 | Chapter Five Route Sprite Wiring | in progress |
+| 76 | Chapter Five Route Sprite Wiring | complete |
 | 77 | Chapter Two Playthrough Polish | complete |
 | 78 | Lantern Lily Pool Side Sprite | complete |
 | 79 | Glowfen Grove Scene Rebuild | complete |
@@ -87,3 +87,22 @@ High-level list only. All details live inside each chunk file.
 | 97 | Chapter Two Puzzle Difficulty Pass | complete |
 | 98 | Chapter Two Route QA and Visual Polish | complete |
 | 99 | Chapter Two Handoff and Checkpoint | complete |
+| 100 | Chapter Two User Playtest | complete |
+| 101 | Chapter Two Early Puzzle Sprite Skin Fix | complete |
+| 102 | Chapter Three Puzzle Panel Skin | complete |
+| 103 | Mossline Switchyard Implementation Plan | complete |
+| 104 | Mossline Shared Background Sprite Pack | complete |
+| 105 | Mossline Shared Background Renderer | complete |
+| 106 | Glowfen to Mossline Transition Page | complete |
+| 107 | Mossline Foreground Landmark Audit | complete |
+| 108 | Mossline Foreground Landmark Sprite Production | complete |
+| 109 | Mossline Scene Rewire and Repaired-State Pass | complete |
+| 110 | Mossline Puzzle Difficulty Tuning | complete |
+| 111 | Mossline Completion Summary and First-Pass Route QA | complete |
+| 112 | Cargo Cart Turntable Side Sprite Fix | complete |
+| 113 | Conductor Booth Side Sprite Fix | complete |
+| 114 | Crane Hook Yard Side Sprite Fix | complete |
+| 115 | Rain-Slick Rails Side Sprite Fix | complete |
+| 116 | Tunnel Mouth Side Sprite Fix | complete |
+| 117 | Clock Signal Side Sprite Fix | complete |
+| 118 | Last Platform Side Sprite Fix | complete |

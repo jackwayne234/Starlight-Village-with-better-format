@@ -61,6 +61,7 @@ export function createWetlandApproachScene() {
       id: "wetland-waymark",
       kind: "path-puzzle",
       puzzleTheme: "beacon-signal",
+      puzzleLayout: "ch2-wetland-approach",
       x: 1160,
       y: 552,
       radius: 275,

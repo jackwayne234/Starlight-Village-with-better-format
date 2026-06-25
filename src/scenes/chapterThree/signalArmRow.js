@@ -67,6 +67,7 @@ export function createSignalArmRowScene() {
       id: "signal-arm-row",
       kind: "path-puzzle",
       puzzleTheme: "beacon-signal",
+      puzzleLayout: "ch3-signal-arm-row",
       x: 1160,
       y: 536,
       radius: 286,

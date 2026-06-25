@@ -114,6 +114,60 @@ const layouts = {
     [tile("start", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
     [tile("blank", 0, true), tile("line", 0), tile("blank", 0, true), tile("blank", 0, true)],
     [tile("output", 2, true), tile("tee", 0), tile("line", 1), tile("output", 0, true)]
+  ],
+  "ch3-mossline-switchyard": [
+    [tile("start", 0, true), tile("line", 1), tile("tee", 2), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("blank", 0, true), tile("tee", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("blank", 0, true), tile("turn", 1), tile("output", 0, true)]
+  ],
+  "ch3-cargo-cart-turntable": [
+    [tile("start", 0, true), tile("tee", 1), tile("output", 0, true), tile("blank", 0, true)],
+    [tile("blank", 0, true), tile("line", 0), tile("blank", 0, true), tile("blank", 0, true)],
+    [tile("output", 2, true), tile("tee", 0), tile("output", 0, true), tile("blank", 0, true)]
+  ],
+  "ch3-signal-arm-row": [
+    [tile("start", 0, true), tile("tee", 3), tile("line", 1), tile("output", 0, true)],
+    [tile("output", 2, true), tile("tee", 2), tile("turn", 2), tile("blank", 0, true)],
+    [tile("blank", 0, true), tile("turn", 2), tile("tee", 1), tile("output", 0, true)]
+  ],
+  "ch3-conductor-booth": [
+    [tile("start", 0, true), tile("line", 1), tile("tee", 2), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("blank", 0, true), tile("tee", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("blank", 0, true), tile("tee", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("blank", 0, true), tile("turn", 1), tile("output", 0, true)]
+  ],
+  "ch3-crane-hook-yard": [
+    [tile("start", 0, true), tile("tee", 1), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("tee", 1), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("tee", 1), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("turn", 1), tile("line", 1), tile("output", 0, true)]
+  ],
+  "ch3-sparking-relay-shed": [
+    [tile("start", 0, true), tile("tee", 1), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("line", 0), tile("blank", 0, true), tile("blank", 0, true)],
+    [tile("output", 2, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)]
+  ],
+  "ch3-rain-slick-rails": [
+    [tile("start", 0, true), tile("line", 1), tile("tee", 2), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("blank", 0, true), tile("tee", 2), tile("output", 0, true)],
+    [tile("output", 2, true), tile("line", 1), tile("tee", 1), tile("output", 0, true)]
+  ],
+  "ch3-tunnel-mouth": [
+    [tile("start", 0, true), tile("tee", 3), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("turn", 2), tile("tee", 1), tile("output", 0, true)]
+  ],
+  "ch3-clock-signal": [
+    [tile("start", 0, true), tile("tee", 1), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("turn", 1), tile("line", 1), tile("output", 0, true)]
+  ],
+  "ch3-last-platform": [
+    [tile("start", 0, true), tile("tee", 1), tile("line", 1), tile("output", 0, true)],
+    [tile("blank", 0, true), tile("tee", 2), tile("line", 1), tile("output", 0, true)],
+    [tile("output", 2, true), tile("tee", 0), tile("blank", 0, true), tile("blank", 0, true)],
+    [tile("blank", 0, true), tile("turn", 2), tile("line", 1), tile("output", 0, true)]
   ]
 };
 
@@ -253,6 +307,12 @@ const themes = {
 };
 
 const layoutThemes = {
+  "ch2-wetland-approach": {
+    title: "Wetland Waymark Signal",
+    instructions: "Rotate the wetland paths to wake the first waymark into the reeds.",
+    objective: "Raise the waymark.",
+    successMessage: "Waymark linked. The wetland route is open."
+  },
   "ch2-glowfen-grove": {
     title: "Glowfen Root Channels",
     instructions: "Rotate the root paths to carry glow through the pump without flooding the side channel.",
@@ -312,6 +372,66 @@ const layoutThemes = {
     instructions: "Rotate the marker paths so the guide light reaches all three reedwatch posts.",
     objective: "Light the exit.",
     successMessage: "Reedwatch markers linked. The road out is lit."
+  },
+  "ch3-mossline-switchyard": {
+    title: "Mossline Junction Panel",
+    instructions: "Rotate the rail paths to carry signal current through the switchyard junction.",
+    objective: "Link the junction.",
+    successMessage: "Junction signal linked. Current is steady."
+  },
+  "ch3-cargo-cart-turntable": {
+    title: "Turntable Rail Signal",
+    instructions: "Rotate the rail paths so the turntable signal lines up with the clear track.",
+    objective: "Align the cart.",
+    successMessage: "Turntable signal linked. The cart can roll aside."
+  },
+  "ch3-signal-arm-row": {
+    title: "Semaphore Signal Panel",
+    instructions: "Rotate the rail paths so every signal arm receives the same clear current.",
+    objective: "Set the signals.",
+    successMessage: "Semaphore signal linked. The row is safe."
+  },
+  "ch3-conductor-booth": {
+    title: "Conductor Route Board",
+    instructions: "Rotate the route paths to light the booth board from switch to switch.",
+    objective: "Wake the board.",
+    successMessage: "Route board linked. The booth is awake."
+  },
+  "ch3-crane-hook-yard": {
+    title: "Crane Hook Signal",
+    instructions: "Rotate the rail paths so the crane hook receives a clean lift signal.",
+    objective: "Lift the beam.",
+    successMessage: "Crane signal linked. The beam is clear."
+  },
+  "ch3-sparking-relay-shed": {
+    title: "Relay Shed Breaker",
+    instructions: "Rotate the breaker paths to calm the wet relay before it throws sparks.",
+    objective: "Calm the relay.",
+    successMessage: "Relay breaker linked. The sparks settle."
+  },
+  "ch3-rain-slick-rails": {
+    title: "Rail Sanding Route",
+    instructions: "Rotate the rail paths so sanding valves feed the slick stretch evenly.",
+    objective: "Grip the rails.",
+    successMessage: "Sanding route linked. The rails have grip."
+  },
+  "ch3-tunnel-mouth": {
+    title: "Tunnel Lamp Chain",
+    instructions: "Rotate the rail paths to carry green lamp current into the tunnel mouth.",
+    objective: "Light the tunnel.",
+    successMessage: "Tunnel lamps linked. The way in is safe."
+  },
+  "ch3-clock-signal": {
+    title: "Clock Signal Rhythm",
+    instructions: "Rotate the signal paths so the station clock and rail lamps beat together.",
+    objective: "Sync the clock.",
+    successMessage: "Clock signal linked. The rhythm is steady."
+  },
+  "ch3-last-platform": {
+    title: "Last Platform Lamp",
+    instructions: "Rotate the rail paths to open the final Mossline road lamp.",
+    objective: "Open the road.",
+    successMessage: "Platform lamp linked. The road down is open."
   }
 };
 

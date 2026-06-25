@@ -13,6 +13,24 @@ export function createConductorBoothScene() {
   scene.showSignpost = false;
   scene.backdrop = { moonX: 948, moonY: 140, cloudDrift: 1.04, hillOffset: 50, ridgeOffset: 74 };
   scene.conductorBooth = { x: 1160, groundY: 654, fixed: false, boardLit: false };
+  scene.paintedLandmark = {
+    source: "chapterThreeLandmarks",
+    sprite: "conductorBoothSide",
+    state: scene.conductorBooth,
+    x: 1160,
+    groundY: 690,
+    height: 430,
+    dimFilter: "brightness(0.74) saturate(0.9)",
+    fixedFilter: "brightness(0.92) saturate(1.04)",
+    glow: {
+      xOffset: 0,
+      heightRatio: 0.48,
+      radius: 170,
+      dimIntensity: 0.08,
+      fixedIntensity: 0.32,
+      pulse: 0.04
+    }
+  };
   scene.layers = {
     trees: [
       { x: 70, y: 280, scale: 1.54 },
@@ -58,6 +76,7 @@ export function createConductorBoothScene() {
       id: "conductor-booth",
       kind: "path-puzzle",
       puzzleTheme: "junction-line",
+      puzzleLayout: "ch3-conductor-booth",
       x: 1160,
       y: 544,
       radius: 284,

@@ -1,4 +1,5 @@
 import { fullGameScenes } from "../scenes/fullGameCatalog.js";
+import { imageReady, sprites } from "../rendering/sprites.js";
 
 export function drawHud(ctx, scene, width, height) {
   if (scene.repairTarget && (scene.flow.mode === "puzzle" || scene.flow.mode === "puzzle-complete")) {
@@ -469,14 +470,43 @@ function drawPuzzleSideStatus(ctx, puzzle, x, y, colors) {
 
 function drawPuzzleSuccess(ctx, puzzle, x, y, colors) {
   const message = puzzle.theme?.successMessage ?? "Repair complete.";
+  const wetlandSprites = getWetlandPuzzleSprites(puzzle);
+  const mosslinePuzzle = isMosslinePuzzle(puzzle);
 
   ctx.fillStyle = colors.glow ?? "rgba(255, 224, 138, 0.92)";
   roundedRect(ctx, x - 220, y - 25, 440, 50, 10);
   ctx.fill();
+  if (wetlandSprites?.completionSpark) {
+    drawImageCover(ctx, wetlandSprites.completionSpark, x - 214, y - 33, 66, 66);
+    drawImageCover(ctx, wetlandSprites.completionSpark, x + 148, y - 33, 66, 66);
+  } else if (mosslinePuzzle) {
+    drawMosslineSignalSpark(ctx, x - 184, y, colors);
+    drawMosslineSignalSpark(ctx, x + 184, y, colors);
+  }
   ctx.fillStyle = "rgba(35, 31, 24, 0.96)";
   ctx.font = "900 20px system-ui, sans-serif";
   ctx.textAlign = "center";
   ctx.fillText(message, x, y + 7);
+}
+
+function drawMosslineSignalSpark(ctx, x, y, colors) {
+  ctx.save();
+  ctx.strokeStyle = colors.glow ?? "rgba(201, 240, 240, 0.98)";
+  ctx.fillStyle = colors.accent ?? "rgba(240, 197, 107, 0.94)";
+  ctx.lineWidth = 3;
+  ctx.lineCap = "round";
+  ctx.shadowColor = colors.glow ?? "rgba(201, 240, 240, 0.98)";
+  ctx.shadowBlur = 12;
+  ctx.beginPath();
+  ctx.moveTo(x - 18, y + 10);
+  ctx.lineTo(x - 4, y - 8);
+  ctx.lineTo(x + 8, y + 2);
+  ctx.lineTo(x + 18, y - 12);
+  ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(x, y + 11, 5, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
 }
 
 function drawPuzzleBoardFrame(ctx, x, y, width, height, colors) {
@@ -499,13 +529,23 @@ function drawPathPuzzle(ctx, puzzle, startX, startY, tileSize, gap) {
       const key = `${rowIndex},${colIndex}`;
       const selected = puzzle.selected.row === rowIndex && puzzle.selected.col === colIndex;
       const lit = puzzle.connected.has(key);
-      drawPuzzleTile(ctx, tile, x, y, tileSize, selected, lit, colors);
+      drawPuzzleTile(ctx, puzzle, tile, x, y, tileSize, selected, lit, colors);
     });
   });
   ctx.restore();
 }
 
-function drawPuzzleTile(ctx, tile, x, y, size, selected, lit, colors) {
+function drawPuzzleTile(ctx, puzzle, tile, x, y, size, selected, lit, colors) {
+  const wetlandSprites = getWetlandPuzzleSprites(puzzle);
+  if (wetlandSprites) {
+    drawWetlandPuzzleTile(ctx, tile, x, y, size, selected, lit, colors, wetlandSprites);
+    return;
+  }
+  if (isMosslinePuzzle(puzzle)) {
+    drawMosslinePuzzleTile(ctx, puzzle, tile, x, y, size, selected, lit, colors);
+    return;
+  }
+
   ctx.fillStyle = lit ? colors.tileLit ?? "rgba(73, 103, 91, 0.95)" : colors.tile ?? "rgba(47, 62, 63, 0.95)";
   roundedRect(ctx, x, y, size, size, 10);
   ctx.fill();
@@ -568,6 +608,284 @@ function drawPuzzleTile(ctx, tile, x, y, size, selected, lit, colors) {
     ctx.fill();
   }
   ctx.restore();
+}
+
+function drawMosslinePuzzleTile(ctx, puzzle, tile, x, y, size, selected, lit, colors) {
+  const accent = getMosslineAccent(puzzle.layoutId);
+  const baseGradient = ctx.createLinearGradient(x, y, x, y + size);
+  baseGradient.addColorStop(0, lit ? "rgba(73, 91, 90, 0.98)" : "rgba(43, 54, 55, 0.98)");
+  baseGradient.addColorStop(1, lit ? "rgba(42, 67, 66, 0.98)" : "rgba(25, 35, 38, 0.98)");
+  ctx.fillStyle = baseGradient;
+  roundedRect(ctx, x, y, size, size, 8);
+  ctx.fill();
+
+  ctx.strokeStyle = selected ? accent.glow : "rgba(184, 209, 204, 0.18)";
+  ctx.lineWidth = selected ? 5 : 2;
+  ctx.stroke();
+
+  ctx.save();
+  ctx.globalAlpha = lit ? 0.3 : 0.14;
+  ctx.strokeStyle = "rgba(230, 241, 230, 0.45)";
+  ctx.lineWidth = 2;
+  for (let offset = size * 0.22; offset < size; offset += size * 0.28) {
+    ctx.beginPath();
+    ctx.moveTo(x + 10, y + offset);
+    ctx.lineTo(x + size - 10, y + offset - size * 0.08);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  if (selected) {
+    ctx.save();
+    ctx.shadowColor = accent.glow;
+    ctx.shadowBlur = 18;
+    ctx.strokeStyle = accent.glow;
+    ctx.lineWidth = 3;
+    roundedRect(ctx, x + 8, y + 8, size - 16, size - 16, 6);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  if (tile.type === "blank") {
+    ctx.fillStyle = "rgba(154, 181, 176, 0.16)";
+    ctx.beginPath();
+    ctx.arc(x + size / 2, y + size / 2, size * 0.08, 0, Math.PI * 2);
+    ctx.fill();
+    return;
+  }
+
+  const centerX = x + size / 2;
+  const centerY = y + size / 2;
+  const exits = getTileVisualExits(tile);
+  exits.forEach((direction) => {
+    drawMosslineRailSegment(ctx, centerX, centerY, size, direction, lit, accent);
+  });
+
+  const nodeRadius = tile.type === "start" || tile.type === "output" ? size * 0.17 : size * 0.13;
+  ctx.save();
+  ctx.shadowColor = lit ? accent.glow : "transparent";
+  ctx.shadowBlur = lit ? 14 : 0;
+  ctx.fillStyle = lit ? accent.litNode : colors.node ?? "rgba(169, 202, 201, 0.86)";
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, nodeRadius, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = "rgba(21, 31, 32, 0.74)";
+  ctx.beginPath();
+  ctx.arc(centerX, centerY, nodeRadius * 0.42, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
+  if (tile.type === "start" || tile.type === "output") {
+    const terminalX = centerX + (tile.type === "start" ? -size * 0.34 : size * 0.34);
+    ctx.save();
+    ctx.fillStyle = lit ? accent.glow : accent.signal;
+    ctx.shadowColor = lit ? accent.glow : "transparent";
+    ctx.shadowBlur = lit ? 16 : 0;
+    roundedRect(ctx, terminalX - size * 0.11, centerY - size * 0.11, size * 0.22, size * 0.22, 5);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+function drawMosslineRailSegment(ctx, centerX, centerY, size, direction, lit, accent) {
+  const angle = {
+    right: 0,
+    down: Math.PI / 2,
+    left: Math.PI,
+    up: -Math.PI / 2
+  }[direction] ?? 0;
+
+  ctx.save();
+  ctx.translate(centerX, centerY);
+  ctx.rotate(angle);
+  ctx.lineCap = "round";
+  ctx.strokeStyle = lit ? accent.glow : accent.rail;
+  ctx.lineWidth = Math.max(9, size * 0.12);
+  ctx.shadowColor = lit ? accent.glow : "transparent";
+  ctx.shadowBlur = lit ? 12 : 0;
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(size * 0.42, 0);
+  ctx.stroke();
+
+  ctx.shadowBlur = 0;
+  ctx.strokeStyle = lit ? "rgba(255, 246, 190, 0.62)" : "rgba(222, 238, 229, 0.28)";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(size * 0.06, -size * 0.07);
+  ctx.lineTo(size * 0.36, -size * 0.07);
+  ctx.moveTo(size * 0.06, size * 0.07);
+  ctx.lineTo(size * 0.36, size * 0.07);
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawWetlandPuzzleTile(ctx, tile, x, y, size, selected, lit, colors, wetlandSprites) {
+  drawImageCover(ctx, lit ? wetlandSprites.tileLit : wetlandSprites.tileBase, x, y, size, size);
+
+  if (selected) {
+    ctx.save();
+    ctx.globalAlpha = 0.38;
+    drawImageCover(ctx, wetlandSprites.selectionFrame, x - 5, y - 5, size + 10, size + 10);
+    ctx.restore();
+  } else {
+    ctx.strokeStyle = "rgba(207, 239, 224, 0.18)";
+    ctx.lineWidth = 2;
+    roundedRect(ctx, x + 2, y + 2, size - 4, size - 4, 10);
+    ctx.stroke();
+  }
+
+  if (tile.type === "blank") {
+    ctx.save();
+    ctx.globalAlpha = 0.36;
+    ctx.fillStyle = "rgba(198, 235, 217, 0.12)";
+    ctx.beginPath();
+    ctx.arc(x + size / 2, y + size / 2, size * 0.08, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    return;
+  }
+
+  const centerX = x + size / 2;
+  const centerY = y + size / 2;
+  const exits = getTileVisualExits(tile);
+  exits.forEach((direction) => {
+    drawWetlandConduitSegment(ctx, wetlandSprites.conduit, centerX, centerY, size, direction, lit);
+  });
+
+  const nodeImage = tile.type === "start"
+    ? wetlandSprites.startNode
+    : tile.type === "output"
+      ? wetlandSprites.outputNode
+      : null;
+  if (nodeImage) {
+    const nodeX = centerX + (tile.type === "start" ? -size * 0.34 : size * 0.34);
+    drawImageCover(ctx, nodeImage, nodeX - size * 0.18, centerY - size * 0.18, size * 0.36, size * 0.36);
+  } else {
+    ctx.save();
+    ctx.fillStyle = lit ? colors.conduitLit ?? "rgba(255, 232, 166, 0.95)" : colors.node ?? "rgba(216, 170, 87, 0.82)";
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, size * 0.14, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "rgba(24, 39, 34, 0.64)";
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, size * 0.055, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+function getWetlandPuzzleSprites(puzzle) {
+  if (!puzzle.layoutId?.startsWith("ch2-")) {
+    return null;
+  }
+
+  const puzzleSprites = sprites.chapterTwo?.puzzles;
+  if (!puzzleSprites) {
+    return null;
+  }
+
+  const conduit = getWetlandConduitSprite(puzzle.layoutId, puzzleSprites);
+  const required = [
+    puzzleSprites.wetlandTileBase,
+    puzzleSprites.wetlandTileLit,
+    puzzleSprites.wetlandSelectionFrame,
+    puzzleSprites.wetlandStartNode,
+    puzzleSprites.wetlandOutputNode,
+    puzzleSprites.wetlandCompletionSpark,
+    conduit
+  ];
+  if (!required.every(imageReady)) {
+    return null;
+  }
+
+  return {
+    tileBase: puzzleSprites.wetlandTileBase,
+    tileLit: puzzleSprites.wetlandTileLit,
+    selectionFrame: puzzleSprites.wetlandSelectionFrame,
+    startNode: puzzleSprites.wetlandStartNode,
+    outputNode: puzzleSprites.wetlandOutputNode,
+    completionSpark: puzzleSprites.wetlandCompletionSpark,
+    conduit
+  };
+}
+
+function getWetlandConduitSprite(layoutId, puzzleSprites) {
+  if (["ch2-lantern-lily-pool", "ch2-bog-bridge", "ch2-mist-pool", "ch2-old-fen-shrine"].includes(layoutId)) {
+    return puzzleSprites.shallowWaterConduit;
+  }
+  if (["ch2-glowfen-grove", "ch2-frogsong-lock", "ch2-moss-gate"].includes(layoutId)) {
+    return puzzleSprites.reedChannelConduit;
+  }
+  return puzzleSprites.boardwalkConduit;
+}
+
+function isMosslinePuzzle(puzzle) {
+  return puzzle.layoutId?.startsWith("ch3-");
+}
+
+function getMosslineAccent(layoutId) {
+  if (["ch3-rain-slick-rails", "ch3-tunnel-mouth"].includes(layoutId)) {
+    return {
+      rail: "rgba(108, 154, 157, 0.9)",
+      signal: "rgba(128, 213, 194, 0.86)",
+      glow: "rgba(169, 244, 218, 0.98)",
+      litNode: "rgba(192, 249, 218, 0.98)"
+    };
+  }
+  if (["ch3-sparking-relay-shed", "ch3-clock-signal", "ch3-last-platform"].includes(layoutId)) {
+    return {
+      rail: "rgba(177, 150, 93, 0.9)",
+      signal: "rgba(235, 192, 98, 0.9)",
+      glow: "rgba(255, 222, 134, 0.98)",
+      litNode: "rgba(255, 232, 155, 0.98)"
+    };
+  }
+  return {
+    rail: "rgba(128, 167, 177, 0.9)",
+    signal: "rgba(158, 205, 207, 0.88)",
+    glow: "rgba(201, 240, 240, 0.98)",
+    litNode: "rgba(211, 245, 241, 0.98)"
+  };
+}
+
+function drawWetlandConduitSegment(ctx, image, centerX, centerY, size, direction, lit) {
+  const angle = {
+    right: 0,
+    down: Math.PI / 2,
+    left: Math.PI,
+    up: -Math.PI / 2
+  }[direction] ?? 0;
+  const length = size * 0.52;
+  const thickness = size * 0.32;
+
+  ctx.save();
+  ctx.translate(centerX, centerY);
+  ctx.rotate(angle);
+  ctx.globalAlpha = lit ? 1 : 0.72;
+  drawImageCover(ctx, image, -size * 0.05, -thickness / 2, length, thickness);
+  ctx.restore();
+}
+
+function getTileVisualExits(tile) {
+  const exits = {
+    start: ["right"],
+    output: ["left"],
+    blank: [],
+    line: ["left", "right"],
+    turn: ["right", "down"],
+    tee: ["left", "right", "down"]
+  }[tile.type] ?? [];
+  return exits.map((direction) => rotateDirection(direction, tile.rotation));
+}
+
+function rotateDirection(direction, rotation) {
+  const order = ["up", "right", "down", "left"];
+  return order[(order.indexOf(direction) + rotation) % order.length];
+}
+
+function drawImageCover(ctx, image, x, y, width, height) {
+  ctx.drawImage(image, x, y, width, height);
 }
 
 function drawCompletionBadge(ctx, celebrationTimer, width) {
