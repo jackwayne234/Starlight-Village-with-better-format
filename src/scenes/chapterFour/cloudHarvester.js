@@ -22,9 +22,9 @@ export function createCloudHarvesterScene() {
     source: "chapterFourLandmarks",
     sprite: "cloudHarvester",
     state: scene.cloudHarvester,
-    x: 1120,
+    x: 1082,
     groundY: 668,
-    height: 432,
+    height: 392,
     glow: { heightRatio: 0.42, radius: 230, fixedIntensity: 0.34, dimIntensity: 0.1, pulse: 0.05 },
     dimFilter: "brightness(0.72) saturate(0.88)",
     fixedFilter: "brightness(0.94) saturate(1.04)"
@@ -55,16 +55,8 @@ export function createCloudHarvesterScene() {
     ],
     brokenBranches: [],
     repairParts: [],
-    puddles: [
-      { x: 270, y: 662, width: 166, height: 20 },
-      { x: 1120, y: 668, width: 390, height: 24 },
-      { x: 1904, y: 661, width: 160, height: 18 }
-    ],
-    mistBands: [
-      { x: 125, y: 418, width: 450, speed: 20 },
-      { x: 765, y: 378, width: 530, speed: 23 },
-      { x: 1415, y: 462, width: 430, speed: 20 }
-    ]
+    puddles: [],
+    mistBands: []
   };
 
   scene.repairs = [

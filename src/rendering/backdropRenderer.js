@@ -15,7 +15,7 @@ export function drawBackdrop(ctx, scene, time, width, height, cameraX) {
     drawClouds(ctx, scene.backdrop, time, width, cameraX);
     return;
   }
-  if (drawPaintedScenery(ctx, width, height, cameraX)) {
+  if (scene.useSharedStormedgeBackdrop !== false && drawPaintedScenery(ctx, width, height, cameraX)) {
     drawClouds(ctx, scene.backdrop, time, width, cameraX);
     return;
   }
@@ -51,6 +51,9 @@ function drawChapterThreeMosslineScenery(ctx, scene, width, height, cameraX) {
 
 function drawChapterFourStormedgeScenery(ctx, scene, width, height, cameraX) {
   if (!scene.id?.startsWith("chapter-four/")) {
+    return false;
+  }
+  if (scene.useSharedStormedgeBackdrop === false) {
     return false;
   }
 

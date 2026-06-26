@@ -22,9 +22,9 @@ export function createCliffRopeLiftScene() {
     source: "chapterFourLandmarks",
     sprite: "cliffRopeLift",
     state: scene.cliffRopeLift,
-    x: 1120,
+    x: 900,
     groundY: 668,
-    height: 444,
+    height: 360,
     glow: { heightRatio: 0.44, radius: 230, fixedIntensity: 0.36, dimIntensity: 0.1, pulse: 0.06 },
     dimFilter: "brightness(0.72) saturate(0.88)",
     fixedFilter: "brightness(0.94) saturate(1.04)"
@@ -55,16 +55,8 @@ export function createCliffRopeLiftScene() {
     ],
     brokenBranches: [],
     repairParts: [],
-    puddles: [
-      { x: 270, y: 662, width: 166, height: 20 },
-      { x: 1118, y: 666, width: 284, height: 24 },
-      { x: 1890, y: 661, width: 160, height: 18 }
-    ],
-    mistBands: [
-      { x: 130, y: 424, width: 430, speed: 17 },
-      { x: 760, y: 382, width: 500, speed: 20 },
-      { x: 1410, y: 462, width: 390, speed: 18 }
-    ]
+    puddles: [],
+    mistBands: []
   };
 
   scene.repairs = [

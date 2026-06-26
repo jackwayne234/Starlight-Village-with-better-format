@@ -53,16 +53,8 @@ export function createWindChimePassScene() {
     ],
     brokenBranches: [],
     repairParts: [],
-    puddles: [
-      { x: 275, y: 662, width: 164, height: 20 },
-      { x: 1120, y: 668, width: 360, height: 24 },
-      { x: 1900, y: 661, width: 160, height: 18 }
-    ],
-    mistBands: [
-      { x: 125, y: 420, width: 440, speed: 18 },
-      { x: 760, y: 380, width: 510, speed: 21 },
-      { x: 1415, y: 462, width: 410, speed: 19 }
-    ]
+    puddles: [],
+    mistBands: []
   };
 
   scene.repairs = [

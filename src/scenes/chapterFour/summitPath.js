@@ -20,11 +20,11 @@ export function createSummitPathScene() {
   };
   scene.spriteLandmark = {
     source: "chapterFourLandmarks",
-    sprite: "summitPath",
+    sprite: "summitPathSideGenerated",
     state: scene.summitPath,
     x: 1120,
     groundY: 668,
-    height: 430,
+    height: 318,
     glow: { heightRatio: 0.38, radius: 230, fixedIntensity: 0.36, dimIntensity: 0.1, pulse: 0.06 },
     dimFilter: "brightness(0.72) saturate(0.88)",
     fixedFilter: "brightness(0.94) saturate(1.04)"
@@ -55,16 +55,8 @@ export function createSummitPathScene() {
     ],
     brokenBranches: [],
     repairParts: [],
-    puddles: [
-      { x: 270, y: 662, width: 164, height: 20 },
-      { x: 1120, y: 668, width: 400, height: 24 },
-      { x: 1904, y: 661, width: 160, height: 18 }
-    ],
-    mistBands: [
-      { x: 120, y: 412, width: 470, speed: 22 },
-      { x: 760, y: 364, width: 550, speed: 25 },
-      { x: 1420, y: 452, width: 450, speed: 21 }
-    ]
+    puddles: [],
+    mistBands: []
   };
 
   scene.repairs = [

@@ -22,9 +22,9 @@ export function createBeaconApproachScene() {
     source: "chapterFourLandmarks",
     sprite: "beaconApproach",
     state: scene.beaconApproach,
-    x: 1120,
+    x: 1088,
     groundY: 670,
-    height: 462,
+    height: 426,
     glow: { heightRatio: 0.54, radius: 235, fixedIntensity: 0.38, dimIntensity: 0.12, pulse: 0.06 }
   };
   scene.layers = {
@@ -53,16 +53,8 @@ export function createBeaconApproachScene() {
     ],
     brokenBranches: [],
     repairParts: [],
-    puddles: [
-      { x: 270, y: 662, width: 166, height: 20 },
-      { x: 1120, y: 668, width: 408, height: 24 },
-      { x: 1906, y: 661, width: 162, height: 18 }
-    ],
-    mistBands: [
-      { x: 118, y: 408, width: 480, speed: 23 },
-      { x: 760, y: 360, width: 560, speed: 26 },
-      { x: 1424, y: 450, width: 460, speed: 22 }
-    ]
+    puddles: [],
+    mistBands: []
   };
 
   scene.repairs = [

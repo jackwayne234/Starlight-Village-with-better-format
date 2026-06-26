@@ -1,5 +1,5 @@
 import { config } from "../core/config.js";
-import { sprites, imageReady } from "./sprites.js?v=stormedge-real-sprite-pass";
+import { sprites, imageReady } from "./sprites.js?v=repair-10-no-puddles-mist";
 
 const { colors } = config;
 
@@ -85,7 +85,7 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
   if (scene.groundStyle === "festival-square") {
     drawFestivalSquareGround(ctx, scene.world.width, height, time);
   } else if (isChapterFourScene(scene)) {
-    drawChapterFourStormedgeGround(ctx, scene.world.width, height, time);
+    drawChapterFourStormedgeGround(ctx, scene, scene.world.width, height, time);
   } else if (isChapterTwoScene(scene)) {
     drawChapterTwoWetlandGround(ctx, scene.world.width, height, time);
   } else {
@@ -120,9 +120,7 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
     drawCompletionPulse(ctx, activeRepair, scene.flow.celebrationTimer);
   }
   scene.layers.lamps.forEach((lamp) => {
-    if (isChapterFourScene(scene)) {
-      drawChapterFourLamp(ctx, lamp, time, powerLevel);
-    } else {
+    if (!isChapterFourScene(scene)) {
       drawLamp(ctx, lamp, time, powerLevel);
     }
   });
@@ -359,7 +357,13 @@ function isChapterFourScene(scene) {
   return scene.id?.startsWith("chapter-four/");
 }
 
-function drawChapterFourStormedgeGround(ctx, width, height, time) {
+function drawChapterFourStormedgeGround(ctx, scene, width, height, time) {
+  if (scene.useSharedStormedgeGround === false) {
+    drawChapterFourFallbackPath(ctx, width, time, { markings: false });
+    drawChapterFourPathContactShadow(ctx, width);
+    return;
+  }
+
   const foreground = sprites.chapterFour?.environment?.ridgeForeground;
   if (imageReady(foreground)) {
     ctx.save();
@@ -368,7 +372,6 @@ function drawChapterFourStormedgeGround(ctx, width, height, time) {
     ctx.drawImage(foreground, 0, height - foreground.naturalHeight, foreground.naturalWidth, foreground.naturalHeight);
     ctx.restore();
     drawChapterFourRockyWalkPath(ctx, height);
-    drawChapterFourWindLines(ctx, width, time);
     return;
   }
 
@@ -409,7 +412,6 @@ function drawChapterFourStormedgeGround(ctx, width, height, time) {
     drawChapterFourFallbackPath(ctx, width, time);
   }
 
-  drawChapterFourWindLines(ctx, width, time);
   drawChapterFourPathContactShadow(ctx, width);
 }
 
@@ -426,7 +428,7 @@ function drawChapterFourRockyWalkPath(ctx, height) {
   ctx.restore();
 }
 
-function drawChapterFourFallbackPath(ctx, width, time) {
+function drawChapterFourFallbackPath(ctx, width, time, options = {}) {
   ctx.save();
   ctx.fillStyle = "#575d50";
   ctx.beginPath();
@@ -440,46 +442,15 @@ function drawChapterFourFallbackPath(ctx, width, time) {
   ctx.closePath();
   ctx.fill();
 
-  ctx.strokeStyle = "rgba(207, 211, 174, 0.22)";
-  ctx.lineWidth = 2;
-  for (let x = 84; x < width; x += 150) {
-    const y = 648 + Math.sin(time * 0.4 + x * 0.018) * 17;
-    ctx.beginPath();
-    ctx.ellipse(x, y, 58, 13, -0.1, 0, Math.PI * 2);
-    ctx.stroke();
-  }
-  ctx.restore();
-}
-
-function drawChapterFourWindLines(ctx, width, time) {
-  const windImage = sprites.chapterFour?.environment?.windStreaks;
-  if (imageReady(windImage)) {
-    const targetHeight = 180;
-    const scale = targetHeight / windImage.naturalHeight;
-    const drawWidth = windImage.naturalWidth * scale;
-    const y = 455;
-    const drift = (time * 28) % drawWidth;
-
-    ctx.save();
-    ctx.globalCompositeOperation = "screen";
-    ctx.globalAlpha = 0.5;
-    for (let x = -drawWidth - drift; x < width + drawWidth; x += drawWidth - 1) {
-      ctx.drawImage(windImage, x, y, drawWidth, targetHeight);
+  if (options.markings !== false) {
+    ctx.strokeStyle = "rgba(207, 211, 174, 0.22)";
+    ctx.lineWidth = 2;
+    for (let x = 84; x < width; x += 150) {
+      const y = 648 + Math.sin(time * 0.4 + x * 0.018) * 17;
+      ctx.beginPath();
+      ctx.ellipse(x, y, 58, 13, -0.1, 0, Math.PI * 2);
+      ctx.stroke();
     }
-    ctx.restore();
-    return;
-  }
-
-  ctx.save();
-  ctx.globalCompositeOperation = "screen";
-  ctx.strokeStyle = "rgba(194, 218, 211, 0.14)";
-  ctx.lineWidth = 2;
-  for (let x = -120; x < width + 180; x += 220) {
-    const y = 520 + Math.sin(time * 0.8 + x * 0.01) * 22;
-    ctx.beginPath();
-    ctx.moveTo(x + Math.sin(time + x) * 18, y);
-    ctx.bezierCurveTo(x + 70, y - 18, x + 126, y + 12, x + 190, y - 8);
-    ctx.stroke();
   }
   ctx.restore();
 }
@@ -8317,22 +8288,6 @@ function drawLamp(ctx, lamp, time, powerLevel) {
     ctx.fill();
   }
   ctx.restore();
-}
-
-function drawChapterFourLamp(ctx, lamp, time, powerLevel) {
-  const lampImage = sprites.chapterFour?.environment?.lamp;
-  if (!imageReady(lampImage)) {
-    drawLamp(ctx, lamp, time, powerLevel);
-    return;
-  }
-
-  const lit = lamp.lit || powerLevel > 0.9;
-  const groundY = lamp.y + 78 * (lamp.scale ?? 1);
-  const height = 190 * (lamp.scale ?? 1);
-  const { width } = drawWorldSprite(ctx, lampImage, lamp.x, groundY, height);
-  const intensity = lit ? 0.55 + Math.sin(time * 4 + lamp.x) * 0.08 : 0.18 + powerLevel * 0.4;
-  warmGlow(ctx, lamp.x, groundY - height * 0.55, width * 0.54, intensity);
-  drawWetReflection(ctx, lamp.x, groundY - 10, 94, intensity * 0.65);
 }
 
 function drawBrokenBranch(ctx, branch) {

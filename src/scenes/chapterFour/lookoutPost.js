@@ -22,9 +22,9 @@ export function createLookoutPostScene() {
     source: "chapterFourLandmarks",
     sprite: "lookoutPost",
     state: scene.lookoutPost,
-    x: 1120,
+    x: 1168,
     groundY: 668,
-    height: 430,
+    height: 392,
     glow: { heightRatio: 0.4, radius: 220, fixedIntensity: 0.34, dimIntensity: 0.1, pulse: 0.05 },
     dimFilter: "brightness(0.72) saturate(0.88)",
     fixedFilter: "brightness(0.94) saturate(1.04)"
@@ -55,16 +55,8 @@ export function createLookoutPostScene() {
     ],
     brokenBranches: [],
     repairParts: [],
-    puddles: [
-      { x: 270, y: 662, width: 166, height: 20 },
-      { x: 1120, y: 668, width: 340, height: 24 },
-      { x: 1900, y: 661, width: 160, height: 18 }
-    ],
-    mistBands: [
-      { x: 130, y: 422, width: 430, speed: 18 },
-      { x: 760, y: 382, width: 510, speed: 21 },
-      { x: 1415, y: 462, width: 420, speed: 19 }
-    ]
+    puddles: [],
+    mistBands: []
   };
 
   scene.repairs = [

@@ -53,16 +53,8 @@ export function createLightningRodFieldScene() {
     ],
     brokenBranches: [],
     repairParts: [],
-    puddles: [
-      { x: 275, y: 662, width: 164, height: 20 },
-      { x: 1120, y: 668, width: 385, height: 24 },
-      { x: 1900, y: 661, width: 160, height: 18 }
-    ],
-    mistBands: [
-      { x: 125, y: 420, width: 440, speed: 19 },
-      { x: 760, y: 380, width: 520, speed: 23 },
-      { x: 1415, y: 462, width: 420, speed: 20 }
-    ]
+    puddles: [],
+    mistBands: []
   };
 
   scene.repairs = [

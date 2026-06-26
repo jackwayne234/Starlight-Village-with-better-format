@@ -117,3 +117,8 @@ High-level list only. All details live inside each chunk file.
 | 127 | Stormedge Completion Summary and First-Pass Route QA | complete |
 | 128 | Stormedge Background and Environment Sprite Pass | complete |
 | 129 | Stormedge Sprite Landmark Cleanup | complete |
+| 130 | Stormedge User Asset Integration | complete |
+| 131 | Stormedge Landmark Placement Polish | complete |
+| 132 | Stormedge Wind and Lamp Cleanup | complete |
+| 133 | Zero Painted PNG Asset Cleanout | complete |
+| 134 | Clean World Sprite Replacement Pass | complete |

@@ -54,16 +54,8 @@ export function createWeatherVaneRoofScene() {
     ],
     brokenBranches: [],
     repairParts: [],
-    puddles: [
-      { x: 250, y: 662, width: 160, height: 20 },
-      { x: 1120, y: 666, width: 330, height: 26 },
-      { x: 1870, y: 660, width: 154, height: 18 }
-    ],
-    mistBands: [
-      { x: 120, y: 422, width: 420, speed: 16 },
-      { x: 760, y: 384, width: 480, speed: 19 },
-      { x: 1410, y: 464, width: 380, speed: 17 }
-    ]
+    puddles: [],
+    mistBands: []
   };
 
   scene.repairs = [

@@ -12,16 +12,16 @@ import { createFestivalSquareScene } from "./chapterOne/festivalSquare.js";
 import { createOldFootbridgeScene } from "./chapterOne/oldFootbridge.js";
 import { createRainDrainCornerScene } from "./chapterOne/rainDrainCorner.js";
 import { createStarlightVillageScene } from "./chapterOne/starlightVillage.js";
-import { createStormedgeRiseScene } from "./chapterOne/stormedgeRise.js?v=stormedge-real-sprite-pass";
-import { createBeaconApproachScene } from "./chapterFour/beaconApproach.js?v=stormedge-real-sprite-pass";
-import { createCloudHarvesterScene } from "./chapterFour/cloudHarvester.js?v=stormedge-real-sprite-pass";
-import { createCliffRopeLiftScene } from "./chapterFour/cliffRopeLift.js?v=stormedge-real-sprite-pass";
-import { createCrackedStairScene } from "./chapterFour/crackedStair.js?v=stormedge-real-sprite-pass";
-import { createLightningRodFieldScene } from "./chapterFour/lightningRodField.js?v=stormedge-real-sprite-pass";
-import { createLookoutPostScene } from "./chapterFour/lookoutPost.js?v=stormedge-real-sprite-pass";
-import { createSummitPathScene } from "./chapterFour/summitPath.js?v=stormedge-real-sprite-pass";
-import { createWeatherVaneRoofScene } from "./chapterFour/weatherVaneRoof.js?v=stormedge-real-sprite-pass";
-import { createWindChimePassScene } from "./chapterFour/windChimePass.js?v=stormedge-real-sprite-pass";
+import { createStormedgeRiseScene } from "./chapterOne/stormedgeRise.js?v=zero-painted-assets";
+import { createBeaconApproachScene } from "./chapterFour/beaconApproach.js?v=repair-10-no-puddles-mist";
+import { createCloudHarvesterScene } from "./chapterFour/cloudHarvester.js?v=repair-8-no-puddles-mist";
+import { createCliffRopeLiftScene } from "./chapterFour/cliffRopeLift.js?v=repair-3-no-puddles-mist";
+import { createCrackedStairScene } from "./chapterFour/crackedStair.js?v=repair-7-firewatch-tower-2x";
+import { createLightningRodFieldScene } from "./chapterFour/lightningRodField.js?v=repair-5-no-puddles-mist";
+import { createLookoutPostScene } from "./chapterFour/lookoutPost.js?v=repair-6-no-puddles-mist";
+import { createSummitPathScene } from "./chapterFour/summitPath.js?v=repair-9-side-summit-path";
+import { createWeatherVaneRoofScene } from "./chapterFour/weatherVaneRoof.js?v=repair-2-clean-ground";
+import { createWindChimePassScene } from "./chapterFour/windChimePass.js?v=repair-4-no-puddles-mist";
 import {
   createBellPlatformScene,
   createFuelShedScene,
@@ -97,7 +97,7 @@ import { createConductorBoothScene } from "./chapterThree/conductorBooth.js?v=co
 import { createCraneHookYardScene } from "./chapterThree/craneHookYard.js?v=crane-hook-yard-sprite";
 import { createClockSignalScene } from "./chapterThree/clockSignal.js?v=clock-signal-sprite";
 import { createRainSlickRailsScene } from "./chapterThree/rainSlickRails.js?v=rain-slick-rails-sprite";
-import { createLastPlatformScene } from "./chapterThree/lastPlatform.js?v=stormedge-real-sprite-pass";
+import { createLastPlatformScene } from "./chapterThree/lastPlatform.js?v=zero-painted-assets";
 import { createSignalArmRowScene } from "./chapterThree/signalArmRow.js";
 import { createSparkingRelayShedScene } from "./chapterThree/sparkingRelayShed.js";
 import { createTunnelMouthScene } from "./chapterThree/tunnelMouth.js?v=tunnel-mouth-sprite";
