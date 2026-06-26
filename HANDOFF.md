@@ -227,12 +227,16 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Chapter 4 Stormedge planning landed on `2026-06-25`: `ground-truth.md` now contains a complete 25-answer Chapter 4 source of truth, and `chunks/119-stormedge-rise-implementation-plan.md` turns those answers into the next build sequence: shared Stormedge background sprite pack, shared background/ridge-path renderer, mostly visual Chapter 3-to-4 transition page with the boy and robot, ten-scene foreground landmark audit, landmark sprite production, scene rewire/repaired-state pass, storm/ridge puzzle skin and difficulty tuning, and completion summary/route QA. This was docs-only; no sprites, code, gameplay, QA, or visual changes were made.
 - Chapter 4 Stormedge first implementation pass landed on `2026-06-25`: Chunks 120-127 are complete. New assets live under `assets/sprites/chapter-four/`: shared Stormedge background, ridge path, Mossline-to-Stormedge transition image, ten transparent foreground landmark sprites plus source files, and Stormedge puzzle panel sprites. All ten Chapter 4 scenes now use the shared Stormedge background/path and one sprite-backed side-view landmark through `source: "chapterFourLandmarks"`. Last Platform now shows its Chapter 3 summary, then the visual Stormedge transition page, then Stormedge Rise. Beacon Approach now shows the Stormedge completion summary before continuing to Beacon Hill. The ten `ch4-*` puzzle layouts are solvable, start incomplete, and render with storm-blue/brass sprite-backed puzzle art.
 - Local preview verification used `http://127.0.0.1:5304/` most recently for Chapter 4 scene, transition, completion, and puzzle-overlay checks.
+- Chapter 4 playtest sprite-environment polish landed on `2026-06-25`: Chunk 128 is complete. Stormedge now uses `assets/sprites/chapter-four/backgrounds/stormedge-background-rocky-v1.png` as its shared Rocky Mountain-style chapter backdrop, plus sprite-backed ridge foreground, mist-band, wind-streak, pine, lamp, puddle, and walk-path layers under `assets/sprites/chapter-four/environment/` and `assets/sprites/chapter-four/paths/`. Chapter 4 ground, ridge foreground, wind streaks, mist, trees, lamps, puddles, and walk path now prefer bitmap sprites instead of code-drawn shapes. The leftover generic signpost was removed from Stormedge Rise. Data checks confirmed all ten Chapter 4 scenes use `source: "chapterFourLandmarks"` with no cottages, broken branches, loose repair parts, generic signpost, or generic marker, and the in-app browser sweep passed on port `5350`.
+- Chapter 4 sprite-landmark cleanup landed on `2026-06-25`: Chunk 129 is complete. All ten Chapter 4 scenes now use `scene.spriteLandmark` instead of `scene.paintedLandmark`, and `src/rendering/worldRenderer.js` draws those through `drawSpriteLandmark` before the older compatibility path. The old unused Chapter 4 `*-painted.png` and `*-painted-source.png` files were removed from `assets/sprites/world/` after source checks confirmed they are no longer referenced. Cache tags were bumped for the Stormedge sprite-landmark pass.
 
 ## Suggested Next Step
 
-Chapter 4's first Stormedge implementation pass is complete through Chunk 127.
-Do not redo the shared background, transition image, landmark sprite, puzzle
-skin, or completion-summary pass unless the user asks for a revision.
+Chapter 4's Stormedge implementation, sprite-environment polish, and
+sprite-landmark cleanup are complete through Chunk 129. Do not redo the
+transition image, landmark sprites, puzzle skin, completion-summary pass,
+environment sprite pass, or sprite-landmark cleanup unless the user asks for a
+revision.
 
 Next likely stop:
 

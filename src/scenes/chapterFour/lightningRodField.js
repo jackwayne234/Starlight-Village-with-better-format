@@ -18,7 +18,7 @@ export function createLightningRodFieldScene() {
     fixed: false,
     rodsGrounded: false
   };
-  scene.paintedLandmark = {
+  scene.spriteLandmark = {
     source: "chapterFourLandmarks",
     sprite: "lightningRodField",
     state: scene.lightningRodField,

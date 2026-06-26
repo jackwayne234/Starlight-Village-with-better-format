@@ -18,7 +18,7 @@ export function createBeaconApproachScene() {
     fixed: false,
     gateOpen: false
   };
-  scene.paintedLandmark = {
+  scene.spriteLandmark = {
     source: "chapterFourLandmarks",
     sprite: "beaconApproach",
     state: scene.beaconApproach,

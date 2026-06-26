@@ -1,5 +1,5 @@
 import { config } from "../core/config.js";
-import { sprites, imageReady } from "./sprites.js?v=stormedge-sprite-pass";
+import { sprites, imageReady } from "./sprites.js?v=stormedge-real-sprite-pass";
 
 const { colors } = config;
 
@@ -74,7 +74,13 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
 
   ctx.save();
   ctx.translate(-cameraX, 0);
-  scene.layers.trees.forEach((tree) => drawTree(ctx, tree, time));
+  scene.layers.trees.forEach((tree) => {
+    if (isChapterFourScene(scene)) {
+      drawChapterFourTree(ctx, tree, time);
+    } else {
+      drawTree(ctx, tree, time);
+    }
+  });
   scene.layers.cottages.forEach((cottage) => drawCottage(ctx, cottage, time, powerLevel));
   if (scene.groundStyle === "festival-square") {
     drawFestivalSquareGround(ctx, scene.world.width, height, time);
@@ -89,7 +95,13 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
   if (waterWheel) {
     drawStream(ctx, time);
   }
-  drawMist(ctx, scene.layers.mistBands, time, scene.world.width);
+  if (isChapterFourScene(scene)) {
+    drawChapterFourMistSprites(ctx, scene.layers.mistBands, time, scene.world.width);
+    scene.layers.puddles?.forEach((puddle) => drawChapterFourPuddle(ctx, puddle, time));
+  } else {
+    drawMist(ctx, scene.layers.mistBands, time, scene.world.width);
+    scene.layers.puddles?.forEach((puddle) => drawPuddle(ctx, puddle, time));
+  }
   if (scene.foliageLayer === "behind-landmark") {
     scene.layers.foliage?.forEach((foliage) => drawFoliageSprite(ctx, foliage, time));
   }
@@ -107,7 +119,13 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
   if (activeRepair) {
     drawCompletionPulse(ctx, activeRepair, scene.flow.celebrationTimer);
   }
-  scene.layers.lamps.forEach((lamp) => drawLamp(ctx, lamp, time, powerLevel));
+  scene.layers.lamps.forEach((lamp) => {
+    if (isChapterFourScene(scene)) {
+      drawChapterFourLamp(ctx, lamp, time, powerLevel);
+    } else {
+      drawLamp(ctx, lamp, time, powerLevel);
+    }
+  });
   scene.layers.brokenBranches.forEach((branch) => drawBrokenBranch(ctx, branch));
   // Temporarily hidden until the mushroom/glow-plant art is replaced.
   // The current sprite has internal white cutout fills that fight the night scene.
@@ -181,6 +199,19 @@ function drawTree(ctx, tree, time) {
   drawLeafMass(ctx, -38, 16, 76, time);
   drawLeafMass(ctx, 38, 22, 70, time + 1);
   drawLeafMass(ctx, 0, -42, 82, time + 2);
+  ctx.restore();
+}
+
+function drawChapterFourTree(ctx, tree, time) {
+  const pineImage = sprites.chapterFour?.environment?.pine;
+  if (!imageReady(pineImage)) {
+    drawTree(ctx, tree, time);
+    return;
+  }
+
+  ctx.save();
+  ctx.filter = "brightness(0.64) saturate(0.86)";
+  drawWorldSprite(ctx, pineImage, tree.x, tree.y + 230 * tree.scale, 385 * tree.scale);
   ctx.restore();
 }
 
@@ -329,6 +360,18 @@ function isChapterFourScene(scene) {
 }
 
 function drawChapterFourStormedgeGround(ctx, width, height, time) {
+  const foreground = sprites.chapterFour?.environment?.ridgeForeground;
+  if (imageReady(foreground)) {
+    ctx.save();
+    ctx.globalAlpha = 0.98;
+    ctx.filter = "brightness(0.9) saturate(0.94) contrast(1.04)";
+    ctx.drawImage(foreground, 0, height - foreground.naturalHeight, foreground.naturalWidth, foreground.naturalHeight);
+    ctx.restore();
+    drawChapterFourRockyWalkPath(ctx, height);
+    drawChapterFourWindLines(ctx, width, time);
+    return;
+  }
+
   ctx.fillStyle = "#1f2c2a";
   ctx.fillRect(0, 574, width, height - 574);
 
@@ -370,6 +413,19 @@ function drawChapterFourStormedgeGround(ctx, width, height, time) {
   drawChapterFourPathContactShadow(ctx, width);
 }
 
+function drawChapterFourRockyWalkPath(ctx, height) {
+  const pathImage = sprites.chapterFour?.paths?.rockyWalkPath;
+  if (!imageReady(pathImage)) {
+    return;
+  }
+
+  ctx.save();
+  ctx.globalAlpha = 0.9;
+  ctx.filter = "brightness(0.78) saturate(0.84) contrast(1.05)";
+  ctx.drawImage(pathImage, 0, height - 238, pathImage.naturalWidth, pathImage.naturalHeight);
+  ctx.restore();
+}
+
 function drawChapterFourFallbackPath(ctx, width, time) {
   ctx.save();
   ctx.fillStyle = "#575d50";
@@ -396,6 +452,24 @@ function drawChapterFourFallbackPath(ctx, width, time) {
 }
 
 function drawChapterFourWindLines(ctx, width, time) {
+  const windImage = sprites.chapterFour?.environment?.windStreaks;
+  if (imageReady(windImage)) {
+    const targetHeight = 180;
+    const scale = targetHeight / windImage.naturalHeight;
+    const drawWidth = windImage.naturalWidth * scale;
+    const y = 455;
+    const drift = (time * 28) % drawWidth;
+
+    ctx.save();
+    ctx.globalCompositeOperation = "screen";
+    ctx.globalAlpha = 0.5;
+    for (let x = -drawWidth - drift; x < width + drawWidth; x += drawWidth - 1) {
+      ctx.drawImage(windImage, x, y, drawWidth, targetHeight);
+    }
+    ctx.restore();
+    return;
+  }
+
   ctx.save();
   ctx.globalCompositeOperation = "screen";
   ctx.strokeStyle = "rgba(194, 218, 211, 0.14)";
@@ -625,6 +699,26 @@ function drawMist(ctx, bands, time, width) {
   });
 }
 
+function drawChapterFourMistSprites(ctx, bands, time, width) {
+  const mistImage = sprites.chapterFour?.environment?.mistBand;
+  if (!imageReady(mistImage)) {
+    drawMist(ctx, bands, time, width);
+    return;
+  }
+
+  bands.forEach((band, index) => {
+    const targetWidth = band.width;
+    const targetHeight = targetWidth * (mistImage.naturalHeight / mistImage.naturalWidth);
+    const drift = (band.x + time * band.speed) % (width + targetWidth) - targetWidth;
+    const y = band.y - targetHeight / 2 + Math.sin(time + index) * 3;
+
+    ctx.save();
+    ctx.globalAlpha = 0.82;
+    ctx.drawImage(mistImage, drift, y, targetWidth, targetHeight);
+    ctx.restore();
+  });
+}
+
 function drawPuddle(ctx, puddle, time) {
   const puddleImage = sprites.world.puddle;
   if (imageReady(puddleImage)) {
@@ -649,8 +743,27 @@ function drawPuddle(ctx, puddle, time) {
   ctx.stroke();
 }
 
+function drawChapterFourPuddle(ctx, puddle, time) {
+  const puddleImage = sprites.chapterFour?.environment?.puddle;
+  if (!imageReady(puddleImage)) {
+    drawPuddle(ctx, puddle, time);
+    return;
+  }
+
+  const width = puddle.width * 1.34;
+  const height = width * (puddleImage.naturalHeight / puddleImage.naturalWidth);
+  ctx.save();
+  ctx.globalAlpha = 0.84 + Math.sin(time * 1.8 + puddle.x) * 0.04;
+  ctx.drawImage(puddleImage, puddle.x - width / 2, puddle.y - height / 2, width, height);
+  ctx.restore();
+}
+
 function drawSceneLandmarks(ctx, scene, time) {
   drawWaterUnderlay(ctx, scene.waterUnderlay);
+
+  if (drawSpriteLandmark(ctx, scene.spriteLandmark, time, scene.world.powerLevel)) {
+    return;
+  }
 
   if (drawPaintedLandmark(ctx, scene.paintedLandmark, time, scene.world.powerLevel)) {
     return;
@@ -834,6 +947,10 @@ function resolveLandmarkSprite(landmark) {
 }
 
 function drawPaintedLandmark(ctx, landmark, time, powerLevel) {
+  return drawSpriteLandmark(ctx, landmark, time, powerLevel);
+}
+
+function drawSpriteLandmark(ctx, landmark, time, powerLevel) {
   if (!landmark) {
     return false;
   }
@@ -8200,6 +8317,22 @@ function drawLamp(ctx, lamp, time, powerLevel) {
     ctx.fill();
   }
   ctx.restore();
+}
+
+function drawChapterFourLamp(ctx, lamp, time, powerLevel) {
+  const lampImage = sprites.chapterFour?.environment?.lamp;
+  if (!imageReady(lampImage)) {
+    drawLamp(ctx, lamp, time, powerLevel);
+    return;
+  }
+
+  const lit = lamp.lit || powerLevel > 0.9;
+  const groundY = lamp.y + 78 * (lamp.scale ?? 1);
+  const height = 190 * (lamp.scale ?? 1);
+  const { width } = drawWorldSprite(ctx, lampImage, lamp.x, groundY, height);
+  const intensity = lit ? 0.55 + Math.sin(time * 4 + lamp.x) * 0.08 : 0.18 + powerLevel * 0.4;
+  warmGlow(ctx, lamp.x, groundY - height * 0.55, width * 0.54, intensity);
+  drawWetReflection(ctx, lamp.x, groundY - 10, 94, intensity * 0.65);
 }
 
 function drawBrokenBranch(ctx, branch) {

@@ -10,6 +10,7 @@ export function createStormedgeRiseScene() {
 
   scene.player.x = 315;
   scene.robot.x = 427;
+  scene.showSignpost = false;
   scene.backdrop = { moonX: 1080, moonY: 140, cloudDrift: 1.55, hillOffset: 86, ridgeOffset: 120 };
   scene.ridge = {
     gauge: { x: 1115, y: 576, lit: false },
@@ -18,7 +19,7 @@ export function createStormedgeRiseScene() {
       { x: 1440, y: 530, lean: 0.14 }
     ]
   };
-  scene.paintedLandmark = {
+  scene.spriteLandmark = {
     source: "chapterFourLandmarks",
     sprite: "stormGauge",
     state: scene.ridge.gauge,

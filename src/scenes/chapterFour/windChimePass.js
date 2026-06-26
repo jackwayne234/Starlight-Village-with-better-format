@@ -18,7 +18,7 @@ export function createWindChimePassScene() {
     fixed: false,
     chimesCalm: false
   };
-  scene.paintedLandmark = {
+  scene.spriteLandmark = {
     source: "chapterFourLandmarks",
     sprite: "windChimePass",
     state: scene.windChimePass,

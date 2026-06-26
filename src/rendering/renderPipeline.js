@@ -1,10 +1,10 @@
 import { config } from "../core/config.js";
 import { drawActors } from "./actorRenderer.js?v=robot-scan-restored";
-import { drawBackdrop } from "./backdropRenderer.js?v=stormedge-sprite-pass";
+import { drawBackdrop } from "./backdropRenderer.js?v=stormedge-real-sprite-pass";
 import { drawWeather } from "./weatherRenderer.js?v=no-bottom-ovals";
-import { drawWorld } from "./worldRenderer.js?v=stormedge-sprite-pass";
-import { imageReady, sprites } from "./sprites.js?v=stormedge-sprite-pass";
-import { drawHud } from "../ui/hud.js?v=stormedge-sprite-pass";
+import { drawWorld } from "./worldRenderer.js?v=stormedge-real-sprite-pass";
+import { imageReady, sprites } from "./sprites.js?v=stormedge-real-sprite-pass";
+import { drawHud } from "../ui/hud.js?v=stormedge-real-sprite-pass";
 
 export function renderScene(ctx, scene, time, transition = null, options = {}) {
   const { hud = true } = options;

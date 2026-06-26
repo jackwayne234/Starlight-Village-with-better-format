@@ -18,7 +18,7 @@ export function createCrackedStairScene() {
     fixed: false,
     bracesLocked: false
   };
-  scene.paintedLandmark = {
+  scene.spriteLandmark = {
     source: "chapterFourLandmarks",
     sprite: "crackedStair",
     state: scene.crackedStair,

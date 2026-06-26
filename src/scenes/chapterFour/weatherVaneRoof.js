@@ -18,7 +18,7 @@ export function createWeatherVaneRoofScene() {
     fixed: false,
     vaneAligned: false
   };
-  scene.paintedLandmark = {
+  scene.spriteLandmark = {
     source: "chapterFourLandmarks",
     sprite: "weatherVaneRoof",
     state: scene.weatherVaneRoof,

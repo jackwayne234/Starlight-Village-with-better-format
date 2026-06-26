@@ -18,7 +18,7 @@ export function createCloudHarvesterScene() {
     fixed: false,
     condenserTuned: false
   };
-  scene.paintedLandmark = {
+  scene.spriteLandmark = {
     source: "chapterFourLandmarks",
     sprite: "cloudHarvester",
     state: scene.cloudHarvester,

@@ -115,3 +115,5 @@ High-level list only. All details live inside each chunk file.
 | 125 | Stormedge Scene Rewire and Repaired-State Pass | complete |
 | 126 | Stormedge Puzzle Skin and Difficulty Tuning | complete |
 | 127 | Stormedge Completion Summary and First-Pass Route QA | complete |
+| 128 | Stormedge Background and Environment Sprite Pass | complete |
+| 129 | Stormedge Sprite Landmark Cleanup | complete |

@@ -18,7 +18,7 @@ export function createSummitPathScene() {
     fixed: false,
     markersLit: false
   };
-  scene.paintedLandmark = {
+  scene.spriteLandmark = {
     source: "chapterFourLandmarks",
     sprite: "summitPath",
     state: scene.summitPath,

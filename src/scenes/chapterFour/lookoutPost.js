@@ -18,7 +18,7 @@ export function createLookoutPostScene() {
     fixed: false,
     scopeAligned: false
   };
-  scene.paintedLandmark = {
+  scene.spriteLandmark = {
     source: "chapterFourLandmarks",
     sprite: "lookoutPost",
     state: scene.lookoutPost,

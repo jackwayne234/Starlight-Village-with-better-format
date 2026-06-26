@@ -1,7 +1,7 @@
-import { createGame } from "./core/game.js?v=stormedge-sprite-pass";
+import { createGame } from "./core/game.js?v=stormedge-real-sprite-pass";
 import { createInput } from "./core/input.js";
 import { clearProgress, saveProgress } from "./core/progress.js";
-import { createInitialScene, createScene } from "./scenes/sceneRegistry.js?v=stormedge-sprite-pass";
+import { createInitialScene, createScene } from "./scenes/sceneRegistry.js?v=stormedge-real-sprite-pass";
 import { primeAudio, unlockAudio } from "./audio/gameAudio.js";
 
 const canvas = document.querySelector("#game");

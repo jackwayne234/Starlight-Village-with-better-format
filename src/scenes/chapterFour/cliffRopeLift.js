@@ -18,7 +18,7 @@ export function createCliffRopeLiftScene() {
     fixed: false,
     basketRaised: false
   };
-  scene.paintedLandmark = {
+  scene.spriteLandmark = {
     source: "chapterFourLandmarks",
     sprite: "cliffRopeLift",
     state: scene.cliffRopeLift,

@@ -1,4 +1,4 @@
-import { createRepairPuzzle, movePuzzleSelection, rotateSelectedTile } from "./repairPuzzle.js?v=stormedge-sprite-pass";
+import { createRepairPuzzle, movePuzzleSelection, rotateSelectedTile } from "./repairPuzzle.js?v=stormedge-real-sprite-pass";
 import { sfx } from "../audio/gameAudio.js";
 
 export function updateRepairFlow(scene, input, dt) {

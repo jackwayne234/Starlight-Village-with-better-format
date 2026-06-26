@@ -25,6 +25,7 @@ const CHAPTER_FOUR_BACKGROUNDS = `${CHAPTER_FOUR}/backgrounds`;
 const CHAPTER_FOUR_PATHS = `${CHAPTER_FOUR}/paths`;
 const CHAPTER_FOUR_TRANSITIONS = `${CHAPTER_FOUR}/transitions`;
 const CHAPTER_FOUR_LANDMARKS = `${CHAPTER_FOUR}/landmarks`;
+const CHAPTER_FOUR_ENVIRONMENT = `${CHAPTER_FOUR}/environment`;
 const CHAPTER_FOUR_PUZZLES = `${CHAPTER_FOUR}/puzzles`;
 const TITLE = "assets/title";
 
@@ -67,9 +68,6 @@ export const sprites = {
     mosslineSwitchyard: loadImage(`${WORLD}/mossline-switchyard-painted.png?v=painted-route-ch3`),
     cargoCartTurntable: loadImage(`${WORLD}/cargo-cart-turntable-painted.png?v=painted-route-ch3`),
     signalArmRow: loadImage(`${WORLD}/signal-arm-row-painted.png?v=painted-route-ch3`),
-    windChimePass: loadImage(`${WORLD}/wind-chime-pass-painted.png?v=painted-route-ch4`),
-    lightningRodField: loadImage(`${WORLD}/lightning-rod-field-painted.png?v=painted-route-ch4`),
-    beaconApproach: loadImage(`${WORLD}/beacon-approach-painted.png?v=painted-route-ch4-final`),
     tree: loadImage(`${WORLD}/tree-trimmed.png`),
     pine: loadImage(`${WORLD}/pine-tree-trimmed.png`),
     lamp: loadImage(`${WORLD}/lamp-trimmed.png`),
@@ -167,22 +165,31 @@ export const sprites = {
   },
   chapterFour: {
     backgrounds: {
-      stormedgeBackground: loadImage(`${CHAPTER_FOUR_BACKGROUNDS}/stormedge-background.png?v=stormedge-shared-background`)
+      stormedgeBackground: loadImage(`${CHAPTER_FOUR_BACKGROUNDS}/stormedge-background-rocky-v1.png?v=stormedge-background-rocky-v1`)
     },
     paths: {
-      ridgeStonePath: loadImage(`${CHAPTER_FOUR_PATHS}/ridge-stone-path.png?v=stormedge-ridge-path`)
+      ridgeStonePath: loadImage(`${CHAPTER_FOUR_PATHS}/ridge-stone-path.png?v=stormedge-ridge-path`),
+      rockyWalkPath: loadImage(`${CHAPTER_FOUR_PATHS}/rocky-walk-path.png?v=stormedge-rocky-walk-path-v2`)
+    },
+    environment: {
+      ridgeForeground: loadImage(`${CHAPTER_FOUR_ENVIRONMENT}/stormedge-ridge-foreground.png?v=stormedge-environment-sprites-v2`),
+      mistBand: loadImage(`${CHAPTER_FOUR_ENVIRONMENT}/stormedge-mist-band.png?v=stormedge-environment-sprites-v2`),
+      windStreaks: loadImage(`${CHAPTER_FOUR_ENVIRONMENT}/stormedge-wind-streaks.png?v=stormedge-environment-sprites-v2`),
+      pine: loadImage(`${CHAPTER_FOUR_ENVIRONMENT}/stormedge-pine-reference-still.png?v=stormedge-pine-reference-still-v1`),
+      lamp: loadImage(`${CHAPTER_FOUR_ENVIRONMENT}/stormedge-lamp-sprite.png?v=stormedge-real-sprite-pass`),
+      puddle: loadImage(`${CHAPTER_FOUR_ENVIRONMENT}/stormedge-puddle-sprite.png?v=stormedge-real-sprite-pass`)
     },
     landmarks: {
-      stormGauge: loadImage(`${CHAPTER_FOUR_LANDMARKS}/storm-gauge.png?v=stormedge-landmarks`),
-      weatherVaneRoof: loadImage(`${CHAPTER_FOUR_LANDMARKS}/weather-vane-roof.png?v=stormedge-landmarks`),
-      cliffRopeLift: loadImage(`${CHAPTER_FOUR_LANDMARKS}/cliff-rope-lift.png?v=stormedge-landmarks`),
-      windChimePass: loadImage(`${CHAPTER_FOUR_LANDMARKS}/wind-chime-pass.png?v=stormedge-landmarks`),
-      lightningRodField: loadImage(`${CHAPTER_FOUR_LANDMARKS}/lightning-rod-field.png?v=stormedge-landmarks`),
-      lookoutPost: loadImage(`${CHAPTER_FOUR_LANDMARKS}/lookout-post.png?v=stormedge-landmarks`),
-      crackedStair: loadImage(`${CHAPTER_FOUR_LANDMARKS}/cracked-stair.png?v=stormedge-landmarks`),
-      cloudHarvester: loadImage(`${CHAPTER_FOUR_LANDMARKS}/cloud-harvester.png?v=stormedge-landmarks`),
-      summitPath: loadImage(`${CHAPTER_FOUR_LANDMARKS}/summit-path.png?v=stormedge-landmarks`),
-      beaconApproach: loadImage(`${CHAPTER_FOUR_LANDMARKS}/beacon-approach.png?v=stormedge-landmarks`)
+      stormGauge: loadImage(`${CHAPTER_FOUR_LANDMARKS}/storm-gauge.png?v=stormedge-landmark-sprites-v2`),
+      weatherVaneRoof: loadImage(`${CHAPTER_FOUR_LANDMARKS}/weather-vane-roof.png?v=stormedge-landmark-sprites-v2`),
+      cliffRopeLift: loadImage(`${CHAPTER_FOUR_LANDMARKS}/cliff-rope-lift.png?v=stormedge-landmark-sprites-v2`),
+      windChimePass: loadImage(`${CHAPTER_FOUR_LANDMARKS}/wind-chime-pass.png?v=stormedge-landmark-sprites-v2`),
+      lightningRodField: loadImage(`${CHAPTER_FOUR_LANDMARKS}/lightning-rod-field.png?v=stormedge-landmark-sprites-v2`),
+      lookoutPost: loadImage(`${CHAPTER_FOUR_LANDMARKS}/lookout-post.png?v=stormedge-landmark-sprites-v2`),
+      crackedStair: loadImage(`${CHAPTER_FOUR_LANDMARKS}/cracked-stair.png?v=stormedge-landmark-sprites-v2`),
+      cloudHarvester: loadImage(`${CHAPTER_FOUR_LANDMARKS}/cloud-harvester.png?v=stormedge-landmark-sprites-v2`),
+      summitPath: loadImage(`${CHAPTER_FOUR_LANDMARKS}/summit-path.png?v=stormedge-landmark-sprites-v2`),
+      beaconApproach: loadImage(`${CHAPTER_FOUR_LANDMARKS}/beacon-approach.png?v=stormedge-landmark-sprites-v2`)
     },
     transitions: {
       mosslineToStormedge: loadImage(`${CHAPTER_FOUR_TRANSITIONS}/mossline-to-stormedge.png?v=mossline-to-stormedge-transition`)
