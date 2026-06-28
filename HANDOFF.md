@@ -243,13 +243,17 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Chapter 10 clean sprite landmark pass landed on `2026-06-28`: Chunk 141 is complete. Festival Return through Celebration Square now use clean `assets/sprites/world/` PNG landmarks through `scene.spriteLandmark`, with the old canvas `chapterTenLandmark` drawings left as fallback. Celebration Square remains the terminal route scene with `nextSceneId: null` and `The route is complete.` Syntax checks, route walk, zero-painted checks, `git diff --check`, Chapter 10 browser sweep, and server asset-response checks passed on port `5364`.
 - Full-route browser QA landed on `2026-06-28`: Chunk 142 is complete. The route was walked from Starlight Village through Celebration Square, all 101 route scenes were loaded in the in-app browser on port `5364`, every scene reported a `1280x720` canvas, chapter-complete metadata was checked from Mossline through Under-Village, and a final QA board covered the title screen, opening scene, transition pages, chapter completion cards, and Celebration Square finale preview.
 - README current-state refresh landed on `2026-06-28`: Chunk 143 is complete. The README now names Starlight Village as the route start, reflects the current hand-built and sprite-backed landmark state, and calls out the remaining need for a real human playthrough, puzzle-fatigue review, pacing review, and late-route feel check.
+- Puddle matte cleanup landed on `2026-06-28`: Chunk 144 is complete. The shared `puddle-trimmed.png` rock-ring puddle sprite had its pale edge matte cleaned so route puddles no longer read like pasted-on sprites, and the browser cache tag was bumped to `puddle-matte-cleanup`.
+- Glowfen Repair 1 sprite waymark landed on `2026-06-28`: Chunk 145 is complete. Wetland Approach, the HUD-facing `Chapter 2: Glowfen - Repair 1 of 11`, now uses the transparent Chapter 2 `sunkenRouteMarker` sprite through `scene.spriteLandmark` instead of the hand-drawn waymark cluster, while keeping the old canvas renderer as fallback. Source checks, static scene checks, full route walk, and in-app browser preview passed on port `5364`.
+- Chapter review visual environment fixes landed on `2026-06-28`: Chunk 146 is complete. Mossline puddles now use the Mossline wet-ground sprite, Chapter 4 Repair 3 uses a completed Cliff Rope Lift sprite, Chapter 5 Repair 10 uses a Hill Descent sprite with an onward road, and Chapters 7-10 now use dedicated Orchard, Glassworks, Under-Village, and Festival background/pathway sprite pairs. The late chapters also skip generic tree-density, old filler props, shared puddles, and mist bands so the new chapter art owns the scene. Syntax checks, 104-scene registry smoke test, asset dimension checks, and in-app browser previews passed on port `5364` with no warnings or errors.
 
 ## Suggested Next Step
 
 Chapter 4's Stormedge implementation, zero-painted cleanup, clean world sprite
 replacement, Last Platform to Beacon Hill sweep, the Chapter 5-10 clean sprite
-landmark passes, full-route browser QA, and README state refresh are complete
-through Chunk 143. Do
+landmark passes, full-route browser QA, README state refresh, the shared puddle
+matte cleanup, the Glowfen Repair 1 sprite waymark, and the chapter review
+visual environment fixes are complete through Chunk 146. Do
 not redo the Stormedge
 transition image, landmark sprites, puzzle skin, completion-summary pass,
 environment sprite pass, or sprite-landmark cleanup unless the user asks for a

@@ -330,35 +330,15 @@ function createChapterNineScene(sceneId) {
 }
 
 function createUnderVillageLayers(type) {
-  const engine = type === "heartEngine";
   return {
-    trees: [
-      { x: 106, y: 314, scale: 1.18 },
-      { x: 2064, y: 318, scale: 1.24 }
-    ],
+    trees: [],
     cottages: [],
-    lamps: [
-      { x: 340, y: 560, lit: true },
-      { x: 762, y: 564, lit: false },
-      { x: 1518, y: 564, lit: false },
-      { x: 1988, y: 560, lit: engine }
-    ],
+    lamps: [],
     glowPlants: [],
-    foliage: [
-      { kind: "wetPathEdge", x: 548, groundY: 670, height: 84, alpha: 0.74 },
-      { kind: "wetPathEdge", x: 1698, groundY: 670, height: 92, alpha: 0.68 }
-    ],
+    foliage: [],
     brokenBranches: [],
     repairParts: [],
-    puddles: [
-      { x: 274, y: 664, width: 156, height: 18 },
-      { x: 1120, y: 671, width: 438, height: 25 },
-      { x: 1934, y: 664, width: 168, height: 18 }
-    ],
-    mistBands: [
-      { x: 130, y: 438, width: 470, speed: 11 },
-      { x: 800, y: 390, width: 560, speed: 12 },
-      { x: 1502, y: 452, width: 490, speed: 10 }
-    ]
+    puddles: [],
+    mistBands: []
   };
 }

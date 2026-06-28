@@ -319,38 +319,15 @@ function createChapterTenScene(sceneId) {
 }
 
 function createFestivalLayers(type) {
-  const finalSquare = type === "celebrationSquare";
-  const clock = type === "townClock";
   return {
-    trees: [
-      { x: 106, y: 300, scale: 1.26 },
-      { x: 356, y: 318, scale: 1.1 },
-      { x: 1858, y: 314, scale: 1.12 },
-      { x: 2088, y: 298, scale: 1.28 }
-    ],
+    trees: [],
     cottages: [],
-    lamps: [
-      { x: 304, y: 560, lit: true },
-      { x: 690, y: 558, lit: finalSquare },
-      { x: 1538, y: 558, lit: clock || finalSquare },
-      { x: 1998, y: 560, lit: finalSquare }
-    ],
+    lamps: [],
     glowPlants: [],
-    foliage: [
-      { kind: "wetPathEdge", x: 548, groundY: 670, height: 84, alpha: 0.66 },
-      { kind: "wetPathEdge", x: 1714, groundY: 670, height: 88, alpha: 0.62 }
-    ],
+    foliage: [],
     brokenBranches: [],
     repairParts: [],
-    puddles: [
-      { x: 280, y: 662, width: 162, height: 18 },
-      { x: 1120, y: 669, width: 430, height: 24 },
-      { x: 1938, y: 662, width: 172, height: 18 }
-    ],
-    mistBands: [
-      { x: 170, y: 414, width: 420, speed: 9 },
-      { x: 780, y: 384, width: 510, speed: 10 },
-      { x: 1458, y: 432, width: 460, speed: 9 }
-    ]
+    puddles: [],
+    mistBands: []
   };
 }

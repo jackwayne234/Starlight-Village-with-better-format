@@ -7,7 +7,7 @@ export function addTreeDensity(scene) {
     return scene;
   }
 
-  if (SKIP_TREE_DENSITY_SCENES.has(scene.id)) {
+  if (SKIP_TREE_DENSITY_SCENES.has(scene.id) || usesChapterEnvironmentSprite(scene.id)) {
     return scene;
   }
 
@@ -25,6 +25,15 @@ export function addTreeDensity(scene) {
   };
 
   return scene;
+}
+
+function usesChapterEnvironmentSprite(sceneId) {
+  return [
+    "chapter-seven/",
+    "chapter-eight/",
+    "chapter-nine/",
+    "chapter-ten/"
+  ].some((prefix) => sceneId?.startsWith(prefix));
 }
 
 function makeExtraTrees(sceneId, worldWidth, targetTreeCount, existingTrees) {

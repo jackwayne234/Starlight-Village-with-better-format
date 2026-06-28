@@ -131,3 +131,6 @@ High-level list only. All details live inside each chunk file.
 | 141 | Chapter Ten Clean Sprite Landmark Pass | complete |
 | 142 | Full Route Browser QA | complete |
 | 143 | README Current-State Refresh | complete |
+| 144 | Puddle Matte Cleanup | complete |
+| 145 | Glowfen Repair 1 Sprite Waymark | complete |
+| 146 | Chapter Review Visual Environment Fixes | complete |

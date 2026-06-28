@@ -18,6 +18,16 @@ export function createWetlandApproachScene() {
     fixed: false,
     waymarkLit: false
   };
+  scene.spriteLandmark = {
+    source: "chapterTwoLandmarks",
+    sprite: "sunkenRouteMarker",
+    state: scene.wetlandApproach,
+    x: 1160,
+    groundY: 746,
+    height: 380,
+    wetlandBlend: { yOffset: -48, widthRatio: 0.92, height: 128 },
+    glow: { xOffset: -24, heightRatio: 0.58, radius: 175, fixedIntensity: 0.36, dimIntensity: 0.12, pulse: 0.05 }
+  };
   scene.layers = {
     trees: [
       { x: 70, y: 270, scale: 1.5 },

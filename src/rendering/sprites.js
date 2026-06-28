@@ -27,6 +27,18 @@ const CHAPTER_FOUR_TRANSITIONS = `${CHAPTER_FOUR}/transitions`;
 const CHAPTER_FOUR_LANDMARKS = `${CHAPTER_FOUR}/landmarks`;
 const CHAPTER_FOUR_ENVIRONMENT = `${CHAPTER_FOUR}/environment`;
 const CHAPTER_FOUR_PUZZLES = `${CHAPTER_FOUR}/puzzles`;
+const CHAPTER_SEVEN = "assets/sprites/chapter-seven";
+const CHAPTER_SEVEN_BACKGROUNDS = `${CHAPTER_SEVEN}/backgrounds`;
+const CHAPTER_SEVEN_PATHS = `${CHAPTER_SEVEN}/paths`;
+const CHAPTER_EIGHT = "assets/sprites/chapter-eight";
+const CHAPTER_EIGHT_BACKGROUNDS = `${CHAPTER_EIGHT}/backgrounds`;
+const CHAPTER_EIGHT_PATHS = `${CHAPTER_EIGHT}/paths`;
+const CHAPTER_NINE = "assets/sprites/chapter-nine";
+const CHAPTER_NINE_BACKGROUNDS = `${CHAPTER_NINE}/backgrounds`;
+const CHAPTER_NINE_PATHS = `${CHAPTER_NINE}/paths`;
+const CHAPTER_TEN = "assets/sprites/chapter-ten";
+const CHAPTER_TEN_BACKGROUNDS = `${CHAPTER_TEN}/backgrounds`;
+const CHAPTER_TEN_PATHS = `${CHAPTER_TEN}/paths`;
 const TITLE = "assets/title";
 
 export const sprites = {
@@ -72,7 +84,7 @@ export const sprites = {
     pine: loadImage(`${WORLD}/pine-tree-trimmed.png`),
     lamp: loadImage(`${WORLD}/lamp-trimmed.png`),
     glowPlant: loadImage(`${WORLD}/glow-plant-trimmed.png`),
-    puddle: loadImage(`${WORLD}/puddle-trimmed.png`),
+    puddle: loadImage(`${WORLD}/puddle-trimmed.png?v=puddle-matte-cleanup`),
     brokenBranch: loadImage(`${WORLD}/broken-branch-trimmed.png`),
     gear: loadImage(`${WORLD}/repair-part-gear-trimmed.png`),
     coil: loadImage(`${WORLD}/repair-part-coil-trimmed.png`),
@@ -91,7 +103,7 @@ export const sprites = {
     oldFlagRoom: loadImage(`${WORLD}/old-flag-room.png?v=chapter-five-clean-sprites`),
     stormShutters: loadImage(`${WORLD}/storm-shutters.png?v=chapter-five-clean-sprites`),
     relayBalcony: loadImage(`${WORLD}/relay-balcony.png?v=chapter-five-clean-sprites`),
-    hillDescent: loadImage(`${WORLD}/hill-descent.png?v=chapter-five-clean-sprites`),
+    hillDescent: loadImage(`${WORLD}/hill-descent-road.png?v=chapter-review-visual-fixes-3`),
     rooftopChannels: loadImage(`${WORLD}/rooftop-channels.png?v=chapter-six-clean-sprites`),
     floodedCellar: loadImage(`${WORLD}/flooded-cellar.png?v=chapter-six-clean-sprites`),
     laundryLines: loadImage(`${WORLD}/laundry-lines.png?v=chapter-six-clean-sprites`),
@@ -238,7 +250,7 @@ export const sprites = {
     landmarks: {
       stormGauge: loadImage(`${CHAPTER_FOUR_LANDMARKS}/storm-gauge.png?v=stormedge-landmark-sprites-v2`),
       weatherVaneRoof: loadImage(`${CHAPTER_FOUR_LANDMARKS}/weather-vane-roof.png?v=stormedge-landmark-sprites-v2`),
-      cliffRopeLift: loadImage(`${CHAPTER_FOUR_LANDMARKS}/cliff-rope-lift.png?v=stormedge-landmark-sprites-v2`),
+      cliffRopeLift: loadImage(`${CHAPTER_FOUR_LANDMARKS}/cliff-rope-lift-complete.png?v=chapter-review-visual-fixes-3`),
       windChimePass: loadImage(`${CHAPTER_FOUR_LANDMARKS}/wind-chime-pass.png?v=stormedge-landmark-sprites-v2`),
       lightningRodField: loadImage(`${CHAPTER_FOUR_LANDMARKS}/lightning-rod-field.png?v=stormedge-landmark-sprites-v2`),
       lookoutPost: loadImage(`${CHAPTER_FOUR_LANDMARKS}/lookout-post.png?v=stormedge-landmark-sprites-v2`),
@@ -261,6 +273,38 @@ export const sprites = {
       stormedgeOutputNode: loadImage(`${CHAPTER_FOUR_PUZZLES}/stormedge-output-node.png?v=stormedge-puzzle-sprites`),
       stormedgeSelectionFrame: loadImage(`${CHAPTER_FOUR_PUZZLES}/stormedge-selection-frame.png?v=stormedge-puzzle-sprites`),
       stormedgeCompletionSpark: loadImage(`${CHAPTER_FOUR_PUZZLES}/stormedge-completion-spark.png?v=stormedge-puzzle-sprites`)
+    }
+  },
+  chapterSeven: {
+    backgrounds: {
+      orchardBackground: loadImage(`${CHAPTER_SEVEN_BACKGROUNDS}/orchard-background.png?v=chapter-review-visual-fixes-3`)
+    },
+    paths: {
+      orchardPath: loadImage(`${CHAPTER_SEVEN_PATHS}/orchard-path.png?v=chapter-review-visual-fixes-3`)
+    }
+  },
+  chapterEight: {
+    backgrounds: {
+      glassworksBackground: loadImage(`${CHAPTER_EIGHT_BACKGROUNDS}/glassworks-background.png?v=chapter-review-visual-fixes-3`)
+    },
+    paths: {
+      glassworksPath: loadImage(`${CHAPTER_EIGHT_PATHS}/glassworks-path.png?v=chapter-review-visual-fixes-3`)
+    }
+  },
+  chapterNine: {
+    backgrounds: {
+      underVillageBackground: loadImage(`${CHAPTER_NINE_BACKGROUNDS}/under-village-background.png?v=chapter-review-visual-fixes-3`)
+    },
+    paths: {
+      underVillagePath: loadImage(`${CHAPTER_NINE_PATHS}/under-village-path.png?v=chapter-review-visual-fixes-3`)
+    }
+  },
+  chapterTen: {
+    backgrounds: {
+      festivalBackground: loadImage(`${CHAPTER_TEN_BACKGROUNDS}/festival-background.png?v=chapter-review-visual-fixes-3`)
+    },
+    paths: {
+      festivalPath: loadImage(`${CHAPTER_TEN_PATHS}/festival-path.png?v=chapter-review-visual-fixes-3`)
     }
   },
   title: {

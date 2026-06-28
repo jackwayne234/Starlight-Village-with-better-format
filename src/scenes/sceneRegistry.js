@@ -32,7 +32,7 @@ import {
   createOldFlagRoomScene,
   createRelayBalconyScene,
   createStormShuttersScene
-} from "./chapterFive/routeScenes.js?v=chapter-five-clean-sprites";
+} from "./chapterFive/routeScenes.js?v=chapter-review-visual-fixes-3";
 import {
   createCisternHouseScene,
   createFloodedCellarScene,
@@ -55,7 +55,7 @@ import {
   createRootCellarScene,
   createScarecrowWiresScene,
   createWindfallenFruitScene
-} from "./chapterSeven/routeScenes.js?v=chapter-seven-clean-sprites";
+} from "./chapterSeven/routeScenes.js?v=chapter-review-visual-fixes-3";
 import {
   createColorFilterHallScene,
   createCoolingPipesScene,
@@ -67,7 +67,7 @@ import {
   createPrismLampRowScene,
   createRainbowTowerScene,
   createStainedGlassPathScene
-} from "./chapterEight/routeScenes.js?v=chapter-eight-clean-sprites";
+} from "./chapterEight/routeScenes.js?v=chapter-review-visual-fixes-3";
 import {
   createBuriedMuralsScene,
   createDrainLocksScene,
@@ -79,7 +79,7 @@ import {
   createSealedWorkshopScene,
   createUndergroundStreamScene,
   createUnderVillageScene
-} from "./chapterNine/routeScenes.js?v=chapter-nine-clean-sprites";
+} from "./chapterNine/routeScenes.js?v=chapter-review-visual-fixes-3";
 import {
   createCelebrationSquareScene,
   createFestivalReturnScene,
@@ -91,7 +91,7 @@ import {
   createMusicStageScene,
   createStarMapScene,
   createTownClockScene
-} from "./chapterTen/routeScenes.js?v=chapter-ten-clean-sprites";
+} from "./chapterTen/routeScenes.js?v=chapter-review-visual-fixes-3";
 import { createCargoCartTurntableScene } from "./chapterThree/cargoCartTurntable.js?v=side-turntable-sprite";
 import { createConductorBoothScene } from "./chapterThree/conductorBooth.js?v=conductor-booth-sprite";
 import { createCraneHookYardScene } from "./chapterThree/craneHookYard.js?v=crane-hook-yard-sprite";
@@ -105,7 +105,7 @@ import { createGlassrailCrossingScene } from "./chapterTwo/glassrailCrossing.js"
 import { createLanternMarketScene } from "./chapterTwo/lanternMarket.js";
 import { createLanternLilyPoolScene } from "./chapterTwo/lanternLilyPool.js";
 import { createOldObservatoryScene } from "./chapterTwo/oldObservatory.js";
-import { createWetlandApproachScene } from "./chapterTwo/wetlandApproach.js?v=chapter-two-puzzle-sprites";
+import { createWetlandApproachScene } from "./chapterTwo/wetlandApproach.js?v=glowfen-r1-sprite-waymark";
 import { createBogBridgeScene } from "./chapterTwo/bogBridge.js";
 import { createFrogsongLockScene } from "./chapterTwo/frogsongLock.js";
 import { createGlowfenFerryScene } from "./chapterTwo/glowfenFerry.js";
@@ -116,7 +116,7 @@ import { createMossGateScene } from "./chapterTwo/mossGate.js";
 import { createOldFenShrineScene } from "./chapterTwo/oldFenShrine.js";
 import { fullGameSceneById, fullGameSceneIds } from "./fullGameCatalog.js";
 import { createPlannedScene } from "./plannedSceneFactory.js";
-import { addTreeDensity } from "./treeDensity.js";
+import { addTreeDensity } from "./treeDensity.js?v=chapter-review-visual-fixes-3";
 
 export const sceneIds = {
   beaconHill: "chapter-five/beacon-hill",

@@ -1,5 +1,5 @@
 import { config } from "../core/config.js";
-import { sprites, imageReady } from "./sprites.js";
+import { sprites, imageReady } from "./sprites.js?v=chapter-review-visual-fixes-3";
 
 const { colors } = config;
 
@@ -9,6 +9,9 @@ export function drawBackdrop(ctx, scene, time, width, height, cameraX) {
     return;
   }
   if (drawChapterFourStormedgeScenery(ctx, scene, width, height, cameraX)) {
+    return;
+  }
+  if (drawLateChapterScenery(ctx, scene, width, height, cameraX)) {
     return;
   }
   if (drawChapterTwoWetlandScenery(ctx, scene, width, height, cameraX)) {
@@ -21,6 +24,52 @@ export function drawBackdrop(ctx, scene, time, width, height, cameraX) {
   }
   drawClouds(ctx, scene.backdrop, time, width, cameraX);
   drawHills(ctx, scene.backdrop, scene.world.width, width, height, cameraX);
+}
+
+function drawLateChapterScenery(ctx, scene, width, height, cameraX) {
+  const sceneId = scene.id ?? "";
+  const config = [
+    {
+      prefix: "chapter-seven/",
+      image: sprites.chapterSeven?.backgrounds?.orchardBackground,
+      filter: "brightness(0.94) saturate(1.04) contrast(1.05)"
+    },
+    {
+      prefix: "chapter-eight/",
+      image: sprites.chapterEight?.backgrounds?.glassworksBackground,
+      filter: "brightness(0.92) saturate(1.06) contrast(1.06)"
+    },
+    {
+      prefix: "chapter-nine/",
+      image: sprites.chapterNine?.backgrounds?.underVillageBackground,
+      filter: "brightness(0.9) saturate(1.02) contrast(1.08)"
+    },
+    {
+      prefix: "chapter-ten/",
+      image: sprites.chapterTen?.backgrounds?.festivalBackground,
+      filter: "brightness(0.96) saturate(1.08) contrast(1.05)"
+    }
+  ].find((entry) => sceneId.startsWith(entry.prefix));
+
+  if (!config || !imageReady(config.image)) {
+    return false;
+  }
+
+  const scenery = config.image;
+  const scale = Math.max(height / scenery.naturalHeight, (width + 480) / scenery.naturalWidth);
+  const drawWidth = scenery.naturalWidth * scale;
+  const drawHeight = scenery.naturalHeight * scale;
+  const y = height - drawHeight;
+  const panRange = Math.max(0, drawWidth - width);
+  const cameraRange = Math.max(1, (scene.world?.width ?? width) - width);
+  const x = -Math.min(panRange, (cameraX / cameraRange) * panRange);
+
+  ctx.save();
+  ctx.globalAlpha = 0.99;
+  ctx.filter = config.filter;
+  ctx.drawImage(scenery, x, y, drawWidth, drawHeight);
+  ctx.restore();
+  return true;
 }
 
 function drawChapterThreeMosslineScenery(ctx, scene, width, height, cameraX) {

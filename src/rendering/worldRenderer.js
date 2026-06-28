@@ -1,5 +1,5 @@
 import { config } from "../core/config.js";
-import { sprites, imageReady } from "./sprites.js?v=chapter-ten-clean-sprites";
+import { sprites, imageReady } from "./sprites.js?v=chapter-review-visual-fixes-3";
 
 const { colors } = config;
 
@@ -88,6 +88,8 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
     drawChapterFourStormedgeGround(ctx, scene, scene.world.width, height, time);
   } else if (isChapterTwoScene(scene)) {
     drawChapterTwoWetlandGround(ctx, scene.world.width, height, time);
+  } else if (drawLateChapterGround(ctx, scene, scene.world.width, height, time)) {
+    // Chapter-specific path sprite handled above.
   } else {
     drawGround(ctx, scene.world.width, height);
     drawPath(ctx, scene.world.width, time);
@@ -100,7 +102,13 @@ export function drawWorld(ctx, scene, time, width, height, cameraX) {
     scene.layers.puddles?.forEach((puddle) => drawChapterFourPuddle(ctx, puddle, time));
   } else {
     drawMist(ctx, scene.layers.mistBands, time, scene.world.width);
-    scene.layers.puddles?.forEach((puddle) => drawPuddle(ctx, puddle, time));
+    scene.layers.puddles?.forEach((puddle) => {
+      if (isChapterThreeScene(scene)) {
+        drawMosslinePuddle(ctx, puddle, time);
+      } else {
+        drawPuddle(ctx, puddle, time);
+      }
+    });
   }
   if (scene.foliageLayer === "behind-landmark") {
     scene.layers.foliage?.forEach((foliage) => drawFoliageSprite(ctx, foliage, time));
@@ -353,8 +361,100 @@ function isChapterTwoScene(scene) {
   return scene.id?.startsWith("chapter-two/");
 }
 
+function isChapterThreeScene(scene) {
+  return scene.id?.startsWith("chapter-three/");
+}
+
 function isChapterFourScene(scene) {
   return scene.id?.startsWith("chapter-four/");
+}
+
+function lateChapterGroundConfig(scene) {
+  const sceneId = scene.id ?? "";
+  if (sceneId.startsWith("chapter-seven/")) {
+    return {
+      image: sprites.chapterSeven?.paths?.orchardPath,
+      base: "#182820",
+      filter: "brightness(0.88) saturate(1.02) contrast(1.04)",
+      targetHeight: 250
+    };
+  }
+  if (sceneId.startsWith("chapter-eight/")) {
+    return {
+      image: sprites.chapterEight?.paths?.glassworksPath,
+      base: "#14272c",
+      filter: "brightness(0.9) saturate(1.08) contrast(1.05)",
+      targetHeight: 254
+    };
+  }
+  if (sceneId.startsWith("chapter-nine/")) {
+    return {
+      image: sprites.chapterNine?.paths?.underVillagePath,
+      base: "#101c1d",
+      filter: "brightness(0.86) saturate(0.98) contrast(1.07)",
+      targetHeight: 254
+    };
+  }
+  if (sceneId.startsWith("chapter-ten/")) {
+    return {
+      image: sprites.chapterTen?.paths?.festivalPath,
+      base: "#182425",
+      filter: "brightness(0.94) saturate(1.08) contrast(1.04)",
+      targetHeight: 254
+    };
+  }
+  return null;
+}
+
+function drawLateChapterGround(ctx, scene, width, height, time) {
+  const config = lateChapterGroundConfig(scene);
+  if (!config) {
+    return false;
+  }
+
+  ctx.fillStyle = config.base;
+  ctx.fillRect(0, 548, width, height - 548);
+
+  const pathBase = ctx.createLinearGradient(0, 532, 0, height);
+  pathBase.addColorStop(0, "rgba(56, 70, 60, 0.24)");
+  pathBase.addColorStop(0.72, "rgba(18, 26, 25, 0.86)");
+  pathBase.addColorStop(1, "rgba(4, 8, 10, 0.96)");
+  ctx.fillStyle = pathBase;
+  ctx.beginPath();
+  ctx.moveTo(0, 626);
+  ctx.bezierCurveTo(230, 586, 430, 618, 650, 586);
+  ctx.bezierCurveTo(890, 550, 1055, 596, 1250, 558);
+  ctx.bezierCurveTo(1480, 512, 1690, 606, 1920, 560);
+  ctx.bezierCurveTo(2070, 530, 2160, 548, width, 528);
+  ctx.lineTo(width, height);
+  ctx.lineTo(0, height);
+  ctx.closePath();
+  ctx.fill();
+
+  if (imageReady(config.image)) {
+    const targetHeight = config.targetHeight;
+    const scale = targetHeight / config.image.naturalHeight;
+    const drawWidth = config.image.naturalWidth * scale;
+    const y = height - targetHeight + 4;
+
+    ctx.save();
+    ctx.globalAlpha = 0.96;
+    ctx.filter = config.filter;
+    for (let x = -drawWidth; x < width + drawWidth; x += drawWidth - 1) {
+      ctx.drawImage(config.image, x, y, drawWidth, targetHeight);
+    }
+    ctx.restore();
+  } else {
+    drawPath(ctx, width, time);
+  }
+
+  const shade = ctx.createLinearGradient(0, 600, 0, height);
+  shade.addColorStop(0, "rgba(3, 7, 8, 0)");
+  shade.addColorStop(0.68, "rgba(2, 6, 8, 0.16)");
+  shade.addColorStop(1, "rgba(0, 3, 5, 0.5)");
+  ctx.fillStyle = shade;
+  ctx.fillRect(0, 600, width, height - 600);
+  return true;
 }
 
 function drawChapterFourStormedgeGround(ctx, scene, width, height, time) {
@@ -712,6 +812,24 @@ function drawPuddle(ctx, puddle, time) {
   ctx.beginPath();
   ctx.ellipse(puddle.x + Math.sin(time) * 4, puddle.y, puddle.width / 3, puddle.height / 3, 0, 0, Math.PI * 2);
   ctx.stroke();
+}
+
+function drawMosslinePuddle(ctx, puddle, time) {
+  const puddleImage = sprites.world.mosslinePuddleGround;
+  if (!imageReady(puddleImage)) {
+    drawPuddle(ctx, puddle, time);
+    return;
+  }
+
+  const height = Math.max(124, Math.min(190, puddle.width * 0.46));
+  const width = height * (puddleImage.naturalWidth / puddleImage.naturalHeight);
+  const y = puddle.y - height * 0.68;
+
+  ctx.save();
+  ctx.globalAlpha = 0.84 + Math.sin(time * 1.4 + puddle.x) * 0.03;
+  ctx.filter = "brightness(0.9) saturate(0.96) contrast(1.04)";
+  ctx.drawImage(puddleImage, puddle.x - width / 2, y, width, height);
+  ctx.restore();
 }
 
 function drawChapterFourPuddle(ctx, puddle, time) {

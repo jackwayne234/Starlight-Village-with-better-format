@@ -166,7 +166,7 @@ const CHAPTER_FIVE_SCENES = [
     title: "Hill Descent",
     type: "hillDescent",
     sprite: "hillDescent",
-    spriteHeight: 410,
+    spriteHeight: 440,
     puzzleTheme: "market-lanterns",
     scanText: "Robot scan: the downward path lamps are dark between Beacon Hill and Rainbarrel Row.",
     puzzleText: "Rotate the lamp paths until the descent lights in order.",

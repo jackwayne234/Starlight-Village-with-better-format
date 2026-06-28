@@ -330,14 +330,8 @@ function createChapterSevenScene(sceneId) {
 }
 
 function createOrchardLayers(type) {
-  const mistShift = type.length * 11;
   return {
-    trees: [
-      { x: 120, y: 170, scale: 0.62 },
-      { x: 330, y: 142, scale: 0.78 },
-      { x: 1950, y: 150, scale: 0.78 },
-      { x: 2140, y: 182, scale: 0.58 }
-    ],
+    trees: [],
     cottages: [],
     lamps: [],
     glowPlants: [],
@@ -345,11 +339,6 @@ function createOrchardLayers(type) {
     brokenBranches: [],
     repairParts: [],
     puddles: [],
-    mistBands: [
-      { x: 120 + mistShift, y: 176, width: 260, speed: 9 },
-      { x: 640 + mistShift, y: 224, width: 330, speed: 12 },
-      { x: 1320 + mistShift, y: 190, width: 300, speed: 10 },
-      { x: 1880 + mistShift, y: 236, width: 280, speed: 8 }
-    ]
+    mistBands: []
   };
 }

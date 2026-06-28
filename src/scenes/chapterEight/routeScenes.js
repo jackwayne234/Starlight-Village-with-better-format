@@ -330,37 +330,15 @@ function createChapterEightScene(sceneId) {
 }
 
 function createGlassworksLayers(type) {
-  const tower = type === "rainbowTower";
   return {
-    trees: [
-      { x: 98, y: 292, scale: 1.38 },
-      { x: 382, y: 278, scale: 1.5 },
-      { x: 1770, y: 286, scale: 1.44 },
-      { x: 2078, y: 302, scale: 1.32 }
-    ],
+    trees: [],
     cottages: [],
-    lamps: [
-      { x: 320, y: 560, lit: true },
-      { x: 770, y: 560, lit: false },
-      { x: 1475, y: 560, lit: false },
-      { x: 1998, y: 560, lit: tower }
-    ],
+    lamps: [],
     glowPlants: [],
-    foliage: [
-      { kind: "wetPathEdge", x: 604, groundY: 670, height: 98, alpha: 0.76 },
-      { kind: "wetPathEdge", x: 1598, groundY: 670, height: 108, alpha: 0.72 }
-    ],
+    foliage: [],
     brokenBranches: [],
     repairParts: [],
-    puddles: [
-      { x: 278, y: 662, width: 166, height: 20 },
-      { x: 1120, y: 668, width: 410, height: 24 },
-      { x: 1910, y: 661, width: 172, height: 18 }
-    ],
-    mistBands: [
-      { x: 148, y: 404, width: 430, speed: 16 },
-      { x: 790, y: 374, width: 520, speed: 18 },
-      { x: 1430, y: 454, width: 440, speed: 16 }
-    ]
+    puddles: [],
+    mistBands: []
   };
 }

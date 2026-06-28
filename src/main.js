@@ -1,7 +1,7 @@
-import { createGame } from "./core/game.js?v=chapter-ten-clean-sprites";
+import { createGame } from "./core/game.js?v=chapter-review-visual-fixes-3";
 import { createInput } from "./core/input.js";
 import { clearProgress, saveProgress } from "./core/progress.js";
-import { createInitialScene, createScene } from "./scenes/sceneRegistry.js?v=chapter-ten-clean-sprites";
+import { createInitialScene, createScene } from "./scenes/sceneRegistry.js?v=chapter-review-visual-fixes-3";
 import { primeAudio, unlockAudio } from "./audio/gameAudio.js";
 
 const canvas = document.querySelector("#game");
