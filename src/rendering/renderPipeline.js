@@ -2,8 +2,8 @@ import { config } from "../core/config.js";
 import { drawActors } from "./actorRenderer.js?v=robot-scan-restored";
 import { drawBackdrop } from "./backdropRenderer.js?v=repair-2-clean-ground";
 import { drawWeather } from "./weatherRenderer.js?v=no-bottom-ovals";
-import { drawWorld } from "./worldRenderer.js?v=repair-10-no-puddles-mist";
-import { imageReady, sprites } from "./sprites.js?v=repair-10-no-puddles-mist";
+import { drawWorld } from "./worldRenderer.js?v=chapter-ten-clean-sprites";
+import { imageReady, sprites } from "./sprites.js?v=chapter-ten-clean-sprites";
 import { drawHud } from "../ui/hud.js?v=zero-painted-assets";
 
 export function renderScene(ctx, scene, time, transition = null, options = {}) {

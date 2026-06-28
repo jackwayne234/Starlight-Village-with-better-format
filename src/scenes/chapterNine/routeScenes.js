@@ -5,6 +5,8 @@ const CHAPTER_NINE_SCENES = [
     id: "chapter-nine/under-village",
     title: "Under-Village Door",
     type: "underVillage",
+    sprite: "underVillage",
+    spriteHeight: 430,
     puzzleTheme: "junction-line",
     scanText: "Robot scan: the hidden service door is sealed by old pipe locks.",
     puzzleText: "Rotate the junction paths until the under-village door unlocks.",
@@ -23,6 +25,8 @@ const CHAPTER_NINE_SCENES = [
     id: "chapter-nine/echo-door",
     title: "Echo Door",
     type: "echoDoor",
+    sprite: "echoDoor",
+    spriteHeight: 430,
     puzzleTheme: "beacon-signal",
     scanText: "Robot scan: pipe tones are bouncing out of order around the echo door.",
     puzzleText: "Rotate the tone paths until the round door hears the right pattern.",
@@ -41,6 +45,8 @@ const CHAPTER_NINE_SCENES = [
     id: "chapter-nine/old-pipe-crossing",
     title: "Old Pipe Crossing",
     type: "oldPipeCrossing",
+    sprite: "oldPipeCrossing",
+    spriteHeight: 380,
     puzzleTheme: "water-routing",
     scanText: "Robot scan: the old pipe bridge is spraying water into the walkway.",
     puzzleText: "Rotate the pipe paths until the crossing carries water safely below.",
@@ -59,6 +65,8 @@ const CHAPTER_NINE_SCENES = [
     id: "chapter-nine/forgotten-machine",
     title: "Forgotten Machine",
     type: "forgottenMachine",
+    sprite: "forgottenMachine",
+    spriteHeight: 410,
     puzzleTheme: "junction-line",
     scanText: "Robot scan: the forgotten machine is waking its circuits in the wrong order.",
     puzzleText: "Rotate the circuit paths until the machine starts one section at a time.",
@@ -77,6 +85,8 @@ const CHAPTER_NINE_SCENES = [
     id: "chapter-nine/drain-locks",
     title: "Drain Locks",
     type: "drainLocks",
+    sprite: "drainLocks",
+    spriteHeight: 410,
     puzzleTheme: "water-routing",
     scanText: "Robot scan: drain lock pressure is uneven behind the tunnel gates.",
     puzzleText: "Rotate the water paths until every lock gauge settles.",
@@ -95,6 +105,8 @@ const CHAPTER_NINE_SCENES = [
     id: "chapter-nine/buried-murals",
     title: "Buried Murals",
     type: "buriedMurals",
+    sprite: "buriedMurals",
+    spriteHeight: 380,
     puzzleTheme: "water-routing",
     scanText: "Robot scan: gentle wash channels are missing the mud-covered murals.",
     puzzleText: "Rotate the water paths until the murals rinse clean without flooding.",
@@ -113,6 +125,8 @@ const CHAPTER_NINE_SCENES = [
     id: "chapter-nine/gear-room",
     title: "Gear Room",
     type: "gearRoom",
+    sprite: "gearRoom",
+    spriteHeight: 400,
     puzzleTheme: "junction-line",
     scanText: "Robot scan: the gear room's slow wheels are nearly jamming.",
     puzzleText: "Rotate the gear paths until the large wheels mesh without grinding.",
@@ -131,6 +145,8 @@ const CHAPTER_NINE_SCENES = [
     id: "chapter-nine/underground-stream",
     title: "Underground Stream",
     type: "undergroundStream",
+    sprite: "undergroundStream",
+    spriteHeight: 330,
     puzzleTheme: "glow-bridge",
     scanText: "Robot scan: stepping stones are sunk below the current-lit stream.",
     puzzleText: "Rotate the glow paths until the stones rise into a safe crossing.",
@@ -149,6 +165,8 @@ const CHAPTER_NINE_SCENES = [
     id: "chapter-nine/sealed-workshop",
     title: "Sealed Workshop",
     type: "sealedWorkshop",
+    sprite: "sealedWorkshop",
+    spriteHeight: 430,
     puzzleTheme: "archive-lens",
     scanText: "Robot scan: the old keeper workshop is sealed behind a memory lock.",
     puzzleText: "Rotate the archive paths until the workshop remembers its opening code.",
@@ -167,6 +185,8 @@ const CHAPTER_NINE_SCENES = [
     id: "chapter-nine/heart-engine",
     title: "Ancient Heart Engine",
     type: "heartEngine",
+    sprite: "heartEngine",
+    spriteHeight: 430,
     puzzleTheme: "water-routing",
     scanText: "Robot scan: the heart engine is moving rainwater in broken pulses.",
     puzzleText: "Rotate the oldest water paths until the engine beats evenly again.",
@@ -174,6 +194,16 @@ const CHAPTER_NINE_SCENES = [
     onwardText: "The heart engine is steady.",
     nextText: "Festival Return is next.",
     nextSceneId: "chapter-ten/festival-return",
+    chapterComplete: {
+      title: "Under-Village Restored",
+      subtitle: "The old doors, pipes, murals, gears, and heart engine are steady enough to return to the festival road.",
+      checklist: [
+        "Service doors opened",
+        "Pipe locks and gears steadied",
+        "Heart engine opened the festival road"
+      ],
+      prompt: "Press Space, Enter, or E to continue"
+    },
     reaction: "The whole village felt that.",
     robotReaction: "Heart engine restored.",
     scanLine: "The engine beat is uneven.",
@@ -248,6 +278,22 @@ function createChapterNineScene(sceneId) {
     groundY: 664,
     fixed: false
   };
+  scene.spriteLandmark = {
+    sprite: entry.sprite,
+    state: scene.chapterNineLandmark,
+    x: 1120,
+    groundY: 666,
+    height: entry.spriteHeight,
+    dimFilter: "brightness(0.78) saturate(0.9)",
+    fixedFilter: "brightness(1.06) saturate(1.14)",
+    glow: {
+      heightRatio: 0.55,
+      radius: 220,
+      dimIntensity: 0.1,
+      fixedIntensity: 0.36,
+      pulse: 0.05
+    }
+  };
   scene.layers = createUnderVillageLayers(entry.type);
   scene.repairs = [
     {
@@ -266,6 +312,7 @@ function createChapterNineScene(sceneId) {
       onwardText: entry.onwardText,
       nextText: entry.nextText,
       nextSceneId: entry.nextSceneId,
+      chapterComplete: entry.chapterComplete,
       reactions: [
         { text: entry.reaction, x: 1120, y: 292 },
         { text: entry.robotReaction, x: "robot", y: "robotTop" }

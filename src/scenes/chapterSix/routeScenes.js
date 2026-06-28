@@ -5,6 +5,8 @@ const CHAPTER_SIX_SCENES = [
     id: "chapter-six/rooftop-channels",
     title: "Rooftop Channels",
     type: "rooftopChannels",
+    sprite: "rooftopChannels",
+    spriteHeight: 360,
     puzzleTheme: "water-routing",
     scanText: "Robot scan: roof channels are spilling rain into the homes.",
     puzzleText: "Rotate the water paths until every roof channel drains safely.",
@@ -23,6 +25,8 @@ const CHAPTER_SIX_SCENES = [
     id: "chapter-six/flooded-cellar",
     title: "Flooded Cellar",
     type: "floodedCellar",
+    sprite: "floodedCellar",
+    spriteHeight: 380,
     puzzleTheme: "root-pump",
     scanText: "Robot scan: cellar water is rising around the pump valves.",
     puzzleText: "Rotate the pump paths until the cellar drains.",
@@ -41,6 +45,8 @@ const CHAPTER_SIX_SCENES = [
     id: "chapter-six/laundry-lines",
     title: "Laundry Lines",
     type: "laundryLines",
+    sprite: "laundryLines",
+    spriteHeight: 380,
     puzzleTheme: "rail-signal",
     scanText: "Robot scan: laundry pulleys are sagging into the flooded lane.",
     puzzleText: "Rotate the pulley paths until the lines lift into a dry crossing.",
@@ -59,6 +65,8 @@ const CHAPTER_SIX_SCENES = [
     id: "chapter-six/pump-alley",
     title: "Pump Alley",
     type: "pumpAlley",
+    sprite: "pumpAlley",
+    spriteHeight: 390,
     puzzleTheme: "root-pump",
     scanText: "Robot scan: the alley pump is locked by crossed pipe pressure.",
     puzzleText: "Rotate the pump paths until the shared pipe starts moving.",
@@ -77,6 +85,8 @@ const CHAPTER_SIX_SCENES = [
     id: "chapter-six/overflow-garden",
     title: "Overflow Garden",
     type: "overflowGarden",
+    sprite: "overflowGarden",
+    spriteHeight: 330,
     puzzleTheme: "water-routing",
     scanText: "Robot scan: overflow is missing the garden beds.",
     puzzleText: "Rotate the water paths until extra rain feeds the beds.",
@@ -95,6 +105,8 @@ const CHAPTER_SIX_SCENES = [
     id: "chapter-six/neighborhood-fountain",
     title: "Neighborhood Fountain",
     type: "neighborhoodFountain",
+    sprite: "neighborhoodFountain",
+    spriteHeight: 390,
     puzzleTheme: "water-routing",
     scanText: "Robot scan: fountain flow is stuck below the district marker.",
     puzzleText: "Rotate the water paths until the tiny fountain runs clear.",
@@ -113,6 +125,8 @@ const CHAPTER_SIX_SCENES = [
     id: "chapter-six/cistern-house",
     title: "Cistern House",
     type: "cisternHouse",
+    sprite: "cisternHouse",
+    spriteHeight: 390,
     puzzleTheme: "water-routing",
     scanText: "Robot scan: three cistern tanks are balancing unevenly.",
     puzzleText: "Rotate the cistern paths until all three tanks share the load.",
@@ -131,6 +145,8 @@ const CHAPTER_SIX_SCENES = [
     id: "chapter-six/gutter-bell",
     title: "Gutter Bell",
     type: "gutterBell",
+    sprite: "gutterBell",
+    spriteHeight: 400,
     puzzleTheme: "beacon-signal",
     scanText: "Robot scan: the overflow bell is not ringing when the gutter is safe.",
     puzzleText: "Rotate the signal paths until water rings the bell cleanly.",
@@ -149,6 +165,8 @@ const CHAPTER_SIX_SCENES = [
     id: "chapter-six/stormwater-gate",
     title: "Stormwater Gate",
     type: "stormwaterGate",
+    sprite: "stormwaterGate",
+    spriteHeight: 395,
     puzzleTheme: "junction-line",
     scanText: "Robot scan: the big drain gate is stuck between the row and the outer village.",
     puzzleText: "Rotate the gate paths until the stormwater gate opens safely.",
@@ -156,6 +174,16 @@ const CHAPTER_SIX_SCENES = [
     onwardText: "The stormwater gate is open.",
     nextText: "Old Orchard waits beyond the rain.",
     nextSceneId: "chapter-seven/old-orchard",
+    chapterComplete: {
+      title: "Rainbarrel Row Restored",
+      subtitle: "The gutters, pumps, cisterns, and stormwater gate are carrying the rain safely again.",
+      checklist: [
+        "Runoff channels reopened",
+        "Neighborhood water systems steadied",
+        "Stormwater gate opened the road to Old Orchard"
+      ],
+      prompt: "Press Space, Enter, or E to continue"
+    },
     reaction: "Gate is open!",
     robotReaction: "Drain route clear.",
     scanLine: "The big gate is holding back the whole row.",
@@ -226,6 +254,22 @@ function createChapterSixScene(sceneId) {
     groundY: 662,
     fixed: false
   };
+  scene.spriteLandmark = {
+    sprite: entry.sprite,
+    state: scene.chapterSixLandmark,
+    x: 1120,
+    groundY: 666,
+    height: entry.spriteHeight,
+    dimFilter: "brightness(0.78) saturate(0.9)",
+    fixedFilter: "brightness(1.03) saturate(1.08)",
+    glow: {
+      heightRatio: 0.54,
+      radius: 215,
+      dimIntensity: 0.1,
+      fixedIntensity: 0.34,
+      pulse: 0.05
+    }
+  };
   scene.layers = createRainbarrelLayers(entry.type);
   scene.repairs = [
     {
@@ -244,6 +288,7 @@ function createChapterSixScene(sceneId) {
       onwardText: entry.onwardText,
       nextText: entry.nextText,
       nextSceneId: entry.nextSceneId,
+      chapterComplete: entry.chapterComplete,
       reactions: [
         { text: entry.reaction, x: 1120, y: 292 },
         { text: entry.robotReaction, x: "robot", y: "robotTop" }

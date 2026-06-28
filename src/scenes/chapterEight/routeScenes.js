@@ -5,6 +5,8 @@ const CHAPTER_EIGHT_SCENES = [
     id: "chapter-eight/glassworks-quarter",
     title: "Glassworks Quarter",
     type: "glassworksQuarter",
+    sprite: "glassworksQuarter",
+    spriteHeight: 430,
     puzzleTheme: "archive-lens",
     scanText: "Robot scan: rain-dark glass is scattering the quarter's color signal.",
     puzzleText: "Rotate the lens paths until color returns to the glassworks window.",
@@ -23,6 +25,8 @@ const CHAPTER_EIGHT_SCENES = [
     id: "chapter-eight/prism-lamp-row",
     title: "Prism Lamp Row",
     type: "prismLampRow",
+    sprite: "prismLampRow",
+    spriteHeight: 390,
     puzzleTheme: "archive-lens",
     scanText: "Robot scan: the prism lamps are splitting light into the wrong stones.",
     puzzleText: "Rotate the prism paths until the lamps mark one clear route.",
@@ -41,6 +45,8 @@ const CHAPTER_EIGHT_SCENES = [
     id: "chapter-eight/cracked-skylights",
     title: "Cracked Skylights",
     type: "crackedSkylights",
+    sprite: "crackedSkylights",
+    spriteHeight: 400,
     puzzleTheme: "storm-gauge",
     scanText: "Robot scan: skylight panes are leaking above the furnace room.",
     puzzleText: "Rotate the storm paths until the cracked panes seal in order.",
@@ -59,6 +65,8 @@ const CHAPTER_EIGHT_SCENES = [
     id: "chapter-eight/furnace-bellows",
     title: "Furnace Bellows",
     type: "furnaceBellows",
+    sprite: "furnaceBellows",
+    spriteHeight: 400,
     puzzleTheme: "water-routing",
     scanText: "Robot scan: bellows valves are cooling the furnace instead of feeding it.",
     puzzleText: "Rotate the valve paths until the bellows breathe in rhythm.",
@@ -77,6 +85,8 @@ const CHAPTER_EIGHT_SCENES = [
     id: "chapter-eight/color-filter-hall",
     title: "Color Filter Hall",
     type: "colorFilterHall",
+    sprite: "colorFilterHall",
+    spriteHeight: 390,
     puzzleTheme: "archive-lens",
     scanText: "Robot scan: color filters are stacked in the wrong signal order.",
     puzzleText: "Rotate the lens paths until the filters line up red to violet.",
@@ -95,6 +105,8 @@ const CHAPTER_EIGHT_SCENES = [
     id: "chapter-eight/mirror-maze",
     title: "Mirror Maze",
     type: "mirrorMaze",
+    sprite: "mirrorMaze",
+    spriteHeight: 400,
     puzzleTheme: "archive-lens",
     scanText: "Robot scan: the mirror stands are reflecting light into the rain.",
     puzzleText: "Rotate the mirror paths until the beam reaches the center prism.",
@@ -113,6 +125,8 @@ const CHAPTER_EIGHT_SCENES = [
     id: "chapter-eight/stained-glass-path",
     title: "Stained Glass Path",
     type: "stainedGlassPath",
+    sprite: "stainedGlassPath",
+    spriteHeight: 390,
     puzzleTheme: "market-lanterns",
     scanText: "Robot scan: stained-glass path panes are dark under the puddles.",
     puzzleText: "Rotate the lamp paths until the glass panes light underfoot.",
@@ -131,6 +145,8 @@ const CHAPTER_EIGHT_SCENES = [
     id: "chapter-eight/cooling-pipes",
     title: "Cooling Pipes",
     type: "coolingPipes",
+    sprite: "coolingPipes",
+    spriteHeight: 390,
     puzzleTheme: "water-routing",
     scanText: "Robot scan: cooling water is missing the fragile glass molds.",
     puzzleText: "Rotate the pipe paths until water reaches every cooling tube.",
@@ -149,6 +165,8 @@ const CHAPTER_EIGHT_SCENES = [
     id: "chapter-eight/lens-grinder",
     title: "Lens Grinder",
     type: "lensGrinder",
+    sprite: "lensGrinder",
+    spriteHeight: 400,
     puzzleTheme: "junction-line",
     scanText: "Robot scan: the grinder wheel is turning before the lens is aligned.",
     puzzleText: "Rotate the gear paths until the lens grinder turns smoothly.",
@@ -167,6 +185,8 @@ const CHAPTER_EIGHT_SCENES = [
     id: "chapter-eight/rainbow-tower",
     title: "Rainbow Tower",
     type: "rainbowTower",
+    sprite: "rainbowTower",
+    spriteHeight: 440,
     puzzleTheme: "beacon-signal",
     scanText: "Robot scan: the tall color signal is dark below the tower cap.",
     puzzleText: "Rotate the signal paths until every color chamber lights in order.",
@@ -174,6 +194,16 @@ const CHAPTER_EIGHT_SCENES = [
     onwardText: "The rainbow signal is awake.",
     nextText: "Under-Village waits below.",
     nextSceneId: "chapter-nine/under-village",
+    chapterComplete: {
+      title: "Glassworks Quarter Restored",
+      subtitle: "The glassworks lamps, pipes, mirrors, and rainbow tower are shining cleanly toward the under-village road.",
+      checklist: [
+        "Glass signal focused",
+        "Furnace and cooling systems steadied",
+        "Rainbow tower opened the under-village road"
+      ],
+      prompt: "Press Space, Enter, or E to continue"
+    },
     reaction: "It reaches the clouds!",
     robotReaction: "Color beacon restored.",
     scanLine: "The tower colors are out of sequence.",
@@ -248,6 +278,22 @@ function createChapterEightScene(sceneId) {
     groundY: 662,
     fixed: false
   };
+  scene.spriteLandmark = {
+    sprite: entry.sprite,
+    state: scene.chapterEightLandmark,
+    x: 1120,
+    groundY: 666,
+    height: entry.spriteHeight,
+    dimFilter: "brightness(0.78) saturate(0.9)",
+    fixedFilter: "brightness(1.06) saturate(1.14)",
+    glow: {
+      heightRatio: 0.55,
+      radius: 220,
+      dimIntensity: 0.1,
+      fixedIntensity: 0.36,
+      pulse: 0.05
+    }
+  };
   scene.layers = createGlassworksLayers(entry.type);
   scene.repairs = [
     {
@@ -266,6 +312,7 @@ function createChapterEightScene(sceneId) {
       onwardText: entry.onwardText,
       nextText: entry.nextText,
       nextSceneId: entry.nextSceneId,
+      chapterComplete: entry.chapterComplete,
       reactions: [
         { text: entry.reaction, x: 1120, y: 292 },
         { text: entry.robotReaction, x: "robot", y: "robotTop" }

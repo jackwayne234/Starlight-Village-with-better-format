@@ -234,23 +234,30 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Chapter 4 wind and lamp cleanup landed on `2026-06-25`: Chunk 132 is complete. Chapter 4 no longer draws the painted wind-streak overlay or repeated lamp props; other chapters keep their lamp rendering. Stormedge Rise preview reloaded on port `5363` with no browser warnings or errors.
 - Zero painted PNG asset cleanout landed on `2026-06-25`: Chunk 133 is complete. All `*painted*.png`, `*painted*.jpg`, and `*painted*.webp` files under `assets/` were deleted, old source registrations for painted world sprites were removed, the Chapter 4 wind/lamp sprite files and helper renderers were removed, and cache tags were bumped to `zero-painted-assets`. Verification found `0` painted raster files under `assets/`, no active source paths to painted raster files, and the Stormedge Rise preview reloaded on port `5363` with no browser warnings or errors.
 - Clean world sprite replacement landed on `2026-06-25`: Chunk 134 is complete. The supplied Desktop `assets/sprites/world/` route art was imported under clean non-painted filenames, the active world sprite registry now points at those clean replacements for Chapter 1, Chapter 2 legacy hooks, and Chapter 3 legacy hooks, and the zero-painted rule still verifies with `0` painted raster files under `assets/` and `0` active painted image references. The running preview server confirmed clean replacement asset requests with `200` responses.
+- Stormedge-to-Beacon-Hill human-feel sweep landed on `2026-06-28`: Chunk 135 is complete. The active slice from Last Platform through the Mossline completion card, Mossline-to-Stormedge transition page, all ten Stormedge scenes, the Stormedge completion card, and Beacon Hill was captured on port `5364`. The browser reported no warnings or errors, every capture had a `1280x720` game canvas, and no concrete Chapter 4 visual fix was needed before advancing.
+- Chapter 5 clean sprite landmark pass landed on `2026-06-28`: Chunk 136 is complete. Keeper's Cottage through Hill Descent now use clean `assets/sprites/world/` PNG landmarks through `scene.spriteLandmark`, with the old canvas `chapterFiveLandmark` drawings left as fallback. Hill Descent now shows a `Beacon Hill Restored` chapter-complete card before continuing to Rainbarrel Row. Syntax checks, route walk, zero-painted checks, `git diff --check`, Chapter 5 browser sweep, and the Chapter 5 completion-card preview passed on port `5364`.
+- Chapter 6 clean sprite landmark pass landed on `2026-06-28`: Chunk 137 is complete. Rooftop Channels through Stormwater Gate now use clean `assets/sprites/world/` PNG landmarks through `scene.spriteLandmark`, with the old canvas `chapterSixLandmark` drawings left as fallback. Stormwater Gate now shows a `Rainbarrel Row Restored` chapter-complete card before continuing to Old Orchard. Syntax checks, route walk, zero-painted checks, `git diff --check`, Chapter 6 browser sweep, and the Chapter 6 completion-card preview passed on port `5364`.
+- Chapter 7 clean sprite landmark pass landed on `2026-06-28`: Chunk 138 is complete. Old Orchard through Hollow Tree Door now use clean `assets/sprites/world/` PNG landmarks through `scene.spriteLandmark`, with the old canvas `chapterSevenLandmark` drawings left as fallback. Hollow Tree Door now shows an `Old Orchard Restored` chapter-complete card before continuing to Glassworks Quarter. Syntax checks, route walk, zero-painted checks, `git diff --check`, Chapter 7 browser sweep, and the corrected Chapter 7 completion-card preview passed on port `5364`.
+- Chapter 8 clean sprite landmark pass landed on `2026-06-28`: Chunk 139 is complete. Glassworks Quarter through Rainbow Tower now use clean `assets/sprites/world/` PNG landmarks through `scene.spriteLandmark`, with the old canvas `chapterEightLandmark` drawings left as fallback. Rainbow Tower now shows a `Glassworks Quarter Restored` chapter-complete card before continuing to Under-Village. Syntax checks, route walk, zero-painted checks, `git diff --check`, Chapter 8 browser sweep, server asset-response checks, and the Chapter 8 completion-card preview passed on port `5364`.
+- Chapter 9 clean sprite landmark pass landed on `2026-06-28`: Chunk 140 is complete. Under-Village Door through Ancient Heart Engine now use clean `assets/sprites/world/` PNG landmarks through `scene.spriteLandmark`, with the old canvas `chapterNineLandmark` drawings left as fallback. Ancient Heart Engine now shows an `Under-Village Restored` chapter-complete card before continuing to Festival Return. Syntax checks, route walk, zero-painted checks, `git diff --check`, Chapter 9 browser sweep, server asset-response checks, and the Chapter 9 completion-card preview passed on port `5364`.
+- Chapter 10 clean sprite landmark pass landed on `2026-06-28`: Chunk 141 is complete. Festival Return through Celebration Square now use clean `assets/sprites/world/` PNG landmarks through `scene.spriteLandmark`, with the old canvas `chapterTenLandmark` drawings left as fallback. Celebration Square remains the terminal route scene with `nextSceneId: null` and `The route is complete.` Syntax checks, route walk, zero-painted checks, `git diff --check`, Chapter 10 browser sweep, and server asset-response checks passed on port `5364`.
+- Full-route browser QA landed on `2026-06-28`: Chunk 142 is complete. The route was walked from Starlight Village through Celebration Square, all 101 route scenes were loaded in the in-app browser on port `5364`, every scene reported a `1280x720` canvas, chapter-complete metadata was checked from Mossline through Under-Village, and a final QA board covered the title screen, opening scene, transition pages, chapter completion cards, and Celebration Square finale preview.
+- README current-state refresh landed on `2026-06-28`: Chunk 143 is complete. The README now names Starlight Village as the route start, reflects the current hand-built and sprite-backed landmark state, and calls out the remaining need for a real human playthrough, puzzle-fatigue review, pacing review, and late-route feel check.
 
 ## Suggested Next Step
 
-Chapter 4's Stormedge implementation, sprite-environment polish,
-sprite-landmark cleanup, user asset integration, and landmark placement polish
-are complete through Chunk 134. Do not redo the
+Chapter 4's Stormedge implementation, zero-painted cleanup, clean world sprite
+replacement, Last Platform to Beacon Hill sweep, the Chapter 5-10 clean sprite
+landmark passes, full-route browser QA, and README state refresh are complete
+through Chunk 143. Do
+not redo the Stormedge
 transition image, landmark sprites, puzzle skin, completion-summary pass,
 environment sprite pass, or sprite-landmark cleanup unless the user asks for a
-revision.
+revision or a later playtest finds a specific bug.
 
 Next likely stop:
 
-1. Do a human-feel playtest from Last Platform through Beacon Hill, checking
-   whether the new Stormedge sprites feel too tree-obscured, too sparse, or need
-   stronger local ridge variation.
-2. If the user wants implementation next, proceed to a narrow Chapter 4 polish
-   chunk based on that playtest: landmark scale/placement, ridge foreground
-   detail, dialogue microcopy, or puzzle feel.
-3. Keep Chapter 5 / Beacon Hill changes out of Stormedge polish unless the user
-   explicitly expands scope.
+1. Do a real human playthrough or guided playtest for puzzle feel, route fatigue,
+   and any late-scene pacing issues that data/browser sweeps cannot catch.
+2. Decide whether the remaining same-day work should be audio/weather polish,
+   packaging, or a release checkpoint.

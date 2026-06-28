@@ -5,6 +5,8 @@ const CHAPTER_SEVEN_SCENES = [
     id: "chapter-seven/old-orchard",
     title: "Old Orchard",
     type: "oldOrchard",
+    sprite: "oldOrchard",
+    spriteHeight: 430,
     puzzleTheme: "root-pump",
     scanText: "Robot scan: old roots are pinching the orchard irrigation line shut.",
     puzzleText: "Rotate the root paths until water reaches the old apple tree.",
@@ -23,6 +25,8 @@ const CHAPTER_SEVEN_SCENES = [
     id: "chapter-seven/windfallen-fruit",
     title: "Windfallen Fruit",
     type: "windfallenFruit",
+    sprite: "windfallenFruit",
+    spriteHeight: 360,
     puzzleTheme: "water-routing",
     scanText: "Robot scan: fallen apples are blocking the channel drains.",
     puzzleText: "Rotate the channel paths until fruit and water separate safely.",
@@ -41,6 +45,8 @@ const CHAPTER_SEVEN_SCENES = [
     id: "chapter-seven/branch-bridge",
     title: "Branch Bridge",
     type: "branchBridge",
+    sprite: "branchBridge",
+    spriteHeight: 380,
     puzzleTheme: "glow-bridge",
     scanText: "Robot scan: branch braces are crossed over the walking path.",
     puzzleText: "Rotate the bridge paths until the branch braces make a safe crossing.",
@@ -59,6 +65,8 @@ const CHAPTER_SEVEN_SCENES = [
     id: "chapter-seven/bee-box-row",
     title: "Bee Box Row",
     type: "beeBoxRow",
+    sprite: "beeBoxRow",
+    spriteHeight: 370,
     puzzleTheme: "market-lanterns",
     scanText: "Robot scan: the bee-box lanterns are flickering too close and too bright.",
     puzzleText: "Rotate the lantern paths until the boxes warm gently.",
@@ -77,6 +85,8 @@ const CHAPTER_SEVEN_SCENES = [
     id: "chapter-seven/cider-press",
     title: "Cider Press",
     type: "ciderPress",
+    sprite: "ciderPress",
+    spriteHeight: 400,
     puzzleTheme: "junction-line",
     scanText: "Robot scan: the little cider press gears are skipping teeth.",
     puzzleText: "Rotate the gear paths until the press turns evenly.",
@@ -95,6 +105,8 @@ const CHAPTER_SEVEN_SCENES = [
     id: "chapter-seven/scarecrow-wires",
     title: "Scarecrow Wires",
     type: "scarecrowWires",
+    sprite: "scarecrowWires",
+    spriteHeight: 430,
     puzzleTheme: "rail-signal",
     scanText: "Robot scan: signal wires are tangled around the scarecrow arms.",
     puzzleText: "Rotate the signal paths until the wet wires hang clear.",
@@ -113,6 +125,8 @@ const CHAPTER_SEVEN_SCENES = [
     id: "chapter-seven/root-cellar",
     title: "Root Cellar",
     type: "rootCellar",
+    sprite: "rootCellar",
+    spriteHeight: 430,
     puzzleTheme: "storm-gauge",
     scanText: "Robot scan: cellar vents are trapping damp air around the stored food.",
     puzzleText: "Rotate the vent paths until dry air moves through the root cellar.",
@@ -131,6 +145,8 @@ const CHAPTER_SEVEN_SCENES = [
     id: "chapter-seven/moon-apple-tree",
     title: "Moon Apple Tree",
     type: "moonAppleTree",
+    sprite: "moonAppleTree",
+    spriteHeight: 430,
     puzzleTheme: "archive-lens",
     scanText: "Robot scan: the moon reflector is missing the rare apple tree.",
     puzzleText: "Rotate the light paths until moonlight reaches the glowing fruit.",
@@ -149,6 +165,8 @@ const CHAPTER_SEVEN_SCENES = [
     id: "chapter-seven/birdhouse-lane",
     title: "Birdhouse Lane",
     type: "birdhouseLane",
+    sprite: "birdhouseLane",
+    spriteHeight: 420,
     puzzleTheme: "beacon-signal",
     scanText: "Robot scan: birdhouse guide lamps are hanging at mixed heights.",
     puzzleText: "Rotate the signal paths until the birdhouses mark one clear route.",
@@ -167,6 +185,8 @@ const CHAPTER_SEVEN_SCENES = [
     id: "chapter-seven/hollow-tree-door",
     title: "Hollow Tree Door",
     type: "hollowTreeDoor",
+    sprite: "hollowTreeDoor",
+    spriteHeight: 430,
     puzzleTheme: "root-pump",
     scanText: "Robot scan: the hidden tree door is locked by old root latches.",
     puzzleText: "Rotate the root paths until the hollow tree door unlocks.",
@@ -174,6 +194,16 @@ const CHAPTER_SEVEN_SCENES = [
     onwardText: "The hollow tree is open.",
     nextText: "Glassworks Quarter waits beyond.",
     nextSceneId: "chapter-eight/glassworks-quarter",
+    chapterComplete: {
+      title: "Old Orchard Restored",
+      subtitle: "The roots, bridges, bee boxes, and hidden tree door are steady enough to reach the glassworks road.",
+      checklist: [
+        "Orchard water line reopened",
+        "Fruit paths and keeper devices restored",
+        "Hollow tree opened the glassworks road"
+      ],
+      prompt: "Press Space, Enter, or E to continue"
+    },
     reaction: "A door in the tree!",
     robotReaction: "Root latch released.",
     scanLine: "The old latches are woven through the roots.",
@@ -248,6 +278,22 @@ function createChapterSevenScene(sceneId) {
     groundY: 662,
     fixed: false
   };
+  scene.spriteLandmark = {
+    sprite: entry.sprite,
+    state: scene.chapterSevenLandmark,
+    x: 1120,
+    groundY: 666,
+    height: entry.spriteHeight,
+    dimFilter: "brightness(0.78) saturate(0.9)",
+    fixedFilter: "brightness(1.04) saturate(1.08)",
+    glow: {
+      heightRatio: 0.55,
+      radius: 220,
+      dimIntensity: 0.1,
+      fixedIntensity: 0.34,
+      pulse: 0.05
+    }
+  };
   scene.layers = createOrchardLayers(entry.type);
   scene.repairs = [
     {
@@ -266,6 +312,7 @@ function createChapterSevenScene(sceneId) {
       onwardText: entry.onwardText,
       nextText: entry.nextText,
       nextSceneId: entry.nextSceneId,
+      chapterComplete: entry.chapterComplete,
       reactions: [
         { text: entry.reaction, x: 1120, y: 292 },
         { text: entry.robotReaction, x: "robot", y: "robotTop" }

@@ -32,7 +32,7 @@ import {
   createOldFlagRoomScene,
   createRelayBalconyScene,
   createStormShuttersScene
-} from "./chapterFive/routeScenes.js";
+} from "./chapterFive/routeScenes.js?v=chapter-five-clean-sprites";
 import {
   createCisternHouseScene,
   createFloodedCellarScene,
@@ -43,7 +43,7 @@ import {
   createPumpAlleyScene,
   createRooftopChannelsScene,
   createStormwaterGateScene
-} from "./chapterSix/routeScenes.js";
+} from "./chapterSix/routeScenes.js?v=chapter-six-clean-sprites";
 import {
   createBeeBoxRowScene,
   createBirdhouseLaneScene,
@@ -55,7 +55,7 @@ import {
   createRootCellarScene,
   createScarecrowWiresScene,
   createWindfallenFruitScene
-} from "./chapterSeven/routeScenes.js";
+} from "./chapterSeven/routeScenes.js?v=chapter-seven-clean-sprites";
 import {
   createColorFilterHallScene,
   createCoolingPipesScene,
@@ -67,7 +67,7 @@ import {
   createPrismLampRowScene,
   createRainbowTowerScene,
   createStainedGlassPathScene
-} from "./chapterEight/routeScenes.js";
+} from "./chapterEight/routeScenes.js?v=chapter-eight-clean-sprites";
 import {
   createBuriedMuralsScene,
   createDrainLocksScene,
@@ -79,7 +79,7 @@ import {
   createSealedWorkshopScene,
   createUndergroundStreamScene,
   createUnderVillageScene
-} from "./chapterNine/routeScenes.js";
+} from "./chapterNine/routeScenes.js?v=chapter-nine-clean-sprites";
 import {
   createCelebrationSquareScene,
   createFestivalReturnScene,
@@ -91,7 +91,7 @@ import {
   createMusicStageScene,
   createStarMapScene,
   createTownClockScene
-} from "./chapterTen/routeScenes.js";
+} from "./chapterTen/routeScenes.js?v=chapter-ten-clean-sprites";
 import { createCargoCartTurntableScene } from "./chapterThree/cargoCartTurntable.js?v=side-turntable-sprite";
 import { createConductorBoothScene } from "./chapterThree/conductorBooth.js?v=conductor-booth-sprite";
 import { createCraneHookYardScene } from "./chapterThree/craneHookYard.js?v=crane-hook-yard-sprite";

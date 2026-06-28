@@ -5,6 +5,8 @@ const CHAPTER_FIVE_SCENES = [
     id: "chapter-five/keeper-cottage",
     title: "Keeper's Cottage",
     type: "keeperCottage",
+    sprite: "keeperCottage",
+    spriteHeight: 430,
     puzzleTheme: "market-lanterns",
     scanText: "Robot scan: the keeper's chimney draft is pushing sparks the wrong way.",
     puzzleText: "Rotate the warm paths until the chimney draft and stove sparks settle.",
@@ -23,6 +25,8 @@ const CHAPTER_FIVE_SCENES = [
     id: "chapter-five/lens-room",
     title: "Lens Room",
     type: "lensRoom",
+    sprite: "lensRoom",
+    spriteHeight: 430,
     puzzleTheme: "archive-lens",
     scanText: "Robot scan: the beacon lens is catching rain-glare instead of focusing.",
     puzzleText: "Rotate the lens paths until the beacon beam gathers in the center.",
@@ -41,6 +45,8 @@ const CHAPTER_FIVE_SCENES = [
     id: "chapter-five/fuel-shed",
     title: "Fuel Shed",
     type: "fuelShed",
+    sprite: "fuelShed",
+    spriteHeight: 410,
     puzzleTheme: "water-routing",
     scanText: "Robot scan: the fuel valves are feeding the beacon unevenly.",
     puzzleText: "Rotate the valve paths until the tower burns steady.",
@@ -59,6 +65,8 @@ const CHAPTER_FIVE_SCENES = [
     id: "chapter-five/mirror-array",
     title: "Mirror Array",
     type: "mirrorArray",
+    sprite: "mirrorArray",
+    spriteHeight: 340,
     puzzleTheme: "archive-lens",
     scanText: "Robot scan: the mirrors are bouncing light into the rain.",
     puzzleText: "Rotate the mirror paths until the light returns toward the village.",
@@ -77,6 +85,8 @@ const CHAPTER_FIVE_SCENES = [
     id: "chapter-five/bell-platform",
     title: "Bell Platform",
     type: "bellPlatform",
+    sprite: "bellPlatform",
+    spriteHeight: 430,
     puzzleTheme: "beacon-signal",
     scanText: "Robot scan: the lowland bell striker is hanging out of reach.",
     puzzleText: "Rotate the signal paths until the striker can ring cleanly.",
@@ -95,6 +105,8 @@ const CHAPTER_FIVE_SCENES = [
     id: "chapter-five/old-flag-room",
     title: "Old Flag Room",
     type: "oldFlagRoom",
+    sprite: "oldFlagRoom",
+    spriteHeight: 380,
     puzzleTheme: "junction-line",
     scanText: "Robot scan: old storm flags are folded in the wrong memory order.",
     puzzleText: "Rotate the memory paths until the folded flags settle in sequence.",
@@ -113,6 +125,8 @@ const CHAPTER_FIVE_SCENES = [
     id: "chapter-five/storm-shutters",
     title: "Storm Shutters",
     type: "stormShutters",
+    sprite: "stormShutters",
+    spriteHeight: 400,
     puzzleTheme: "storm-gauge",
     scanText: "Robot scan: the tower shutters are catching wind in the wrong sequence.",
     puzzleText: "Rotate the storm paths until the shutters lock against the gusts.",
@@ -131,6 +145,8 @@ const CHAPTER_FIVE_SCENES = [
     id: "chapter-five/relay-balcony",
     title: "Relay Balcony",
     type: "relayBalcony",
+    sprite: "relayBalcony",
+    spriteHeight: 350,
     puzzleTheme: "beacon-signal",
     scanText: "Robot scan: balcony relays are dropping the wider beacon sweep.",
     puzzleText: "Rotate the relay paths until the beacon sweep reaches outward.",
@@ -149,6 +165,8 @@ const CHAPTER_FIVE_SCENES = [
     id: "chapter-five/hill-descent",
     title: "Hill Descent",
     type: "hillDescent",
+    sprite: "hillDescent",
+    spriteHeight: 410,
     puzzleTheme: "market-lanterns",
     scanText: "Robot scan: the downward path lamps are dark between Beacon Hill and Rainbarrel Row.",
     puzzleText: "Rotate the lamp paths until the descent lights in order.",
@@ -156,6 +174,16 @@ const CHAPTER_FIVE_SCENES = [
     onwardText: "The descent is lit.",
     nextText: "Rainbarrel Row waits below.",
     nextSceneId: "chapter-six/rainbarrel-row",
+    chapterComplete: {
+      title: "Beacon Hill Restored",
+      subtitle: "The beacon is bright, the keeper systems are steady, and the path down toward Rainbarrel Row is lit.",
+      checklist: [
+        "Beacon signal focused",
+        "Keeper rooms and relays restored",
+        "Hill descent lamps opened the rainwater road"
+      ],
+      prompt: "Press Space, Enter, or E to continue"
+    },
     reaction: "Path downhill!",
     robotReaction: "Descent route lit.",
     scanLine: "The downhill lamps are not carrying light.",
@@ -226,6 +254,22 @@ function createChapterFiveScene(sceneId) {
     groundY: 662,
     fixed: false
   };
+  scene.spriteLandmark = {
+    sprite: entry.sprite,
+    state: scene.chapterFiveLandmark,
+    x: 1120,
+    groundY: 666,
+    height: entry.spriteHeight,
+    dimFilter: "brightness(0.78) saturate(0.88)",
+    fixedFilter: "brightness(1.03) saturate(1.08)",
+    glow: {
+      heightRatio: 0.56,
+      radius: 215,
+      dimIntensity: 0.1,
+      fixedIntensity: 0.34,
+      pulse: 0.05
+    }
+  };
   scene.layers = createBeaconHillLayers(entry.type);
   scene.repairs = [
     {
@@ -244,6 +288,7 @@ function createChapterFiveScene(sceneId) {
       onwardText: entry.onwardText,
       nextText: entry.nextText,
       nextSceneId: entry.nextSceneId,
+      chapterComplete: entry.chapterComplete,
       reactions: [
         { text: entry.reaction, x: 1120, y: 292 },
         { text: entry.robotReaction, x: "robot", y: "robotTop" }

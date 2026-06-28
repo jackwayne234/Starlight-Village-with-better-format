@@ -2,7 +2,7 @@ import { updateCamera } from "./camera.js";
 import { updatePlayer } from "../entities/player.js";
 import { updateRobot } from "../entities/robot.js";
 import { updateRepairFlow } from "../interaction/repairFlow.js?v=zero-painted-assets";
-import { renderScene } from "../rendering/renderPipeline.js?v=repair-10-no-puddles-mist";
+import { renderScene } from "../rendering/renderPipeline.js?v=chapter-ten-clean-sprites";
 import { drawTitleScreen } from "../ui/titleScreen.js?v=browser-route-smoke-2";
 import { sfx } from "../audio/gameAudio.js";
 

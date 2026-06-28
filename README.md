@@ -19,8 +19,8 @@ http://127.0.0.1:5200/
 ## Current Route Spine
 
 - One rainy story route across 10 chapters and 101 scenes.
-- The route starts at Water Wheel Yard and ends at Celebration Square.
-- The current spine uses a catalog builder for first-draft scenes, with hand-built landmark scenes preserved for the opener, Glowfen Grove, Mossline Switchyard, Stormedge Rise, Beacon Hill, and Rainbarrel Row.
+- The route starts at Starlight Village and ends at Celebration Square.
+- The current spine uses a catalog builder for remaining first-draft scenes, with hand-built or sprite-backed landmark scenes carrying the active route from the opener through the finale.
 - Apprentice and floating robot companion.
 - Left/right walking with a scrolling camera.
 - Each scene currently has one repair target.
@@ -46,7 +46,7 @@ http://127.0.0.1:5200/
 
 ## Known Limits
 
-- The 101-scene route is a playable spine, not 101 bespoke finished scenes.
-- Catalog-built scenes are intentionally first drafts.
-- Art is mixed: some scenes use bespoke sprites and tuned canvas layouts, while many catalog scenes use shared placeholder composition.
+- The 101-scene route is a playable spine, but it still needs a true human playthrough for puzzle fatigue, pacing, and late-route feel.
+- Some catalog-built support paths are intentionally first drafts.
+- Art is mixed: many active route scenes now use bespoke or clean sprite-backed landmarks, while some supporting composition remains shared.
 - Progress uses local browser storage only.

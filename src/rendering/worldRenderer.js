@@ -1,5 +1,5 @@
 import { config } from "../core/config.js";
-import { sprites, imageReady } from "./sprites.js?v=repair-10-no-puddles-mist";
+import { sprites, imageReady } from "./sprites.js?v=chapter-ten-clean-sprites";
 
 const { colors } = config;
 

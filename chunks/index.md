@@ -122,3 +122,12 @@ High-level list only. All details live inside each chunk file.
 | 132 | Stormedge Wind and Lamp Cleanup | complete |
 | 133 | Zero Painted PNG Asset Cleanout | complete |
 | 134 | Clean World Sprite Replacement Pass | complete |
+| 135 | Stormedge to Beacon Hill Human-Feel Sweep | complete |
+| 136 | Chapter Five Clean Sprite Landmark Pass | complete |
+| 137 | Chapter Six Clean Sprite Landmark Pass | complete |
+| 138 | Chapter Seven Clean Sprite Landmark Pass | complete |
+| 139 | Chapter Eight Clean Sprite Landmark Pass | complete |
+| 140 | Chapter Nine Clean Sprite Landmark Pass | complete |
+| 141 | Chapter Ten Clean Sprite Landmark Pass | complete |
+| 142 | Full Route Browser QA | complete |
+| 143 | README Current-State Refresh | complete |
