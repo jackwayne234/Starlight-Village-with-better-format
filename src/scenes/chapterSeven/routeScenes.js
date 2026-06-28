@@ -46,7 +46,7 @@ const CHAPTER_SEVEN_SCENES = [
     title: "Branch Bridge",
     type: "branchBridge",
     sprite: "branchBridge",
-    spriteHeight: 380,
+    spriteHeight: 440,
     puzzleTheme: "glow-bridge",
     scanText: "Robot scan: branch braces are crossed over the walking path.",
     puzzleText: "Rotate the bridge paths until the branch braces make a safe crossing.",
@@ -272,17 +272,18 @@ function createChapterSevenScene(sceneId) {
   scene.robot.x = 427;
   scene.showSignpost = false;
   scene.backdrop = { moonX: 890, moonY: 132, cloudDrift: 1.18, hillOffset: 42, ridgeOffset: 72 };
+  const isBranchBridge = entry.type === "branchBridge";
   scene.chapterSevenLandmark = {
     type: entry.type,
     x: 1120,
-    groundY: 662,
+    groundY: isBranchBridge ? 688 : 662,
     fixed: false
   };
   scene.spriteLandmark = {
     sprite: entry.sprite,
     state: scene.chapterSevenLandmark,
     x: 1120,
-    groundY: 666,
+    groundY: isBranchBridge ? 692 : 666,
     height: entry.spriteHeight,
     dimFilter: "brightness(0.78) saturate(0.9)",
     fixedFilter: "brightness(1.04) saturate(1.08)",

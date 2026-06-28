@@ -134,3 +134,4 @@ High-level list only. All details live inside each chunk file.
 | 144 | Puddle Matte Cleanup | complete |
 | 145 | Glowfen Repair 1 Sprite Waymark | complete |
 | 146 | Chapter Review Visual Environment Fixes | complete |
+| 147 | Grounding Fixes From Review | complete |

@@ -275,14 +275,14 @@ function createChapterEightScene(sceneId) {
   scene.chapterEightLandmark = {
     type: entry.type,
     x: 1120,
-    groundY: 662,
+    groundY: 706,
     fixed: false
   };
   scene.spriteLandmark = {
     sprite: entry.sprite,
     state: scene.chapterEightLandmark,
     x: 1120,
-    groundY: 666,
+    groundY: 710,
     height: entry.spriteHeight,
     dimFilter: "brightness(0.78) saturate(0.9)",
     fixedFilter: "brightness(1.06) saturate(1.14)",

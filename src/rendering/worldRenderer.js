@@ -1,5 +1,5 @@
 import { config } from "../core/config.js";
-import { sprites, imageReady } from "./sprites.js?v=chapter-review-visual-fixes-3";
+import { sprites, imageReady } from "./sprites.js?v=chapter-grounding-fixes-1";
 
 const { colors } = config;
 

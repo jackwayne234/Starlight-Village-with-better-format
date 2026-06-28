@@ -32,7 +32,7 @@ import {
   createOldFlagRoomScene,
   createRelayBalconyScene,
   createStormShuttersScene
-} from "./chapterFive/routeScenes.js?v=chapter-review-visual-fixes-3";
+} from "./chapterFive/routeScenes.js?v=chapter-grounding-fixes-1";
 import {
   createCisternHouseScene,
   createFloodedCellarScene,
@@ -55,7 +55,7 @@ import {
   createRootCellarScene,
   createScarecrowWiresScene,
   createWindfallenFruitScene
-} from "./chapterSeven/routeScenes.js?v=chapter-review-visual-fixes-3";
+} from "./chapterSeven/routeScenes.js?v=chapter-grounding-fixes-1";
 import {
   createColorFilterHallScene,
   createCoolingPipesScene,
@@ -67,7 +67,7 @@ import {
   createPrismLampRowScene,
   createRainbowTowerScene,
   createStainedGlassPathScene
-} from "./chapterEight/routeScenes.js?v=chapter-review-visual-fixes-3";
+} from "./chapterEight/routeScenes.js?v=chapter-grounding-fixes-1";
 import {
   createBuriedMuralsScene,
   createDrainLocksScene,
@@ -79,7 +79,7 @@ import {
   createSealedWorkshopScene,
   createUndergroundStreamScene,
   createUnderVillageScene
-} from "./chapterNine/routeScenes.js?v=chapter-review-visual-fixes-3";
+} from "./chapterNine/routeScenes.js?v=chapter-grounding-fixes-1";
 import {
   createCelebrationSquareScene,
   createFestivalReturnScene,
@@ -91,7 +91,7 @@ import {
   createMusicStageScene,
   createStarMapScene,
   createTownClockScene
-} from "./chapterTen/routeScenes.js?v=chapter-review-visual-fixes-3";
+} from "./chapterTen/routeScenes.js?v=chapter-grounding-fixes-1";
 import { createCargoCartTurntableScene } from "./chapterThree/cargoCartTurntable.js?v=side-turntable-sprite";
 import { createConductorBoothScene } from "./chapterThree/conductorBooth.js?v=conductor-booth-sprite";
 import { createCraneHookYardScene } from "./chapterThree/craneHookYard.js?v=crane-hook-yard-sprite";
@@ -116,7 +116,7 @@ import { createMossGateScene } from "./chapterTwo/mossGate.js";
 import { createOldFenShrineScene } from "./chapterTwo/oldFenShrine.js";
 import { fullGameSceneById, fullGameSceneIds } from "./fullGameCatalog.js";
 import { createPlannedScene } from "./plannedSceneFactory.js";
-import { addTreeDensity } from "./treeDensity.js?v=chapter-review-visual-fixes-3";
+import { addTreeDensity } from "./treeDensity.js?v=chapter-grounding-fixes-1";
 
 export const sceneIds = {
   beaconHill: "chapter-five/beacon-hill",

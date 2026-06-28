@@ -103,7 +103,7 @@ export const sprites = {
     oldFlagRoom: loadImage(`${WORLD}/old-flag-room.png?v=chapter-five-clean-sprites`),
     stormShutters: loadImage(`${WORLD}/storm-shutters.png?v=chapter-five-clean-sprites`),
     relayBalcony: loadImage(`${WORLD}/relay-balcony.png?v=chapter-five-clean-sprites`),
-    hillDescent: loadImage(`${WORLD}/hill-descent-road.png?v=chapter-review-visual-fixes-3`),
+    hillDescent: loadImage(`${WORLD}/hill-descent-road.png?v=chapter-grounding-fixes-1`),
     rooftopChannels: loadImage(`${WORLD}/rooftop-channels.png?v=chapter-six-clean-sprites`),
     floodedCellar: loadImage(`${WORLD}/flooded-cellar.png?v=chapter-six-clean-sprites`),
     laundryLines: loadImage(`${WORLD}/laundry-lines.png?v=chapter-six-clean-sprites`),
@@ -115,7 +115,7 @@ export const sprites = {
     stormwaterGate: loadImage(`${WORLD}/stormwater-gate.png?v=chapter-six-clean-sprites`),
     oldOrchard: loadImage(`${WORLD}/old-orchard.png?v=chapter-seven-clean-sprites`),
     windfallenFruit: loadImage(`${WORLD}/windfallen-fruit.png?v=chapter-seven-clean-sprites`),
-    branchBridge: loadImage(`${WORLD}/branch-bridge.png?v=chapter-seven-clean-sprites`),
+    branchBridge: loadImage(`${WORLD}/branch-bridge-road.png?v=chapter-grounding-fixes-1`),
     beeBoxRow: loadImage(`${WORLD}/bee-box-row.png?v=chapter-seven-clean-sprites`),
     ciderPress: loadImage(`${WORLD}/cider-press.png?v=chapter-seven-clean-sprites`),
     scarecrowWires: loadImage(`${WORLD}/scarecrow-wires.png?v=chapter-seven-clean-sprites`),
@@ -250,7 +250,7 @@ export const sprites = {
     landmarks: {
       stormGauge: loadImage(`${CHAPTER_FOUR_LANDMARKS}/storm-gauge.png?v=stormedge-landmark-sprites-v2`),
       weatherVaneRoof: loadImage(`${CHAPTER_FOUR_LANDMARKS}/weather-vane-roof.png?v=stormedge-landmark-sprites-v2`),
-      cliffRopeLift: loadImage(`${CHAPTER_FOUR_LANDMARKS}/cliff-rope-lift-complete.png?v=chapter-review-visual-fixes-3`),
+      cliffRopeLift: loadImage(`${CHAPTER_FOUR_LANDMARKS}/cliff-rope-lift-complete.png?v=chapter-grounding-fixes-1`),
       windChimePass: loadImage(`${CHAPTER_FOUR_LANDMARKS}/wind-chime-pass.png?v=stormedge-landmark-sprites-v2`),
       lightningRodField: loadImage(`${CHAPTER_FOUR_LANDMARKS}/lightning-rod-field.png?v=stormedge-landmark-sprites-v2`),
       lookoutPost: loadImage(`${CHAPTER_FOUR_LANDMARKS}/lookout-post.png?v=stormedge-landmark-sprites-v2`),
@@ -277,34 +277,34 @@ export const sprites = {
   },
   chapterSeven: {
     backgrounds: {
-      orchardBackground: loadImage(`${CHAPTER_SEVEN_BACKGROUNDS}/orchard-background.png?v=chapter-review-visual-fixes-3`)
+      orchardBackground: loadImage(`${CHAPTER_SEVEN_BACKGROUNDS}/orchard-background.png?v=chapter-grounding-fixes-1`)
     },
     paths: {
-      orchardPath: loadImage(`${CHAPTER_SEVEN_PATHS}/orchard-path.png?v=chapter-review-visual-fixes-3`)
+      orchardPath: loadImage(`${CHAPTER_SEVEN_PATHS}/orchard-path.png?v=chapter-grounding-fixes-1`)
     }
   },
   chapterEight: {
     backgrounds: {
-      glassworksBackground: loadImage(`${CHAPTER_EIGHT_BACKGROUNDS}/glassworks-background.png?v=chapter-review-visual-fixes-3`)
+      glassworksBackground: loadImage(`${CHAPTER_EIGHT_BACKGROUNDS}/glassworks-background.png?v=chapter-grounding-fixes-1`)
     },
     paths: {
-      glassworksPath: loadImage(`${CHAPTER_EIGHT_PATHS}/glassworks-path.png?v=chapter-review-visual-fixes-3`)
+      glassworksPath: loadImage(`${CHAPTER_EIGHT_PATHS}/glassworks-path.png?v=chapter-grounding-fixes-1`)
     }
   },
   chapterNine: {
     backgrounds: {
-      underVillageBackground: loadImage(`${CHAPTER_NINE_BACKGROUNDS}/under-village-background.png?v=chapter-review-visual-fixes-3`)
+      underVillageBackground: loadImage(`${CHAPTER_NINE_BACKGROUNDS}/under-village-background.png?v=chapter-grounding-fixes-1`)
     },
     paths: {
-      underVillagePath: loadImage(`${CHAPTER_NINE_PATHS}/under-village-path.png?v=chapter-review-visual-fixes-3`)
+      underVillagePath: loadImage(`${CHAPTER_NINE_PATHS}/under-village-path.png?v=chapter-grounding-fixes-1`)
     }
   },
   chapterTen: {
     backgrounds: {
-      festivalBackground: loadImage(`${CHAPTER_TEN_BACKGROUNDS}/festival-background.png?v=chapter-review-visual-fixes-3`)
+      festivalBackground: loadImage(`${CHAPTER_TEN_BACKGROUNDS}/festival-background.png?v=chapter-grounding-fixes-1`)
     },
     paths: {
-      festivalPath: loadImage(`${CHAPTER_TEN_PATHS}/festival-path.png?v=chapter-review-visual-fixes-3`)
+      festivalPath: loadImage(`${CHAPTER_TEN_PATHS}/festival-path.png?v=chapter-grounding-fixes-1`)
     }
   },
   title: {

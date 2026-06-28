@@ -246,6 +246,7 @@ The route ledger lives in `src/scenes/fullGameCatalog.js`. First-draft catalog s
 - Puddle matte cleanup landed on `2026-06-28`: Chunk 144 is complete. The shared `puddle-trimmed.png` rock-ring puddle sprite had its pale edge matte cleaned so route puddles no longer read like pasted-on sprites, and the browser cache tag was bumped to `puddle-matte-cleanup`.
 - Glowfen Repair 1 sprite waymark landed on `2026-06-28`: Chunk 145 is complete. Wetland Approach, the HUD-facing `Chapter 2: Glowfen - Repair 1 of 11`, now uses the transparent Chapter 2 `sunkenRouteMarker` sprite through `scene.spriteLandmark` instead of the hand-drawn waymark cluster, while keeping the old canvas renderer as fallback. Source checks, static scene checks, full route walk, and in-app browser preview passed on port `5364`.
 - Chapter review visual environment fixes landed on `2026-06-28`: Chunk 146 is complete. Mossline puddles now use the Mossline wet-ground sprite, Chapter 4 Repair 3 uses a completed Cliff Rope Lift sprite, Chapter 5 Repair 10 uses a Hill Descent sprite with an onward road, and Chapters 7-10 now use dedicated Orchard, Glassworks, Under-Village, and Festival background/pathway sprite pairs. The late chapters also skip generic tree-density, old filler props, shared puddles, and mist bands so the new chapter art owns the scene. Syntax checks, 104-scene registry smoke test, asset dimension checks, and in-app browser previews passed on port `5364` with no warnings or errors.
+- Grounding fixes from review landed on `2026-06-28`: Chunk 147 is complete. Branch Bridge now uses `assets/sprites/world/branch-bridge-road.png`, adding a landing/path connection so Old Orchard Repair 3's stairs no longer lead nowhere. All Chapter 8 Glassworks sprites were lowered onto the route, and Chapter 9 Repair 8's Underground Stream got a lower, slightly right-shifted placement so it sits on the foreground path. Syntax checks, sprite/data checks, `git diff --check`, and in-app browser previews for Branch Bridge, Glassworks Quarter, Rainbow Tower, and Underground Stream passed on port `5364` with no warnings or errors.
 
 ## Suggested Next Step
 
@@ -253,7 +254,7 @@ Chapter 4's Stormedge implementation, zero-painted cleanup, clean world sprite
 replacement, Last Platform to Beacon Hill sweep, the Chapter 5-10 clean sprite
 landmark passes, full-route browser QA, README state refresh, the shared puddle
 matte cleanup, the Glowfen Repair 1 sprite waymark, and the chapter review
-visual environment fixes are complete through Chunk 146. Do
+visual environment fixes plus review grounding fixes are complete through Chunk 147. Do
 not redo the Stormedge
 transition image, landmark sprites, puzzle skin, completion-summary pass,
 environment sprite pass, or sprite-landmark cleanup unless the user asks for a

@@ -1,9 +1,9 @@
 import { config } from "../core/config.js";
 import { drawActors } from "./actorRenderer.js?v=robot-scan-restored";
-import { drawBackdrop } from "./backdropRenderer.js?v=chapter-review-visual-fixes-3";
+import { drawBackdrop } from "./backdropRenderer.js?v=chapter-grounding-fixes-1";
 import { drawWeather } from "./weatherRenderer.js?v=no-bottom-ovals";
-import { drawWorld } from "./worldRenderer.js?v=chapter-review-visual-fixes-3";
-import { imageReady, sprites } from "./sprites.js?v=chapter-review-visual-fixes-3";
+import { drawWorld } from "./worldRenderer.js?v=chapter-grounding-fixes-1";
+import { imageReady, sprites } from "./sprites.js?v=chapter-grounding-fixes-1";
 import { drawHud } from "../ui/hud.js?v=zero-painted-assets";
 
 export function renderScene(ctx, scene, time, transition = null, options = {}) {

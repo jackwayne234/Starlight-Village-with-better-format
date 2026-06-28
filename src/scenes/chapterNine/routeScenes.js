@@ -272,18 +272,20 @@ function createChapterNineScene(sceneId) {
   scene.robot.x = 427;
   scene.showSignpost = false;
   scene.backdrop = { moonX: 760, moonY: 156, cloudDrift: 0.55, hillOffset: 42, ridgeOffset: 74 };
+  const isUndergroundStream = entry.type === "undergroundStream";
+  const landmarkX = isUndergroundStream ? 1140 : 1120;
   scene.chapterNineLandmark = {
     type: entry.type,
-    x: 1120,
-    groundY: 664,
+    x: landmarkX,
+    groundY: isUndergroundStream ? 710 : 664,
     fixed: false
   };
   scene.spriteLandmark = {
     sprite: entry.sprite,
     state: scene.chapterNineLandmark,
-    x: 1120,
-    groundY: 666,
-    height: entry.spriteHeight,
+    x: landmarkX,
+    groundY: isUndergroundStream ? 714 : 666,
+    height: isUndergroundStream ? 360 : entry.spriteHeight,
     dimFilter: "brightness(0.78) saturate(0.9)",
     fixedFilter: "brightness(1.06) saturate(1.14)",
     glow: {

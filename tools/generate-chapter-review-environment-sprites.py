@@ -452,6 +452,53 @@ def extend_hill_descent():
     return canvas
 
 
+def extend_branch_bridge():
+    source = Image.open(ROOT / "assets/sprites/world/branch-bridge.png").convert("RGBA")
+    source_data = source.load()
+    for y in range(source.height):
+        for x in range(source.width):
+            r, g, b, a = source_data[x, y]
+            green_matte = g > 118 and r < 78 and b < 86 and g > r * 1.7 and g > b * 1.5
+            if a == 0 or green_matte:
+                source_data[x, y] = (0, 0, 0, 0)
+
+    bridge = source.resize((390, 390), Image.Resampling.LANCZOS)
+    bridge_data = bridge.load()
+    for y in range(bridge.height):
+        for x in range(bridge.width):
+            r, g, b, a = bridge_data[x, y]
+            if a > 0 and g > 118 and g > r * 1.25 and g > b * 1.2:
+                bridge_data[x, y] = (max(r, 34), min(g, 96), max(b, 26), a)
+    canvas = Image.new("RGBA", (560, 440), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(canvas, "RGBA")
+
+    draw.polygon([(124, 286), (276, 270), (520, 396), (510, 440), (76, 440), (62, 386)], fill=(39, 55, 44, 224))
+    draw.polygon([(150, 314), (286, 304), (496, 404), (458, 438), (112, 432), (84, 384)], fill=(64, 58, 41, 242))
+    for y in range(326, 434, 28):
+        draw.line((94, y, 480, y - 8), fill=(33, 31, 25, 116), width=3)
+    for x in range(116, 490, 56):
+        draw.line((x, 316, x + 24, 432), fill=(25, 27, 24, 92), width=2)
+    for _ in range(36):
+        x = RNG.randint(92, 492)
+        y = RNG.randint(304, 428)
+        w = RNG.randint(28, 54)
+        h = RNG.randint(14, 24)
+        color = RNG.choice([(59, 65, 49), (78, 68, 45), (43, 60, 48)])
+        draw.rounded_rectangle((x, y, x + w, y + h), radius=5, fill=(*color, 142), outline=(18, 26, 23, 82), width=1)
+    for x, y, r in [(102, 386, 36), (142, 410, 42), (452, 396, 34), (500, 420, 42)]:
+        draw.ellipse((x - r, y - r * 0.58, x + r, y + r * 0.52), fill=(37, 54, 47, 218), outline=(88, 95, 62, 145), width=3)
+    for x in range(80, 520, 72):
+        draw.line((x, 374, x + RNG.randint(-12, 18), 334), fill=(47, 83, 49, 130), width=3)
+        draw.ellipse((x - 7, 336, x + 8, 350), fill=(77, 112, 50, 118))
+
+    canvas.alpha_composite(bridge, (85, 12))
+
+    draw.line((126, 388, 466, 382), fill=(92, 61, 35, 180), width=8)
+    draw.line((124, 402, 462, 398), fill=(42, 31, 24, 165), width=4)
+    draw.ellipse((250, 390, 496, 440), fill=(28, 55, 55, 44))
+    return canvas
+
+
 def save(image, relative_path):
     path = ROOT / relative_path
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -471,6 +518,7 @@ def main():
         "assets/sprites/chapter-ten/paths/festival-path.png": reference_path(3, draw_festival_path),
         "assets/sprites/chapter-four/landmarks/cliff-rope-lift-complete.png": complete_cliff_rope_lift(),
         "assets/sprites/world/hill-descent-road.png": extend_hill_descent(),
+        "assets/sprites/world/branch-bridge-road.png": extend_branch_bridge(),
     }
     for relative_path, image in outputs.items():
         save(image, relative_path)
